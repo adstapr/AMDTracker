@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>AMD Driver & Bug Watch</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Include Chart.js for the visual graph -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="bg-slate-950 text-slate-100 p-6 font-sans">
     <div class="max-w-6xl mx-auto space-y-8">
@@ -14,13 +16,13 @@
             <p class="text-slate-400 text-sm mt-1">Manual issue lifecycle tracker mapped by version and bug ID.</p>
         </div>
 
-        <!-- SECTION 3: Bug Lifecycle Matrix Chart -->
+        <!-- SECTION 3: Visual Bug Lifecycle Graph -->
         <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm">
-            <h2 class="text-xl font-semibold text-slate-200 mb-2">Bug Lifecycle Matrix</h2>
-            <p class="text-slate-400 text-sm mb-4">Visual status of issues across driver versions (Red = Open, Green = Resolved)</p>
+            <h2 class="text-xl font-semibold text-slate-200 mb-1">Bug Lifecycle Graph</h2>
+            <p class="text-slate-400 text-sm mb-4">Visual chart mapping bug status across driver versions (Red = Open, Green = Resolved)</p>
             
-            <div id="matrix-chart" class="overflow-x-auto">
-                <div class="text-slate-500 text-sm">Loading matrix...</div>
+            <div class="relative h-[350px] w-full">
+                <canvas id="bugLifecycleChart"></canvas>
             </div>
         </div>
 
@@ -34,7 +36,7 @@
                 </div>
             </div>
 
-            <!-- SECTION 2: Master Bug Ledger (Lifecycle tracking) -->
+            <!-- SECTION 2: Master Bug Ledger -->
             <div class="space-y-6">
                 <h2 class="text-xl font-semibold text-slate-200 border-b border-slate-800 pb-2">Master Bug Ledger</h2>
                 <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-sm max-h-[800px] overflow-y-auto pr-2">
@@ -53,24 +55,23 @@
             .then(data => {
                 const driverContainer = document.getElementById('driver-tracker');
                 const bugContainer = document.getElementById('bug-ledger');
-                const matrixContainer = document.getElementById('matrix-chart');
                 
                 driverContainer.innerHTML = '';
                 bugContainer.innerHTML = '';
 
                 // 1. Render Driver Versions & Their Fixed/Known Bugs
-                data.drivers.forEach((d, index) => {
+                data.drivers.forEach((d) => {
                     let card = document.createElement('div');
                     card.className = 'bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm space-y-4';
                     
-                    let fixedHtml = d.fixed_bug_ids.filter(id => data.master_bugs[id]).map(id => `
+                    let fixedHtml = d.fixed_bug_ids.filter(id => data.master_bugs[id]?.trim()).map(id => `
                         <li class="text-emerald-400 text-xs mb-1 flex items-center gap-2">
                             <span class="bg-emerald-950 px-1.5 py-0.5 rounded border border-emerald-800/50 font-mono text-[10px]">${id}</span>
                             <span>${data.master_bugs[id]}</span>
                         </li>
                     `).join('');
 
-                    let knownHtml = d.known_bug_ids.filter(id => data.master_bugs[id]).map(id => `
+                    let knownHtml = d.known_bug_ids.filter(id => data.master_bugs[id]?.trim()).map(id => `
                         <li class="text-amber-400 text-xs mb-1 flex items-center gap-2">
                             <span class="bg-amber-950 px-1.5 py-0.5 rounded border border-amber-800/50 font-mono text-[10px]">${id}</span>
                             <span>${data.master_bugs[id]}</span>
@@ -103,9 +104,9 @@
                     driverContainer.appendChild(card);
                 });
 
-                // 2. Render Master Bug Ledger (Only show bugs with actual descriptions to avoid clutter)
+                // 2. Render Master Bug Ledger
                 for (const [id, description] of Object.entries(data.master_bugs)) {
-                    if (!description.trim()) continue; // Skip empty descriptions
+                    if (!description.trim()) continue;
 
                     let isKnownCurrent = data.drivers[0]?.known_bug_ids.includes(id);
                     let badgeColor = isKnownCurrent ? 'bg-amber-950 text-amber-400 border-amber-800' : 'bg-emerald-950 text-emerald-400 border-emerald-800';
@@ -125,49 +126,83 @@
                     bugContainer.appendChild(bugRow);
                 }
 
-                // 3. Render Bug Matrix Grid (Using unique index tracking to handle duplicate version strings safely)
-                let allBugIds = Object.keys(data.master_bugs).filter(id => data.master_bugs[id].trim() !== '');
+                // 3. Render Visual Chart (Chart.js scatter/matrix graph)
+                const driverVersions = data.drivers.map(d => d.version);
+                const activeBugIds = Object.keys(data.master_bugs).filter(id => data.master_bugs[id].trim() !== '');
 
-                let tableHtml = `<table class="w-full text-left border-collapse text-xs">
-                    <thead>
-                        <tr class="border-b border-slate-800 text-slate-400">
-                            <th class="p-2 font-mono">Bug ID</th>
-                            <th class="p-2">Description</th>`;
-
-                data.drivers.forEach((d, idx) => {
-                    tableHtml += `<th class="p-2 text-center font-mono">${d.version} <span class="block text-[9px] text-slate-500">#${idx+1}</span></th>`;
-                });
-                tableHtml += `</tr></thead><tbody class="divide-y divide-slate-800/50">`;
-
-                allBugIds.forEach(bugId => {
-                    tableHtml += `<tr>
-                        <td class="p-2 font-mono font-bold text-slate-300">${bugId}</td>
-                        <td class="p-2 text-slate-400 max-w-xs truncate">${data.master_bugs[bugId]}</td>`;
-                    
-                    data.drivers.forEach(driver => {
-                        let statusClass = "bg-slate-800 text-slate-600";
-                        let statusText = "-";
+                let chartData = [];
+                activeBugIds.forEach((bugId, yIndex) => {
+                    driverVersions.forEach((ver, xIndex) => {
+                        let driver = data.drivers[xIndex];
+                        let status = 0; // 0 = None, 1 = Open/Known, 2 = Fixed
 
                         if (driver.fixed_bug_ids.includes(bugId)) {
-                            statusClass = "bg-emerald-950 text-emerald-400 border border-emerald-800/60";
-                            statusText = "FIXED";
+                            status = 2; // Resolved (Green)
                         } else if (driver.known_bug_ids.includes(bugId)) {
-                            statusClass = "bg-rose-950 text-rose-400 border border-rose-800/60";
-                            statusText = "OPEN";
+                            status = 1; // Open (Red/Amber)
                         }
 
-                        tableHtml += `<td class="p-2 text-center"><span class="px-1.5 py-0.5 rounded text-[10px] font-semibold ${statusClass}">${statusText}</span></td>`;
+                        if (status > 0) {
+                            chartData.push({
+                                x: xIndex,
+                                y: yIndex,
+                                v: status,
+                                bug: bugId,
+                                version: ver
+                            });
+                        }
                     });
-
-                    tableHtml += `</tr>`;
                 });
 
-                tableHtml += `</tbody></table>`;
-                matrixContainer.innerHTML = tableHtml;
+                const ctx = document.getElementById('bugLifecycleChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'scatter',
+                    data: {
+                        datasets: [{
+                            data: chartData.map(d => ({ x: d.x, y: d.y, v: d.v })),
+                            backgroundColor: (context) => {
+                                const val = context.raw?.v;
+                                return val === 2 ? '#10b981' : '#f43f5e'; // Green for fixed, Rose for open
+                            },
+                            pointRadius: 8,
+                            pointHoverRadius: 10
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                type: 'category',
+                                labels: driverVersions,
+                                ticks: { color: '#94a3b8', font: { family: 'monospace', size: 11 } },
+                                grid: { color: '#1e293b' }
+                            },
+                            y: {
+                                type: 'category',
+                                labels: activeBugIds,
+                                ticks: { color: '#94a3b8', font: { family: 'monospace', size: 11 } },
+                                grid: { color: '#1e293b' }
+                            }
+                        },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let item = chartData[context.dataIndex];
+                                        let state = item.v === 2 ? 'FIXED' : 'OPEN';
+                                        return `${item.bug} on ${item.version}: ${state}`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
             })
             .catch(err => {
                 console.error("Error loading drivers.json:", err);
-                document.getElementById('driver-tracker').innerHTML = '<div class="text-rose-500 text-sm">Failed to load drivers.json. Make sure it exists in the same folder!</div>';
+                document.getElementById('driver-tracker').innerHTML = '<div class="text-rose-500 text-sm">Failed to load drivers.json.</div>';
             });
     </script>
 </body>
