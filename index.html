@@ -14,6 +14,16 @@
             <p class="text-slate-400 text-sm mt-1">Manual issue lifecycle tracker mapped by version and bug ID.</p>
         </div>
 
+        <!-- SECTION 3: Bug Lifecycle Matrix Chart (Moved inside layout flow) -->
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm">
+            <h2 class="text-xl font-semibold text-slate-200 mb-2">Bug Lifecycle Matrix</h2>
+            <p class="text-slate-400 text-sm mb-4">Visual status of issues across driver versions (Red = Open, Green = Resolved)</p>
+            
+            <div id="matrix-chart" class="overflow-x-auto">
+                <div class="text-slate-500 text-sm">Loading matrix...</div>
+            </div>
+        </div>
+
         <div class="grid lg:grid-cols-2 gap-8">
             
             <!-- SECTION 1: Issues Grouped by Driver Version -->
@@ -43,6 +53,7 @@
             .then(data => {
                 const driverContainer = document.getElementById('driver-tracker');
                 const bugContainer = document.getElementById('bug-ledger');
+                const matrixContainer = document.getElementById('matrix-chart');
                 
                 driverContainer.innerHTML = '';
                 bugContainer.innerHTML = '';
@@ -94,9 +105,7 @@
 
                 // 2. Render Master Bug Ledger
                 for (const [id, description] of Object.entries(data.master_bugs)) {
-                    // Check status across drivers
-                    let isFixedAnywhere = data.drivers.some(d => d.fixed_bug_ids.includes(id));
-                    let isKnownCurrent = data.drivers[0]?.known_bug_ids.includes(id); // latest driver check
+                    let isKnownCurrent = data.drivers[0]?.known_bug_ids.includes(id);
 
                     let badgeColor = isKnownCurrent ? 'bg-amber-950 text-amber-400 border-amber-800' : 'bg-emerald-950 text-emerald-400 border-emerald-800';
                     let statusText = isKnownCurrent ? 'Open / Pending' : 'Resolved';
@@ -114,6 +123,54 @@
                     `;
                     bugContainer.appendChild(bugRow);
                 }
+
+                // 3. Render NvidiaWatch-style Bug Matrix Grid
+                let driverVersions = data.drivers.map(d => d.version);
+                let allBugIds = Object.keys(data.master_bugs);
+
+                let tableHtml = `<table class="w-full text-left border-collapse text-xs">
+                    <thead>
+                        <tr class="border-b border-slate-800 text-slate-400">
+                            <th class="p-2 font-mono">Bug ID</th>
+                            <th class="p-2">Description</th>`;
+
+                driverVersions.forEach(v => {
+                    tableHtml += `<th class="p-2 text-center font-mono">${v}</th>`;
+                });
+                tableHtml += `</tr></thead><tbody class="divide-y divide-slate-800/50">`;
+
+                allBugIds.forEach(bugId => {
+                    tableHtml += `<tr>
+                        <td class="p-2 font-mono font-bold text-slate-300">${bugId}</td>
+                        <td class="p-2 text-slate-400 max-w-xs truncate">${data.master_bugs[bugId]}</td>`;
+                    
+                    driverVersions.forEach(v => {
+                        let driver = data.drivers.find(d => d.version === v);
+                        let statusClass = "bg-slate-800 text-slate-600";
+                        let statusText = "-";
+
+                        if (driver) {
+                            if (driver.fixed_bug_ids.includes(bugId)) {
+                                statusClass = "bg-emerald-950 text-emerald-400 border border-emerald-800/60";
+                                statusText = "FIXED";
+                            } else if (driver.known_bug_ids.includes(bugId)) {
+                                statusClass = "bg-rose-950 text-rose-400 border border-rose-800/60";
+                                statusText = "OPEN";
+                            }
+                        }
+
+                        tableHtml += `<td class="p-2 text-center"><span class="px-1.5 py-0.5 rounded text-[10px] font-semibold ${statusClass}">${statusText}</span></td>`;
+                    });
+
+                    tableHtml += `</tr>`;
+                });
+
+                tableHtml += `</tbody></table>`;
+                matrixContainer.innerHTML = tableHtml;
+            })
+            .catch(err => {
+                console.error("Error loading drivers.json:", err);
+                document.getElementById('driver-tracker').innerHTML = '<div class="text-rose-500 text-sm">Failed to load drivers.json. Make sure it exists in the same folder!</div>';
             });
     </script>
 </body>
