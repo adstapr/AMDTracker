@@ -6,7 +6,7 @@
       "type": "Optional",
       "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-22-10-3.html",
       "fixed_bug_ids": ["BUG-013", "BUG-014", "BUG-015"],
-      "known_bug_ids": ["BUG-016", "BUG-017", "BUG-018", "BUG-019", "BUG-020",]
+      "known_bug_ids": ["BUG-016", "BUG-017", "BUG-018", "BUG-019", "BUG-020"]
     },
     {
       "version": "22.10.2",
