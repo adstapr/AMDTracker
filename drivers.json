@@ -1,52 +1,12 @@
 {
   "drivers": [
     {
-      "version": "26.6.2",
-      "date": "2026-06-22",
-      "type": "Recommended",
-      "url": "https://www.amd.com/en/support",
-      "fixed_bug_ids": ["BUG-013"],
-      "known_bug_ids": ["BUG-013"]
-    },
-    {
-      "version": "26.5.1",
-      "date": "2026-05-10",
+      "version": "22.10.3",
+      "date": "2022-10-28",
       "type": "Optional",
-      "url": "https://www.amd.com/en/support",
-      "fixed_bug_ids": ["BUG-013"],
-      "known_bug_ids": ["BUG-013"]
-    },
-    {
-      "version": "26.5.1",
-      "date": "2026-05-10",
-      "type": "Optional",
-      "url": "https://www.amd.com/en/support",
-      "fixed_bug_ids": ["BUG-013"],
-      "known_bug_ids": ["BUG-013"]
-    },
-    {
-      "version": "26.5.1",
-      "date": "2026-05-10",
-      "type": "Optional",
-      "url": "https://www.amd.com/en/support",
-      "fixed_bug_ids": ["BUG-013"],
-      "known_bug_ids": ["BUG-013"]
-    },
-    {
-      "version": "26.5.1",
-      "date": "2026-05-10",
-      "type": "Optional",
-      "url": "https://www.amd.com/en/support",
-      "fixed_bug_ids": ["BUG-013"],
-      "known_bug_ids": ["BUG-013"]
-    },
-    {
-      "version": "26.5.1",
-      "date": "2026-05-10",
-      "type": "Optional",
-      "url": "https://www.amd.com/en/support",
-      "fixed_bug_ids": ["BUG-013"],
-      "known_bug_ids": ["BUG-013"]
+      "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-22-10-3.html",
+      "fixed_bug_ids": ["BUG-013", "BUG-014", "BUG-015"],
+      "known_bug_ids": ["BUG-016", "BUG-017", "BUG-018", "BUG-019", "BUG-020",]
     },
     {
       "version": "22.10.2",
@@ -70,19 +30,13 @@
     "BUG-010": "Elite Dangerous may crash upon launch on Radeon™ RX 6000 series GPUs.",
     "BUG-011": "Stuttering may occur during video playback using hardware acceleration with Firefox on some AMD Graphics Products such as the Radeon™ RX 6900 XT Graphics.", 
     "BUG-012": "Brief display corruption may occur when switching between video and game windows on some AMD Graphics Products such as the Radeon™ RX 6700 XT.",
-    "BUG-013": "",
-    "BUG-014": "",
-    "BUG-015": "",
-    "BUG-016": "",
-    "BUG-017": "",
-    "BUG-018": "When Radeon™ Anti-Lag is enabled, a beep can be heard when pressing shift + back key. [Resolution targeted for 22.11.1]",
-    "BUG-019": "When Radeon™ Anti-Lag is enabled, a beep can be heard when pressing shift + back key. [Resolution targeted for 22.11.1]",
-    "BUG-020": "When Radeon™ Anti-Lag is enabled, a beep can be heard when pressing shift + back key. [Resolution targeted for 22.11.1]",
-    "BUG-021": "When Radeon™ Anti-Lag is enabled, a beep can be heard when pressing shift + back key. [Resolution targeted for 22.11.1]",
-    "BUG-022": "When Radeon™ Anti-Lag is enabled, a beep can be heard when pressing shift + back key. [Resolution targeted for 22.11.1]",
-    "BUG-023": "When Radeon™ Anti-Lag is enabled, a beep can be heard when pressing shift + back key. [Resolution targeted for 22.11.1]",
-    "BUG-024": "When Radeon™ Anti-Lag is enabled, a beep can be heard when pressing shift + back key. [Resolution targeted for 22.11.1]",
-    "BUG-025": "When Radeon™ Anti-Lag is enabled, a beep can be heard when pressing shift + back key. [Resolution targeted for 22.11.1]",
-    "BUG-026": "When Radeon™ Anti-Lag is enabled, a beep can be heard when pressing shift + back key. [Resolution targeted for 22.11.1]"
+    "BUG-013": "Elite Dangerous may crash upon launch on Radeon™ RX 6000 series GPUs.",
+    "BUG-014": "Black screen may occur during driver upgrade or settings reset using Microsoft® Windows® 11 version 22H2 on Radeon™ RX 6000 series GPUs.",
+    "BUG-015": "Lower than expected performance on Gotham Knights™ using ​​​​AMD Processors on some AMD Graphics Products such as Radeon™ RX 6950 XT.",
+    "BUG-016": "World Of Warships prediction lines may be missing on Radeon™ RX 6000 series GPUs.",
+    "BUG-017": "When Radeon™ Anti-Lag is enabled, a beep can be heard when pressing shift + back key.",
+    "BUG-018": "GPU utilization may be stuck at 100% in Radeon performance metrics after closing games on some AMD Graphics Products such as Radeon™ 570.",
+    "BUG-019": "Stuttering may occur during video playback using hardware acceleration with Firefox on some AMD Graphics Products such as the Radeon™ RX 6900 XT Graphics.",
+    "BUG-020": "Brief display corruption may occur when switching between video and game windows on some AMD Graphics Products such as the Radeon™ RX 6700 XT."
   }
 }
