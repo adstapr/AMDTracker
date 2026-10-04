@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Driver Watch Baseline</title>
+    <title>AMD Driver & Bug Watch</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body class="bg-slate-950 text-slate-100 p-6 font-sans">
@@ -10,11 +10,11 @@
         
         <!-- Header -->
         <div class="border-b border-slate-800 pb-4">
-            <h1 class="text-3xl font-bold tracking-tight">GPU Driver & Bug Watch</h1>
+            <h1 class="text-3xl font-bold tracking-tight">AMD Driver & Bug Watch</h1>
             <p class="text-slate-400 text-sm mt-1">Manual issue lifecycle tracker mapped by version and bug ID.</p>
         </div>
 
-        <!-- SECTION 3: Bug Lifecycle Matrix Chart (Moved inside layout flow) -->
+        <!-- SECTION 3: Bug Lifecycle Matrix Chart -->
         <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm">
             <h2 class="text-xl font-semibold text-slate-200 mb-2">Bug Lifecycle Matrix</h2>
             <p class="text-slate-400 text-sm mb-4">Visual status of issues across driver versions (Red = Open, Green = Resolved)</p>
@@ -29,7 +29,7 @@
             <!-- SECTION 1: Issues Grouped by Driver Version -->
             <div class="space-y-6">
                 <h2 class="text-xl font-semibold text-slate-200 border-b border-slate-800 pb-2">Issues by Driver Version</h2>
-                <div id="driver-tracker" class="space-y-4">
+                <div id="driver-tracker" class="space-y-4 max-h-[800px] overflow-y-auto pr-2">
                     <div class="text-slate-500 text-sm">Loading drivers...</div>
                 </div>
             </div>
@@ -37,7 +37,7 @@
             <!-- SECTION 2: Master Bug Ledger (Lifecycle tracking) -->
             <div class="space-y-6">
                 <h2 class="text-xl font-semibold text-slate-200 border-b border-slate-800 pb-2">Master Bug Ledger</h2>
-                <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-sm">
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-sm max-h-[800px] overflow-y-auto pr-2">
                     <div id="bug-ledger" class="space-y-3">
                         <div class="text-slate-500 text-sm">Loading bugs...</div>
                     </div>
@@ -59,21 +59,21 @@
                 bugContainer.innerHTML = '';
 
                 // 1. Render Driver Versions & Their Fixed/Known Bugs
-                data.drivers.forEach(d => {
+                data.drivers.forEach((d, index) => {
                     let card = document.createElement('div');
                     card.className = 'bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm space-y-4';
                     
-                    let fixedHtml = d.fixed_bug_ids.map(id => `
+                    let fixedHtml = d.fixed_bug_ids.filter(id => data.master_bugs[id]).map(id => `
                         <li class="text-emerald-400 text-xs mb-1 flex items-center gap-2">
                             <span class="bg-emerald-950 px-1.5 py-0.5 rounded border border-emerald-800/50 font-mono text-[10px]">${id}</span>
-                            <span>${data.master_bugs[id] || id}</span>
+                            <span>${data.master_bugs[id]}</span>
                         </li>
                     `).join('');
 
-                    let knownHtml = d.known_bug_ids.map(id => `
+                    let knownHtml = d.known_bug_ids.filter(id => data.master_bugs[id]).map(id => `
                         <li class="text-amber-400 text-xs mb-1 flex items-center gap-2">
                             <span class="bg-amber-950 px-1.5 py-0.5 rounded border border-amber-800/50 font-mono text-[10px]">${id}</span>
-                            <span>${data.master_bugs[id] || id}</span>
+                            <span>${data.master_bugs[id]}</span>
                         </li>
                     `).join('');
 
@@ -103,10 +103,11 @@
                     driverContainer.appendChild(card);
                 });
 
-                // 2. Render Master Bug Ledger
+                // 2. Render Master Bug Ledger (Only show bugs with actual descriptions to avoid clutter)
                 for (const [id, description] of Object.entries(data.master_bugs)) {
-                    let isKnownCurrent = data.drivers[0]?.known_bug_ids.includes(id);
+                    if (!description.trim()) continue; // Skip empty descriptions
 
+                    let isKnownCurrent = data.drivers[0]?.known_bug_ids.includes(id);
                     let badgeColor = isKnownCurrent ? 'bg-amber-950 text-amber-400 border-amber-800' : 'bg-emerald-950 text-emerald-400 border-emerald-800';
                     let statusText = isKnownCurrent ? 'Open / Pending' : 'Resolved';
 
@@ -124,9 +125,8 @@
                     bugContainer.appendChild(bugRow);
                 }
 
-                // 3. Render NvidiaWatch-style Bug Matrix Grid
-                let driverVersions = data.drivers.map(d => d.version);
-                let allBugIds = Object.keys(data.master_bugs);
+                // 3. Render Bug Matrix Grid (Using unique index tracking to handle duplicate version strings safely)
+                let allBugIds = Object.keys(data.master_bugs).filter(id => data.master_bugs[id].trim() !== '');
 
                 let tableHtml = `<table class="w-full text-left border-collapse text-xs">
                     <thead>
@@ -134,8 +134,8 @@
                             <th class="p-2 font-mono">Bug ID</th>
                             <th class="p-2">Description</th>`;
 
-                driverVersions.forEach(v => {
-                    tableHtml += `<th class="p-2 text-center font-mono">${v}</th>`;
+                data.drivers.forEach((d, idx) => {
+                    tableHtml += `<th class="p-2 text-center font-mono">${d.version} <span class="block text-[9px] text-slate-500">#${idx+1}</span></th>`;
                 });
                 tableHtml += `</tr></thead><tbody class="divide-y divide-slate-800/50">`;
 
@@ -144,19 +144,16 @@
                         <td class="p-2 font-mono font-bold text-slate-300">${bugId}</td>
                         <td class="p-2 text-slate-400 max-w-xs truncate">${data.master_bugs[bugId]}</td>`;
                     
-                    driverVersions.forEach(v => {
-                        let driver = data.drivers.find(d => d.version === v);
+                    data.drivers.forEach(driver => {
                         let statusClass = "bg-slate-800 text-slate-600";
                         let statusText = "-";
 
-                        if (driver) {
-                            if (driver.fixed_bug_ids.includes(bugId)) {
-                                statusClass = "bg-emerald-950 text-emerald-400 border border-emerald-800/60";
-                                statusText = "FIXED";
-                            } else if (driver.known_bug_ids.includes(bugId)) {
-                                statusClass = "bg-rose-950 text-rose-400 border border-rose-800/60";
-                                statusText = "OPEN";
-                            }
+                        if (driver.fixed_bug_ids.includes(bugId)) {
+                            statusClass = "bg-emerald-950 text-emerald-400 border border-emerald-800/60";
+                            statusText = "FIXED";
+                        } else if (driver.known_bug_ids.includes(bugId)) {
+                            statusClass = "bg-rose-950 text-rose-400 border border-rose-800/60";
+                            statusText = "OPEN";
                         }
 
                         tableHtml += `<td class="p-2 text-center"><span class="px-1.5 py-0.5 rounded text-[10px] font-semibold ${statusClass}">${statusText}</span></td>`;
