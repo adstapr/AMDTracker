@@ -2,65 +2,62 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>AMD Driver Watch</title>
+    <title>AMD Driver Tracker</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body class="bg-gray-900 text-gray-100 p-8 font-sans">
     <div class="max-w-4xl mx-auto">
         <header class="mb-8">
             <h1 class="text-3xl font-bold tracking-tight">AMD Radeon Driver Watch</h1>
-            <p class="text-gray-400 text-sm mt-1">A lightweight tracker for recent AMD graphics software releases.</p>
+            <p class="text-gray-400 text-sm mt-1">Aiming to track AMD driver releases, bugs (fixed and unfixed) based on driver release notes.</p>
         </header>
 
-        <div class="bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700">
-            <table class="w-full text-left border-collapse">
-                <thead>
-                    <tr class="bg-gray-700/50 text-gray-300 text-xs uppercase tracking-wider border-b border-gray-700">
-                        <th class="p-4 font-semibold">Version</th>
-                        <th class="p-4 font-semibold">Release Date</th>
-                        <th class="p-4 font-semibold">Type</th>
-                        <th class="p-4 font-semibold text-right">Details</th>
-                    </tr>
-                </thead>
-                <tbody id="driver-table-body" class="divide-y divide-gray-700 text-sm">
-                    <tr>
-                        <td colspan="4" class="p-6 text-center text-gray-400">Loading AMD drivers...</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div id="driver-list" class="space-y-6">
+            <div class="text-gray-400 text-center p-6">Loading driver bug tracker data...</div>
         </div>
     </div>
 
     <script>
-        // Fetch the local drivers.json file
         fetch('drivers.json')
             .then(res => res.json())
             .then(data => {
-                const tbody = document.getElementById('driver-table-body');
-                tbody.innerHTML = ''; // Clear loading text
+                const container = document.getElementById('driver-list');
+                container.innerHTML = '';
 
-                // Loop through the amd array from our json file
                 data.amd.forEach(driver => {
-                    let row = document.createElement('tr');
-                    row.className = 'hover:bg-gray-700/30 transition-colors';
+                    let card = document.createElement('div');
+                    card.className = 'bg-gray-800 rounded-xl shadow-lg border border-gray-700 p-6';
                     
-                    row.innerHTML = `
-                        <td class="p-4 font-medium text-white">${driver.version}</td>
-                        <td class="p-4 text-gray-300">${driver.date}</td>
-                        <td class="p-4">
-                            <span class="px-2.5 py-1 rounded-full text-xs font-semibold ${driver.type === 'Recommended' ? 'bg-emerald-900/50 text-emerald-400 border border-emerald-700/50' : 'bg-blue-900/50 text-blue-400 border border-blue-700/50'}">
-                                ${driver.type}
-                            </span>
-                        </td>
-                        <td class="p-4 text-right">
-                            <a href="${driver.url}" target="_blank" class="text-indigo-400 hover:text-indigo-300 font-medium underline">Release Notes</a>
-                        </td>
+                    let fixedHtml = driver.fixed_issues.map(issue => `<li class="text-emerald-400 text-sm mb-1">✓ ${issue}</li>`).join('');
+                    let knownHtml = driver.known_issues.map(issue => `<li class="text-amber-400 text-sm mb-1">⚠ ${issue}</li>`).join('');
+
+                    card.innerHTML = `
+                        <div class="flex flex-wrap justify-between items-start gap-4 mb-4 border-b border-gray-700 pb-4">
+                            <div>
+                                <span class="text-2xl font-bold text-white">${driver.version}</span>
+                                <span class="ml-3 px-2.5 py-1 rounded-full text-xs font-semibold ${driver.type === 'Recommended' ? 'bg-emerald-900/50 text-emerald-400 border border-emerald-700/50' : 'bg-blue-900/50 text-blue-400 border border-blue-700/50'}">
+                                    ${driver.type}
+                                </span>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-gray-400 text-sm block">${driver.date}</span>
+                                <a href="${driver.url}" target="_blank" class="text-indigo-400 hover:text-indigo-300 text-sm underline mt-1 inline-block">Official Release Notes</a>
+                            </div>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="bg-gray-900/50 p-4 rounded-lg border border-gray-700/50">
+                                <h3 class="text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">Fixed Issues</h3>
+                                <ul class="list-none pl-0">${fixedHtml || '<li class="text-gray-500 text-sm">None listed</li>'}</ul>
+                            </div>
+                            <div class="bg-gray-900/50 p-4 rounded-lg border border-gray-700/50">
+                                <h3 class="text-xs font-bold uppercase tracking-wider text-amber-500 mb-2">Known / Pending Issues</h3>
+                                <ul class="list-none pl-0">${knownHtml || '<li class="text-gray-500 text-sm">None listed</li>'}</ul>
+                            </div>
+                        </div>
                     `;
-                    tbody.appendChild(row);
+                    container.appendChild(card);
                 });
-            })
-            .catch(err => {
-                document.getElementById('driver-table-body').innerHTML = `<tr><td colspan="4" class="p-6 text-center text-red-400">Error loading driver data.</td></tr>`;
             });
     </script>
 </body>
