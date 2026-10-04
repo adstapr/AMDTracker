@@ -1,10 +1,25 @@
 {
-  "amd": [
+  "drivers": [
     {
       "version": "26.6.2",
       "date": "2026-06-22",
       "type": "Recommended",
-      "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-6-2.html"
+      "url": "https://www.amd.com/en/support",
+      "fixed_bug_ids": ["BUG-002"],
+      "known_bug_ids": ["BUG-003"]
+    },
+    {
+      "version": "26.5.1",
+      "date": "2026-05-10",
+      "type": "Optional",
+      "url": "https://www.amd.com/en/support",
+      "fixed_bug_ids": ["BUG-001"],
+      "known_bug_ids": ["BUG-002", "BUG-003"]
     }
-  ]
+  ],
+  "master_bugs": {
+    "BUG-001": "Intermittent display flicker on multi-monitor setups",
+    "BUG-002": "Driver timeout/crash in specific Unreal Engine 5 games",
+    "BUG-003": "Stuttering or hitching during hardware video acceleration"
+  }
 }
