@@ -32,6 +32,6 @@
     "BUG-012": "Brief display corruption may occur when switching between video and game windows on some AMD Graphics Products such as the Radeon™ RX 6700 XT.",
     "BUG-013": "Black screen may occur during driver upgrade or settings reset using Microsoft® Windows® 11 version 22H2 on Radeon™ RX 6000 series GPUs.",
     "BUG-014": "Lower than expected performance on Gotham Knights™ using ​​​​AMD Processors on some AMD Graphics Products such as Radeon™ RX 6950 XT.",
-    "BUG-015": "World Of Warships prediction lines may be missing on Radeon™ RX 6000 series GPUs.",
+    "BUG-015": "World Of Warships prediction lines may be missing on Radeon™ RX 6000 series GPUs."
   }
 }
