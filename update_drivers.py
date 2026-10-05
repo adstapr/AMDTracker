@@ -32,37 +32,47 @@ def get_next_id(master_dict, prefix):
 
 def parse_amd_section(soup, keywords):
     items = []
-    for tag in soup.find_all(["h2", "h3", "h4", "strong", "b", "p"]):
+    target_tag = None
+    
+    # Find the heading or tag matching any of the keywords
+    for tag in soup.find_all(["h2", "h3", "h4", "h1", "strong", "b", "p"]):
         text = tag.get_text(strip=True)
-        if any(kw.lower() in text.lower() for kw in keywords):
-            container = tag.find_parent(["div", "section", "article"]) or tag
-            ul = container.find("ul")
-            if not ul:
-                curr = tag.find_next_sibling()
-                while curr and curr.name not in ["h2", "h3", "h4", "section"]:
-                    if curr.name == "ul":
-                        ul = curr
-                        break
-                    found_ul = curr.find("ul") if hasattr(curr, "find") else None
-                    if found_ul:
-                        ul = found_ul
-                        break
-                    curr = curr.find_next_sibling()
+        if any(kw.lower() == text.lower() or (len(kw) > 3 and kw.lower() in text.lower()) for kw in keywords):
+            target_tag = tag
+            break
             
-            if ul:
-                for li in ul.find_all("li", recursive=False):
-                    cleaned = clean_text(li.get_text())
+    if not target_tag:
+        return items
+
+    # Iterate through siblings strictly after target_tag until the next heading
+    curr = target_tag.find_next_sibling()
+    while curr:
+        if curr.name in ["h1", "h2", "h3", "h4", "h5", "h6"]:
+            break
+            
+        if curr.name in ["ul", "ol"]:
+            for li in curr.find_all("li", recursive=True):
+                cleaned = clean_text(li.get_text())
+                if cleaned and len(cleaned) > 2 and cleaned not in items:
+                    items.append(cleaned)
+        elif curr.name == "p":
+            cleaned = clean_text(curr.get_text())
+            if cleaned and len(cleaned) > 2 and cleaned not in items:
+                items.append(cleaned)
+        else:
+            if hasattr(curr, "find_all"):
+                for ul in curr.find_all(["ul", "ol"]):
+                    for li in ul.find_all("li", recursive=True):
+                        cleaned = clean_text(li.get_text())
+                        if cleaned and len(cleaned) > 2 and cleaned not in items:
+                            items.append(cleaned)
+                for p in curr.find_all("p"):
+                    cleaned = clean_text(p.get_text())
                     if cleaned and len(cleaned) > 2 and cleaned not in items:
                         items.append(cleaned)
-            else:
-                curr = tag.find_next_sibling()
-                while curr and curr.name == "p":
-                    cleaned = clean_text(curr.get_text())
-                    if cleaned and len(cleaned) > 2 and cleaned not in items:
-                        items.append(cleaned)
-                    curr = curr.find_next_sibling()
-            if items:
-                break
+                        
+        curr = curr.find_next_sibling()
+        
     return items
 
 def fetch_amd_release_notes(url):
@@ -127,7 +137,7 @@ def update_json(scraped_data):
         except json.JSONDecodeError:
             data = {}
     else:
-        data = {}
+      data = {}
 
     data.setdefault("drivers", [])
     master_bugs = data.setdefault("master_bugs", {})
