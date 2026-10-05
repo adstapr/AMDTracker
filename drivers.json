@@ -1,6 +1,30 @@
 {
     "drivers": [
         {
+            "version": "24.1.1",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-1-1.html",
+            "fixed_bug_ids": [
+                "BUG-152",
+                "BUG-148",
+                "BUG-150",
+                "BUG-153",
+                "BUG-154",
+                "BUG-155",
+                "BUG-156"
+            ],
+            "known_bug_ids": [
+                "BUG-157",
+                "BUG-158",
+                "BUG-159",
+                "BUG-160",
+                "BUG-161",
+                "BUG-162",
+                "BUG-163",
+                "BUG-164",
+                "BUG-165"
+            ]
+        },
+        {
             "version": "23.12.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-12-1.html",
             "fixed_bug_ids": [
@@ -668,6 +692,20 @@
         "BUG-148": "Intermittent grey screen after driver upgrade with certain monitors (such as Nixeus NX-EDG274K) on Radeon™ RX 7000 series GPUs.",
         "BUG-149": "Performance drop may be observed in some light DirectML workloads.",
         "BUG-150": "Graphics API metric may show as N/A in certain UWP applications.",
-        "BUG-151": "Intermittent flickering of certain ground textures may be observed while playing War Thunder with 4x SAAA enabled on some AMD Graphics Products, such as the Radeon™ RX 7900 XTX."
+        "BUG-151": "Intermittent flickering of certain ground textures may be observed while playing War Thunder with 4x SAAA enabled on some AMD Graphics Products, such as the Radeon™ RX 7900 XTX.",
+        "BUG-152": "Performance drop may be observed in some DirectML workloads.",
+        "BUG-153": "Heavy stuttering may be experienced while playing Warframe and loading into a new area or starting a mission.",
+        "BUG-154": "Black artifacts may be observed in smoke effects while playing Call of Duty®: Modern Warfare® III.",
+        "BUG-155": "Black texture flickering may be observed while playing Starfield on some AMD Graphics Products, such as the Radeon™ RX 5600 XT.",
+        "BUG-156": "Intermittent install failure may be observed when using the factory reset setting.",
+        "BUG-157": "Deathloop may experience extended loading times on some AMD Graphics Products, such as the Radeon™ RX 6900 XT.",
+        "BUG-158": "Dead Space may experience an application crash after enabling RTAO on some AMD Graphics Products, such as the Radeon™ RX 6800.",
+        "BUG-159": "Excessive stuttering may be experienced when first playing a match in Overwatch 2 and Battlefield™ 2042.",
+        "BUG-160": "HDR setting may not take effect until resizing/moving the window while playing certain games such as Like A Dragon: Infinite Wealth.",
+        "BUG-161": "Audio may intermittently become out of sync with the video when recording from AMD Software: Adrenalin Edition using AV1 codec.",
+        "BUG-162": "Oculus Rift S may display with a green tint on AMD Radeon™ RX 7000 series GPUs.",
+        "BUG-163": "After a system reboot, Parsec host application may experience a crash on some AMD Graphics Products, such as the Radeon™ RX 7900 XTX.",
+        "BUG-164": "During Microsoft Teams meetings, the camera may intermittently display looped footage on some AMD Products, such as the AMD Ryzen™ 7 7840U Processor.",
+        "BUG-165": "On select hybrid graphics configurations, AFMF may be inaccurately displayed or absent, particularly in systems where one of the devices lacks support for AFMF."
     }
 }
