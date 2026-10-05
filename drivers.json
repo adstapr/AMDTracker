@@ -1,6 +1,21 @@
 {
     "drivers": [
         {
+            "version": "23.10.23",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-10-23-03-RCRA.html",
+            "fixed_bug_ids": [
+                "BUG-111"
+            ],
+            "known_bug_ids": [
+                "BUG-103",
+                "BUG-108",
+                "BUG-109",
+                "BUG-110",
+                "BUG-112",
+                "BUG-106"
+            ]
+        },
+        {
             "version": "23.7.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-7-2.html",
             "fixed_bug_ids": [
