@@ -1,6 +1,26 @@
 {
     "drivers": [
         {
+            "version": "25.6.2",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-6-2.html",
+            "fixed_bug_ids": [
+                "BUG-162",
+                "BUG-290",
+                "BUG-297",
+                "BUG-298",
+                "BUG-299"
+            ],
+            "known_bug_ids": [
+                "BUG-296",
+                "BUG-267",
+                "BUG-278",
+                "BUG-282",
+                "BUG-288",
+                "BUG-300",
+                "BUG-301"
+            ]
+        },
+        {
             "version": "25.6.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-6-1.html",
             "fixed_bug_ids": [
@@ -1207,6 +1227,11 @@
         "BUG-293": "Intermittent application crash or driver timeout may be observed while playing Marvel Spiderman 2 with Ray Tracing enabled on Radeon™ RX 9060 XT.",
         "BUG-294": "Intermittent application crash may be observed when first launching The Last of Us Part 1 on Radeon™ RX 9060 XT graphics products.",
         "BUG-295": "Stutter and lower than expected performance may be observed while playing 4K resolution YouTube videos in Chromium. Users experiencing this issue are recommended to play videos in full screen as a temporary workaround.",
-        "BUG-296": "Texture flickering or corruption may appear while playing The Elder Scrolls IV: Oblivion Remastered with AMD FidelityFX™ Super Resolution enabled on Radeon™ RX 9070 XT. Users experiencing this issue are recommended to disable AMD FidelityFX™ Super Resolution as a temporary workaround."
+        "BUG-296": "Texture flickering or corruption may appear while playing The Elder Scrolls IV: Oblivion Remastered with AMD FidelityFX™ Super Resolution enabled on Radeon™ RX 9070 XT. Users experiencing this issue are recommended to disable AMD FidelityFX™ Super Resolution as a temporary workaround.",
+        "BUG-297": "Intermittent application crash or driver timeout may be observed while playing Marvel's Spider-Man 2 with Ray Tracing enabled on Radeon™ RX 9060 XT.",
+        "BUG-298": "Intermittent application crash may be observed when first launching The Last of Us Part I on Radeon™ RX 9060 XT graphics products.",
+        "BUG-299": "Lower than expected performance may be observed while playing Warhammer 40,000: Darktide on Radeon™ RX 9070 series graphics products.",
+        "BUG-300": "Stutter and lower than expected performance may be observed while playing 4K resolution YouTube videos in Chrome. Users experiencing this issue are recommended to play videos in full screen as a temporary workaround.",
+        "BUG-301": "Intermittent application crash may be observed while playing FBC: Firebreak on some AMD Ryzen AI 300 series and some AMD Ryzen 7000 series APU products."
     }
 }
