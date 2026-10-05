@@ -1,6 +1,25 @@
 {
     "drivers": [
         {
+            "version": "22.11.2",
+            "type": "WHQL",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-22-11-2.html",
+            "fixed_bug_ids": [
+                "BUG-009",
+                "BUG-010",
+                "BUG-011",
+                "BUG-012"
+            ],
+            "known_bug_ids": [
+                "BUG-013",
+                "BUG-014",
+                "BUG-008",
+                "BUG-015",
+                "BUG-016"
+            ],
+            "game_ids": []
+        },
+        {
             "version": "22.10.3",
             "type": "WHQL",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-22-10-3.html",
@@ -27,7 +46,15 @@
         "BUG-005": "When Radeon™ Anti-Lag is enabled, a beep can be heard when pressing shift + back key.",
         "BUG-006": "GPU utilization may be stuck at 100% in Radeon performance metrics after closing games on some AMD Graphics Products such as Radeon™ 570.",
         "BUG-007": "Stuttering may occur during video playback using hardware acceleration with Firefox on some AMD Graphics Products such as the Radeon™ RX 6900 XT Graphics.",
-        "BUG-008": "Brief display corruption may occur when switching between video and game windows on some AMD Graphics Products such as the Radeon™ RX 6700 XT."
+        "BUG-008": "Brief display corruption may occur when switching between video and game windows on some AMD Graphics Products such as the Radeon™ RX 6700 XT.",
+        "BUG-009": "During video playback and window switching, an intermittent driver timeout or black screen may occur on Radeon™ RX 6000 series GPUs using some 240Hz refresh rate displays or high refresh rate primary display plus low refresh rate secondary display configurations.",
+        "BUG-010": "Stuttering may occur during video playback using hardware acceleration with Firefox on Radeon™ RX 6000 series GPUs.",
+        "BUG-011": "AMDRSServ.exe may cause GPU utilization to remain at 100% after closing games on some AMD Graphics Products such as Radeon™ 570.",
+        "BUG-012": "An intermittent driver timeout or black screen may occur while videos are playing in VRChat™ on Radeon™ RX 6000 series GPUs.",
+        "BUG-013": "Intermittent system stuttering or UI flickering may occur when two videos are simultaneously playing using chromium-based browsers.",
+        "BUG-014": "During video playback and gameplay, frame drop may occur in chromium-based browsers with variable refresh rate enabled extended displays.",
+        "BUG-015": "Texture flickering or artifacts may occur during Warhammer 40,000: Darktide™ gameplay.",
+        "BUG-016": "Some laptops using hybrid graphics and AMD Ryzen™ 5000 series Processors with Radeon™ Graphics may have no sound output using certain Realtek Audio versions."
     },
     "master_games": {}
 }
