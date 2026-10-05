@@ -1,6 +1,21 @@
 {
     "drivers": [
         {
+            "version": "25.2.1",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-2-1.html",
+            "fixed_bug_ids": [
+                "BUG-250",
+                "BUG-252"
+            ],
+            "known_bug_ids": [
+                "BUG-251",
+                "BUG-235",
+                "BUG-245",
+                "BUG-239",
+                "BUG-246"
+            ]
+        },
+        {
             "version": "25.1.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-1-1.html",
             "fixed_bug_ids": [
@@ -1024,6 +1039,7 @@
         "BUG-248": "Lower than expected performance may be observed while using LM Studio on AMD Ryzen™ AI and Radeon™ products. We recommend users experiencing this issue to install our new driver, available here.",
         "BUG-249": "Improvements to performance while playing Apex Legends™ with DirectX® 12 API.",
         "BUG-250": "Partial black screen may appear in Main Menu while playing Marvel's Spider-Man 2 with Radeon™ Anti-Lag 2 and Ray Tracing enabled on AMD Ryzen™ 7000 and above series processors. Users experiencing this issue are recommended to disable Radeon™ Anti-Lag 2 as a temporary workaround.",
-        "BUG-251": "Intermittent system or application crash may be observed while playing FINAL FANTASY VII REBIRTH for long periods of time."
+        "BUG-251": "Intermittent system or application crash may be observed while playing FINAL FANTASY VII REBIRTH for long periods of time.",
+        "BUG-252": "Unable to set low black values when using MyXrayDose ViewIQ."
     }
 }
