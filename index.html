@@ -69,7 +69,7 @@
             <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm flex items-center justify-between">
                 <div>
                     <span class="text-slate-400 text-xs font-medium uppercase tracking-wider block mb-1">Avg. Time to Fix</span>
-                    <span id="stat-avg-time-to-fix" class="text-base font-bold text-cyan-400">0 releases (0 days)</span>
+                    <span id="stat-avg-time-to-fix" class="text-base font-bold text-cyan-400">0 releases</span>
                 </div>
                 <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800 text-cyan-400 shrink-0">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
@@ -219,15 +219,19 @@
                 let bugChart = null;
                 let currentActiveKnownMap = new Map(); 
 
-                function parseDate(dateStr) {
-                    if (!dateStr) return null;
-                    const parsed = Date.parse(dateStr);
-                    if (!isNaN(parsed)) return parsed;
-                    
-                    // Fallback cleanup for formats like "Month DD, YYYY" or similar if standard parse fails
-                    const clean = dateStr.replace(/st|nd|rd|th/g, '');
-                    const parsedClean = Date.parse(clean);
-                    return isNaN(parsedClean) ? null : parsedClean;
+                // Derive real calendar date from AMD driver version string (e.g. "26.9.2" -> Year 2026, Month 9)
+                function getVersionDate(version) {
+                    if (!version) return null;
+                    const parts = version.split('.');
+                    if (parts.length >= 2) {
+                        let year = parseInt(parts[0], 10);
+                        let month = parseInt(parts[1], 10);
+                        if (!isNaN(year) && !isNaN(month)) {
+                            if (year < 100) year += 2000;
+                            return new Date(year, month - 1, 15).getTime();
+                        }
+                    }
+                    return null;
                 }
 
                 function updateView() {
@@ -285,16 +289,12 @@
                             for (let i = 0; i <= globalIdx; i++) {
                                 const pastDriver = chronologicalDrivers[i];
                                 if ((pastDriver.known_bug_ids || []).includes(id)) {
-                                    const releaseSpan = globalIdx - i;
-                                    sliceFixReleases.push(releaseSpan);
+                                    sliceFixReleases.push(globalIdx - i);
                                     
-                                    const startDate = parseDate(pastDriver.date);
-                                    const fixDate = parseDate(d.date);
+                                    const startDate = getVersionDate(pastDriver.version);
+                                    const fixDate = getVersionDate(d.version);
                                     if (startDate && fixDate && fixDate >= startDate) {
                                         sliceFixDays.push(Math.round((fixDate - startDate) / (1000 * 60 * 60 * 24)));
-                                    } else {
-                                        // Fallback if dates are missing: estimate ~18 days per release version
-                                        sliceFixDays.push(releaseSpan * 18);
                                     }
                                     break;
                                 }
@@ -303,14 +303,19 @@
                     });
 
                     let avgReleases = 0;
-                    let avgDays = 0;
+                    let avgDays = null;
                     if (sliceFixReleases.length > 0) {
                         avgReleases = (sliceFixReleases.reduce((a, b) => a + b, 0) / sliceFixReleases.length).toFixed(1);
                     }
                     if (sliceFixDays.length > 0) {
                         avgDays = Math.round(sliceFixDays.reduce((a, b) => a + b, 0) / sliceFixDays.length);
                     }
-                    document.getElementById('stat-avg-time-to-fix').textContent = `${avgReleases} releases (~${avgDays} days)`;
+
+                    let timeToFixText = `${avgReleases} releases`;
+                    if (avgDays !== null) {
+                        timeToFixText += ` (~${avgDays} days)`;
+                    }
+                    document.getElementById('stat-avg-time-to-fix').textContent = timeToFixText;
 
                     if (filteredDriversChronological.length > 0) {
                         filteredDriversChronological.forEach(d => {
