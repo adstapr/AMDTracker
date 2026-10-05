@@ -1,6 +1,12 @@
 {
     "drivers": [
         {
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-22-12-1-RX7900.html",
+            "fixed_issues": [
+                "Link added automatically. Manual review required."
+            ]
+        },
+        {
             "version": "22.11.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-22-11-2.html",
             "fixed_issues": [
