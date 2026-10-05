@@ -21,7 +21,7 @@ def clean_text(text):
     )
 
 def get_next_id(master_dict, prefix):
-    """Finds the next sequential ID like FEAT-001 or GAME-001."""
+    """Finds the next sequential ID like FEAT-001 or BUG-001."""
     if not master_dict:
         return f"{prefix}-001"
     existing_nums = []
@@ -32,29 +32,53 @@ def get_next_id(master_dict, prefix):
     next_num = max(existing_nums) + 1 if existing_nums else 1
     return f"{prefix}-{next_num:03d}"
 
-def parse_list_items(soup, header_keywords):
-    """Scrapes text items under headings containing specific keywords safely."""
+def parse_section_bullets(soup, target_headers):
+    """Precisely extracts bullet points (<li>) under specific heading titles."""
     items = []
-    for header in soup.find_all(["h2", "h3", "strong", "p", "div", "span"]):
-        text_content = header.get_text()
-        if any(keyword.lower() in text_content.lower() for keyword in header_keywords):
-            # Traverse siblings to find lists or paragraphs
-            sibling = header.find_next_sibling()
-            checked_count = 0
-            while sibling and checked_count < 5:
-                if sibling.name == "ul":
-                    for li in sibling.find_all("li"):
-                        cleaned = clean_text(li.get_text())
-                        if cleaned:
-                            items.append(cleaned)
-                elif sibling.name == "p":
-                    cleaned = clean_text(sibling.get_text())
-                    if cleaned and len(cleaned) > 5:
+    
+    # Search for headings or strong tags matching target keywords
+    for element in soup.find_all(["h2", "h3", "h4", "strong", "b"]):
+        text = element.get_text(strip=True)
+        if any(th.lower() in text.lower() for th in target_headers):
+            # Look for the nearest parent container or sibling list
+            container = element.find_parent(["div", "section", "article", "body"])
+            if not container:
+                container = element
+            
+            # Find the next sibling list or a list within the same parent block
+            ul = container.find("ul")
+            if not ul:
+                sibling = element.find_next_sibling()
+                while sibling and sibling.name not in ["h2", "h3", "h4", "section"]:
+                    if sibling.name == "ul":
+                        ul = sibling
+                        break
+                    nested_ul = sibling.find("ul") if hasattr(sibling, "find") else None
+                    if nested_ul:
+                        ul = nested_ul
+                        break
+                    sibling = sibling.find_next_sibling()
+            
+            if ul:
+                for li in ul.find_all("li", recursive=False):
+                    cleaned = clean_text(li.get_text())
+                    if cleaned and len(cleaned) > 3:
                         items.append(cleaned)
-                sibling = sibling.find_next_sibling()
-                checked_count += 1
-            if items:
                 break
+    
+    # Fallback: if no <ul> found, try grabbing paragraph text directly following the header
+    if not items:
+        for element in soup.find_all(["h2", "h3", "h4", "strong", "b"]):
+            text = element.get_text(strip=True)
+            if any(th.lower() in text.lower() for th in target_headers):
+                sibling = element.find_next_sibling()
+                while sibling and sibling.name == "p":
+                    cleaned = clean_text(sibling.get_text())
+                    if cleaned and len(cleaned) > 3:
+                        items.append(cleaned)
+                    sibling = sibling.find_next_sibling()
+                break
+
     return items
 
 def fetch_amd_release_notes(url):
@@ -78,10 +102,11 @@ def fetch_amd_release_notes(url):
 
         if response.status_code == 200:
             soup = BeautifulSoup(response.text, "html.parser")
-            fixed_texts = parse_list_items(soup, ["Fixed Issues"])
-            known_texts = parse_list_items(soup, ["Known Issues"])
-            feature_texts = parse_list_items(soup, ["Highlights", "New Features", "What's New"])
-            game_texts = parse_list_items(soup, ["Support for", "New Game Support", "Game Support"])
+            
+            fixed_texts = parse_section_bullets(soup, ["Fixed Issues"])
+            known_texts = parse_section_bullets(soup, ["Known Issues"])
+            feature_texts = parse_section_bullets(soup, ["Highlights", "New Features", "What's New"])
+            game_texts = parse_section_bullets(soup, ["Support for", "New Game Support", "Game Support"])
 
             if "Recommended" in soup.get_text():
                 driver_type = "Recommended"
