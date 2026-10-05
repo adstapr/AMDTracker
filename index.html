@@ -9,14 +9,24 @@
 <body class="bg-slate-950 text-slate-100 p-6 font-sans">
     <div class="max-w-6xl mx-auto space-y-8">
         
+        <!-- Header -->
         <div class="border-b border-slate-800 pb-4">
             <h1 class="text-3xl font-bold tracking-tight">AMD Tracker</h1>
             <p class="text-slate-400 text-sm mt-1">A bug tracker using AMD's driver notes.</p>
         </div>
 
-        <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm">
-            <h2 class="text-xl font-semibold text-slate-200 mb-1">Bugs Per Driver</h2>
-            <p class="text-slate-400 text-sm mb-4">(Positive = Fixed Issues, Negative = Open / Known Issues)</p>
+        <!-- SECTION 3: Visual Bug Lifecycle Graph -->
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div>
+                    <h2 class="text-xl font-semibold text-slate-200 mb-1">Bugs Per Driver</h2>
+                    <p class="text-slate-400 text-sm">(Positive = Fixed Issues, Negative = Open / Known Issues)</p>
+                </div>
+                <label class="flex items-center gap-2.5 text-xs text-slate-300 cursor-pointer select-none bg-slate-950 px-3 py-2 rounded-lg border border-slate-800">
+                    <input type="checkbox" id="excludeDuplicatesToggle" checked class="rounded border-slate-700 bg-slate-900 text-indigo-600 focus:ring-indigo-500 w-4 h-4">
+                    <span>Exclude duplicate known issues</span>
+                </label>
+            </div>
             
             <div class="relative h-[450px] w-full">
                 <canvas id="bugLifecycleChart"></canvas>
@@ -38,9 +48,9 @@
             })
             .then(data => {
                 const driverContainer = document.getElementById('driver-tracker');
-                
                 driverContainer.innerHTML = '';
 
+                // Render Driver Cards
                 data.drivers.forEach((d) => {
                     let card = document.createElement('div');
                     card.className = 'bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm space-y-4';
@@ -84,94 +94,134 @@
                     driverContainer.appendChild(card);
                 });
 
+                // Chart Setup & Rendering Function
+                let bugChart = null;
                 const chronologicalDrivers = [...data.drivers].reverse();
-                
                 const driverVersions = chronologicalDrivers.map(d => d.version);
                 const fixedCounts = chronologicalDrivers.map(d => (d.fixed_bug_ids || []).length);
-                const knownCounts = chronologicalDrivers.map(d => -Math.abs((d.known_bug_ids || []).length));
 
-                const ctx = document.getElementById('bugLifecycleChart').getContext('2d');
-                new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: driverVersions,
-                        datasets: [
-                            {
-                                label: 'Fixed Issues',
-                                data: fixedCounts,
-                                borderColor: '#10b981',
-                                backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                                borderWidth: 2,
-                                pointBackgroundColor: '#10b981',
-                                pointRadius: 4,
-                                fill: true,
-                                tension: 0.1
-                            },
-                            {
-                                label: 'Open / Known Issues',
-                                data: knownCounts,
-                                borderColor: '#f59e0b',
-                                backgroundColor: 'rgba(245, 158, 11, 0.1)',
-                                borderWidth: 2,
-                                pointBackgroundColor: '#f59e0b',
-                                pointRadius: 4,
-                                fill: true,
-                                tension: 0.1
+                function getKnownCounts(excludeDuplicates) {
+                    if (!excludeDuplicates) {
+                        return chronologicalDrivers.map(d => -Math.abs((d.known_bug_ids || []).length));
+                    }
+
+                    // Track active open bugs chronologically
+                    let activeKnown = new Set();
+                    return chronologicalDrivers.map(d => {
+                        // Remove any fixed bugs from active set
+                        (d.fixed_bug_ids || []).forEach(id => activeKnown.delete(id));
+                        
+                        // Count unique newly introduced or newly surfaced known issues for this driver
+                        let uniqueCount = 0;
+                        (d.known_bug_ids || []).forEach(id => {
+                            if (!activeKnown.has(id)) {
+                                activeKnown.add(id);
+                                uniqueCount++;
                             }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            x: {
-                                ticks: { color: '#94a3b8', font: { family: 'monospace', size: 12 } },
-                                grid: { color: '#1e293b' }
-                            },
-                            y: {
-                                beginAtZero: true,
-                                ticks: { 
-                                    color: '#94a3b8', 
-                                    font: { family: 'monospace', size: 12 }, 
-                                    precision: 0,
-                                    callback: function(value) {
-                                        return Math.abs(value);
-                                    }
+                        });
+                        return -Math.abs(uniqueCount);
+                    });
+                }
+
+                function renderChart() {
+                    const excludeDuplicates = document.getElementById('excludeDuplicatesToggle').checked;
+                    const knownCounts = getKnownCounts(excludeDuplicates);
+
+                    if (bugChart) {
+                        bugChart.data.datasets[1].data = knownCounts;
+                        bugChart.update();
+                        return;
+                    }
+
+                    const ctx = document.getElementById('bugLifecycleChart').getContext('2d');
+                    bugChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: driverVersions,
+                            datasets: [
+                                {
+                                    label: 'Fixed Issues',
+                                    data: fixedCounts,
+                                    borderColor: '#10b981',
+                                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                                    borderWidth: 2,
+                                    pointBackgroundColor: '#10b981',
+                                    pointRadius: 4,
+                                    fill: true,
+                                    tension: 0.1
                                 },
-                                grid: { 
-                                    color: function(context) {
-                                        if (context.tick.value === 0) {
-                                            return '#475569';
+                                {
+                                    label: 'Open / Known Issues',
+                                    data: knownCounts,
+                                    borderColor: '#f59e0b',
+                                    backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                                    borderWidth: 2,
+                                    pointBackgroundColor: '#f59e0b',
+                                    pointRadius: 4,
+                                    fill: true,
+                                    tension: 0.1
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                x: {
+                                    ticks: { color: '#94a3b8', font: { family: 'monospace', size: 12 } },
+                                    grid: { color: '#1e293b' }
+                                },
+                                y: {
+                                    beginAtZero: true,
+                                    ticks: { 
+                                        color: '#94a3b8', 
+                                        font: { family: 'monospace', size: 12 }, 
+                                        precision: 0,
+                                        callback: function(value) {
+                                            return Math.abs(value);
                                         }
-                                        return '#1e293b';
                                     },
-                                    lineWidth: function(context) {
-                                        return context.tick.value === 0 ? 2 : 1;
+                                    grid: { 
+                                        color: function(context) {
+                                            if (context.tick.value === 0) {
+                                                return '#475569';
+                                            }
+                                            return '#1e293b';
+                                        },
+                                        lineWidth: function(context) {
+                                            return context.tick.value === 0 ? 2 : 1;
+                                        }
                                     }
                                 }
-                            }
-                        },
-                        plugins: {
-                            legend: {
-                                display: true,
-                                position: 'top',
-                                labels: { color: '#94a3b8', font: { family: 'sans-serif', size: 12 } }
                             },
-                            tooltip: {
-                                callbacks: {
-                                    title: function(context) {
-                                        return `Driver Version: ${context[0].label}`;
-                                    },
-                                    label: function(context) {
-                                        let label = context.dataset.label || '';
-                                        let value = Math.abs(context.parsed.y);
-                                        return ` ${label}: ${value}`;
+                            plugins: {
+                                legend: {
+                                    display: true,
+                                    position: 'top',
+                                    labels: { color: '#94a3b8', font: { family: 'sans-serif', size: 12 } }
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        title: function(context) {
+                                            return `Driver Version: ${context[0].label}`;
+                                        },
+                                        label: function(context) {
+                                            let label = context.dataset.label || '';
+                                            let value = Math.abs(context.parsed.y);
+                                            return ` ${label}: ${value}`;
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
-                });
+                    });
+                }
+
+                // Initial render
+                renderChart();
+
+                // Listen for toggle changes
+                document.getElementById('excludeDuplicatesToggle').addEventListener('change', renderChart);
             })
             .catch(error => console.error('Error loading driver tracker data:', error));
     </script>
