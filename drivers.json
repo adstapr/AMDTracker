@@ -1,6 +1,22 @@
 {
     "drivers": [
         {
+            "version": "22.10.3",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-22-10-3.html",
+            "fixed_bug_ids": [
+                "BUG-010",
+                "BUG-013",
+                "BUG-014"
+            ],
+            "known_bug_ids": [
+                "BUG-015",
+                "BUG-009",
+                "BUG-008",
+                "BUG-011",
+                "BUG-012"
+            ]
+        },
+        {
             "version": "22.10.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-22-10-2.html",
             "fixed_bug_ids": [
@@ -33,6 +49,9 @@
         "BUG-009": "When Radeon™ Anti-Lag is enabled, a beep can be heard when pressing shift + back key.",
         "BUG-010": "Elite Dangerous may crash upon launch on Radeon™ RX 6000 series GPUs.",
         "BUG-011": "Stuttering may occur during video playback using hardware acceleration with Firefox on some AMD Graphics Products such as the Radeon™ RX 6900 XT Graphics.",
-        "BUG-012": "Brief display corruption may occur when switching between video and game windows on some AMD Graphics Products such as the Radeon™ RX 6700 XT."
+        "BUG-012": "Brief display corruption may occur when switching between video and game windows on some AMD Graphics Products such as the Radeon™ RX 6700 XT.",
+        "BUG-013": "Black screen may occur during driver upgrade or settings reset using Microsoft® Windows® 11 version 22H2 on Radeon™ RX 6000 series GPUs.",
+        "BUG-014": "Lower than expected performance on Gotham Knights™ using AMD Processors on some AMD Graphics Products such as Radeon™ RX 6950 XT.",
+        "BUG-015": "World Of Warships prediction lines may be missing on Radeon™ RX 6000 series GPUs."
     }
 }
