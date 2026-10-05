@@ -1,6 +1,23 @@
 {
     "drivers": [
         {
+            "version": "23.5.1",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-5-1.html",
+            "fixed_bug_ids": [
+                "BUG-090",
+                "BUG-012",
+                "BUG-091",
+                "BUG-092"
+            ],
+            "known_bug_ids": [
+                "BUG-045",
+                "BUG-085",
+                "BUG-086",
+                "BUG-089",
+                "BUG-093"
+            ]
+        },
+        {
             "version": "23.4.3",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-4-3.html",
             "fixed_bug_ids": [
@@ -372,6 +389,10 @@
         "BUG-086": "Some virtual reality games or applications may experience lower-than-expected performance on Radeon™ RX 7000 series GPUs.",
         "BUG-087": "Red corruption may occur in World War Z™: Aftermath when using the Vulkan® API.",
         "BUG-088": "Longer than expected shader compilation time when first launching THE LAST OF US™ Part I.",
-        "BUG-089": "Application crash may be intermittently observed while playing RuneScape™ on some AMD Graphics Products, such as the Radeon™ RX 5700 XT."
+        "BUG-089": "Application crash may be intermittently observed while playing RuneScape™ on some AMD Graphics Products, such as the Radeon™ RX 5700 XT.",
+        "BUG-090": "Application crash or driver timeout may be observed during video playback using DaVinci Resolve™ Studio.",
+        "BUG-091": "Higher than expected memory usage during shader compilation time when first launching THE LAST OF US™ Part I.",
+        "BUG-092": "Intermittent system crash while playing Call of Duty®: Modern Warfare® II on some AMD Graphics Products, such as the Radeon™ RX 580.",
+        "BUG-093": "System crashes or freezes may occur after installing the driver on certain laptops that use hybrid graphics with AMD products, such as the AMD Ryzen™ 9 7945HX. Users that may experience this issue are recommended to use AMD Software: Adrenalin Edition 23.4.3 or the latest available OEM driver."
     }
 }
