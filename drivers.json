@@ -1,6 +1,26 @@
 {
     "drivers": [
         {
+            "version": "23.7.2",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-7-2.html",
+            "fixed_bug_ids": [
+                "BUG-102",
+                "BUG-101",
+                "BUG-105",
+                "BUG-104",
+                "BUG-107"
+            ],
+            "known_bug_ids": [
+                "BUG-103",
+                "BUG-108",
+                "BUG-109",
+                "BUG-110",
+                "BUG-111",
+                "BUG-112",
+                "BUG-106"
+            ]
+        },
+        {
             "version": "23.7.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-7-1.html",
             "fixed_bug_ids": [
@@ -440,6 +460,12 @@
         "BUG-103": "Performance Metrics Overlay may report N/A for FPS on various games.",
         "BUG-104": "Display signal may be lost after switching windows on certain Adaptive-Sync enable displays on some AMD Graphics Products, such as the Radeon™ RX 7900 XTX.",
         "BUG-105": "Higher than expected GPU Memory Utilization when using certain Record and Stream settings such as Instant Replay.",
-        "BUG-106": "Performance drop may be experienced for DirectX® 11 games on AMD Radeon™ RX 5600 XT when AMD SmartAccess Memory is Enabled. As a temporary workaround, users encountering this are recommended to disable SmartAccess Memory in the Performance Tuning Page."
+        "BUG-106": "Performance drop may be experienced for DirectX® 11 games on AMD Radeon™ RX 5600 XT when AMD SmartAccess Memory is Enabled. As a temporary workaround, users encountering this are recommended to disable SmartAccess Memory in the Performance Tuning Page.",
+        "BUG-107": "Audio may intermittently become out of sync with video when recording from AMD Software: Adrenalin Edition with AVC and HEVC codecs.",
+        "BUG-108": "High idle power has situationally been observed when using select multi-display setups with mixed high-resolution and high refresh rate displays on Radeon™ RX 7000 series GPUs.",
+        "BUG-109": "Intermittent corruption may be observed playing Rocket League™ with Bloom set to Off on some AMD Graphics Products, such as the Radeon™ RX 6900 XT.",
+        "BUG-110": "Intermittent application hang for a few seconds may be observed while playing RuneScape™ on some AMD Graphics Products, such as the Radeon™ RX 5700 XT.",
+        "BUG-111": "Application crash or driver timeout may be observed while playing Ratchet & Clank™: Rift Apart with Ray-Tracing and Dynamic Resolution Scaling enabled on some AMD Graphics Products, such as the Radeon™ RX 7900 XTX.",
+        "BUG-112": "Audio may intermittently become out of sync with video when recording from AMD Software: Adrenalin Edition with AV1 codec."
     }
 }
