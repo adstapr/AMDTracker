@@ -1,6 +1,21 @@
 {
     "drivers": [
         {
+            "version": "26.5.1",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-5-1.html",
+            "fixed_bug_ids": [
+                "BUG-366",
+                "BUG-367"
+            ],
+            "known_bug_ids": [
+                "BUG-309",
+                "BUG-310",
+                "BUG-308",
+                "BUG-365",
+                "BUG-368"
+            ]
+        },
+        {
             "version": "26.3.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-3-1.html",
             "fixed_bug_ids": [
@@ -1518,6 +1533,9 @@
         "BUG-362": "Users may experience intermittent loss of mouse and keyboard functionality both in-game and on the desktop when interacting with AMD Software: Adrenalin Edition.",
         "BUG-363": "System crash may occur when repeatedly changing in-game AMD Software: Adrenalin Edition settings or when alt-tabbing on Radeon™ RX 7000 and above series graphics products.",
         "BUG-364": "Failure to enable AMD Noise Suppression in AMD Software: Adrenalin Edition on Radeon™ RX 6000 and above series graphics products.",
-        "BUG-365": "Intermittent application crash or driver timeout may be observed while playing RoadCraft on Radeon™ RX 9000 series products."
+        "BUG-365": "Intermittent application crash or driver timeout may be observed while playing RoadCraft on Radeon™ RX 9000 series products.",
+        "BUG-366": "Intermittent stuttering may be observed while playing Resident Evil Requiem “Raccoon City” map on Radeon™ RX 9000 series graphics products.",
+        "BUG-367": "Corruption may appear while playing God of War on Radeon™ RX 9000 series graphics products.",
+        "BUG-368": "Corruption may appear while playing Satisfactory on Radeon™ RX 9000 series graphics products."
     }
 }
