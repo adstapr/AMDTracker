@@ -1,6 +1,41 @@
 {
     "drivers": [
         {
+            "version": "23.2.1",
+            "type": "WHQL",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-2-1.html",
+            "fixed_bug_ids": [
+                "BUG-044",
+                "BUG-045",
+                "BUG-046",
+                "BUG-047",
+                "BUG-048",
+                "BUG-049",
+                "BUG-050",
+                "BUG-051",
+                "BUG-052",
+                "BUG-053",
+                "BUG-054"
+            ],
+            "known_bug_ids": [
+                "BUG-055",
+                "BUG-056",
+                "BUG-057",
+                "BUG-058",
+                "BUG-059",
+                "BUG-060",
+                "BUG-061",
+                "BUG-012",
+                "BUG-062"
+            ],
+            "feature_ids": [
+                "FEAT-001",
+                "FEAT-002",
+                "FEAT-003"
+            ],
+            "game_ids": []
+        },
+        {
             "version": "23.1.1",
             "type": "WHQL",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-1-1-RX7900.html",
@@ -185,8 +220,31 @@
         "BUG-040": "Intermittent driver timeout may occur when applying Auto Overclock performance tuning.",
         "BUG-041": "While playing Valheim™ an app crash or driver timeout may occur using Vulkan® API.",
         "BUG-042": "While playing The Witcher® 3: Wild Hunt, an intermittent app crash or driver timeout may occur when Ray Tracing settings are enabled.",
-        "BUG-043": "Minor performance degradation may be observed after applying a factory reset of settings."
+        "BUG-043": "Minor performance degradation may be observed after applying a factory reset of settings.",
+        "BUG-044": "AMD Software: Adrenalin Edition may fail to launch with the error message “Delayed Write Failed” on Microsoft® Windows® 11 version 22H2.",
+        "BUG-045": "Poor performance and load time may be observed while playing SpaceEngine™.",
+        "BUG-046": "Corruption may be observed while scrolling the points shop in STEAM™ on Radeon RX 6000 series GPUs.",
+        "BUG-047": "Performance drop may be observed during Fortnite™ and YouTube playback with Enhanced Sync enabled on some AMD Graphics Products such as AMD Radeon™ RX 5700 XT.",
+        "BUG-048": "Corruption or game crash may be observed while playing Door Kickers 2™.",
+        "BUG-049": "Missing or flickering textures may be observed while playing Emergency 4™.",
+        "BUG-050": "Application crash may be observed when launching Baldur's Gate 3™ using Vulkan® API on Radeon™ RX 7000 series GPUs.",
+        "BUG-051": "Stuttering may be observed while playing Sea of Thieves™ on Radeon™ RX 6000 and above series GPUs.",
+        "BUG-052": "Corruption may be observed while playing Battlefield™ 4 with Post Process Quality settings set to high or ultra on Radeon™ RX 6000 and above series GPUs.",
+        "BUG-053": "White foliage may be observed while playing Hogwarts Legacy™ on Radeon™ RX 7000 series GPUs.",
+        "BUG-054": "Intermittent system stuttering or UI flickering may occur when two videos are simultaneously playing using chromium-based browsers on some multi-display configurations.",
+        "BUG-055": "High idle power has situationally been observed when using select high-resolution and high refresh rate displays on Radeon™ RX 7000 series GPUs.",
+        "BUG-056": "Video stuttering or performance drop may be observed during gameplay plus video playback with some extended display configurations on Radeon™ RX 7000 series GPUs.",
+        "BUG-057": "Application crash may be observed while opening Premium Gold Packs in EA SPORTS™ FIFA 23.",
+        "BUG-058": "Some virtual reality games or apps may experience lower-than-expected performance on Radeon™ RX 7000 series GPUs.",
+        "BUG-059": "AMD Bug Report Tool pop-up or system hang may be observed after driver upgrade on some hybrid graphics notebooks. Users are recommended to use the factory reset install option as a workaround.",
+        "BUG-060": "Corruption may be briefly observed when moving Netflix video between displays or minimize-to-fullscreen on some AMD Products such as AMD Ryzen™ 7 6800U.",
+        "BUG-061": "Certain videos played with Movies and TV may briefly show corruption when moving the window between displays on some AMD Graphics Products such as AMD Radeon™ RX 6700 XT.",
+        "BUG-062": "Maximum encode bitrate is limited to 100Mbps for certain applications."
     },
-    "master_features": {},
+    "master_features": {
+        "FEAT-001": "A new version of AMD Link improves overall connectivity across all supported Radeon products, RX 400 series and newer, so you can game from anywhere on virtually any device.",
+        "FEAT-002": "Boost your performance with AMD Software - read the latest blog HERE and learn how this newly unified driver delivers performance gains since Windows 11 first launched.",
+        "FEAT-003": "Game Optimizations"
+    },
     "master_games": {}
 }
