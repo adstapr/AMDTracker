@@ -92,11 +92,8 @@ def parse_amd_section(soup, keywords):
     return items
 
 def parse_amd_games_section(soup):
-    """Specifically parses 'New Game Support' or 'Support For' headers under Highlights 
-       while strictly ignoring global navigation / footer elements."""
     items = []
     main_container = get_main_content(soup)
-    
     game_keywords = ["new game support", "game support", "support for"]
     target_tags = []
     
@@ -154,9 +151,8 @@ def fetch_amd_release_notes(url):
 
     fixed_texts = []
     known_texts = []
-    feature_texts = []
     game_texts = []
-    driver_type = "optional"  # Default fallback
+    driver_type = "optional"
 
     try:
         response = requests.get(url, headers=headers, timeout=15)
@@ -168,16 +164,7 @@ def fetch_amd_release_notes(url):
             fixed_texts = parse_amd_section(soup, ["Fixed Issues"])
             known_texts = parse_amd_section(soup, ["Known Issues"])
             game_texts = parse_amd_games_section(soup)
-            feature_texts = parse_amd_section(soup, ["Highlights", "New Features", "What's New"])
             
-            feature_texts = [
-                f for f in feature_texts 
-                if not any(g.lower() in f.lower() for g in game_texts) 
-                and "support for" not in f.lower()
-                and "game support" not in f.lower()
-            ]
-
-            # Check for WHQL certification
             page_text = soup.get_text()
             if re.search(r"whql", page_text, re.IGNORECASE):
                 driver_type = "WHQL"
@@ -202,7 +189,6 @@ def fetch_amd_release_notes(url):
         "url": url,
         "fixed_texts": fixed_texts,
         "known_texts": known_texts,
-        "feature_texts": feature_texts,
         "game_texts": game_texts,
     }
 
@@ -218,16 +204,33 @@ def update_json(scraped_data):
 
     data.setdefault("drivers", [])
     master_bugs = data.setdefault("master_bugs", {})
-    master_features = data.setdefault("master_features", {})
     master_games = data.setdefault("master_games", {})
+    
+    # Remove deprecated feature keys if they existed in older JSON schemas
+    if "master_features" in data:
+        del data["master_features"]
+
+    def find_matching_bug_id(text, master_dict):
+        clean_incoming = clean_text(text).lower()
+        
+        # 1. Exact clean text match
+        for k, v in master_dict.items():
+            if clean_text(v).lower() == clean_incoming:
+                return k
+                
+        # 2. Substring/Variant match handling (e.g., catching duplicate entries with hardware specs like "on RX 6000 or newer")
+        for k, v in master_dict.items():
+            clean_existing = clean_text(v).lower()
+            if clean_incoming in clean_existing or clean_existing in clean_incoming:
+                # Keep the longer, more descriptive string or match directly
+                return k
+                
+        return None
 
     def process_list(text_list, master_dict, prefix):
         ids = []
         for text in text_list:
-            existing_id = next(
-                (k for k, v in master_dict.items() if clean_text(v) == clean_text(text)),
-                None,
-            )
+            existing_id = find_matching_bug_id(text, master_dict)
             if existing_id:
                 ids.append(existing_id)
             else:
@@ -238,7 +241,6 @@ def update_json(scraped_data):
 
     fixed_bug_ids = process_list(scraped_data["fixed_texts"], master_bugs, "BUG")
     known_bug_ids = process_list(scraped_data["known_texts"], master_bugs, "BUG")
-    feature_ids = process_list(scraped_data["feature_texts"], master_features, "FEAT")
     game_ids = process_list(scraped_data["game_texts"], master_games, "GAME")
 
     new_driver_entry = {
@@ -247,7 +249,6 @@ def update_json(scraped_data):
         "url": scraped_data["url"],
         "fixed_bug_ids": fixed_bug_ids,
         "known_bug_ids": known_bug_ids,
-        "feature_ids": feature_ids,
         "game_ids": game_ids,
     }
 
