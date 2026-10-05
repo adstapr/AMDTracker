@@ -1,6 +1,22 @@
 {
     "drivers": [
         {
+            "version": "26.9.2",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-9-2.html",
+            "fixed_bug_ids": [
+                "BUG-384",
+                "BUG-385",
+                "BUG-380",
+                "BUG-386"
+            ],
+            "known_bug_ids": [
+                "BUG-311",
+                "BUG-312",
+                "BUG-387",
+                "BUG-388"
+            ]
+        },
+        {
             "version": "26.9.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-9-1.html",
             "fixed_bug_ids": [
@@ -1646,6 +1662,11 @@
         "BUG-380": "Anti-Lag 2 may show as inactive in AMD Software: Adrenalin Edition after disabling Frame Generation in Resonance: A Plague Tale Legacy.",
         "BUG-381": "Cyberpunk 2077 recommends a minimum of 6GB of video memory. AMD Radeon™ RX 9050 4GB users experiencing issues are recommended to set graphics intensive features to low or off.",
         "BUG-382": "Intermittent game crash may be observed while playing Starfield on Radeon™ RX 9000 series graphics products. Users experiencing this issue are recommended to install AMD Software: Adrenalin Edition 26.7.1.",
-        "BUG-383": "Intermittent game crash may be observed while playing Starfield and Apex Legends™ on Radeon™ RX 9000 series graphics products."
+        "BUG-383": "Intermittent game crash may be observed while playing Starfield and Apex Legends™ on Radeon™ RX 9000 series graphics products.",
+        "BUG-384": "Intermittent driver timeout may be observed while playing Final Fantasy VII Rebirth on Radeon™ RX 7000 series graphics products.",
+        "BUG-385": "Intermittent driver timeout may be observed while playing War Thunder in DirectX 12 mode with Instant Replay and Borderless Region Capture enabled on Radeon™ RX 6000 series graphics products.",
+        "BUG-386": "Intermittent driver timeout or system freeze may be observed while playing HITMAN™ World of Assassination on Radeon™ RX 9000 series graphics products.",
+        "BUG-387": "Intermittent application crash or driver timeout may be observed while playing Assassin's Creed Black Flag Resynced on Radeon™ RX 7000 series graphics products.",
+        "BUG-388": "Intermittent driver timeout may be observed while playing War Thunder on Radeon™ RX 5000 series graphics products. Users experiencing this issue are recommended to install AMD Software: Adrenalin Edition 26.9.1."
     }
 }
