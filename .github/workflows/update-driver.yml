@@ -1,0 +1,40 @@
+name: Auto-Populate AMD Driver
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Driver Version to Fetch (e.g., 22.10.2)'
+        required: true
+        type: string
+
+jobs:
+  update-driver:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install requests beautifulsoup4
+
+      - name: Run Scraper Script
+        run: |
+          python update_drivers.py ${{ github.event.inputs.version }}
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add drivers.json
+          git commit -m "Auto-update driver data for version ${{ github.event.inputs.version }}"
+          git push
