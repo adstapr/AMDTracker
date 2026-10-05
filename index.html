@@ -15,6 +15,8 @@
             background: #6366f1;
             cursor: pointer;
             border: 2px solid #020617;
+            position: relative;
+            z-index: 30;
         }
         input[type="range"]::-moz-range-thumb {
             pointer-events: auto;
@@ -24,6 +26,8 @@
             background: #6366f1;
             cursor: pointer;
             border: 2px solid #020617;
+            position: relative;
+            z-index: 30;
         }
     </style>
 </head>
@@ -66,21 +70,21 @@
                 <button id="reset-timeline" class="text-xs text-slate-400 hover:text-white bg-slate-950 px-3 py-1.5 rounded border border-slate-800 transition">Reset Range</button>
             </div>
             
-            <div class="relative pt-2 pb-8">
+            <div class="relative pt-2 pb-10">
                 <!-- Slider Track Base -->
-                <div class="relative h-2 bg-slate-950 rounded-lg border border-slate-800">
+                <div class="relative h-2 bg-slate-950 rounded-lg border border-slate-800 mx-3">
                     <!-- Highlighted Active Range Fill -->
-                    <div id="slider-range-fill" class="absolute h-full bg-indigo-600/30 rounded-lg"></div>
+                    <div id="slider-range-fill" class="absolute h-full bg-indigo-600/30 rounded-lg pointer-events-none"></div>
                     
                     <!-- Dual Range Inputs -->
                     <input type="range" id="sliderMin" min="0" max="100" value="0" step="1" 
-                        class="absolute inset-0 w-full h-2 appearance-none bg-transparent pointer-events-none z-20">
+                        class="absolute -top-2 left-0 w-full h-6 appearance-none bg-transparent pointer-events-none z-20">
                     <input type="range" id="sliderMax" min="0" max="100" value="100" step="1" 
-                        class="absolute inset-0 w-full h-2 appearance-none bg-transparent pointer-events-none z-20">
+                        class="absolute -top-2 left-0 w-full h-6 appearance-none bg-transparent pointer-events-none z-20">
                 </div>
                 
                 <!-- Perfectly Aligned Magnet Datalist / Markers -->
-                <div id="timeline-markers" class="absolute left-0 right-0 h-6 mt-2 px-1">
+                <div id="timeline-markers" class="absolute left-3 right-3 h-6 mt-3">
                     <!-- Populated dynamically via JS with exact percentage left positions -->
                 </div>
             </div>
@@ -121,23 +125,29 @@
                 const chronologicalDrivers = [...data.drivers].reverse();
                 const totalSteps = chronologicalDrivers.length - 1;
                 
-                // Define Architecture/Year Magnet Milestones
+                // Define precise Architecture/Year Magnet Milestones with distinct target matching rules
                 const milestones = [
-                    { label: 'Start', index: 0 },
-                    { label: '2022', keyword: '22.' },
-                    { label: 'RDNA 3', keyword: '22.11.' },
-                    { label: '2023', keyword: '23.' },
-                    { label: '2024', keyword: '24.' },
-                    { label: 'RDNA 4', keyword: '25.' },
-                    { label: 'Latest', index: totalSteps }
+                    { label: '2022', match: (d) => d.version.startsWith('22.') && !d.version.includes('22.11.') },
+                    { label: 'RDNA 3', match: (d) => d.version.includes('22.11.') || d.version.includes('22.12.') },
+                    { label: '2023', match: (d) => d.version.startsWith('23.') },
+                    { label: '2024', match: (d) => d.version.startsWith('24.') },
+                    { label: 'RDNA 4', match: (d) => d.version.includes('25.3.') || d.version.includes('25.4.') },
+                    { label: '2025', match: (d) => d.version.startsWith('25.') && !d.version.includes('25.3.') && !d.version.includes('25.4.') },
+                    { label: '2026', match: (d) => d.version.startsWith('26.') }
                 ];
 
                 // Resolve milestone exact array indexes
                 milestones.forEach(m => {
-                    if (m.index !== undefined) return;
-                    let foundIdx = chronologicalDrivers.findIndex(d => d.version.includes(m.keyword) || (d.date && d.date.includes(m.keyword)));
-                    m.index = foundIdx !== -1 ? foundIdx : 0;
+                    let foundIdx = chronologicalDrivers.findIndex(m.match);
+                    if (foundIdx === -1) {
+                        // Fallback partial keyword search if exact match rule fails
+                        foundIdx = chronologicalDrivers.findIndex(d => d.version.includes(m.label.toLowerCase()) || (d.date && d.date.includes(m.label)));
+                    }
+                    m.index = foundIdx !== -1 ? foundIdx : null;
                 });
+
+                // Filter out milestones that couldn't be matched in the dataset
+                const activeMilestones = milestones.filter(m => m.index !== null);
 
                 // Setup Slider Range attributes
                 const sliderMin = document.getElementById('sliderMin');
@@ -150,13 +160,13 @@
                 sliderMax.max = totalSteps;
                 sliderMax.value = totalSteps;
 
-                // Render Perfectly Aligned Markers
+                // Render Perfectly Aligned Magnet Markers
                 const markersContainer = document.getElementById('timeline-markers');
                 markersContainer.innerHTML = '';
-                milestones.forEach(m => {
+                activeMilestones.forEach(m => {
                     let pct = totalSteps > 0 ? (m.index / totalSteps) * 100 : 0;
                     let span = document.createElement('span');
-                    span.className = 'absolute text-[10px] text-slate-500 font-mono cursor-pointer hover:text-indigo-400 transition -translate-x-1/2 whitespace-nowrap';
+                    span.className = 'absolute text-[10px] text-slate-400 font-mono cursor-pointer hover:text-indigo-400 transition -translate-x-1/2 whitespace-nowrap bg-slate-900 px-1 py-0.5 rounded border border-slate-800';
                     span.style.left = `${pct}%`;
                     span.textContent = m.label;
                     span.onclick = () => {
@@ -187,7 +197,7 @@
                         sliderMax.value = maxIdx;
                     }
 
-                    // Update visual range fill bar
+                    // Update visual range fill bar percentage
                     const fill = document.getElementById('slider-range-fill');
                     const leftPct = totalSteps > 0 ? (minIdx / totalSteps) * 100 : 0;
                     const rightPct = totalSteps > 0 ? (1 - (maxIdx / totalSteps)) * 100 : 0;
