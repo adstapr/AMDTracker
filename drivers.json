@@ -1,6 +1,22 @@
 {
     "drivers": [
         {
+            "version": "25.6.3",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-6-3.html",
+            "fixed_bug_ids": [
+                "BUG-302",
+                "BUG-303",
+                "BUG-296"
+            ],
+            "known_bug_ids": [
+                "BUG-267",
+                "BUG-278",
+                "BUG-282",
+                "BUG-288",
+                "BUG-300"
+            ]
+        },
+        {
             "version": "25.6.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-6-2.html",
             "fixed_bug_ids": [
@@ -1232,6 +1248,8 @@
         "BUG-298": "Intermittent application crash may be observed when first launching The Last of Us Part I on Radeon™ RX 9060 XT graphics products.",
         "BUG-299": "Lower than expected performance may be observed while playing Warhammer 40,000: Darktide on Radeon™ RX 9070 series graphics products.",
         "BUG-300": "Stutter and lower than expected performance may be observed while playing 4K resolution YouTube videos in Chrome. Users experiencing this issue are recommended to play videos in full screen as a temporary workaround.",
-        "BUG-301": "Intermittent application crash may be observed while playing FBC: Firebreak on some AMD Ryzen AI 300 series and some AMD Ryzen 7000 series APU products."
+        "BUG-301": "Intermittent application crash may be observed while playing FBC: Firebreak on some AMD Ryzen AI 300 series and some AMD Ryzen 7000 series APU products.",
+        "BUG-302": "AMD FidelityFX™ Super Resolution 4 (FSR 4) is not enabled while playing DragonKin: The Banished, Blades of Fire, RoadCraft, The Alters, Star Wars Outlaws and S.T.A.L.K.E.R. 2: Heart of Chornobyl on Radeon™ RX 9000 series graphics products.",
+        "BUG-303": "Intermittent system or application crash maybe observed while playing Black Myth: WuKong on Radeon™ RX 7650 GRE graphics products."
     }
 }
