@@ -1,6 +1,28 @@
 {
     "drivers": [
         {
+            "version": "25.3.1",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-3-1.html",
+            "fixed_bug_ids": [
+                "BUG-246",
+                "BUG-235",
+                "BUG-253",
+                "BUG-245"
+            ],
+            "known_bug_ids": [
+                "BUG-254",
+                "BUG-255",
+                "BUG-256",
+                "BUG-257",
+                "BUG-258",
+                "BUG-259",
+                "BUG-260",
+                "BUG-239",
+                "BUG-261",
+                "BUG-247"
+            ]
+        },
+        {
             "version": "25.2.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-2-1.html",
             "fixed_bug_ids": [
@@ -1040,6 +1062,15 @@
         "BUG-249": "Improvements to performance while playing Apex Legends™ with DirectX® 12 API.",
         "BUG-250": "Partial black screen may appear in Main Menu while playing Marvel's Spider-Man 2 with Radeon™ Anti-Lag 2 and Ray Tracing enabled on AMD Ryzen™ 7000 and above series processors. Users experiencing this issue are recommended to disable Radeon™ Anti-Lag 2 as a temporary workaround.",
         "BUG-251": "Intermittent system or application crash may be observed while playing FINAL FANTASY VII REBIRTH for long periods of time.",
-        "BUG-252": "Unable to set low black values when using MyXrayDose ViewIQ."
+        "BUG-252": "Unable to set low black values when using MyXrayDose ViewIQ.",
+        "BUG-253": "Lower than expected performance may be observed in Delta Force on Radeon™ RX 7000 series graphics products.",
+        "BUG-254": "Intermittent crash of AMD Software: Adrenalin Edition™ may be observed while playing Marvel's Spider-Man 2 or Ratchet & Clank: Rift Apart with AMD Image Inspector enabled. Users experiencing this issue are recommended to disable AMD Image Inspector as a temporary workaround.",
+        "BUG-255": "Lower than expected performance may be observed when using YouTube on the Microsoft Edge web browser immediately after a driver install. Users experiencing this issue are recommended to restart Microsoft Edge and relaunch YouTube as a temporary workaround.",
+        "BUG-256": "3rd party tools that rely on our ADL SDK for detecting ROPs count will incorrectly report 64 ROPs, and we are looking to address this in a driver update post launch.",
+        "BUG-257": "Incorrect gamma is exhibited while playing Counter-Strike 2 and using MSAA x8 on Radeon™ RX 9070 series graphics products.",
+        "BUG-258": "AMD Software: Adrenalin Edition™ may not accurately report AMD FSR 4 enablement for Marvel's Spider-Man 2.",
+        "BUG-259": "Lower than expected performance may be observed while playing Assetto Corsa Competizione on Radeon™ RX 9000 series graphics products.",
+        "BUG-260": "Intermittent application crash may be observed in Indiana Jones and the Great Circle when settings are set to \"Very Ultra\" quality and Path Tracing is enabled. Users experiencing this issue are recommended to use the default Ray Tracing settings as a temporary workaround.",
+        "BUG-261": "After completing a driver upgrade on certain laptops, users may experience intermittent failures for the integrated camera to start. Users experiencing this issue are recommended to use the AMD Cleanup Utility for Windows® and use our previous recommended driver, available here."
     }
 }
