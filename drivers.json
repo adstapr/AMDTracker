@@ -1,6 +1,25 @@
 {
     "drivers": [
         {
+            "version": "25.9.1",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-9-1.html",
+            "fixed_bug_ids": [
+                "BUG-318",
+                "BUG-321",
+                "BUG-324",
+                "BUG-325"
+            ],
+            "known_bug_ids": [
+                "BUG-319",
+                "BUG-320",
+                "BUG-323",
+                "BUG-322",
+                "BUG-267",
+                "BUG-326",
+                "BUG-327"
+            ]
+        },
+        {
             "version": "25.8.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-8-1.html",
             "fixed_bug_ids": [
@@ -1309,6 +1328,10 @@
         "BUG-320": "Intermittent application crash may be observed while playing Call of Duty®: Black Ops 6 on Radeon™ RX 9000 series graphics products.",
         "BUG-321": "Intermittent application crash or driver timeout may be observed while playing Wuchang: Fallen Feathers with FSR 4 enabled on Radeon™ RX 9000 series graphics products.",
         "BUG-322": "Intermittent application crash may be observed while playing FBC: Firebreak on some AMD Ryzen™ processors such as the Ryzen™ AI 300 series and the Ryzen™ 7000 series.",
-        "BUG-323": "Intermittent application crash may be observed while playing NBA 2K25 in MyCareer mode on Radeon™ RX 9070 series graphics products."
+        "BUG-323": "Intermittent application crash may be observed while playing NBA 2K25 in MyCareer mode on Radeon™ RX 9070 series graphics products.",
+        "BUG-324": "Playstation® VR controllers are not detected while playing SteamVR™.",
+        "BUG-325": "Intermittent application crash or driver timeout may be observed while playing Monster Hunter Wilds with Ray Tracing enabled and recording with AMD Software on Radeon™ RX 7600, 7700, and 7800 series graphics products.",
+        "BUG-326": "Corruption (missing scan travel lines) may be observed while playing GTFO™ on Radeon™ RX 7000 series graphics products.",
+        "BUG-327": "Intermittent application crash or driver timeout may be observed while loading a saved game in Cyberpunk 2077 with Path Tracing enabled."
     }
 }
