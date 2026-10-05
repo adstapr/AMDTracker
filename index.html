@@ -222,7 +222,12 @@
                 function parseDate(dateStr) {
                     if (!dateStr) return null;
                     const parsed = Date.parse(dateStr);
-                    return isNaN(parsed) ? null : parsed;
+                    if (!isNaN(parsed)) return parsed;
+                    
+                    // Fallback cleanup for formats like "Month DD, YYYY" or similar if standard parse fails
+                    const clean = dateStr.replace(/st|nd|rd|th/g, '');
+                    const parsedClean = Date.parse(clean);
+                    return isNaN(parsedClean) ? null : parsedClean;
                 }
 
                 function updateView() {
@@ -271,48 +276,25 @@
                     let activeOpenCount = 0;
                     currentActiveKnownMap = new Map(); 
                     
-                    const bugFirstSeenIndex = new Map(); 
-                    const bugFixReleases = [];
-                    const bugFixDays = [];
-
-                    chronologicalDrivers.forEach((d, idx) => {
-                        (d.known_bug_ids || []).forEach(id => {
-                            if (!bugFirstSeenIndex.has(id)) {
-                                bugFirstSeenIndex.set(id, { index: idx, date: parseDate(d.date) });
-                            }
-                        });
-                        (d.fixed_bug_ids || []).forEach(id => {
-                            if (bugFirstSeenIndex.has(id)) {
-                                const startInfo = bugFirstSeenIndex.get(id);
-                                const releaseDuration = idx - startInfo.index;
-                                bugFixReleases.push(releaseDuration);
-
-                                const currentDate = parseDate(d.date);
-                                if (startInfo.date && currentDate && currentDate >= startInfo.date) {
-                                    const dayDuration = Math.round((currentDate - startInfo.date) / (1000 * 60 * 60 * 24));
-                                    bugFixDays.push(dayDuration);
-                                }
-                                bugFirstSeenIndex.delete(id);
-                            }
-                        });
-                    });
-
-                    // Calculate dynamic average time to fix for selected slice range
                     let sliceFixReleases = [];
                     let sliceFixDays = [];
                     
                     filteredDriversChronological.forEach((d, sIdx) => {
                         const globalIdx = minIdx + sIdx;
                         (d.fixed_bug_ids || []).forEach(id => {
-                            // Find where this bug originally appeared in chronological array
                             for (let i = 0; i <= globalIdx; i++) {
                                 const pastDriver = chronologicalDrivers[i];
                                 if ((pastDriver.known_bug_ids || []).includes(id)) {
-                                    sliceFixReleases.push(globalIdx - i);
+                                    const releaseSpan = globalIdx - i;
+                                    sliceFixReleases.push(releaseSpan);
+                                    
                                     const startDate = parseDate(pastDriver.date);
                                     const fixDate = parseDate(d.date);
                                     if (startDate && fixDate && fixDate >= startDate) {
                                         sliceFixDays.push(Math.round((fixDate - startDate) / (1000 * 60 * 60 * 24)));
+                                    } else {
+                                        // Fallback if dates are missing: estimate ~18 days per release version
+                                        sliceFixDays.push(releaseSpan * 18);
                                     }
                                     break;
                                 }
@@ -347,7 +329,6 @@
                         let oldestIdx = Infinity;
                         let oldestIdStr = '';
                         currentActiveKnownMap.forEach((ver, id) => {
-                            // Find global first seen index for this bug
                             let firstIdx = 0;
                             for (let i = 0; i < chronologicalDrivers.length; i++) {
                                 if ((chronologicalDrivers[i].known_bug_ids || []).includes(id)) {
@@ -438,7 +419,6 @@
                     const unfixedListContainer = document.getElementById('unfixed-issues-list');
                     const searchQuery = document.getElementById('issueSearchInput').value.toLowerCase().trim();
                     
-                    // Convert map entries to array and reverse so latest reported/newest driver versions appear first
                     const entriesArray = Array.from(currentActiveKnownMap.entries()).reverse();
 
                     let filteredEntries = entriesArray.filter(([id, firstVersion]) => {
