@@ -33,6 +33,7 @@
 <body class="bg-slate-950 text-slate-100 p-6 font-sans">
     <div class="max-w-6xl mx-auto space-y-8">
         
+        <!-- Header with Official Bug Report Button -->
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-800 pb-4">
             <div>
                 <h1 class="text-3xl font-bold tracking-tight">AMD Tracker</h1>
@@ -63,20 +64,21 @@
             </div>
         </div>
 
+        <!-- Bug Lifecycle / Time to Fix Analytics Card -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm flex items-center justify-between">
                 <div>
-                    <span class="text-slate-400 text-xs font-medium uppercase tracking-wider block mb-1">Avg. Driver Releases to Fix</span>
-                    <span id="stat-avg-time-to-fix" class="text-xl font-bold text-cyan-400">0 releases</span>
+                    <span class="text-slate-400 text-xs font-medium uppercase tracking-wider block mb-1">Avg. Time to Fix</span>
+                    <span id="stat-avg-time-to-fix" class="text-base font-bold text-cyan-400">0 releases (0 days)</span>
                 </div>
-                <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800 text-cyan-400">
+                <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800 text-cyan-400 shrink-0">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                 </div>
             </div>
-            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm flex items-center justify-between">
-                <div>
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm flex items-center justify-between gap-4">
+                <div class="min-w-0 flex-1">
                     <span class="text-slate-400 text-xs font-medium uppercase tracking-wider block mb-1">Longest Unresolved Standing Issue</span>
-                    <span id="stat-oldest-open-bug" class="text-xs font-mono text-amber-300 truncate block max-w-[280px] sm:max-w-[360px] mt-1">None</span>
+                    <span id="stat-oldest-open-bug" class="text-xs font-mono text-amber-300 block line-clamp-2 mt-1 leading-relaxed">None</span>
                 </div>
                 <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800 text-amber-400 shrink-0">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
@@ -112,7 +114,7 @@
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
                     <h2 class="text-xl font-semibold text-slate-200 mb-1">Bugs Per Driver</h2>
-                    <p class="text-slate-400 text-sm">(Positive = Fixed Issues, Negative = Known Issues)</p>
+                    <p class="text-slate-400 text-sm">(Positive = Fixed Issues, Negative = Open / Known Issues)</p>
                 </div>
                 <label class="flex items-center gap-2.5 text-xs text-slate-300 cursor-pointer select-none bg-slate-950 px-3 py-2 rounded-lg border border-slate-800">
                     <input type="checkbox" id="excludeDuplicatesToggle" checked class="rounded border-slate-700 bg-slate-900 text-indigo-600 focus:ring-indigo-500 w-4 h-4">
@@ -125,6 +127,7 @@
             </div>
         </div>
 
+        <!-- Panel for Unfixed / Active Open Issues with Keyword Search Bar -->
         <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm space-y-4">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-800 pb-3">
                 <div>
@@ -144,6 +147,7 @@
             </div>
 
             <div id="unfixed-issues-list" class="space-y-2 max-h-[400px] overflow-y-auto pr-2">
+                <!-- Dynamically populated -->
             </div>
         </div>
             
@@ -213,7 +217,13 @@
                 });
 
                 let bugChart = null;
-                let currentActiveKnownMap = new Map();
+                let currentActiveKnownMap = new Map(); 
+
+                function parseDate(dateStr) {
+                    if (!dateStr) return null;
+                    const parsed = Date.parse(dateStr);
+                    return isNaN(parsed) ? null : parsed;
+                }
 
                 function updateView() {
                     let minIdx = parseInt(sliderMin.value);
@@ -261,30 +271,64 @@
                     let activeOpenCount = 0;
                     currentActiveKnownMap = new Map(); 
                     
-                    const bugFirstSeenIndex = new Map();
-                    const bugFixDuration = [];
+                    const bugFirstSeenIndex = new Map(); 
+                    const bugFixReleases = [];
+                    const bugFixDays = [];
 
                     chronologicalDrivers.forEach((d, idx) => {
                         (d.known_bug_ids || []).forEach(id => {
                             if (!bugFirstSeenIndex.has(id)) {
-                                bugFirstSeenIndex.set(id, idx);
+                                bugFirstSeenIndex.set(id, { index: idx, date: parseDate(d.date) });
                             }
                         });
                         (d.fixed_bug_ids || []).forEach(id => {
                             if (bugFirstSeenIndex.has(id)) {
-                                let duration = idx - bugFirstSeenIndex.get(id);
-                                bugFixDuration.push(duration);
+                                const startInfo = bugFirstSeenIndex.get(id);
+                                const releaseDuration = idx - startInfo.index;
+                                bugFixReleases.push(releaseDuration);
+
+                                const currentDate = parseDate(d.date);
+                                if (startInfo.date && currentDate && currentDate >= startInfo.date) {
+                                    const dayDuration = Math.round((currentDate - startInfo.date) / (1000 * 60 * 60 * 24));
+                                    bugFixDays.push(dayDuration);
+                                }
                                 bugFirstSeenIndex.delete(id);
                             }
                         });
                     });
 
-                    let avgReleasesToFix = 0;
-                    if (bugFixDuration.length > 0) {
-                        let sum = bugFixDuration.reduce((a, b) => a + b, 0);
-                        avgReleasesToFix = (sum / bugFixDuration.length).toFixed(1);
+                    // Calculate dynamic average time to fix for selected slice range
+                    let sliceFixReleases = [];
+                    let sliceFixDays = [];
+                    
+                    filteredDriversChronological.forEach((d, sIdx) => {
+                        const globalIdx = minIdx + sIdx;
+                        (d.fixed_bug_ids || []).forEach(id => {
+                            // Find where this bug originally appeared in chronological array
+                            for (let i = 0; i <= globalIdx; i++) {
+                                const pastDriver = chronologicalDrivers[i];
+                                if ((pastDriver.known_bug_ids || []).includes(id)) {
+                                    sliceFixReleases.push(globalIdx - i);
+                                    const startDate = parseDate(pastDriver.date);
+                                    const fixDate = parseDate(d.date);
+                                    if (startDate && fixDate && fixDate >= startDate) {
+                                        sliceFixDays.push(Math.round((fixDate - startDate) / (1000 * 60 * 60 * 24)));
+                                    }
+                                    break;
+                                }
+                            }
+                        });
+                    });
+
+                    let avgReleases = 0;
+                    let avgDays = 0;
+                    if (sliceFixReleases.length > 0) {
+                        avgReleases = (sliceFixReleases.reduce((a, b) => a + b, 0) / sliceFixReleases.length).toFixed(1);
                     }
-                    document.getElementById('stat-avg-time-to-fix').textContent = `${avgReleasesToFix} releases`;
+                    if (sliceFixDays.length > 0) {
+                        avgDays = Math.round(sliceFixDays.reduce((a, b) => a + b, 0) / sliceFixDays.length);
+                    }
+                    document.getElementById('stat-avg-time-to-fix').textContent = `${avgReleases} releases (~${avgDays} days)`;
 
                     if (filteredDriversChronological.length > 0) {
                         filteredDriversChronological.forEach(d => {
@@ -303,7 +347,14 @@
                         let oldestIdx = Infinity;
                         let oldestIdStr = '';
                         currentActiveKnownMap.forEach((ver, id) => {
-                            let firstIdx = bugFirstSeenIndex.get(id) ?? 0;
+                            // Find global first seen index for this bug
+                            let firstIdx = 0;
+                            for (let i = 0; i < chronologicalDrivers.length; i++) {
+                                if ((chronologicalDrivers[i].known_bug_ids || []).includes(id)) {
+                                    firstIdx = i;
+                                    break;
+                                }
+                            }
                             if (firstIdx < oldestIdx) {
                                 oldestIdx = firstIdx;
                                 oldestIdStr = `${id}: ${data.master_bugs[id] || ''}`;
@@ -321,6 +372,7 @@
 
                     renderUnfixedList(data);
 
+                    // Render Driver Cards
                     const driverContainer = document.getElementById('driver-tracker');
                     driverContainer.innerHTML = '';
                     filteredDriversDisplay.forEach((d) => {
@@ -386,7 +438,10 @@
                     const unfixedListContainer = document.getElementById('unfixed-issues-list');
                     const searchQuery = document.getElementById('issueSearchInput').value.toLowerCase().trim();
                     
-                    let filteredEntries = Array.from(currentActiveKnownMap.entries()).filter(([id, firstVersion]) => {
+                    // Convert map entries to array and reverse so latest reported/newest driver versions appear first
+                    const entriesArray = Array.from(currentActiveKnownMap.entries()).reverse();
+
+                    let filteredEntries = entriesArray.filter(([id, firstVersion]) => {
                         if (!searchQuery) return true;
                         const desc = (data.master_bugs[id] || '').toLowerCase();
                         return id.toLowerCase().includes(searchQuery) || desc.includes(searchQuery) || firstVersion.toLowerCase().includes(searchQuery);
