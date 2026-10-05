@@ -45,7 +45,7 @@
     </div>
 
     <script>
-        // Fetch external drivers.json cleanly
+        // Fetch external drivers.json exclusively
         fetch('./drivers.json')
             .then(response => {
                 if (!response.ok) throw new Error('Failed to load drivers.json');
@@ -126,7 +126,6 @@
                 }
 
                 // 3. Render Visual Chart (Chronological left-to-right, aggregated totals per driver)
-                // Reverse the drivers array so oldest is first (left) and newest is last (right)
                 const chronologicalDrivers = [...data.drivers].reverse();
                 
                 const driverVersions = chronologicalDrivers.map(d => d.version);
