@@ -8,6 +8,10 @@ on:
         required: true
         type: string
 
+concurrency:
+  group: amd-driver-queue
+  cancel-in-progress: false
+  
 jobs:
   update-driver:
     runs-on: ubuntu-latest
