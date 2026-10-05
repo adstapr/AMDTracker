@@ -8,17 +8,15 @@ import requests
 JSON_FILE = "drivers.json"
 
 
-def get_next_bug_id(master_bugs):
-  """Finds the next sequential bug ID like BUG-022."""
-  if not master_bugs:
-    return "BUG-001"
-  existing_nums = []
-  for key in master_bugs.keys():
-    match = re.search(r"(\d+)", key)
-    if match:
-      existing_nums.append(int(match.group(1)))
-  next_num = max(existing_nums) + 1 if existing_nums else 1
-  return f"BUG-{next_num:03d}"
+def clean_text(text):
+  """Cleans up smart quotes, trademark glitches, and weird spacing."""
+  if not text:
+    return ""
+  # Fix common mojibake/encoding corruptions from web scraping
+  text = (
+      text.replace("â„¢", "™")
+      .replace("â€“", "-")
+      .replace("â€"
 
 
 def parse_list_items(soup, header_keywords):
@@ -31,7 +29,7 @@ def parse_list_items(soup, header_keywords):
       while sibling and sibling.name not in ["h2", "h3"]:
         if sibling.name == "ul":
           for li in sibling.find_all("li"):
-            cleaned = li.get_text().strip()
+            cleaned = clean_text(li.get_text())
             if cleaned:
               items.append(cleaned)
         sibling = sibling.find_next_sibling()
@@ -52,30 +50,26 @@ def fetch_amd_release_notes(url):
 
   fixed_texts = []
   known_texts = []
-  date_str = ""
-  driver_type = "Optional"  # Default assumption
+  driver_type = "Optional"
 
   try:
     response = requests.get(url, headers=headers, timeout=10)
+    # FORCE proper UTF-8 decoding so symbols like ™ don't break
+    response.encoding = "utf-8"
+
     if response.status_code == 200:
       soup = BeautifulSoup(response.text, "html.parser")
-
-      # Extract Fixed Issues and Known Issues
       fixed_texts = parse_list_items(soup, ["Fixed Issues"])
       known_texts = parse_list_items(soup, ["Known Issues"])
 
-      # Look for release date or type hints on page if available
-      page_text = soup.get_text()
-      if "Recommended" in page_text:
+      if "Recommended" in soup.get_text():
         driver_type = "Recommended"
-
   except Exception as e:
     print(f"Notice: Could not scrape text due to network restrictions ({e}).")
 
-  # Extract version from filename (e.g., RN-RAD-WIN-22-11-2.html -> 22.11.2)
+  # Extract version from filename
   filename = url.split("/")[-1].replace(".html", "")
   raw_version_part = filename.replace("RN-RAD-WIN-", "")
-  # Clean up extra tags like -RX7900 or -HOTFIX if present, keeping numbers/dots
   version_match = re.search(r"(\d+-\d+-\d+)", raw_version_part)
   if version_match:
     version = version_match.group(1).replace("-", ".")
@@ -93,20 +87,20 @@ def fetch_amd_release_notes(url):
 
 def update_json(scraped_data):
   if os.path.exists(JSON_FILE):
-    with open(JSON_FILE, "r") as f:
+    with open(JSON_FILE, "r", encoding="utf-8") as f:
       data = json.load(f)
   else:
     data = {"drivers": [], "master_bugs": {}}
 
   master_bugs = data.setdefault("master_bugs", {})
 
-  # Helper to process text lists into ID references
   def process_bug_list(text_list):
     bug_ids = []
     for text in text_list:
-      # Check if this exact bug description already exists in master_bugs to prevent duplicates
+      # Check if exact text already exists in master_bugs (ignoring case/spacing differences)
       existing_id = next(
-          (k for k, v in master_bugs.items() if v == text), None
+          (k for k, v in master_bugs.items() if clean_text(v) == clean_text(text)),
+          None,
       )
       if existing_id:
         bug_ids.append(existing_id)
@@ -127,15 +121,13 @@ def update_json(scraped_data):
       "known_bug_ids": known_bug_ids,
   }
 
-  # Remove existing entry for this version/url if it exists to avoid duplicates
+  # Remove existing entry for this version/url to prevent driver duplicates
   data["drivers"] = [
       d
       for d in data["drivers"]
       if d["url"] != scraped_data["url"]
       and d.get("version") != scraped_data["version"]
   ]
-
-  # Insert at the top of the list
   data["drivers"].insert(0, new_driver_entry)
 
   with open(JSON_FILE, "w", encoding="utf-8") as f:
