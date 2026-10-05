@@ -8,7 +8,6 @@ import requests
 JSON_FILE = "drivers.json"
 
 def clean_text(text):
-    """Cleans up smart quotes, trademark glitches, and weird spacing."""
     if not text:
         return ""
     return (
@@ -21,7 +20,6 @@ def clean_text(text):
     )
 
 def get_next_id(master_dict, prefix):
-    """Finds the next sequential ID like FEAT-001 or BUG-001."""
     if not master_dict:
         return f"{prefix}-001"
     existing_nums = []
@@ -32,61 +30,39 @@ def get_next_id(master_dict, prefix):
     next_num = max(existing_nums) + 1 if existing_nums else 1
     return f"{prefix}-{next_num:03d}"
 
-def parse_section_bullets(soup, target_keywords, exclude_keywords=None):
-    """Precisely extracts bullet points (<li>) under specific headings while avoiding excluded topics."""
+def parse_amd_section(soup, keywords):
     items = []
-    if exclude_keywords is None:
-        exclude_keywords = []
-    
-    for element in soup.find_all(["h2", "h3", "h4", "strong", "b"]):
-        text = element.get_text(strip=True)
-        # Check if header matches target and doesn't contain excluded keywords
-        if any(tk.lower() in text.lower() for tk in target_keywords):
-            if any(ek.lower() in text.lower() for ek in exclude_keywords):
-                continue
-                
-            container = element.find_parent(["div", "section", "article", "body"])
-            if not container:
-                container = element
-            
+    for tag in soup.find_all(["h2", "h3", "h4", "strong", "b", "p"]):
+        text = tag.get_text(strip=True)
+        if any(kw.lower() in text.lower() for kw in keywords):
+            container = tag.find_parent(["div", "section", "article"]) or tag
             ul = container.find("ul")
             if not ul:
-                sibling = element.find_next_sibling()
-                while sibling and sibling.name not in ["h2", "h3", "h4", "section"]:
-                    if sibling.name == "ul":
-                        ul = sibling
+                curr = tag.find_next_sibling()
+                while curr and curr.name not in ["h2", "h3", "h4", "section"]:
+                    if curr.name == "ul":
+                        ul = curr
                         break
-                    nested_ul = sibling.find("ul") if hasattr(sibling, "find") else None
-                    if nested_ul:
-                        ul = nested_ul
+                    found_ul = curr.find("ul") if hasattr(curr, "find") else None
+                    if found_ul:
+                        ul = found_ul
                         break
-                    sibling = sibling.find_next_sibling()
+                    curr = curr.find_next_sibling()
             
             if ul:
                 for li in ul.find_all("li", recursive=False):
                     cleaned = clean_text(li.get_text())
-                    # Skip generic metadata lines
-                    if cleaned and len(cleaned) > 3 and "Package Contents" not in cleaned:
+                    if cleaned and len(cleaned) > 2 and cleaned not in items:
                         items.append(cleaned)
-                if items:
-                    break
-    
-    # Fallback to paragraph texts if no <ul> was found
-    if not items:
-        for element in soup.find_all(["h2", "h3", "h4", "strong", "b"]):
-            text = element.get_text(strip=True)
-            if any(tk.lower() in text.lower() for tk in target_keywords):
-                if any(ek.lower() in text.lower() for ek in exclude_keywords):
-                    continue
-                sibling = element.find_next_sibling()
-                while sibling and sibling.name == "p":
-                    cleaned = clean_text(sibling.get_text())
-                    if cleaned and len(cleaned) > 3:
+            else:
+                curr = tag.find_next_sibling()
+                while curr and curr.name == "p":
+                    cleaned = clean_text(curr.get_text())
+                    if cleaned and len(cleaned) > 2 and cleaned not in items:
                         items.append(cleaned)
-                    sibling = sibling.find_next_sibling()
-                if items:
-                    break
-
+                    curr = curr.find_next_sibling()
+            if items:
+                break
     return items
 
 def fetch_amd_release_notes(url):
@@ -111,11 +87,12 @@ def fetch_amd_release_notes(url):
         if response.status_code == 200:
             soup = BeautifulSoup(response.text, "html.parser")
             
-            # Strict targeting to prevent cross-contamination
-            fixed_texts = parse_section_bullets(soup, ["Fixed Issues"], exclude_keywords=["Known", "Highlights"])
-            known_texts = parse_section_bullets(soup, ["Known Issues"], exclude_keywords=["Fixed"])
-            game_texts = parse_section_bullets(soup, ["Support for", "New Game Support", "Game Support"])
-            feature_texts = parse_section_bullets(soup, ["Highlights", "New Features", "What's New"], exclude_keywords=["Fixed", "Known", "Support for"])
+            fixed_texts = parse_amd_section(soup, ["Fixed Issues"])
+            known_texts = parse_amd_section(soup, ["Known Issues"])
+            game_texts = parse_amd_section(soup, ["Support for", "New Game Support", "Game Support"])
+            feature_texts = parse_amd_section(soup, ["Highlights", "New Features", "What's New"])
+            
+            feature_texts = [f for f in feature_texts if not any(g.lower() in f.lower() for g in game_texts) and "support for" not in f.lower()]
 
             if "Recommended" in soup.get_text():
                 driver_type = "Recommended"
@@ -124,7 +101,6 @@ def fetch_amd_release_notes(url):
     except Exception as e:
         print(f"Notice: Could not scrape text due to network restrictions or timeout ({e}).")
 
-    # Extract version from filename/url safely
     filename = url.split("/")[-1].replace(".html", "")
     raw_version_part = filename.replace("RN-RAD-WIN-", "")
     version_match = re.search(r"(\d+-\d+-\d+)", raw_version_part)
