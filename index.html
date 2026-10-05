@@ -33,7 +33,6 @@
 <body class="bg-slate-950 text-slate-100 p-6 font-sans">
     <div class="max-w-6xl mx-auto space-y-8">
         
-        <!-- Header with Feature 4: Official Bug Report Button -->
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-800 pb-4">
             <div>
                 <h1 class="text-3xl font-bold tracking-tight">AMD Tracker</h1>
@@ -64,7 +63,6 @@
             </div>
         </div>
 
-        <!-- Feature 3: Bug Lifecycle / Time to Fix Analytics Card -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm flex items-center justify-between">
                 <div>
@@ -114,7 +112,7 @@
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
                     <h2 class="text-xl font-semibold text-slate-200 mb-1">Bugs Per Driver</h2>
-                    <p class="text-slate-400 text-sm">(Positive = Fixed Issues, Negative = Open / Known Issues)</p>
+                    <p class="text-slate-400 text-sm">(Positive = Fixed Issues, Negative = Known Issues)</p>
                 </div>
                 <label class="flex items-center gap-2.5 text-xs text-slate-300 cursor-pointer select-none bg-slate-950 px-3 py-2 rounded-lg border border-slate-800">
                     <input type="checkbox" id="excludeDuplicatesToggle" checked class="rounded border-slate-700 bg-slate-900 text-indigo-600 focus:ring-indigo-500 w-4 h-4">
@@ -127,7 +125,6 @@
             </div>
         </div>
 
-        <!-- Panel for Unfixed / Active Open Issues with Feature 1 Search Bar -->
         <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm space-y-4">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-800 pb-3">
                 <div>
@@ -139,7 +136,6 @@
                 </div>
             </div>
 
-            <!-- Feature 1: Keyword Search Bar -->
             <div class="relative">
                 <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
@@ -148,7 +144,6 @@
             </div>
 
             <div id="unfixed-issues-list" class="space-y-2 max-h-[400px] overflow-y-auto pr-2">
-                <!-- Dynamically populated -->
             </div>
         </div>
             
@@ -218,7 +213,7 @@
                 });
 
                 let bugChart = null;
-                let currentActiveKnownMap = new Map(); // Store globally for search query re-filtering
+                let currentActiveKnownMap = new Map();
 
                 function updateView() {
                     let minIdx = parseInt(sliderMin.value);
@@ -266,9 +261,8 @@
                     let activeOpenCount = 0;
                     currentActiveKnownMap = new Map(); 
                     
-                    // Track persistence of bugs across drivers to calculate Feature 3 metrics
-                    const bugFirstSeenIndex = new Map(); // bugId -> chronological driver index
-                    const bugFixDuration = []; // stores number of releases it took to fix bugs
+                    const bugFirstSeenIndex = new Map();
+                    const bugFixDuration = [];
 
                     chronologicalDrivers.forEach((d, idx) => {
                         (d.known_bug_ids || []).forEach(id => {
@@ -285,7 +279,6 @@
                         });
                     });
 
-                    // Calculate average time to fix in driver release steps
                     let avgReleasesToFix = 0;
                     if (bugFixDuration.length > 0) {
                         let sum = bugFixDuration.reduce((a, b) => a + b, 0);
@@ -293,7 +286,6 @@
                     }
                     document.getElementById('stat-avg-time-to-fix').textContent = `${avgReleasesToFix} releases`;
 
-                    // Calculate active open issues for current range slice
                     if (filteredDriversChronological.length > 0) {
                         filteredDriversChronological.forEach(d => {
                             (d.fixed_bug_ids || []).forEach(id => currentActiveKnownMap.delete(id));
@@ -306,7 +298,6 @@
                         activeOpenCount = currentActiveKnownMap.size;
                     }
 
-                    // Find oldest standing open bug in current view
                     let oldestBugText = 'None';
                     if (currentActiveKnownMap.size > 0) {
                         let oldestIdx = Infinity;
@@ -330,7 +321,6 @@
 
                     renderUnfixedList(data);
 
-                    // Render Driver Cards
                     const driverContainer = document.getElementById('driver-tracker');
                     driverContainer.innerHTML = '';
                     filteredDriversDisplay.forEach((d) => {
