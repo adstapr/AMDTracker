@@ -10,6 +10,9 @@ JSON_FILE = "drivers.json"
 def clean_text(text):
     if not text:
         return ""
+    # Strip trailing resolution target notices (e.g., [Resolution targeted for 22.10.3])
+    text = re.sub(r'\s*\[?Resolution targeted for [^\]]+\]?', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'\s*\(?Resolution targeted for [^\)]+\)?', '', text, flags=re.IGNORECASE)
     return (
         text.replace("â„¢", "™")
         .replace("â€“", "-")
@@ -51,8 +54,12 @@ def parse_amd_section(soup, keywords):
             break
             
         if curr.name in ["ul", "ol"]:
-            for li in curr.find_all("li", recursive=True):
-                cleaned = clean_text(li.get_text())
+            for li in curr.find_all("li", recursive=False):
+                # Strip nested lists so sub-points don't become separate items
+                li_copy = BeautifulSoup(str(li), "html.parser")
+                for nested in li_copy.find_all(["ul", "ol"]):
+                    nested.decompose()
+                cleaned = clean_text(li_copy.get_text())
                 if cleaned and len(cleaned) > 2 and cleaned not in items:
                     items.append(cleaned)
         elif curr.name == "p":
@@ -62,8 +69,11 @@ def parse_amd_section(soup, keywords):
         else:
             if hasattr(curr, "find_all"):
                 for ul in curr.find_all(["ul", "ol"]):
-                    for li in ul.find_all("li", recursive=True):
-                        cleaned = clean_text(li.get_text())
+                    for li in ul.find_all("li", recursive=False):
+                        li_copy = BeautifulSoup(str(li), "html.parser")
+                        for nested in li_copy.find_all(["ul", "ol"]):
+                            nested.decompose()
+                        cleaned = clean_text(li_copy.get_text())
                         if cleaned and len(cleaned) > 2 and cleaned not in items:
                             items.append(cleaned)
                 for p in curr.find_all("p"):
@@ -102,7 +112,13 @@ def fetch_amd_release_notes(url):
             game_texts = parse_amd_section(soup, ["Support for", "New Game Support", "Game Support"])
             feature_texts = parse_amd_section(soup, ["Highlights", "New Features", "What's New"])
             
-            feature_texts = [f for f in feature_texts if not any(g.lower() in f.lower() for g in game_texts) and "support for" not in f.lower()]
+            # Strict separation to prevent games from leaking into features
+            feature_texts = [
+                f for f in feature_texts 
+                if not any(g.lower() in f.lower() for g in game_texts) 
+                and "support for" not in f.lower()
+                and "game support" not in f.lower()
+            ]
 
             if "Recommended" in soup.get_text():
                 driver_type = "Recommended"
