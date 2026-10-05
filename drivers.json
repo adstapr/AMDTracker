@@ -1,6 +1,32 @@
 {
     "drivers": [
         {
+            "version": "25.4.1",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-4-1.html",
+            "fixed_bug_ids": [
+                "BUG-270",
+                "BUG-271",
+                "BUG-272",
+                "BUG-273",
+                "BUG-274",
+                "BUG-275",
+                "BUG-276"
+            ],
+            "known_bug_ids": [
+                "BUG-277",
+                "BUG-265",
+                "BUG-269",
+                "BUG-267",
+                "BUG-278",
+                "BUG-279",
+                "BUG-280",
+                "BUG-281",
+                "BUG-282",
+                "BUG-283",
+                "BUG-284"
+            ]
+        },
+        {
             "version": "25.3.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-3-2.html",
             "fixed_bug_ids": [
@@ -1103,6 +1129,21 @@
         "BUG-266": "Performance logging notifications from AMD Software: Adrenalin Edition™ may appear while using the Right Alt + L hotkey if the Microsoft® Windows® display language is not English.",
         "BUG-267": "Stutter may be observed while playing games with some VR headsets at 80Hz or 90Hz refresh rate on some AMD Radeon™ Graphics Products such as the Radeon™ RX 7000 series. Users experiencing this issue are recommended to change the refresh rate as a temporary workaround.",
         "BUG-268": "Installation progress may persistently display 0% while installing chipset drivers using AMD Install Manager.",
-        "BUG-269": "Installation progress may persistently display 0% while installing AMD Chat within the AMD Software: Adrenalin Edition user interface after upgrading to AMD Radeon RX 9000 Series graphics products."
+        "BUG-269": "Installation progress may persistently display 0% while installing AMD Chat within the AMD Software: Adrenalin Edition user interface after upgrading to AMD Radeon RX 9000 Series graphics products.",
+        "BUG-270": "Failure to apply effects models may be observed while using \"Adjust Lighting v1\" and \"Adjust Lighting v2\" features in Topaz Photo AI with Radeon™ RX 9000 series graphics products.",
+        "BUG-271": "Flashing or flickering may appear while using AMD Freesync™ technology.",
+        "BUG-272": "Lower than expected performance may be observed while running DirectML/GenAI models in Amuse 3.0 with Radeon™ RX 7000 series graphics products and Ryzen AITM 300 series processors.",
+        "BUG-273": "Image corruption may be observed while running certain diffuser models in Amuse 3.0 with Radeon™ RX 9000 series graphics products.",
+        "BUG-274": "Lower than expected performance may be observed while playing World of Warcraft (western plaguelands) with Radeon™ RX 9000 series graphics products.",
+        "BUG-275": "Failure to detect integrated camera may be observed after driver installation using factory reset option on some Ryzen™ AI Max and Max+ series products.",
+        "BUG-276": "Added support for Amuse 3 and AMD-optimized models.",
+        "BUG-277": "Intermittent application crash or driver timeout may be observed while playing The Last of Us Part 2.",
+        "BUG-278": "Intermittent system or application crash may be observed while playing Cyberpunk 2077",
+        "BUG-279": "Intermittent system or application crash may be observed during shader compilation while playing Fantasy VII Rebirth during shader compilation.",
+        "BUG-280": "Failure to launch may be observed for Battlefield 1 on Radeon™ RX 9000 series graphics products with Ryzen™ 9 9950X integrated graphics.  Users experiencing these issues are recommended to disable integrated graphics (iGPU) in system BIOS as a temporary workaround.",
+        "BUG-281": "Intermittent failure to launch may be observed when AMD Software: Adrenalin Edition user interface is launched from desktop context menu or system tray.",
+        "BUG-282": "Intermittent application crash or driver timeout may be observed while playing Monster Hunter Wilds with Radeon™ Anti-Lag and Instant Replay enabled.",
+        "BUG-283": "Intermittent system or application crash may be observed while playing Marvels Spiderman 2 with Radeon™ Anti-Lag 2 enabled on Radeon™ RX 7000 series graphics products.",
+        "BUG-284": "Artifacts or corruption may appear while playing BattleField on Radeon™ RX 7000 series graphics products."
     }
 }
