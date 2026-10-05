@@ -24,11 +24,8 @@ def clean_text(text):
 def normalize_for_comparison(text):
     """Strips hardware qualifiers, trademarks, and punctuation to detect duplicate core bugs."""
     t = clean_text(text).lower()
-    # Remove common trademark symbols
     t = t.replace("™", "").replace("®", "").replace("©", "")
-    # Remove specific hardware suffixes/qualifiers commonly appended by AMD
     t = re.sub(r'\b(on\s+)?(radeon\s*™?\.?\s*)?(rx\s*\d+\s*(series|and\s+above)?|graphics\s*products?|products?)\b', '', t)
-    # Remove punctuation and normalize whitespace
     t = re.sub(r'[^\w\s]', '', t)
     return re.sub(r'\s+', ' ', t).strip()
 
@@ -102,55 +99,6 @@ def parse_amd_section(soup, keywords):
         
     return items
 
-def parse_amd_games_section(soup):
-    items = []
-    main_container = get_main_content(soup)
-    game_keywords = ["new game support", "game support", "support for"]
-    target_tags = []
-    
-    for tag in main_container.find_all(["h2", "h3", "h4", "strong", "b"]):
-        text = tag.get_text(strip=True).rstrip(':').strip().lower()
-        if any(kw in text for kw in game_keywords):
-            target_tags.append(tag)
-            
-    nav_blacklist = {
-        "linkedin", "instagram", "facebook", "developer", "developers", "server", 
-        "embedded", "ryzen", "radeon", "about amd", "management team", "careers", 
-        "contact us", "newsroom", "events", "investor relations", "privacy", "cookies policy",
-        "cookie settings", "terms and conditions", "trademarks", "sec filings"
-    }
-
-    for target_tag in target_tags:
-        curr = target_tag.find_next_sibling()
-        if not curr and target_tag.parent:
-            curr = target_tag.parent.find_next_sibling()
-            
-        while curr:
-            if curr.name in ["h1", "h2", "h3"]:
-                break
-                
-            search_elements = []
-            if curr.name in ["ul", "ol"]:
-                search_elements = curr.find_all("li", recursive=True)
-            elif curr.name == "p":
-                search_elements = [curr]
-            elif hasattr(curr, "find_all"):
-                search_elements = curr.find_all(["li", "p"])
-
-            for el in search_elements:
-                el_copy = BeautifulSoup(str(el), "html.parser")
-                for nested in el_copy.find_all(["ul", "ol"]):
-                    nested.decompose()
-                cleaned = clean_text(el_copy.get_text())
-                
-                if cleaned and len(cleaned) > 1:
-                    if cleaned.lower() not in nav_blacklist and cleaned not in items:
-                        items.append(cleaned)
-                        
-            curr = curr.find_next_sibling()
-            
-    return items
-
 def fetch_amd_release_notes(url):
     print(f"Fetching release notes from: {url}")
     headers = {
@@ -162,8 +110,6 @@ def fetch_amd_release_notes(url):
 
     fixed_texts = []
     known_texts = []
-    game_texts = []
-    driver_type = "optional"
 
     try:
         response = requests.get(url, headers=headers, timeout=15)
@@ -171,16 +117,8 @@ def fetch_amd_release_notes(url):
 
         if response.status_code == 200:
             soup = BeautifulSoup(response.text, "html.parser")
-            
             fixed_texts = parse_amd_section(soup, ["Fixed Issues"])
             known_texts = parse_amd_section(soup, ["Known Issues"])
-            game_texts = parse_amd_games_section(soup)
-            
-            page_text = soup.get_text()
-            if re.search(r"whql", page_text, re.IGNORECASE):
-                driver_type = "WHQL"
-            else:
-                driver_type = "Non-WHQL (beta)"
         else:
             print(f"Warning: Received HTTP status {response.status_code}. Proceeding with empty lists.")
     except Exception as e:
@@ -196,11 +134,9 @@ def fetch_amd_release_notes(url):
 
     return {
         "version": version,
-        "type": driver_type,
         "url": url,
         "fixed_texts": fixed_texts,
         "known_texts": known_texts,
-        "game_texts": game_texts,
     }
 
 def update_json(scraped_data):
@@ -215,10 +151,11 @@ def update_json(scraped_data):
 
     data.setdefault("drivers", [])
     master_bugs = data.setdefault("master_bugs", {})
-    master_games = data.setdefault("master_games", {})
     
-    if "master_features" in data:
-        del data["master_features"]
+    # Cleanup obsolete root keys if they exist from prior schemas
+    for obsolete_key in ["master_games", "master_features"]:
+        if obsolete_key in data:
+            del data[obsolete_key]
 
     def find_matching_bug_id(text, master_dict):
         incoming_norm = normalize_for_comparison(text)
@@ -229,7 +166,6 @@ def update_json(scraped_data):
             existing_norm = normalize_for_comparison(v)
             if existing_norm == incoming_norm:
                 return k
-            # Fallback intersection check for heavily overlapping sentences
             if incoming_norm in existing_norm or existing_norm in incoming_norm:
                 return k
                 
@@ -249,15 +185,12 @@ def update_json(scraped_data):
 
     fixed_bug_ids = process_list(scraped_data["fixed_texts"], master_bugs, "BUG")
     known_bug_ids = process_list(scraped_data["known_texts"], master_bugs, "BUG")
-    game_ids = process_list(scraped_data["game_texts"], master_games, "GAME")
 
     new_driver_entry = {
         "version": scraped_data["version"],
-        "type": scraped_data["type"],
         "url": scraped_data["url"],
         "fixed_bug_ids": fixed_bug_ids,
         "known_bug_ids": known_bug_ids,
-        "game_ids": game_ids,
     }
 
     data["drivers"] = [
