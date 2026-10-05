@@ -54,7 +54,8 @@
                 "BUG-305",
                 "BUG-306",
                 "BUG-307",
-                "BUG-308"
+                "BUG-308",
+                "BUG-369"
             ],
             "known_bug_ids": [
                 "BUG-309",
@@ -185,8 +186,7 @@
                 "BUG-309",
                 "BUG-338",
                 "BUG-310",
-                "BUG-358",
-                "BUG-359"
+                "BUG-358"
             ]
         },
         {
@@ -1622,7 +1622,6 @@
         "BUG-356": "Corrupted clouds may be observed while playing Arc Raiders on Radeon™ RX 9000 series graphics products.",
         "BUG-357": "Intermittent application crash may be observed when playing The Finals with ray tracing enabled on Radeon™ RX 7000 series products.",
         "BUG-358": "AMD FSR Upscaling and AMD FSR Frame Generation may show as inactive in AMD Software: Adrenalin Edition when playing Yakuza Kiwami 3 & Dark Ties and Call of Duty®: Black Ops 7 when enabled on Radeon™ RX 9000 series graphics products.",
-        "BUG-359": "AMD Install Manager is unable to install Optional Drivers. Users are recommended to use the installation link available on this page.",
         "BUG-360": "Texture flickering or corruption may appear while using Windows desktop applications with Instant Replay and Record Desktop enabled on Radeon™ RX 7000 series products.",
         "BUG-361": "AMD FSR Upscaling and AMD FSR Frame Generation may show as inactive in AMD Software: Adrenalin Edition when playing Yakuza Kiwami 3 & Dark Ties, Call of Duty®: Black Ops 7, and Resident Evil Requiem when enabled on Radeon™ RX 9000 series graphics products.",
         "BUG-362": "Users may experience intermittent loss of mouse and keyboard functionality both in-game and on the desktop when interacting with AMD Software: Adrenalin Edition.",
