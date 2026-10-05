@@ -37,25 +37,32 @@ def parse_amd_section(soup, keywords):
     items = []
     target_tag = None
     
-    # Find the heading or tag matching any of the keywords
-    for tag in soup.find_all(["h2", "h3", "h4", "h1", "strong", "b", "p"]):
-        text = tag.get_text(strip=True)
+    # Find the heading or tag matching any of the keywords (ignoring trailing punctuation/colons)
+    for tag in soup.find_all(["h1", "h2", "h3", "h4", "h5", "h6", "strong", "b", "p", "span", "div"]):
+        text = tag.get_text(strip=True).rstrip(':').strip()
+        if not text:
+            continue
         if any(kw.lower() == text.lower() or (len(kw) > 3 and kw.lower() in text.lower()) for kw in keywords):
-            target_tag = tag
-            break
+            # Ensure it's a heading or lead-in element, not a massive container
+            if tag.name in ["h1", "h2", "h3", "h4", "h5", "h6", "strong", "b"] or len(text) < 50:
+                target_tag = tag
+                break
             
     if not target_tag:
         return items
 
-    # Iterate through siblings strictly after target_tag until the next heading
+    # Iterate through siblings strictly after target_tag until the next heading/major section
     curr = target_tag.find_next_sibling()
+    # If target_tag is an inline tag like strong/b inside a paragraph, check parent's sibling too
+    if not curr and target_tag.parent and target_tag.parent.name in ["p", "div", "li"]:
+        curr = target_tag.parent.find_next_sibling()
+
     while curr:
         if curr.name in ["h1", "h2", "h3", "h4", "h5", "h6"]:
             break
             
         if curr.name in ["ul", "ol"]:
             for li in curr.find_all("li", recursive=False):
-                # Strip nested lists so sub-points don't become separate items
                 li_copy = BeautifulSoup(str(li), "html.parser")
                 for nested in li_copy.find_all(["ul", "ol"]):
                     nested.decompose()
@@ -109,7 +116,7 @@ def fetch_amd_release_notes(url):
             
             fixed_texts = parse_amd_section(soup, ["Fixed Issues"])
             known_texts = parse_amd_section(soup, ["Known Issues"])
-            game_texts = parse_amd_section(soup, ["Support for", "New Game Support", "Game Support"])
+            game_texts = parse_amd_section(soup, ["Support for", "New Game Support", "Game Support", "Optimized for"])
             feature_texts = parse_amd_section(soup, ["Highlights", "New Features", "What's New"])
             
             # Strict separation to prevent games from leaking into features
