@@ -12,26 +12,46 @@ def clean_text(text):
   """Cleans up smart quotes, trademark glitches, and weird spacing."""
   if not text:
     return ""
-  # Fix common mojibake/encoding corruptions from web scraping
-  text = (
+  return (
       text.replace("â„¢", "™")
       .replace("â€“", "-")
-      .replace("â€"
+      .replace("Â®", "®")
+      .replace("\u200b", "")
+      .strip()
+  )
+
+
+def get_next_id(master_dict, prefix):
+  """Finds the next sequential ID like FEAT-001 or GAME-001."""
+  if not master_dict:
+    return f"{prefix}-001"
+  existing_nums = []
+  for key in master_dict.keys():
+    match = re.search(r"(\d+)", key)
+    if match:
+      existing_nums.append(int(match.group(1)))
+  next_num = max(existing_nums) + 1 if existing_nums else 1
+  return f"{prefix}-{next_num:03d}"
 
 
 def parse_list_items(soup, header_keywords):
   """Scrapes text items under headings containing specific keywords."""
   items = []
-  for header in soup.find_all(["h2", "h3", "strong", "p"]):
+  for header in soup.find_all(["h2", "h3", "strong", "p", "div"]):
     text_content = header.get_text()
     if any(keyword.lower() in text_content.lower() for keyword in header_keywords):
       sibling = header.find_next_sibling()
+      # Look through immediate siblings or container lists
       while sibling and sibling.name not in ["h2", "h3"]:
         if sibling.name == "ul":
           for li in sibling.find_all("li"):
             cleaned = clean_text(li.get_text())
             if cleaned:
               items.append(cleaned)
+        elif sibling.name == "p":
+          cleaned = clean_text(sibling.get_text())
+          if cleaned and len(cleaned) > 5:
+            items.append(cleaned)
         sibling = sibling.find_next_sibling()
       if items:
         break
@@ -50,17 +70,24 @@ def fetch_amd_release_notes(url):
 
   fixed_texts = []
   known_texts = []
+  feature_texts = []
+  game_texts = []
   driver_type = "Optional"
 
   try:
     response = requests.get(url, headers=headers, timeout=10)
-    # FORCE proper UTF-8 decoding so symbols like ™ don't break
     response.encoding = "utf-8"
 
     if response.status_code == 200:
       soup = BeautifulSoup(response.text, "html.parser")
       fixed_texts = parse_list_items(soup, ["Fixed Issues"])
       known_texts = parse_list_items(soup, ["Known Issues"])
+      feature_texts = parse_list_items(
+          soup, ["Highlights", "New Features", "What's New"]
+      )
+      game_texts = parse_list_items(
+          soup, ["Support for", "New Game Support", "Game Support"]
+      )
 
       if "Recommended" in soup.get_text():
         driver_type = "Recommended"
@@ -82,6 +109,8 @@ def fetch_amd_release_notes(url):
       "url": url,
       "fixed_texts": fixed_texts,
       "known_texts": known_texts,
+      "feature_texts": feature_texts,
+      "game_texts": game_texts,
   }
 
 
@@ -90,28 +119,39 @@ def update_json(scraped_data):
     with open(JSON_FILE, "r", encoding="utf-8") as f:
       data = json.load(f)
   else:
-    data = {"drivers": [], "master_bugs": {}}
+    data = {
+        "drivers": [],
+        "master_bugs": {},
+        "master_features": {},
+        "master_games": {},
+    }
 
+  # Ensure master keys exist if migrating an old file
   master_bugs = data.setdefault("master_bugs", {})
+  master_features = data.setdefault("master_features", {})
+  master_games = data.setdefault("master_games", {})
 
-  def process_bug_list(text_list):
-    bug_ids = []
+  def process_list(text_list, master_dict, prefix):
+    ids = []
     for text in text_list:
-      # Check if exact text already exists in master_bugs (ignoring case/spacing differences)
       existing_id = next(
-          (k for k, v in master_bugs.items() if clean_text(v) == clean_text(text)),
+          (k for k, v in master_dict.items() if clean_text(v) == clean_text(text)),
           None,
       )
       if existing_id:
-        bug_ids.append(existing_id)
+        ids.append(existing_id)
       else:
-        new_id = get_next_bug_id(master_bugs)
-        master_bugs[new_id] = text
-        bug_ids.append(new_id)
-    return bug_ids
+        new_id = get_next_id(master_dict, prefix)
+        master_dict[new_id] = text
+        ids.append(new_id)
+    return ids
 
-  fixed_bug_ids = process_bug_list(scraped_data["fixed_texts"])
-  known_bug_ids = process_bug_list(scraped_data["known_texts"])
+  fixed_bug_ids = process_list(scraped_data["fixed_texts"], master_bugs, "BUG")
+  known_bug_ids = process_list(scraped_data["known_texts"], master_bugs, "BUG")
+  feature_ids = process_list(
+      scraped_data["feature_texts"], master_features, "FEAT"
+  )
+  game_ids = process_list(scraped_data["game_texts"], master_games, "GAME")
 
   new_driver_entry = {
       "version": scraped_data["version"],
@@ -119,9 +159,11 @@ def update_json(scraped_data):
       "url": scraped_data["url"],
       "fixed_bug_ids": fixed_bug_ids,
       "known_bug_ids": known_bug_ids,
+      "feature_ids": feature_ids,
+      "game_ids": game_ids,
   }
 
-  # Remove existing entry for this version/url to prevent driver duplicates
+  # Remove existing entry for this version/url to prevent duplicates
   data["drivers"] = [
       d
       for d in data["drivers"]
@@ -133,7 +175,10 @@ def update_json(scraped_data):
   with open(JSON_FILE, "w", encoding="utf-8") as f:
     json.dump(data, f, indent=4, ensure_ascii=False)
 
-  print(f"Successfully updated drivers.json for version {scraped_data['version']}")
+  print(
+      f"Successfully updated drivers.json with features/games for version"
+      f" {scraped_data['version']}"
+  )
 
 
 if __name__ == "__main__":
