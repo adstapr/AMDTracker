@@ -1,6 +1,20 @@
 {
     "drivers": [
         {
+            "version": "26.2.2",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-2-2.html",
+            "fixed_bug_ids": [
+                "BUG-338",
+                "BUG-360"
+            ],
+            "known_bug_ids": [
+                "BUG-327",
+                "BUG-309",
+                "BUG-310",
+                "BUG-361"
+            ]
+        },
+        {
             "version": "26.2.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-2-1.html",
             "fixed_bug_ids": [
@@ -1482,6 +1496,8 @@
         "BUG-356": "Corrupted clouds may be observed while playing Arc Raiders on Radeon™ RX 9000 series graphics products.",
         "BUG-357": "Intermittent application crash may be observed when playing The Finals with ray tracing enabled on Radeon™ RX 7000 series products.",
         "BUG-358": "AMD FSR Upscaling and AMD FSR Frame Generation may show as inactive in AMD Software: Adrenalin Edition when playing Yakuza Kiwami 3 & Dark Ties and Call of Duty®: Black Ops 7 when enabled on Radeon™ RX 9000 series graphics products.",
-        "BUG-359": "AMD Install Manager is unable to install Optional Drivers. Users are recommended to use the installation link available on this page."
+        "BUG-359": "AMD Install Manager is unable to install Optional Drivers. Users are recommended to use the installation link available on this page.",
+        "BUG-360": "Texture flickering or corruption may appear while using Windows desktop applications with Instant Replay and Record Desktop enabled on Radeon™ RX 7000 series products.",
+        "BUG-361": "AMD FSR Upscaling and AMD FSR Frame Generation may show as inactive in AMD Software: Adrenalin Edition when playing Yakuza Kiwami 3 & Dark Ties, Call of Duty®: Black Ops 7, and Resident Evil Requiem when enabled on Radeon™ RX 9000 series graphics products."
     }
 }
