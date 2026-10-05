@@ -1,6 +1,15 @@
 {
     "drivers": [
         {
+            "version": "26.6.4",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-6-4.html",
+            "fixed_bug_ids": [
+                "BUG-375",
+                "BUG-307"
+            ],
+            "known_bug_ids": []
+        },
+        {
             "version": "26.6.3",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-6-3-HOTFIX.html",
             "fixed_bug_ids": [
