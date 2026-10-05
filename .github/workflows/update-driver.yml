@@ -11,13 +11,13 @@ on:
 concurrency:
   group: amd-driver-queue
   cancel-in-progress: false
-  
+  queue: max
+
 jobs:
   update-driver:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
