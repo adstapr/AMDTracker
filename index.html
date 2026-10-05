@@ -5,6 +5,27 @@
     <title>AMD Tracker</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Custom styles for dual range slider thumbs */
+        input[type="range"]::-webkit-slider-thumb {
+            pointer-events: auto;
+            width: 16px;
+            height: 16px;
+            border-radius: 9999px;
+            background: #6366f1;
+            cursor: pointer;
+            border: 2px solid #020617;
+        }
+        input[type="range"]::-moz-range-thumb {
+            pointer-events: auto;
+            width: 16px;
+            height: 16px;
+            border-radius: 9999px;
+            background: #6366f1;
+            cursor: pointer;
+            border: 2px solid #020617;
+        }
+    </style>
 </head>
 <body class="bg-slate-950 text-slate-100 p-6 font-sans">
     <div class="max-w-6xl mx-auto space-y-8">
@@ -35,23 +56,32 @@
             </div>
         </div>
 
-        <!-- SECTION: Timeline Slider Controller -->
+        <!-- SECTION: Dual-Thumb Timeline Slider Controller -->
         <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm space-y-4">
             <div class="flex justify-between items-center">
                 <div>
-                    <h2 class="text-sm font-semibold uppercase tracking-wider text-slate-300">Timeline & Architecture Filter</h2>
+                    <h2 class="text-sm font-semibold uppercase tracking-wider text-slate-300">Timeline & Architecture Range Filter</h2>
                     <p id="timeline-status" class="text-xs text-indigo-400 mt-0.5">Showing all driver history</p>
                 </div>
-                <button id="reset-timeline" class="text-xs text-slate-400 hover:text-white bg-slate-950 px-3 py-1.5 rounded border border-slate-800 transition">Reset Filter</button>
+                <button id="reset-timeline" class="text-xs text-slate-400 hover:text-white bg-slate-950 px-3 py-1.5 rounded border border-slate-800 transition">Reset Range</button>
             </div>
             
-            <div class="relative pt-2 pb-6">
-                <input type="range" id="timelineSlider" min="0" max="100" value="100" step="1" 
-                    class="w-full h-2 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-indigo-500 border border-slate-800">
+            <div class="relative pt-2 pb-8">
+                <!-- Slider Track Base -->
+                <div class="relative h-2 bg-slate-950 rounded-lg border border-slate-800">
+                    <!-- Highlighted Active Range Fill -->
+                    <div id="slider-range-fill" class="absolute h-full bg-indigo-600/30 rounded-lg"></div>
+                    
+                    <!-- Dual Range Inputs -->
+                    <input type="range" id="sliderMin" min="0" max="100" value="0" step="1" 
+                        class="absolute inset-0 w-full h-2 appearance-none bg-transparent pointer-events-none z-20">
+                    <input type="range" id="sliderMax" min="0" max="100" value="100" step="1" 
+                        class="absolute inset-0 w-full h-2 appearance-none bg-transparent pointer-events-none z-20">
+                </div>
                 
-                <!-- Magnet Datalist / Markers -->
-                <div id="timeline-markers" class="flex justify-between text-[10px] text-slate-500 font-mono mt-2 px-1">
-                    <!-- Populated dynamically via JS -->
+                <!-- Perfectly Aligned Magnet Datalist / Markers -->
+                <div id="timeline-markers" class="absolute left-0 right-0 h-6 mt-2 px-1">
+                    <!-- Populated dynamically via JS with exact percentage left positions -->
                 </div>
             </div>
         </div>
@@ -89,16 +119,17 @@
             })
             .then(data => {
                 const chronologicalDrivers = [...data.drivers].reverse();
+                const totalSteps = chronologicalDrivers.length - 1;
                 
-                // Define Architecture/Year Magnet Milestones (mapped loosely by date strings or version indexes)
+                // Define Architecture/Year Magnet Milestones
                 const milestones = [
-                    { label: 'Start', index: 0, type: 'start' },
-                    { label: '2022', keyword: '22.', type: 'year' },
-                    { label: 'RDNA 3 Launch', keyword: '22.11.', type: 'launch' },
-                    { label: '2023', keyword: '23.', type: 'year' },
-                    { label: '2024', keyword: '24.', type: 'year' },
-                    { label: 'RDNA 4 Launch', keyword: '25.', type: 'launch' }, // or matching future architecture triggers
-                    { label: 'Latest', index: chronologicalDrivers.length - 1, type: 'end' }
+                    { label: 'Start', index: 0 },
+                    { label: '2022', keyword: '22.' },
+                    { label: 'RDNA 3', keyword: '22.11.' },
+                    { label: '2023', keyword: '23.' },
+                    { label: '2024', keyword: '24.' },
+                    { label: 'RDNA 4', keyword: '25.' },
+                    { label: 'Latest', index: totalSteps }
                 ];
 
                 // Resolve milestone exact array indexes
@@ -109,20 +140,33 @@
                 });
 
                 // Setup Slider Range attributes
-                const slider = document.getElementById('timelineSlider');
-                slider.min = 0;
-                slider.max = chronologicalDrivers.length - 1;
-                slider.value = chronologicalDrivers.length - 1;
+                const sliderMin = document.getElementById('sliderMin');
+                const sliderMax = document.getElementById('sliderMax');
+                sliderMin.min = 0;
+                sliderMin.max = totalSteps;
+                sliderMin.value = 0;
 
-                // Render Timeline Ticks / Markers HTML
+                sliderMax.min = 0;
+                sliderMax.max = totalSteps;
+                sliderMax.value = totalSteps;
+
+                // Render Perfectly Aligned Markers
                 const markersContainer = document.getElementById('timeline-markers');
                 markersContainer.innerHTML = '';
                 milestones.forEach(m => {
+                    let pct = totalSteps > 0 ? (m.index / totalSteps) * 100 : 0;
                     let span = document.createElement('span');
-                    span.className = 'cursor-pointer hover:text-indigo-400 transition';
+                    span.className = 'absolute text-[10px] text-slate-500 font-mono cursor-pointer hover:text-indigo-400 transition -translate-x-1/2 whitespace-nowrap';
+                    span.style.left = `${pct}%`;
                     span.textContent = m.label;
                     span.onclick = () => {
-                        slider.value = m.index;
+                        // Snap closer thumb to this milestone
+                        let midVal = (parseInt(sliderMin.value) + parseInt(sliderMax.value)) / 2;
+                        if (m.index <= midVal) {
+                            sliderMin.value = m.index;
+                        } else {
+                            sliderMax.value = m.index;
+                        }
                         updateView();
                     };
                     markersContainer.appendChild(span);
@@ -131,13 +175,33 @@
                 let bugChart = null;
 
                 function updateView() {
-                    const maxIndex = parseInt(slider.value);
-                    const filteredDriversChronological = chronologicalDrivers.slice(0, maxIndex + 1);
+                    let minIdx = parseInt(sliderMin.value);
+                    let maxIdx = parseInt(sliderMax.value);
+
+                    // Ensure min doesn't cross max
+                    if (minIdx > maxIdx) {
+                        let temp = minIdx;
+                        minIdx = maxIdx;
+                        maxIdx = temp;
+                        sliderMin.value = minIdx;
+                        sliderMax.value = maxIdx;
+                    }
+
+                    // Update visual range fill bar
+                    const fill = document.getElementById('slider-range-fill');
+                    const leftPct = totalSteps > 0 ? (minIdx / totalSteps) * 100 : 0;
+                    const rightPct = totalSteps > 0 ? (1 - (maxIdx / totalSteps)) * 100 : 0;
+                    fill.style.left = `${leftPct}%`;
+                    fill.style.right = `${rightPct}%`;
+
+                    const filteredDriversChronological = chronologicalDrivers.slice(minIdx, maxIdx + 1);
                     const filteredDriversDisplay = [...filteredDriversChronological].reverse(); // Most recent first for cards
 
                     // Update Status text
-                    const currentDriver = chronologicalDrivers[maxIndex];
-                    document.getElementById('timeline-status').textContent = `Filtered up to version ${currentDriver.version} (${currentDriver.date || 'Unknown date'})`;
+                    const startVer = chronologicalDrivers[minIdx].version;
+                    const endVer = chronologicalDrivers[maxIdx].version;
+                    document.getElementById('timeline-status').textContent = minIdx === 0 && maxIdx === totalSteps ? 
+                        'Showing all driver history' : `Showing range: ${startVer} to ${endVer}`;
 
                     // Recalculate Stats based on filtered view
                     const totalDrivers = filteredDriversChronological.length;
@@ -336,10 +400,12 @@
                 }
 
                 // Event Listeners
-                slider.addEventListener('input', updateView);
+                sliderMin.addEventListener('input', updateView);
+                sliderMax.addEventListener('input', updateView);
                 document.getElementById('excludeDuplicatesToggle').addEventListener('change', updateView);
                 document.getElementById('reset-timeline').addEventListener('click', () => {
-                    slider.value = chronologicalDrivers.length - 1;
+                    sliderMin.value = 0;
+                    sliderMax.value = totalSteps;
                     updateView();
                 });
 
