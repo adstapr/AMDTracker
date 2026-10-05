@@ -1,6 +1,40 @@
 {
     "drivers": [
         {
+            "version": "24.2.1",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-2-1.html",
+            "fixed_bug_ids": [
+                "BUG-166",
+                "BUG-167",
+                "BUG-157",
+                "BUG-158",
+                "BUG-168",
+                "BUG-169",
+                "BUG-170",
+                "BUG-171",
+                "BUG-172",
+                "BUG-163",
+                "BUG-164",
+                "BUG-162",
+                "BUG-173",
+                "BUG-174"
+            ],
+            "known_bug_ids": [
+                "BUG-175",
+                "BUG-114",
+                "BUG-176",
+                "BUG-177",
+                "BUG-178",
+                "BUG-179",
+                "BUG-180",
+                "BUG-181",
+                "BUG-182",
+                "BUG-183",
+                "BUG-184",
+                "BUG-185"
+            ]
+        },
+        {
             "version": "24.1.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-1-1.html",
             "fixed_bug_ids": [
@@ -706,6 +740,26 @@
         "BUG-162": "Oculus Rift S may display with a green tint on AMD Radeon™ RX 7000 series GPUs.",
         "BUG-163": "After a system reboot, Parsec host application may experience a crash on some AMD Graphics Products, such as the Radeon™ RX 7900 XTX.",
         "BUG-164": "During Microsoft Teams meetings, the camera may intermittently display looped footage on some AMD Products, such as the AMD Ryzen™ 7 7840U Processor.",
-        "BUG-165": "On select hybrid graphics configurations, AFMF may be inaccurately displayed or absent, particularly in systems where one of the devices lacks support for AFMF."
+        "BUG-165": "On select hybrid graphics configurations, AFMF may be inaccurately displayed or absent, particularly in systems where one of the devices lacks support for AFMF.",
+        "BUG-166": "Improvement to intermittent driver timeout or application crash experienced while playing HELLDIVERS™ 2 on AMD Radeon™ RX 7000 series GPUs. AMD is continuing to investigate additional reports of driver timeouts and application crashes while playing HELLDIVERS™ 2.",
+        "BUG-167": "Improvements to excessive stutter while playing various games, including Battlefield™ 2042, Destiny 2, Overwatch 2, Monster Hunter: World, PUBG: BATTLEGROUNDS and STAR WARS™ Battlefront™ II.",
+        "BUG-168": "Intermittent application crash when first launching Enshrouded or changing Anti-Aliasing settings on Radeon™ 7000 series graphics products.",
+        "BUG-169": "Shadows may appear bright, or reflections may be missing while playing Enshrouded on Radeon™ 7000 series graphics products.",
+        "BUG-170": "HDR settings may intermittently fail to take effect while playing certain games such as Like A Dragon: Infinite Wealth.",
+        "BUG-171": "Intermittent driver timeout or application crash may be considered while playing Counterstrike 2 with FSR enabled on some AMD Graphics Products, such as the Radeon™ RX 7900 XTX.",
+        "BUG-172": "Graphics API metric may be incorrectly reported as DirectX® 12 for some Vulkan® games.",
+        "BUG-173": "AFMF may be inaccurately displayed on select hybrid graphics configurations, particularly in systems where one of the devices lacks support for AFMF. AFMF must be supported on the displaying GPU to be activated.",
+        "BUG-174": "Mouse lag or stutter may be observed when selecting the discrete GPU as the primary display adapter on certain mobile systems, such as an AMD Ryzen™ 9 6900HS Mobile Processor paired with an AMD Radeon™ RX 6800S Mobile GPU.",
+        "BUG-175": "Intermittent driver timeout or application crash may be experienced while playing HELLDIVERS™ 2 with 100% GPU utilization on some AMD Graphics Products, such as the Radeon™ RX 7900 XTX.",
+        "BUG-176": "Intermittent application crash or driver timeout may be observed while playing Overwatch® 2 with Radeon™ Boost enabled on Radeon™ RX 6000 and above series GPUs. Users experiencing this issue are recommended to disable Radeon™ Boost as a temporary workaround.",
+        "BUG-177": "Purple corruption may be observed while playing Dying Light 2 Stay Human: Reloaded Edition with Radeon™ Boost and Raytracing enabled. Users experiencing this issue are recommended to disable Radeon™ Boost as a temporary workaround.",
+        "BUG-178": "Some textures for characters may appear invisible while playing Cossacks 3.",
+        "BUG-179": "World of Warcraft may experience extended initial loading times with DirectX 12 API on some AMD Graphics Products, such as the Radeon™ RX 6800.",
+        "BUG-180": "Shader caching may fail for Windows usernames containing accented characters.",
+        "BUG-181": "FPS performance metric may incorrectly report values while a game is minimized.",
+        "BUG-182": "AMD SmartAccess Video may be incorrectly reported as “Available” on some systems with the Parsec Virtual Display Driver installed.",
+        "BUG-183": "Performance drop may be observed while using some DirectML workloads in Topaz AI.",
+        "BUG-184": "Audio and video may intermittently become out of sync while recording using the AV1 codec in AMD Software: Adrenalin Edition.",
+        "BUG-185": "Excessive micro stutter may be intermittently experienced after enabling AMD Fluid Motion Frames for select games."
     }
 }
