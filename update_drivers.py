@@ -161,7 +161,7 @@ def fetch_amd_release_notes(url):
     known_texts = []
     feature_texts = []
     game_texts = []
-    driver_type = "Optional"
+    driver_type = ""
 
     try:
         response = requests.get(url, headers=headers, timeout=15)
