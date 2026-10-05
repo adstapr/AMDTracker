@@ -9,13 +9,11 @@
 <body class="bg-slate-950 text-slate-100 p-6 font-sans">
     <div class="max-w-6xl mx-auto space-y-8">
         
-        <!-- Header -->
         <div class="border-b border-slate-800 pb-4">
             <h1 class="text-3xl font-bold tracking-tight">AMD Tracker</h1>
             <p class="text-slate-400 text-sm mt-1">A bug tracker using AMD's driver notes.</p>
         </div>
 
-        <!-- SECTION 3: Visual Bug Lifecycle Graph -->
         <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm">
             <h2 class="text-xl font-semibold text-slate-200 mb-1">Bugs Per Driver</h2>
             <p class="text-slate-400 text-sm mb-4">(Positive = Fixed Issues, Negative = Open / Known Issues)</p>
@@ -25,12 +23,11 @@
             </div>
         </div>
             
-            <div class="space-y-6">
-                <h2 class="text-xl font-semibold text-slate-200 border-b border-slate-800 pb-2">Issues/Fixes by version (most recent first)</h2>
-                <div id="driver-tracker" class="space-y-4 max-h-[800px] overflow-y-auto pr-2"></div>
-            </div>
-
+        <div class="space-y-6">
+            <h2 class="text-xl font-semibold text-slate-200 border-b border-slate-800 pb-2">Issues/Fixes by version (most recent first)</h2>
+            <div id="driver-tracker" class="space-y-4 max-h-[800px] overflow-y-auto pr-2"></div>
         </div>
+
     </div>
 
     <script>
@@ -41,10 +38,8 @@
             })
             .then(data => {
                 const driverContainer = document.getElementById('driver-tracker');
-                const bugContainer = document.getElementById('bug-ledger');
                 
                 driverContainer.innerHTML = '';
-                bugContainer.innerHTML = '';
 
                 data.drivers.forEach((d) => {
                     let card = document.createElement('div');
@@ -64,16 +59,10 @@
                         </li>
                     `).join('');
 
-                    let badgeClass = 'bg-blue-950 text-blue-400 border border-blue-800';
-                    if (d.type === 'WHQL') {
-                        badgeClass = 'bg-emerald-950 text-emerald-400 border border-emerald-800';
-                    }
-
                     card.innerHTML = `
                         <div class="flex justify-between items-center border-b border-slate-800 pb-3">
                             <div>
                                 <span class="text-xl font-bold text-white">${d.version}</span>
-                                <span class="ml-2 px-2 py-0.5 rounded text-[10px] font-semibold ${badgeClass}">${d.type}</span>
                             </div>
                             <div class="text-right">
                                 <span class="text-slate-400 text-xs block">${d.date || ''}</span>
