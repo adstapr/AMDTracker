@@ -1,6 +1,23 @@
 {
     "drivers": [
         {
+            "version": "26.6.1",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-6-1.html",
+            "fixed_bug_ids": [
+                "BUG-370",
+                "BUG-371",
+                "BUG-372"
+            ],
+            "known_bug_ids": [
+                "BUG-309",
+                "BUG-310",
+                "BUG-308",
+                "BUG-369",
+                "BUG-373",
+                "BUG-311"
+            ]
+        },
+        {
             "version": "26.5.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-5-2.html",
             "fixed_bug_ids": [
@@ -1553,6 +1570,9 @@
         "BUG-367": "Corruption may appear while playing God of War on Radeon™ RX 9000 series graphics products.",
         "BUG-368": "Corruption may appear while playing Satisfactory on Radeon™ RX 9000 series graphics products.",
         "BUG-369": "Intermittent application crash may be observed while running Blender on Radeon™ RX 7000 series graphics products and above. Users experiencing this issue are recommended to install AMD Software: Adrenalin Edition 26.3.1.",
-        "BUG-370": "Intermittent application crash may be observed while playing Subnautica 2 and Marvel Rivals on Radeon™ RX 9000 series graphics products. Users experiencing this issue are recommended to install AMD Software: Adrenalin Edition 26.3.1."
+        "BUG-370": "Intermittent application crash may be observed while playing Subnautica 2 and Marvel Rivals on Radeon™ RX 9000 series graphics products. Users experiencing this issue are recommended to install AMD Software: Adrenalin Edition 26.3.1.",
+        "BUG-371": "Artifacts may appear while playing Enshrouded on Radeon™ RX 6000 series graphics products.",
+        "BUG-372": "Zero RPM mode may re-enable itself after a monitor goes to sleep or is turned off on Radeon™ RX 9000 series graphics products.",
+        "BUG-373": "Purple screen may be displayed when using an HP Reverb G2 headset with SteamVR on Radeon™ RX 6000 series graphics products."
     }
 }
