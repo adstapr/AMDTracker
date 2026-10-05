@@ -1,6 +1,26 @@
 {
     "drivers": [
         {
+            "version": "24.7.1",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-7-1.html",
+            "fixed_bug_ids": [
+                "BUG-216",
+                "BUG-217",
+                "BUG-218",
+                "BUG-208",
+                "BUG-219",
+                "BUG-212",
+                "BUG-220",
+                "BUG-213",
+                "BUG-221"
+            ],
+            "known_bug_ids": [
+                "BUG-184",
+                "BUG-222",
+                "BUG-215"
+            ]
+        },
+        {
             "version": "24.6.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-6-1.html",
             "fixed_bug_ids": [
@@ -880,6 +900,13 @@
         "BUG-212": "Virtual Super Resolution or Display Color Enhancements may be set to disabled after driver upgrade.",
         "BUG-213": "Intermittent black corruption may be observed on scaled 3d models while using Origin or OriginPro application.",
         "BUG-214": "Intermittent stutter may be observed while AMD Radeon™ Anti-Lag and AMD FidelityFX™ Super Resolution 3 frame generation is enabled. Users experiencing this issue are recommended to disable Radeon™ Anti-Lag in the per-game settings as a temporary workaround.",
-        "BUG-215": "Intermittent application crash or driver timeout may occur while playing Black Myth: Wukong. We recommend users experiencing this issue to install our new driver, available HERE."
+        "BUG-215": "Intermittent application crash or driver timeout may occur while playing Black Myth: Wukong. We recommend users experiencing this issue to install our new driver, available HERE.",
+        "BUG-216": "Improvements to stutter when AMD Radeon™ Anti-Lag and AMD FidelityFX™ Super Resolution 3 frame generation is enabled.",
+        "BUG-217": "Improvements to stutter while playing Fortnite with DirectX® 12 API.",
+        "BUG-218": "Texture corruption may be observed while playing TEKKEN™ 8 with Ray Tracing or Upscale enabled.",
+        "BUG-219": "Intermittent system crash or corruption may be observed while playing Marvel's Guardians of the Galaxy with Ray Tracing enabled.",
+        "BUG-220": "Unable to change display pixel format with certain Windows display languages.",
+        "BUG-221": "Black corruption may be observed while fast forwarding using PotPlayer.",
+        "BUG-222": "Intermittent application crash may be observed while playing Kunitsu-Gami: Path of the Goddess on some Radeon™ RX 6600 and 6700 series GPUs. We recommend users experiencing this issue to install our new driver, available HERE."
     }
 }
