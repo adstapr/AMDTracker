@@ -1,1 +1,94 @@
-
+{
+    "drivers": [
+        {
+            "version": "22.10.2",
+            "type": "Optional",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-22-10-2.html",
+            "fixed_bug_ids": [
+                "BUG-001",
+                "BUG-002",
+                "BUG-003",
+                "BUG-004",
+                "BUG-005",
+                "BUG-006",
+                "BUG-007",
+                "BUG-008",
+                "BUG-009",
+                "BUG-010",
+                "BUG-011",
+                "BUG-012",
+                "BUG-013",
+                "BUG-014"
+            ],
+            "known_bug_ids": [
+                "BUG-008",
+                "BUG-009",
+                "BUG-010",
+                "BUG-011",
+                "BUG-012",
+                "BUG-013",
+                "BUG-014",
+                "BUG-015"
+            ],
+            "feature_ids": [
+                "FEAT-001",
+                "FEAT-002",
+                "FEAT-003",
+                "FEAT-004",
+                "FEAT-005",
+                "FEAT-006",
+                "FEAT-007",
+                "FEAT-008",
+                "FEAT-009",
+                "FEAT-010",
+                "FEAT-011",
+                "FEAT-012",
+                "FEAT-013",
+                "FEAT-014",
+                "FEAT-015",
+                "FEAT-016"
+            ],
+            "game_ids": [
+                "GAME-001"
+            ]
+        }
+    ],
+    "master_bugs": {
+        "BUG-001": "Radeon™ Super Resolution may fail to trigger after changing resolution or HDR settings on games such as Nioh™ 2.",
+        "BUG-002": "Vertical Refresh Sync set globally to Always Off may cause system stuttering or driver timeout during video playback using Radeon™ RX 6000 series GPUs.",
+        "BUG-003": "Driver timeout may occur using HEVC hardware encoding on Radeon™ RX 6000 series GPUs.",
+        "BUG-004": "Dropped frames may occur during video playback using hardware acceleration on Chromium-based browsers with Radeon™ RX 6000 series GPUs.",
+        "BUG-005": "Chromium-based browsers may experience video stuttering on extended monitors with mixed refresh rates using Radeon™ RX 6000 series GPUs.",
+        "BUG-006": "Oculus dashboard menu and rendered controllers may appear bouncing/wobbly on Oculus Quest 2 with some AMD Graphics Products such as the Radeon™ RX 6800 XT Graphics.",
+        "BUG-007": "While previewing the timeline in VEGAS Pro™, some colors may appear inverted.",
+        "BUG-008": "GPU utilization may be stuck at 100% in Radeon performance metrics after closing games on some AMD Graphics Products such as Radeon™ 570.",
+        "BUG-009": "When Radeon™ Anti-Lag is enabled, a beep can be heard when pressing shift + back key. [Resolution targeted for 22.11.1]",
+        "BUG-010": "Elite Dangerous may crash upon launch on Radeon™ RX 6000 series GPUs. [Resolution targeted for 22.10.3]",
+        "BUG-011": "Stuttering may occur during video playback using hardware acceleration with Firefox on some AMD Graphics Products such as the Radeon™ RX 6900 XT Graphics.",
+        "BUG-012": "Brief display corruption may occur when switching between video and game windows on some AMD Graphics Products such as the Radeon™ RX 6700 XT.\nImprovements have been made in 22.10.2 to reduce occurrence for some configurations.",
+        "BUG-013": "Improvements have been made in 22.10.2 to reduce occurrence for some configurations.",
+        "BUG-014": "AMD Software Capture and Stream features and Overlay support for Clone mode and Eyefinity display configurations will be introduced at a later date.",
+        "BUG-015": "The AMD Software: Adrenalin Edition 22.10.2 installation package contains the following:"
+    },
+    "master_features": {
+        "FEAT-001": "Support for:\nUNCHARTED™: Legacy of Thieves Collection\nCall of Duty®: Modern Warfare® II Campaign",
+        "FEAT-002": "UNCHARTED™: Legacy of Thieves Collection",
+        "FEAT-003": "Call of Duty®: Modern Warfare® II Campaign",
+        "FEAT-004": "Radeon™ Super Resolution may fail to trigger after changing resolution or HDR settings on games such as Nioh™ 2.",
+        "FEAT-005": "Vertical Refresh Sync set globally to Always Off may cause system stuttering or driver timeout during video playback using Radeon™ RX 6000 series GPUs.",
+        "FEAT-006": "Driver timeout may occur using HEVC hardware encoding on Radeon™ RX 6000 series GPUs.",
+        "FEAT-007": "Dropped frames may occur during video playback using hardware acceleration on Chromium-based browsers with Radeon™ RX 6000 series GPUs.",
+        "FEAT-008": "Chromium-based browsers may experience video stuttering on extended monitors with mixed refresh rates using Radeon™ RX 6000 series GPUs.",
+        "FEAT-009": "Oculus dashboard menu and rendered controllers may appear bouncing/wobbly on Oculus Quest 2 with some AMD Graphics Products such as the Radeon™ RX 6800 XT Graphics.",
+        "FEAT-010": "While previewing the timeline in VEGAS Pro™, some colors may appear inverted.",
+        "FEAT-011": "GPU utilization may be stuck at 100% in Radeon performance metrics after closing games on some AMD Graphics Products such as Radeon™ 570.",
+        "FEAT-012": "When Radeon™ Anti-Lag is enabled, a beep can be heard when pressing shift + back key. [Resolution targeted for 22.11.1]",
+        "FEAT-013": "Elite Dangerous may crash upon launch on Radeon™ RX 6000 series GPUs. [Resolution targeted for 22.10.3]",
+        "FEAT-014": "Stuttering may occur during video playback using hardware acceleration with Firefox on some AMD Graphics Products such as the Radeon™ RX 6900 XT Graphics.",
+        "FEAT-015": "Brief display corruption may occur when switching between video and game windows on some AMD Graphics Products such as the Radeon™ RX 6700 XT.\nImprovements have been made in 22.10.2 to reduce occurrence for some configurations.",
+        "FEAT-016": "Improvements have been made in 22.10.2 to reduce occurrence for some configurations."
+    },
+    "master_games": {
+        "GAME-001": "Important Note for Laptop and All-In-One (AIO) PCs \nAMD recommends OEM-provided drivers which are customized and validated for their system-specific features and optimizations.\nIf you experience issues using the AMD Software: Adrenalin Edition driver package downloaded from AMD.com, please install the OEM-provided drivers for full support and compatibility."
+    }
+}
