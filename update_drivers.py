@@ -32,20 +32,23 @@ def get_next_id(master_dict, prefix):
     next_num = max(existing_nums) + 1 if existing_nums else 1
     return f"{prefix}-{next_num:03d}"
 
-def parse_section_bullets(soup, target_headers):
-    """Precisely extracts bullet points (<li>) under specific heading titles."""
+def parse_section_bullets(soup, target_keywords, exclude_keywords=None):
+    """Precisely extracts bullet points (<li>) under specific headings while avoiding excluded topics."""
     items = []
+    if exclude_keywords is None:
+        exclude_keywords = []
     
-    # Search for headings or strong tags matching target keywords
     for element in soup.find_all(["h2", "h3", "h4", "strong", "b"]):
         text = element.get_text(strip=True)
-        if any(th.lower() in text.lower() for th in target_headers):
-            # Look for the nearest parent container or sibling list
+        # Check if header matches target and doesn't contain excluded keywords
+        if any(tk.lower() in text.lower() for tk in target_keywords):
+            if any(ek.lower() in text.lower() for ek in exclude_keywords):
+                continue
+                
             container = element.find_parent(["div", "section", "article", "body"])
             if not container:
                 container = element
             
-            # Find the next sibling list or a list within the same parent block
             ul = container.find("ul")
             if not ul:
                 sibling = element.find_next_sibling()
@@ -62,22 +65,27 @@ def parse_section_bullets(soup, target_headers):
             if ul:
                 for li in ul.find_all("li", recursive=False):
                     cleaned = clean_text(li.get_text())
-                    if cleaned and len(cleaned) > 3:
+                    # Skip generic metadata lines
+                    if cleaned and len(cleaned) > 3 and "Package Contents" not in cleaned:
                         items.append(cleaned)
-                break
+                if items:
+                    break
     
-    # Fallback: if no <ul> found, try grabbing paragraph text directly following the header
+    # Fallback to paragraph texts if no <ul> was found
     if not items:
         for element in soup.find_all(["h2", "h3", "h4", "strong", "b"]):
             text = element.get_text(strip=True)
-            if any(th.lower() in text.lower() for th in target_headers):
+            if any(tk.lower() in text.lower() for tk in target_keywords):
+                if any(ek.lower() in text.lower() for ek in exclude_keywords):
+                    continue
                 sibling = element.find_next_sibling()
                 while sibling and sibling.name == "p":
                     cleaned = clean_text(sibling.get_text())
                     if cleaned and len(cleaned) > 3:
                         items.append(cleaned)
                     sibling = sibling.find_next_sibling()
-                break
+                if items:
+                    break
 
     return items
 
@@ -103,10 +111,11 @@ def fetch_amd_release_notes(url):
         if response.status_code == 200:
             soup = BeautifulSoup(response.text, "html.parser")
             
-            fixed_texts = parse_section_bullets(soup, ["Fixed Issues"])
-            known_texts = parse_section_bullets(soup, ["Known Issues"])
-            feature_texts = parse_section_bullets(soup, ["Highlights", "New Features", "What's New"])
+            # Strict targeting to prevent cross-contamination
+            fixed_texts = parse_section_bullets(soup, ["Fixed Issues"], exclude_keywords=["Known", "Highlights"])
+            known_texts = parse_section_bullets(soup, ["Known Issues"], exclude_keywords=["Fixed"])
             game_texts = parse_section_bullets(soup, ["Support for", "New Game Support", "Game Support"])
+            feature_texts = parse_section_bullets(soup, ["Highlights", "New Features", "What's New"], exclude_keywords=["Fixed", "Known", "Support for"])
 
             if "Recommended" in soup.get_text():
                 driver_type = "Recommended"
@@ -144,7 +153,6 @@ def update_json(scraped_data):
     else:
         data = {}
 
-    # Ensure keys exist
     data.setdefault("drivers", [])
     master_bugs = data.setdefault("master_bugs", {})
     master_features = data.setdefault("master_features", {})
@@ -180,7 +188,6 @@ def update_json(scraped_data):
         "game_ids": game_ids,
     }
 
-    # Remove existing entry for this version/url to prevent duplicates
     data["drivers"] = [
         d for d in data["drivers"]
         if d.get("url") != scraped_data["url"] and d.get("version") != scraped_data["version"]
