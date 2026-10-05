@@ -1,6 +1,18 @@
 {
     "drivers": [
         {
+            "version": "23.8.2",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-8-2.html",
+            "fixed_bug_ids": [
+                "BUG-117"
+            ],
+            "known_bug_ids": [
+                "BUG-103",
+                "BUG-112",
+                "BUG-118"
+            ]
+        },
+        {
             "version": "23.8.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-8-1.html",
             "fixed_bug_ids": [
@@ -504,6 +516,7 @@
         "BUG-114": "Application crash or driver timeout may be observed while playing Starcraft II™ on Radeon™ RX 7000 series GPUs.",
         "BUG-115": "Performance drop may be experienced for various games on AMD Ryzen™ processors with Radeon™ 700M series GPUS.",
         "BUG-116": "Display may not reach correct brightness with certain games on some SAMSUNG™ FreeSync Premium Pro displays and TVs when local dimming is enabled.",
-        "BUG-117": "Application crash or driver timeout may be observed while playing Baldur's Gate 3 with DirectX® 11 API set on certain systems with Radeon™ RX 7000 series GPUs."
+        "BUG-117": "Application crash or driver timeout may be observed while playing Baldur's Gate 3 with DirectX® 11 API set on certain systems with Radeon™ RX 7000 series GPUs.",
+        "BUG-118": "Display may not reach correct brightness with certain games on select SAMSUNG™ FreeSync Premium Pro monitors or TVs with local dimming setting enabled."
     }
 }
