@@ -1,6 +1,25 @@
 {
     "drivers": [
         {
+            "version": "25.9.2",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-9-2.html",
+            "fixed_bug_ids": [
+                "BUG-328",
+                "BUG-329",
+                "BUG-330"
+            ],
+            "known_bug_ids": [
+                "BUG-319",
+                "BUG-323",
+                "BUG-331",
+                "BUG-326",
+                "BUG-327",
+                "BUG-267",
+                "BUG-332",
+                "BUG-333"
+            ]
+        },
+        {
             "version": "25.9.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-9-1.html",
             "fixed_bug_ids": [
@@ -1332,6 +1351,12 @@
         "BUG-324": "Playstation® VR controllers are not detected while playing SteamVR™.",
         "BUG-325": "Intermittent application crash or driver timeout may be observed while playing Monster Hunter Wilds with Ray Tracing enabled and recording with AMD Software on Radeon™ RX 7600, 7700, and 7800 series graphics products.",
         "BUG-326": "Corruption (missing scan travel lines) may be observed while playing GTFO™ on Radeon™ RX 7000 series graphics products.",
-        "BUG-327": "Intermittent application crash or driver timeout may be observed while loading a saved game in Cyberpunk 2077 with Path Tracing enabled."
+        "BUG-327": "Intermittent application crash or driver timeout may be observed while loading a saved game in Cyberpunk 2077 with Path Tracing enabled.",
+        "BUG-328": "Corruption may appear while playing games based on the Godot engine with Vulkan.",
+        "BUG-329": "Intermittent application crash may be observed while playing Cronos: The New Dawn with Ray Tracing enabled on Radeon™ RX 9070 series graphics products.",
+        "BUG-330": "Failure to launch may be observed while using the Oasis Driver with Windows Mixed Reality headsets.",
+        "BUG-331": "Intermittent application crash may be observed while playing FBC: Firebreak on some AMD Ryzen™ processors such as the Ryzen™ AI 300 series and the Ryzen™ 8000 series.",
+        "BUG-332": "Intermittent system crash may be observed while playing World of Warcraft while watching YouTube on Radeon™ RX 7900 GRE graphics products.",
+        "BUG-333": "Intermittent application crash may be observed while playing games with EA Javelin anticheat and Radeon™ Anti-Lag enabled on some AMD Graphics Products. Users experiencing this issue are recommended to disable Radeon™ Anti-Lag as a temporary workaround."
     }
 }
