@@ -1,6 +1,27 @@
 {
     "drivers": [
         {
+            "version": "25.5.1",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-5-1.html",
+            "fixed_bug_ids": [
+                "BUG-275",
+                "BUG-269",
+                "BUG-265",
+                "BUG-285",
+                "BUG-286",
+                "BUG-281"
+            ],
+            "known_bug_ids": [
+                "BUG-267",
+                "BUG-278",
+                "BUG-280",
+                "BUG-282",
+                "BUG-284",
+                "BUG-287",
+                "BUG-288"
+            ]
+        },
+        {
             "version": "25.4.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-4-1.html",
             "fixed_bug_ids": [
@@ -1144,6 +1165,10 @@
         "BUG-281": "Intermittent failure to launch may be observed when AMD Software: Adrenalin Edition user interface is launched from desktop context menu or system tray.",
         "BUG-282": "Intermittent application crash or driver timeout may be observed while playing Monster Hunter Wilds with Radeon™ Anti-Lag and Instant Replay enabled.",
         "BUG-283": "Intermittent system or application crash may be observed while playing Marvels Spiderman 2 with Radeon™ Anti-Lag 2 enabled on Radeon™ RX 7000 series graphics products.",
-        "BUG-284": "Artifacts or corruption may appear while playing BattleField on Radeon™ RX 7000 series graphics products."
+        "BUG-284": "Artifacts or corruption may appear while playing BattleField on Radeon™ RX 7000 series graphics products.",
+        "BUG-285": "Intermittent application crash or driver timeout may be observed while playing Metro Exodus Enhanced Edition.",
+        "BUG-286": "Intermittent application crash or driver timeout may be observed while loading Civilization VII with Anti-Lag enabled.",
+        "BUG-287": "Quality and Performance selections may be reversed in the user interface for AMD Radeon™ Boost.",
+        "BUG-288": "Stutter may be observed while playing Call of Duty®: Warzone™ Season 03 Verdansk map on some AMD Graphics Products."
     }
 }
