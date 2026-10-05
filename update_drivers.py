@@ -10,7 +10,6 @@ JSON_FILE = "drivers.json"
 def clean_text(text):
     if not text:
         return ""
-    # Strip trailing resolution target notices (e.g., [Resolution targeted for 22.10.3])
     text = re.sub(r'\s*\[?Resolution targeted for [^\]]+\]?', '', text, flags=re.IGNORECASE)
     text = re.sub(r'\s*\(?Resolution targeted for [^\)]+\)?', '', text, flags=re.IGNORECASE)
     return (
@@ -34,7 +33,6 @@ def get_next_id(master_dict, prefix):
     return f"{prefix}-{next_num:03d}"
 
 def get_main_content(soup):
-    # Target main article or content body to avoid footers/navs
     return soup.find(["article", "main"]) or soup.find("div", class_=re.compile(r"content|node|release-notes", re.I)) or soup
 
 def parse_amd_section(soup, keywords):
@@ -94,46 +92,58 @@ def parse_amd_section(soup, keywords):
     return items
 
 def parse_amd_games_section(soup):
+    """Specifically parses 'New Game Support' or 'Support For' headers under Highlights 
+       while strictly ignoring global navigation / footer elements."""
     items = []
-    keywords = ["support for", "new game support", "game support", "optimized for"]
     main_container = get_main_content(soup)
     
+    # Target exact headings indicating game support sections
+    game_keywords = ["new game support", "game support", "support for"]
     target_tags = []
-    for tag in main_container.find_all(["h1", "h2", "h3", "h4", "h5", "h6", "strong", "b"]):
-        text = tag.get_text(strip=True).rstrip(':').strip()
-        if any(kw == text.lower() or text.lower().startswith(kw) for kw in keywords):
+    
+    for tag in main_container.find_all(["h2", "h3", "h4", "strong", "b"]):
+        text = tag.get_text(strip=True).rstrip(':').strip().lower()
+        if any(kw in text for kw in game_keywords):
             target_tags.append(tag)
             
+    # Blacklist terms to ensure footer items never slip through as games
+    nav_blacklist = {
+        "linkedin", "instagram", "facebook", "developer", "developers", "server", 
+        "embedded", "ryzen", "radeon", "about amd", "management team", "careers", 
+        "contact us", "newsroom", "events", "investor relations", "privacy", "cookies policy",
+        "cookie settings", "terms and conditions", "trademarks", "sec filings"
+    }
+
     for target_tag in target_tags:
         curr = target_tag.find_next_sibling()
         if not curr and target_tag.parent:
             curr = target_tag.parent.find_next_sibling()
             
         while curr:
-            if curr.name in ["h1", "h2", "h3", "h4", "h5", "h6"]:
+            # Stop if we hit another primary section header
+            if curr.name in ["h1", "h2", "h3"]:
                 break
+                
+            # Search lists and paragraphs inside the game support block
+            search_elements = []
             if curr.name in ["ul", "ol"]:
-                for li in curr.find_all("li", recursive=True):
-                    li_copy = BeautifulSoup(str(li), "html.parser")
-                    for nested in li_copy.find_all(["ul", "ol"]):
-                        nested.decompose()
-                    cleaned = clean_text(li_copy.get_text())
-                    if cleaned and len(cleaned) > 1 and cleaned not in items:
-                        items.append(cleaned)
+                search_elements = curr.find_all("li", recursive=True)
             elif curr.name == "p":
-                cleaned = clean_text(curr.get_text())
-                if cleaned and cleaned.lower().rstrip(':') not in keywords:
-                    if cleaned and len(cleaned) > 1 and cleaned not in items:
-                        items.append(cleaned)
+                search_elements = [curr]
             elif hasattr(curr, "find_all"):
-                for ul in curr.find_all(["ul", "ol"]):
-                    for li in ul.find_all("li", recursive=True):
-                        li_copy = BeautifulSoup(str(li), "html.parser")
-                        for nested in li_copy.find_all(["ul", "ol"]):
-                            nested.decompose()
-                        cleaned = clean_text(li_copy.get_text())
-                        if cleaned and len(cleaned) > 1 and cleaned not in items:
-                            items.append(cleaned)
+                search_elements = curr.find_all(["li", "p"])
+
+            for el in search_elements:
+                el_copy = BeautifulSoup(str(el), "html.parser")
+                for nested in el_copy.find_all(["ul", "ol"]):
+                    nested.decompose()
+                cleaned = clean_text(el_copy.get_text())
+                
+                if cleaned and len(cleaned) > 1:
+                    # Filter out corporate menu items/blacklisted names
+                    if cleaned.lower() not in nav_blacklist and cleaned not in items:
+                        items.append(cleaned)
+                        
             curr = curr.find_next_sibling()
             
     return items
@@ -165,7 +175,7 @@ def fetch_amd_release_notes(url):
             game_texts = parse_amd_games_section(soup)
             feature_texts = parse_amd_section(soup, ["Highlights", "New Features", "What's New"])
             
-            # Strict separation to prevent games from leaking into features
+            # Prevent games from bleeding into features
             feature_texts = [
                 f for f in feature_texts 
                 if not any(g.lower() in f.lower() for g in game_texts) 
