@@ -1,6 +1,26 @@
 {
     "drivers": [
         {
+            "version": "24.8.1",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-8-1.html",
+            "fixed_bug_ids": [
+                "BUG-215",
+                "BUG-223",
+                "BUG-224",
+                "BUG-225",
+                "BUG-226",
+                "BUG-227",
+                "BUG-228"
+            ],
+            "known_bug_ids": [
+                "BUG-229",
+                "BUG-184",
+                "BUG-230",
+                "BUG-231",
+                "BUG-232"
+            ]
+        },
+        {
             "version": "24.7.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-7-1.html",
             "fixed_bug_ids": [
@@ -907,6 +927,16 @@
         "BUG-219": "Intermittent system crash or corruption may be observed while playing Marvel's Guardians of the Galaxy with Ray Tracing enabled.",
         "BUG-220": "Unable to change display pixel format with certain Windows display languages.",
         "BUG-221": "Black corruption may be observed while fast forwarding using PotPlayer.",
-        "BUG-222": "Intermittent application crash may be observed while playing Kunitsu-Gami: Path of the Goddess on some Radeon™ RX 6600 and 6700 series GPUs. We recommend users experiencing this issue to install our new driver, available HERE."
+        "BUG-222": "Intermittent application crash may be observed while playing Kunitsu-Gami: Path of the Goddess on some Radeon™ RX 6600 and 6700 series GPUs. We recommend users experiencing this issue to install our new driver, available HERE.",
+        "BUG-223": "Intermittent application crash may occur while playing Kunitsu-Gami: Path of the Goddess on some Radeon™ RX 6600 and 6700 series GPUs.",
+        "BUG-224": "Intermittent application crash or driver timeout may occur while launching Pacific Drive or KINGDOM HEARTS -HD 1.5+2.5 ReMIX-.",
+        "BUG-225": "Anti-Aliasing and Anisotropic Filtering settings from AMD Software: Adrenalin Edition may fail to correctly apply for OpenGL® applications.",
+        "BUG-226": "Artifacts may appear while playing certain games such as Marvel’s Spider-Man: Miles Morales or Rust.",
+        "BUG-227": "Increased memory usage may be observed while playing certain versions of Minecraft Java Edition.",
+        "BUG-228": "Improved “Optimizing Shaders” time when initially launching Forza Motorsport.",
+        "BUG-229": "Overly dark shadows or desaturated colors may be observed while playing Black Myth: Wukong when Global Illumination is to Medium or higher. Users experiencing this issue may set Global Illumination to Low as a temporary workaround.",
+        "BUG-230": "AMD Software: Adrenalin Edition may unexpectedly initiate upon system wake from sleep mode.",
+        "BUG-231": "Intermittent driver timeout or application crash while playing Warhammer 40,000: Space Marine 2. We recommend users experiencing this issue to install our new driver, available HERE.",
+        "BUG-232": "Intermittent performance when entering certain areas while playing DayZ"
     }
 }
