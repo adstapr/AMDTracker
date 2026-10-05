@@ -1,6 +1,23 @@
 {
     "drivers": [
         {
+            "version": "23.4.1",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-4-1.html",
+            "fixed_bug_ids": [
+                "BUG-077",
+                "BUG-076",
+                "BUG-078"
+            ],
+            "known_bug_ids": [
+                "BUG-045",
+                "BUG-033",
+                "BUG-050",
+                "BUG-012",
+                "BUG-079",
+                "BUG-080"
+            ]
+        },
+        {
             "version": "23.3.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-3-2.html",
             "fixed_bug_ids": [
@@ -310,6 +327,10 @@
         "BUG-073": "Corruption may be observed while playing It Takes Two™ on Radeon™ RX 7000 series GPUs.",
         "BUG-074": "The Performance Tuning Stress Test may intermittently lower GPU usage before test completion.",
         "BUG-075": "Video playback using hardware accelerated browsers may appear blurry during upscale on some AMD Graphics Products, such as the Radeon™ RX 7900 XT.",
-        "BUG-076": "Mouse cursor may appear invisible in Citrix Workspace™."
+        "BUG-076": "Mouse cursor may appear invisible in Citrix Workspace™.",
+        "BUG-077": "Video playback in browsers using hardware acceleration may appear blurry on some AMD Graphics Products, such as the Radeon™ RX 7900 XT.",
+        "BUG-078": "Performance Metrics Overlay may intermittently disappear when playing full-screen videos from STEAM™.",
+        "BUG-079": "Water corruption in Hogwarts Legacy™ may occur on some AMD Graphics Products, such as the Radeon™ RX 580.",
+        "BUG-080": "Blocky water corruption in Red Dead Redemption 2™ may occur using Vulkan® API."
     }
 }
