@@ -2,7 +2,7 @@
     "drivers": [
         {
             "version": "22.11.2",
-            "type": "Optional",
+            "type": "WHQL",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-22-11-2.html",
             "fixed_bug_ids": [
                 "BUG-021",
@@ -22,7 +22,7 @@
         },
         {
             "version": "22.11.1",
-            "type": "Optional",
+            "type": "WHQL",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-22-11-1.html",
             "fixed_bug_ids": [
                 "BUG-015",
@@ -43,7 +43,7 @@
         },
         {
             "version": "22.10.3",
-            "type": "Optional",
+            "type": "WHQL",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-22-10-3.html",
             "fixed_bug_ids": [
                 "BUG-010",
@@ -62,7 +62,7 @@
         },
         {
             "version": "22.10.2",
-            "type": "Optional",
+            "type": "WHQL",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-22-10-2.html",
             "fixed_bug_ids": [
                 "BUG-001",
