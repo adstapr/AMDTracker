@@ -1,6 +1,30 @@
 {
     "drivers": [
         {
+            "version": "23.2.2",
+            "type": "WHQL",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-2-2.html",
+            "fixed_bug_ids": [
+                "BUG-065",
+                "BUG-053",
+                "BUG-064",
+                "BUG-067",
+                "BUG-068",
+                "BUG-066",
+                "BUG-069"
+            ],
+            "known_bug_ids": [
+                "BUG-061",
+                "BUG-062",
+                "BUG-049",
+                "BUG-063",
+                "BUG-012",
+                "BUG-070",
+                "BUG-071"
+            ],
+            "game_ids": []
+        },
+        {
             "version": "23.2.1",
             "type": "WHQL",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-2-1.html",
@@ -253,7 +277,12 @@
         "BUG-063": "Some virtual reality games or apps may experience lower-than-expected performance on Radeon™ RX 7000 series GPUs.",
         "BUG-064": "AMD Bug Report Tool pop-up or system hang may be observed after driver upgrade on some hybrid graphics notebooks. Users are recommended to use the factory reset install option as a workaround.",
         "BUG-065": "Corruption may be briefly observed when moving Netflix video between displays or minimize-to-fullscreen on some AMD Products such as AMD Ryzen™ 7 6800U.",
-        "BUG-066": "Certain videos played with Movies and TV may briefly show corruption when moving the window between displays on some AMD Graphics Products such as AMD Radeon™ RX 6700 XT."
+        "BUG-066": "Certain videos played with Movies and TV may briefly show corruption when moving the window between displays on some AMD Graphics Products such as AMD Radeon™ RX 6700 XT.",
+        "BUG-067": "Application crash may be observed while playing Hitman 3™ with ray tracing settings enabled.",
+        "BUG-068": "Valve Index® VR headset may show a blank screen with 144Hz refresh rate setting on Radeon™ RX 7000 series GPUs.",
+        "BUG-069": "Situational performance drop may be observed in DirectX® 11 based games on Radeon™ RX 6000 series GPUs using Ryzen™ processors.",
+        "BUG-070": "Metrics overlay may intermittently re-size to 50% after gameplay.",
+        "BUG-071": "Corruption may be observed in Returnal™ in certain scenes with ray tracing enabled on Radeon™ RX 6000 series GPUs."
     },
     "master_games": {}
 }
