@@ -1,6 +1,17 @@
 {
     "drivers": [
         {
+            "version": "25.5.2",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-5-2-F1-25.html",
+            "fixed_bug_ids": [
+                "BUG-289"
+            ],
+            "known_bug_ids": [
+                "BUG-290",
+                "BUG-291"
+            ]
+        },
+        {
             "version": "25.5.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-5-1.html",
             "fixed_bug_ids": [
@@ -1169,6 +1180,9 @@
         "BUG-285": "Intermittent application crash or driver timeout may be observed while playing Metro Exodus Enhanced Edition.",
         "BUG-286": "Intermittent application crash or driver timeout may be observed while loading Civilization VII with Anti-Lag enabled.",
         "BUG-287": "Quality and Performance selections may be reversed in the user interface for AMD Radeon™ Boost.",
-        "BUG-288": "Stutter may be observed while playing Call of Duty®: Warzone™ Season 03 Verdansk map on some AMD Graphics Products."
+        "BUG-288": "Stutter may be observed while playing Call of Duty®: Warzone™ Season 03 Verdansk map on some AMD Graphics Products.",
+        "BUG-289": "Intermittent application crash may be observed while playing F1® 25 with path tracing enabled on AMD Radeon™ RX 9000 series graphics products",
+        "BUG-290": "Stutter and lower than expected performance may be observed when using alt-tab and streaming to Discord with multiple monitors.",
+        "BUG-291": "Intermittent system crash may be observed while using multiple high-resolution monitors with AMD FreeSync™ on Radeon™ RX 9000 series graphics products."
     }
 }
