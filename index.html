@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>AMD Driver & Bug Watch</title>
+    <title>AMD Tracker</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -11,41 +11,29 @@
         
         <!-- Header -->
         <div class="border-b border-slate-800 pb-4">
-            <h1 class="text-3xl font-bold tracking-tight">AMD Driver & Bug Watch</h1>
-            <p class="text-slate-400 text-sm mt-1">Manual issue lifecycle tracker mapped by version and bug ID.</p>
+            <h1 class="text-3xl font-bold tracking-tight">AMD Tracker</h1>
+            <p class="text-slate-400 text-sm mt-1">A bug tracker using AMD's driver notes.</p>
         </div>
 
         <!-- SECTION 3: Visual Bug Lifecycle Graph -->
         <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm">
-            <h2 class="text-xl font-semibold text-slate-200 mb-1">Bug Lifecycle Graph</h2>
-            <p class="text-slate-400 text-sm mb-4">Continuous lifecycle tracker (Positive = Fixed Issues, Negative = Open / Known Issues)</p>
+            <h2 class="text-xl font-semibold text-slate-200 mb-1">Bugs Per Driver</h2>
+            <p class="text-slate-400 text-sm mb-4">(Positive = Fixed Issues, Negative = Open / Known Issues)</p>
             
             <div class="relative h-[450px] w-full">
                 <canvas id="bugLifecycleChart"></canvas>
             </div>
         </div>
-
-        <div class="grid lg:grid-cols-2 gap-8">
             
-            <!-- SECTION 1: Issues Grouped by Driver Version -->
             <div class="space-y-6">
-                <h2 class="text-xl font-semibold text-slate-200 border-b border-slate-800 pb-2">Issues by Driver Version</h2>
+                <h2 class="text-xl font-semibold text-slate-200 border-b border-slate-800 pb-2">Issues/Fixes by version (most recent first)</h2>
                 <div id="driver-tracker" class="space-y-4 max-h-[800px] overflow-y-auto pr-2"></div>
-            </div>
-
-            <!-- SECTION 2: Master Bug Ledger -->
-            <div class="space-y-6">
-                <h2 class="text-xl font-semibold text-slate-200 border-b border-slate-800 pb-2">Master Bug Ledger</h2>
-                <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-sm max-h-[800px] overflow-y-auto pr-2">
-                    <div id="bug-ledger" class="space-y-3"></div>
-                </div>
             </div>
 
         </div>
     </div>
 
     <script>
-        // Fetch external drivers.json exclusively
         fetch('./drivers.json')
             .then(response => {
                 if (!response.ok) throw new Error('Failed to load drivers.json');
@@ -58,7 +46,6 @@
                 driverContainer.innerHTML = '';
                 bugContainer.innerHTML = '';
 
-                // 1. Render Driver Versions & Their Fixed/Known Bugs
                 data.drivers.forEach((d) => {
                     let card = document.createElement('div');
                     card.className = 'bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm space-y-4';
@@ -108,34 +95,10 @@
                     driverContainer.appendChild(card);
                 });
 
-                // 2. Render Master Bug Ledger
-                for (const [id, description] of Object.entries(data.master_bugs)) {
-                    if (!description.trim()) continue;
-
-                    let isKnownCurrent = data.drivers[0]?.known_bug_ids?.includes(id);
-                    let badgeColor = isKnownCurrent ? 'bg-amber-950 text-amber-400 border-amber-800' : 'bg-emerald-950 text-emerald-400 border-emerald-800';
-                    let statusText = isKnownCurrent ? 'Open / Pending' : 'Resolved';
-
-                    let bugRow = document.createElement('div');
-                    bugRow.className = 'flex items-start justify-between gap-4 py-2 border-b border-slate-800/60 text-xs last:border-0';
-                    bugRow.innerHTML = `
-                        <div>
-                            <div class="flex items-center gap-2 mb-1">
-                                <span class="font-mono font-semibold text-slate-300">${id}</span>
-                                <span class="px-1.5 py-0.5 rounded text-[10px] border ${badgeColor}">${statusText}</span>
-                            </div>
-                            <p class="text-slate-400">${description}</p>
-                        </div>
-                    `;
-                    bugContainer.appendChild(bugRow);
-                }
-
-                // 3. Render Visual Fluid Line Chart (Positive = Fixed, Negative = Open/Known)
                 const chronologicalDrivers = [...data.drivers].reverse();
                 
                 const driverVersions = chronologicalDrivers.map(d => d.version);
                 const fixedCounts = chronologicalDrivers.map(d => (d.fixed_bug_ids || []).length);
-                // Map known counts as negative values so they trend downwards on the chart axis
                 const knownCounts = chronologicalDrivers.map(d => -Math.abs((d.known_bug_ids || []).length));
 
                 const ctx = document.getElementById('bugLifecycleChart').getContext('2d');
@@ -147,7 +110,7 @@
                             {
                                 label: 'Fixed Issues',
                                 data: fixedCounts,
-                                borderColor: '#10b981', // Green
+                                borderColor: '#10b981',
                                 backgroundColor: 'rgba(16, 185, 129, 0.1)',
                                 borderWidth: 2,
                                 pointBackgroundColor: '#10b981',
@@ -158,7 +121,7 @@
                             {
                                 label: 'Open / Known Issues',
                                 data: knownCounts,
-                                borderColor: '#f59e0b', // Amber
+                                borderColor: '#f59e0b',
                                 backgroundColor: 'rgba(245, 158, 11, 0.1)',
                                 borderWidth: 2,
                                 pointBackgroundColor: '#f59e0b',
@@ -182,7 +145,6 @@
                                     color: '#94a3b8', 
                                     font: { family: 'monospace', size: 12 }, 
                                     precision: 0,
-                                    // Custom callback to strip out the negative sign on Y-axis labels for readability
                                     callback: function(value) {
                                         return Math.abs(value);
                                     }
@@ -190,7 +152,7 @@
                                 grid: { 
                                     color: function(context) {
                                         if (context.tick.value === 0) {
-                                            return '#475569'; // Accent color for the 0 baseline split
+                                            return '#475569';
                                         }
                                         return '#1e293b';
                                     },
