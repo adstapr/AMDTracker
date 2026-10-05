@@ -97,7 +97,6 @@ def parse_amd_games_section(soup):
     items = []
     main_container = get_main_content(soup)
     
-    # Target exact headings indicating game support sections
     game_keywords = ["new game support", "game support", "support for"]
     target_tags = []
     
@@ -106,7 +105,6 @@ def parse_amd_games_section(soup):
         if any(kw in text for kw in game_keywords):
             target_tags.append(tag)
             
-    # Blacklist terms to ensure footer items never slip through as games
     nav_blacklist = {
         "linkedin", "instagram", "facebook", "developer", "developers", "server", 
         "embedded", "ryzen", "radeon", "about amd", "management team", "careers", 
@@ -120,11 +118,9 @@ def parse_amd_games_section(soup):
             curr = target_tag.parent.find_next_sibling()
             
         while curr:
-            # Stop if we hit another primary section header
             if curr.name in ["h1", "h2", "h3"]:
                 break
                 
-            # Search lists and paragraphs inside the game support block
             search_elements = []
             if curr.name in ["ul", "ol"]:
                 search_elements = curr.find_all("li", recursive=True)
@@ -140,7 +136,6 @@ def parse_amd_games_section(soup):
                 cleaned = clean_text(el_copy.get_text())
                 
                 if cleaned and len(cleaned) > 1:
-                    # Filter out corporate menu items/blacklisted names
                     if cleaned.lower() not in nav_blacklist and cleaned not in items:
                         items.append(cleaned)
                         
@@ -161,7 +156,7 @@ def fetch_amd_release_notes(url):
     known_texts = []
     feature_texts = []
     game_texts = []
-    driver_type = ""
+    driver_type = "optional"  # Default fallback
 
     try:
         response = requests.get(url, headers=headers, timeout=15)
@@ -175,7 +170,6 @@ def fetch_amd_release_notes(url):
             game_texts = parse_amd_games_section(soup)
             feature_texts = parse_amd_section(soup, ["Highlights", "New Features", "What's New"])
             
-            # Prevent games from bleeding into features
             feature_texts = [
                 f for f in feature_texts 
                 if not any(g.lower() in f.lower() for g in game_texts) 
@@ -183,8 +177,12 @@ def fetch_amd_release_notes(url):
                 and "game support" not in f.lower()
             ]
 
-            if "Recommended" in soup.get_text():
-                driver_type = "Recommended"
+            # Check for WHQL certification
+            page_text = soup.get_text()
+            if re.search(r"whql", page_text, re.IGNORECASE):
+                driver_type = "WHQL"
+            else:
+                driver_type = "Non-WHQL (beta)"
         else:
             print(f"Warning: Received HTTP status {response.status_code}. Proceeding with empty lists.")
     except Exception as e:
@@ -216,7 +214,7 @@ def update_json(scraped_data):
         except json.JSONDecodeError:
             data = {}
     else:
-      data = {}
+        data = {}
 
     data.setdefault("drivers", [])
     master_bugs = data.setdefault("master_bugs", {})
