@@ -1,6 +1,22 @@
 {
     "drivers": [
         {
+            "version": "25.11.1",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-11-1.html",
+            "fixed_bug_ids": [
+                "BUG-340",
+                "BUG-341"
+            ],
+            "known_bug_ids": [
+                "BUG-327",
+                "BUG-309",
+                "BUG-338",
+                "BUG-310",
+                "BUG-339",
+                "BUG-342"
+            ]
+        },
+        {
             "version": "25.10.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-10-2.html",
             "fixed_bug_ids": [
@@ -1391,6 +1407,9 @@
         "BUG-336": "Shadow corruption on left eye is seen while playing VTOL VR on Radeon™ RX 7000 series and Radeon™ RX 9000 series graphics products.",
         "BUG-337": "CVE-2023-4969 (RDNA only), CVE-2024-21969 (RDNA only), CVE-2024-36323, CVE-2024-36325, CVE-2024-36333, CVE-2025-61964, CVE-2025-61965, CVE-2025-61966, CVE-2025-61967, CVE-2025-61968",
         "BUG-338": "Intermittent application crash or driver timeout may be observed while playing Roblox Player (Car Zone Racing & Drifting) when task switching between media on Radeon™ RX 7000 series products.",
-        "BUG-339": "Radeon Anti-Lag 2 option may not be available while playing Counter-Strike 2 (DX11) with Radeon Anti-Lag 2 enabled on some AMD Graphics Products, such as the Radeon™ RX 9070 XT. Users experiencing this issue are recommended to use the Vulkan API as a temporary workaround."
+        "BUG-339": "Radeon Anti-Lag 2 option may not be available while playing Counter-Strike 2 (DX11) with Radeon Anti-Lag 2 enabled on some AMD Graphics Products, such as the Radeon™ RX 9070 XT. Users experiencing this issue are recommended to use the Vulkan API as a temporary workaround.",
+        "BUG-340": "Intermittent application crash may be observed while playing games with Easy Anti-Cheat enabled when using the Radeon™ Overlay.",
+        "BUG-341": "CPU metrics/tuning may not appear in the AMD Software: Adrenalin Edition™ Application after updating the graphics driver using the AMD Software Install Manager.",
+        "BUG-342": "Intermittent system crashes may be observed while using some high-bandwidth HDMI 2.1 displays during display standby. Users experiencing this issue are recommended to use a DisplayPort connection as a temporary workaround."
     }
 }
