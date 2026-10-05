@@ -1,6 +1,25 @@
 {
     "drivers": [
         {
+            "version": "23.12.1",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-12-1.html",
+            "fixed_bug_ids": [
+                "BUG-145",
+                "BUG-144",
+                "BUG-143",
+                "BUG-146",
+                "BUG-142",
+                "BUG-147"
+            ],
+            "known_bug_ids": [
+                "BUG-112",
+                "BUG-148",
+                "BUG-149",
+                "BUG-150",
+                "BUG-151"
+            ]
+        },
+        {
             "version": "23.11.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-11-1.html",
             "fixed_bug_ids": [
@@ -642,6 +661,13 @@
         "BUG-141": "Intermittent black screen or code 31 error in device manager after reboot on some AMD Graphics Products, such as the Radeon™ RX 6700 XT.",
         "BUG-142": "Intermittent corruption may be observed on the racetrack while playing EA Sports WRC.",
         "BUG-143": "Stars may intermittently fail to appear while playing Crysis Remastered.",
-        "BUG-144": "Intermittent micro-stuttering may be experienced when running Chromium-based browsers on systems that pair a Radeon™ RX 7000 series GPU with a secondary display connected to an AMD Ryzen™ 7000 series processor."
+        "BUG-144": "Intermittent micro-stuttering may be experienced when running Chromium-based browsers on systems that pair a Radeon™ RX 7000 series GPU with a secondary display connected to an AMD Ryzen™ 7000 series processor.",
+        "BUG-145": "Improvements to high idle power when using select dual monitor display setups with mixed resolutions and high refresh rate displays (such as 1440p @ 120/144Hz + 1080p @ 120/144Hz or 2160p @ 120/144Hz + 1080p @ 120/144Hz) on Radeon™ RX 7000 series GPUs.",
+        "BUG-146": "Certain textures may become invisible while playing Final Fantasy X HD Remaster on Radeon™ RX 7000 series GPUs.",
+        "BUG-147": "Intermittent stutter while playing Overwatch 2 on some AMD Graphics Products, such as the Radeon™ RX 6900 XT.",
+        "BUG-148": "Intermittent grey screen after driver upgrade with certain monitors (such as Nixeus NX-EDG274K) on Radeon™ RX 7000 series GPUs.",
+        "BUG-149": "Performance drop may be observed in some light DirectML workloads.",
+        "BUG-150": "Graphics API metric may show as N/A in certain UWP applications.",
+        "BUG-151": "Intermittent flickering of certain ground textures may be observed while playing War Thunder with 4x SAAA enabled on some AMD Graphics Products, such as the Radeon™ RX 7900 XTX."
     }
 }
