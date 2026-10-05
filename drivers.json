@@ -1,6 +1,23 @@
 {
     "drivers": [
         {
+            "version": "25.12.1",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-12-1.html",
+            "fixed_bug_ids": [
+                "BUG-339",
+                "BUG-342",
+                "BUG-343",
+                "BUG-344"
+            ],
+            "known_bug_ids": [
+                "BUG-327",
+                "BUG-309",
+                "BUG-338",
+                "BUG-310",
+                "BUG-345"
+            ]
+        },
+        {
             "version": "25.11.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-11-1.html",
             "fixed_bug_ids": [
@@ -1410,6 +1427,9 @@
         "BUG-339": "Radeon Anti-Lag 2 option may not be available while playing Counter-Strike 2 (DX11) with Radeon Anti-Lag 2 enabled on some AMD Graphics Products, such as the Radeon™ RX 9070 XT. Users experiencing this issue are recommended to use the Vulkan API as a temporary workaround.",
         "BUG-340": "Intermittent application crash may be observed while playing games with Easy Anti-Cheat enabled when using the Radeon™ Overlay.",
         "BUG-341": "CPU metrics/tuning may not appear in the AMD Software: Adrenalin Edition™ Application after updating the graphics driver using the AMD Software Install Manager.",
-        "BUG-342": "Intermittent system crashes may be observed while using some high-bandwidth HDMI 2.1 displays during display standby. Users experiencing this issue are recommended to use a DisplayPort connection as a temporary workaround."
+        "BUG-342": "Intermittent system crashes may be observed while using some high-bandwidth HDMI 2.1 displays during display standby. Users experiencing this issue are recommended to use a DisplayPort connection as a temporary workaround.",
+        "BUG-343": "Intermittent application freeze when using the in-game Radeon™ Overlay.",
+        "BUG-344": "Intermittent application crash when playing ARC Raiders on the Blue Gate map on Radeon™ RX 9000 series products.",
+        "BUG-345": "Some shadows may not render correctly while playing Call of Duty®: Black Ops 7 on some AMD Graphics Products. AMD is actively working on a resolution with the developer to be released as soon as possible."
     }
 }
