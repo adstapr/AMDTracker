@@ -1,6 +1,23 @@
 {
     "drivers": [
         {
+            "version": "26.7.1",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-7-1.html",
+            "fixed_bug_ids": [
+                "BUG-304",
+                "BUG-305",
+                "BUG-306",
+                "BUG-307",
+                "BUG-308"
+            ],
+            "known_bug_ids": [
+                "BUG-309",
+                "BUG-310",
+                "BUG-311",
+                "BUG-312"
+            ]
+        },
+        {
             "version": "25.6.3",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-6-3.html",
             "fixed_bug_ids": [
@@ -1250,6 +1267,15 @@
         "BUG-300": "Stutter and lower than expected performance may be observed while playing 4K resolution YouTube videos in Chrome. Users experiencing this issue are recommended to play videos in full screen as a temporary workaround.",
         "BUG-301": "Intermittent application crash may be observed while playing FBC: Firebreak on some AMD Ryzen AI 300 series and some AMD Ryzen 7000 series APU products.",
         "BUG-302": "AMD FidelityFX™ Super Resolution 4 (FSR 4) is not enabled while playing DragonKin: The Banished, Blades of Fire, RoadCraft, The Alters, Star Wars Outlaws and S.T.A.L.K.E.R. 2: Heart of Chornobyl on Radeon™ RX 9000 series graphics products.",
-        "BUG-303": "Intermittent system or application crash maybe observed while playing Black Myth: WuKong on Radeon™ RX 7650 GRE graphics products."
+        "BUG-303": "Intermittent system or application crash maybe observed while playing Black Myth: WuKong on Radeon™ RX 7650 GRE graphics products.",
+        "BUG-304": "Model flickering or rendering failure may be observed in Maxon Cinema 4D and Blender on Radeon™ RX 7000 series and above graphics products.",
+        "BUG-305": "Intermittent application crash may be observed on some models while running Blender on Radeon™ RX 7000 series and above graphics products.",
+        "BUG-306": "Directional indicator icon may fail to render while playing Fortnite on Radeon™ RX 7000 series and above graphics products.",
+        "BUG-307": "Intermittent application crash may be observed in some games with AMD FSR Upscaling 4.1 enabled on Windows® 10 systems for Radeon™ RX 7000 series graphics products.",
+        "BUG-308": "AMD FSR Upscaling and AMD FSR Frame Generation may show as inactive in AMD Software: Adrenalin Edition while playing Battlefield™ 6 when enabled on Radeon™ RX 9000 series graphics products.",
+        "BUG-309": "Intermittent application crash or driver timeout may be observed while playing Battlefield™ 6 on AMD Ryzen AI 9 HX 370. AMD is actively working on a resolution with the developer to be released as soon as possible.",
+        "BUG-310": "Texture flickering or corruption may appear while playing Battlefield™ 6 with AMD Record and Stream on some AMD graphics products.",
+        "BUG-311": "Failure to install may be observed while installing AI Bundle components in some regions with limited access to HuggingFace and GitHub.",
+        "BUG-312": "AMD Smart Access Memory may become disabled after driver installation on Windows® 10 systems."
     }
 }
