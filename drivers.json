@@ -1,6 +1,32 @@
 {
     "drivers": [
         {
+            "version": "24.4.1",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-4-1.html",
+            "fixed_bug_ids": [
+                "BUG-194",
+                "BUG-192",
+                "BUG-193",
+                "BUG-195",
+                "BUG-176",
+                "BUG-196",
+                "BUG-197",
+                "BUG-198",
+                "BUG-199"
+            ],
+            "known_bug_ids": [
+                "BUG-200",
+                "BUG-201",
+                "BUG-202",
+                "BUG-203",
+                "BUG-204",
+                "BUG-184",
+                "BUG-205",
+                "BUG-206",
+                "BUG-176"
+            ]
+        },
+        {
             "version": "24.3.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-3-1.html",
             "fixed_bug_ids": [
@@ -793,6 +819,19 @@
         "BUG-190": "GPU Acceleration may be missing/greyed out in Adobe Premiere Pro on some hybrid graphics systems.",
         "BUG-191": "Intermittent driver timeout or application crash may be experienced while playing HELLDIVERS™ 2 on dual monitor setups on some AMD Graphics Products, such as the Radeon™ RX 7900 XTX.",
         "BUG-192": "Intermittent application crash may be observed while playing Lords of the Fallen and entering certain areas on Radeon™ RX 6000 series GPUs.",
-        "BUG-193": "Artifacts may appear in certain mud environments while playing SnowRunner on some AMD Graphics Products, such as the Radeon™ RX 6800."
+        "BUG-193": "Artifacts may appear in certain mud environments while playing SnowRunner on some AMD Graphics Products, such as the Radeon™ RX 6800.",
+        "BUG-194": "Performance improvements for HELLDIVERS™ 2.",
+        "BUG-195": "Rainbow-like artifacts may appear in water environments while playing Horizon Forbidden West™ Complete Edition on Radeon™ RX 6000 series graphics products.",
+        "BUG-196": "Intermittent application freeze when first launching SteamVR using the Quest Link feature on Meta Quest 2.",
+        "BUG-197": "Intermittent system or application crash when screen sharing using Microsoft Teams.",
+        "BUG-198": "Intermittent application crash changing Anti-Aliasing settings while playing Enshrouded on Radeon™ 7000 series graphics products.",
+        "BUG-199": "Display colors may appear “dim” or “washed out” after closing Enshrouded with Auto HDR enabled.",
+        "BUG-200": "Black corruption may be observed while playing Alien Isolation on Radeon™ 7000 series graphics products.",
+        "BUG-201": "Corruption may be observed while playing Dying Light 2 Stay Human: Reloaded Edition or Alan Wake 2 with Radeon™ Boost enabled. Users experiencing this issue are recommended to disable Radeon™ Boost as a temporary workaround.",
+        "BUG-202": "Max Payne 1 and 2 may fail to launch on RDNA 3 series graphics products when Anti-Aliasing is enabled.",
+        "BUG-203": "Texture flicking may be observed while playing Hitman: Contracts.",
+        "BUG-204": "Intermittent stutter immediately after alt-tab with Performance Metrics Overlay enabled.",
+        "BUG-205": "Fallout 3 and Fallout: New Vegas may fail to launch.",
+        "BUG-206": "Intermittent application crash or driver timeout may be observed while playing World of Warcraft® or World of Warcraft® Classic on RDNA 3 series graphics products."
     }
 }
