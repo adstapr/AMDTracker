@@ -44,7 +44,7 @@
     "BUG-016": "OpenGL applications using MSAA may see visual corruption.",
     "BUG-017": "Certain monitors may experience higher-than-expected idle VRAM clock speeds on Radeon™ RX 6000 series GPUs.",
     "BUG-018": "Selected objects may be missing in Edificius™.",
-    "BUG-019": "Lower than expected DirectStorage GPU decompression performance on some Radeon™ RX Vega and RX 500/400 Series Graphics.".
+    "BUG-019": "Lower than expected DirectStorage GPU decompression performance on some Radeon™ RX Vega and RX 500/400 Series Graphics.",
     "BUG-020": "During video playback and window switching, an intermittent driver timeout or black screen may occur on Radeon™ RX 6000 series GPUs using some 240Hz refresh rate displays or high refresh rate primary display plus low refresh rate secondary display configurations.",
     "BUG-021": "Stuttering may occur during video playback using hardware acceleration with Firefox on some AMD Graphics Products such as the Radeon™ RX 6900 XT."
   }
