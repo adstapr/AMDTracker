@@ -1,6 +1,23 @@
 {
     "drivers": [
         {
+            "version": "24.9.1",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-9-1.html",
+            "fixed_bug_ids": [
+                "BUG-231",
+                "BUG-233",
+                "BUG-229",
+                "BUG-209",
+                "BUG-234",
+                "BUG-230",
+                "BUG-184"
+            ],
+            "known_bug_ids": [
+                "BUG-232",
+                "BUG-235"
+            ]
+        },
+        {
             "version": "24.8.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-8-1.html",
             "fixed_bug_ids": [
@@ -937,6 +954,9 @@
         "BUG-229": "Overly dark shadows or desaturated colors may be observed while playing Black Myth: Wukong when Global Illumination is to Medium or higher. Users experiencing this issue may set Global Illumination to Low as a temporary workaround.",
         "BUG-230": "AMD Software: Adrenalin Edition may unexpectedly initiate upon system wake from sleep mode.",
         "BUG-231": "Intermittent driver timeout or application crash while playing Warhammer 40,000: Space Marine 2. We recommend users experiencing this issue to install our new driver, available HERE.",
-        "BUG-232": "Intermittent performance when entering certain areas while playing DayZ"
+        "BUG-232": "Intermittent performance when entering certain areas while playing DayZ",
+        "BUG-233": "Intermittent driver timeout or application crash during certain cutscenes while playing FINAL FANTASY XVI on some AMD Graphics Products, such as the Radeon™ RX 6600 XT.",
+        "BUG-234": "AFMF may become inactive after enabling certain on-screen overlays.",
+        "BUG-235": "Intermittent driver timeout or crash may be observed while playing Warhammer 40,000: Space Marine 2 on some AMD Graphics Products, such as the AMD Ryzen™ AI 9 HX 370. Users experiencing this issue can enable Variable Graphics Memory in AMD Software: Adrenalin Edition as a temporary measure (AMD Software: Adrenalin Edition -> Performance -> Tuning -> Variable Graphics Memory)."
     }
 }
