@@ -1,6 +1,28 @@
 {
     "drivers": [
         {
+            "version": "23.3.1",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-3-1.html",
+            "fixed_bug_ids": [
+                "BUG-063",
+                "BUG-047",
+                "BUG-065",
+                "BUG-066",
+                "BUG-064",
+                "BUG-067"
+            ],
+            "known_bug_ids": [
+                "BUG-045",
+                "BUG-033",
+                "BUG-050",
+                "BUG-012",
+                "BUG-068",
+                "BUG-069",
+                "BUG-070",
+                "BUG-071"
+            ]
+        },
+        {
             "version": "23.2.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-2-2.html",
             "fixed_bug_ids": [
@@ -255,6 +277,13 @@
         "BUG-061": "Valve Index® VR headset may show a blank screen with 144Hz refresh rate setting on Radeon™ RX 7000 series GPUs.",
         "BUG-062": "Situational performance drop may be observed in DirectX® 11 based games on Radeon™ RX 6000 series GPUs using Ryzen™ processors.",
         "BUG-063": "Metrics overlay may intermittently re-size to 50% after gameplay.",
-        "BUG-064": "Corruption may be observed in Returnal™ in certain scenes with ray tracing enabled on Radeon™ RX 6000 series GPUs."
+        "BUG-064": "Corruption may be observed in Returnal™ in certain scenes with ray tracing enabled on Radeon™ RX 6000 series GPUs.",
+        "BUG-065": "Intermittent driver timeout may be observed in Halo Infinite™ in certain scenes with ray tracing enabled.",
+        "BUG-066": "Corruption may be observed in Dying Light™ 2 around certain light sources.",
+        "BUG-067": "Intermittent driver timeout, system freeze or BSOD may be observed using select displays on Radeon™ RX 7000 series GPUs.",
+        "BUG-068": "Connection failure or black screen may be observed using Parsec client with AMD decoder setting.",
+        "BUG-069": "Application crash may be observed while playing UNCHARTED™: Legacy of Thieves Collection on some AMD Graphics Products such as the Radeon™ RX 6700 XT.",
+        "BUG-070": "The Performance Metrics Overlay may intermittently resize across the display on some AMD Graphics Products such as the Radeon™ RX 6600M. As a temporary solution, users encountering this are recommended to disable the Performance Metrics Overlay.",
+        "BUG-071": "The Performance Metrics Overlay may have some missing units when enabled, or situationally become truncated after changing display scaling settings."
     }
 }
