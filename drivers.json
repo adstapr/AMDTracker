@@ -1,6 +1,22 @@
 {
     "drivers": [
         {
+            "version": "23.9.2",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-9-2.html",
+            "fixed_bug_ids": [
+                "BUG-120",
+                "BUG-122",
+                "BUG-118",
+                "BUG-121",
+                "BUG-123"
+            ],
+            "known_bug_ids": [
+                "BUG-103",
+                "BUG-112",
+                "BUG-124"
+            ]
+        },
+        {
             "version": "23.9.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-9-1.html",
             "fixed_bug_ids": [
@@ -534,6 +550,9 @@
         "BUG-118": "Display may not reach correct brightness with certain games on select SAMSUNG™ FreeSync Premium Pro monitors or TVs with local dimming setting enabled.",
         "BUG-119": "Error message may be observed when selecting Spatial sound format of “Dolby Atmos for home theatre”.",
         "BUG-120": "Application crash may be observed while playing Baldur's Gate 3 with Vulkan® API set on some AMD Graphics Products, such as the Radeon™ RX 7900 XTX.",
-        "BUG-121": "Application crash or driver timeout may be observed while playing SMITE™ on some AMD Graphics Products, such as the Radeon™ RX 7900 XT."
+        "BUG-121": "Application crash or driver timeout may be observed while playing SMITE™ on some AMD Graphics Products, such as the Radeon™ RX 7900 XT.",
+        "BUG-122": "GPU Clock may be artificially limited to 2700 MHz when performing manual tuning on Radeon™ RX 7700 XT and RX 7800 XT graphics.",
+        "BUG-123": "Intermittent application crash or driver timeout may be observed while playing F1® 23 on some AMD Graphics Products, such as the Radeon™ RX 7800 XT.",
+        "BUG-124": "The display may intermittently freeze after changing the encoding format while streaming select games using AMD Link. Users experiencing this issue are suggested to select the desired encode format before streaming as a temporary workaround."
     }
 }
