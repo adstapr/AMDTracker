@@ -1,6 +1,21 @@
 {
     "drivers": [
         {
+            "version": "24.10.1",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-10-1.html",
+            "fixed_bug_ids": [
+                "BUG-236",
+                "BUG-237"
+            ],
+            "known_bug_ids": [
+                "BUG-235",
+                "BUG-238",
+                "BUG-239",
+                "BUG-240",
+                "BUG-241"
+            ]
+        },
+        {
             "version": "24.9.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-9-1.html",
             "fixed_bug_ids": [
@@ -957,6 +972,12 @@
         "BUG-232": "Intermittent performance when entering certain areas while playing DayZ",
         "BUG-233": "Intermittent driver timeout or application crash during certain cutscenes while playing FINAL FANTASY XVI on some AMD Graphics Products, such as the Radeon™ RX 6600 XT.",
         "BUG-234": "AFMF may become inactive after enabling certain on-screen overlays.",
-        "BUG-235": "Intermittent driver timeout or crash may be observed while playing Warhammer 40,000: Space Marine 2 on some AMD Graphics Products, such as the AMD Ryzen™ AI 9 HX 370. Users experiencing this issue can enable Variable Graphics Memory in AMD Software: Adrenalin Edition as a temporary measure (AMD Software: Adrenalin Edition -> Performance -> Tuning -> Variable Graphics Memory)."
+        "BUG-235": "Intermittent driver timeout or crash may be observed while playing Warhammer 40,000: Space Marine 2 on some AMD Graphics Products, such as the AMD Ryzen™ AI 9 HX 370. Users experiencing this issue can enable Variable Graphics Memory in AMD Software: Adrenalin Edition as a temporary measure (AMD Software: Adrenalin Edition -> Performance -> Tuning -> Variable Graphics Memory).",
+        "BUG-236": "Intermittent performance impact when entering certain areas while playing DayZ.",
+        "BUG-237": "Intermittent system or application crash may be observed when changing in-game resolution settings while playing Doom Eternal with AMD Software: Adrenalin Edition™ Metrics Overlay enabled.",
+        "BUG-238": "System crash may be observed when first launching SteamVR while using Valve Index® at 144Hz on Radeon™ RX 6000 series graphics products.",
+        "BUG-239": "After using the AMD Cleanup Utility for Windows®, the AMD Bug Report Tool may appear intermittently during a new driver install on AMD Ryzen™ 7000 and above series processors paired with AMD Graphics Products.",
+        "BUG-240": "Intermittent application freeze may be observed while loading a save file in Monster Hunter: World.",
+        "BUG-241": "Lower than expected performance may be observed while using llama.cpp. This may also impact Ollama and LM Studio."
     }
 }
