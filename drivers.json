@@ -1,6 +1,30 @@
 {
     "drivers": [
         {
+            "version": "25.3.2",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-3-2.html",
+            "fixed_bug_ids": [
+                "BUG-257",
+                "BUG-260",
+                "BUG-256",
+                "BUG-259",
+                "BUG-262",
+                "BUG-263",
+                "BUG-264"
+            ],
+            "known_bug_ids": [
+                "BUG-265",
+                "BUG-266",
+                "BUG-254",
+                "BUG-255",
+                "BUG-239",
+                "BUG-261",
+                "BUG-267",
+                "BUG-268",
+                "BUG-269"
+            ]
+        },
+        {
             "version": "25.3.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-3-1.html",
             "fixed_bug_ids": [
@@ -1071,6 +1095,14 @@
         "BUG-258": "AMD Software: Adrenalin Edition™ may not accurately report AMD FSR 4 enablement for Marvel's Spider-Man 2.",
         "BUG-259": "Lower than expected performance may be observed while playing Assetto Corsa Competizione on Radeon™ RX 9000 series graphics products.",
         "BUG-260": "Intermittent application crash may be observed in Indiana Jones and the Great Circle when settings are set to \"Very Ultra\" quality and Path Tracing is enabled. Users experiencing this issue are recommended to use the default Ray Tracing settings as a temporary workaround.",
-        "BUG-261": "After completing a driver upgrade on certain laptops, users may experience intermittent failures for the integrated camera to start. Users experiencing this issue are recommended to use the AMD Cleanup Utility for Windows® and use our previous recommended driver, available here."
+        "BUG-261": "After completing a driver upgrade on certain laptops, users may experience intermittent failures for the integrated camera to start. Users experiencing this issue are recommended to use the AMD Cleanup Utility for Windows® and use our previous recommended driver, available here.",
+        "BUG-262": "Intermittent system or application crash may be observed while pressing Alt-Tab during gameplay on some AMD Radeon™ Graphics Products such as the Radeon™ RX 6000 Series.",
+        "BUG-263": "Intermittent system or application crash may be observed while using multiple high refresh rate (+120Hz) monitors with HDMI connections.",
+        "BUG-264": "Windows Update may overwrite the installed AMD Software: Adrenalin Edition with an older version of the graphics driver on Radeon™ RX 9000 series graphics products.",
+        "BUG-265": "System crash may be observed due to a memory leak when using SteamVR on some AMD Radeon™ Graphics Products, such as the Radeon™ RX 9000 series. Users experiencing this issue are recommended to turn off Motion Smoothing in SteamVR settings.",
+        "BUG-266": "Performance logging notifications from AMD Software: Adrenalin Edition™ may appear while using the Right Alt + L hotkey if the Microsoft® Windows® display language is not English.",
+        "BUG-267": "Stutter may be observed while playing games with some VR headsets at 80Hz or 90Hz refresh rate on some AMD Radeon™ Graphics Products such as the Radeon™ RX 7000 series. Users experiencing this issue are recommended to change the refresh rate as a temporary workaround.",
+        "BUG-268": "Installation progress may persistently display 0% while installing chipset drivers using AMD Install Manager.",
+        "BUG-269": "Installation progress may persistently display 0% while installing AMD Chat within the AMD Software: Adrenalin Edition user interface after upgrading to AMD Radeon RX 9000 Series graphics products."
     }
 }
