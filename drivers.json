@@ -1,6 +1,27 @@
 {
     "drivers": [
         {
+            "version": "22.11.1",
+            "type": "Optional",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-22-11-1.html",
+            "fixed_bug_ids": [
+                "BUG-015",
+                "BUG-016",
+                "BUG-017",
+                "BUG-018",
+                "BUG-019",
+                "BUG-020"
+            ],
+            "known_bug_ids": [
+                "BUG-021",
+                "BUG-008",
+                "BUG-022",
+                "BUG-012"
+            ],
+            "feature_ids": [],
+            "game_ids": []
+        },
+        {
             "version": "22.10.3",
             "type": "Optional",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-22-10-3.html",
@@ -58,7 +79,14 @@
         "BUG-012": "Brief display corruption may occur when switching between video and game windows on some AMD Graphics Products such as the Radeon™ RX 6700 XT.",
         "BUG-013": "Black screen may occur during driver upgrade or settings reset using Microsoft® Windows® 11 version 22H2 on Radeon™ RX 6000 series GPUs.",
         "BUG-014": "Lower than expected performance on Gotham Knights™ using AMD Processors on some AMD Graphics Products such as Radeon™ RX 6950 XT.",
-        "BUG-015": "World Of Warships prediction lines may be missing on Radeon™ RX 6000 series GPUs."
+        "BUG-015": "World Of Warships prediction lines may be missing on Radeon™ RX 6000 series GPUs.",
+        "BUG-016": "When Radeon™ Anti-Lag is enabled, a beep can be heard when pressing the shift + back key.",
+        "BUG-017": "OpenGL applications using MSAA may see visual corruption.",
+        "BUG-018": "Certain monitors may experience higher-than-expected idle VRAM clock speeds on Radeon™ RX 6000 series GPUs.",
+        "BUG-019": "Selected objects may be missing in Edificius™.",
+        "BUG-020": "Lower than expected DirectStorage GPU decompression performance on some Radeon™ RX Vega and RX 500/400 Series Graphics.",
+        "BUG-021": "During video playback and window switching, an intermittent driver timeout or black screen may occur on Radeon™ RX 6000 series GPUs using some 240Hz refresh rate displays or high refresh rate primary display plus low refresh rate secondary display configurations.",
+        "BUG-022": "Stuttering may occur during video playback using hardware acceleration with Firefox on some AMD Graphics Products such as the Radeon™ RX 6900 XT."
     },
     "master_features": {},
     "master_games": {}
