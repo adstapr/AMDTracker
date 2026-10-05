@@ -37,13 +37,11 @@ def parse_amd_section(soup, keywords):
     items = []
     target_tag = None
     
-    # Find the heading or tag matching any of the keywords (ignoring trailing punctuation/colons)
     for tag in soup.find_all(["h1", "h2", "h3", "h4", "h5", "h6", "strong", "b", "p", "span", "div"]):
         text = tag.get_text(strip=True).rstrip(':').strip()
         if not text:
             continue
         if any(kw.lower() == text.lower() or (len(kw) > 3 and kw.lower() in text.lower()) for kw in keywords):
-            # Ensure it's a heading or lead-in element, not a massive container
             if tag.name in ["h1", "h2", "h3", "h4", "h5", "h6", "strong", "b"] or len(text) < 50:
                 target_tag = tag
                 break
@@ -51,9 +49,7 @@ def parse_amd_section(soup, keywords):
     if not target_tag:
         return items
 
-    # Iterate through siblings strictly after target_tag until the next heading/major section
     curr = target_tag.find_next_sibling()
-    # If target_tag is an inline tag like strong/b inside a paragraph, check parent's sibling too
     if not curr and target_tag.parent and target_tag.parent.name in ["p", "div", "li"]:
         curr = target_tag.parent.find_next_sibling()
 
@@ -92,6 +88,45 @@ def parse_amd_section(soup, keywords):
         
     return items
 
+def parse_amd_games_section(soup):
+    items = []
+    keywords = ["support for", "new game support", "game support", "optimized for"]
+    
+    for tag in soup.find_all(["h1", "h2", "h3", "h4", "h5", "h6", "strong", "b", "p", "div"]):
+        text = tag.get_text(strip=True)
+        if any(kw in text.lower() for kw in keywords):
+            curr = tag.find_next_sibling()
+            if not curr and tag.parent:
+                curr = tag.parent.find_next_sibling()
+                
+            while curr:
+                if curr.name in ["h1", "h2", "h3", "h4", "h5", "h6"]:
+                    break
+                if curr.name in ["ul", "ol"]:
+                    for li in curr.find_all("li", recursive=True):
+                        li_copy = BeautifulSoup(str(li), "html.parser")
+                        for nested in li_copy.find_all(["ul", "ol"]):
+                            nested.decompose()
+                        cleaned = clean_text(li_copy.get_text())
+                        if cleaned and len(cleaned) > 2 and cleaned not in items:
+                            items.append(cleaned)
+                elif curr.name == "p":
+                    cleaned = clean_text(curr.get_text())
+                    if cleaned and cleaned.lower().rstrip(':') not in ["support for", "new game support", "game support", "optimized for"]:
+                        if cleaned and len(cleaned) > 2 and cleaned not in items:
+                            items.append(cleaned)
+                elif hasattr(curr, "find_all"):
+                    for ul in curr.find_all(["ul", "ol"]):
+                        for li in ul.find_all("li", recursive=True):
+                            li_copy = BeautifulSoup(str(li), "html.parser")
+                            for nested in li_copy.find_all(["ul", "ol"]):
+                                nested.decompose()
+                            cleaned = clean_text(li_copy.get_text())
+                            if cleaned and len(cleaned) > 2 and cleaned not in items:
+                                items.append(cleaned)
+                curr = curr.find_next_sibling()
+    return items
+
 def fetch_amd_release_notes(url):
     print(f"Fetching release notes from: {url}")
     headers = {
@@ -116,7 +151,7 @@ def fetch_amd_release_notes(url):
             
             fixed_texts = parse_amd_section(soup, ["Fixed Issues"])
             known_texts = parse_amd_section(soup, ["Known Issues"])
-            game_texts = parse_amd_section(soup, ["Support for", "New Game Support", "Game Support", "Optimized for"])
+            game_texts = parse_amd_games_section(soup)
             feature_texts = parse_amd_section(soup, ["Highlights", "New Features", "What's New"])
             
             # Strict separation to prevent games from leaking into features
