@@ -21,6 +21,17 @@ def clean_text(text):
         .strip()
     )
 
+def normalize_for_comparison(text):
+    """Strips hardware qualifiers, trademarks, and punctuation to detect duplicate core bugs."""
+    t = clean_text(text).lower()
+    # Remove common trademark symbols
+    t = t.replace("™", "").replace("®", "").replace("©", "")
+    # Remove specific hardware suffixes/qualifiers commonly appended by AMD
+    t = re.sub(r'\b(on\s+)?(radeon\s*™?\.?\s*)?(rx\s*\d+\s*(series|and\s+above)?|graphics\s*products?|products?)\b', '', t)
+    # Remove punctuation and normalize whitespace
+    t = re.sub(r'[^\w\s]', '', t)
+    return re.sub(r'\s+', ' ', t).strip()
+
 def get_next_id(master_dict, prefix):
     if not master_dict:
         return f"{prefix}-001"
@@ -206,23 +217,20 @@ def update_json(scraped_data):
     master_bugs = data.setdefault("master_bugs", {})
     master_games = data.setdefault("master_games", {})
     
-    # Remove deprecated feature keys if they existed in older JSON schemas
     if "master_features" in data:
         del data["master_features"]
 
     def find_matching_bug_id(text, master_dict):
-        clean_incoming = clean_text(text).lower()
-        
-        # 1. Exact clean text match
+        incoming_norm = normalize_for_comparison(text)
+        if not incoming_norm:
+            return None
+            
         for k, v in master_dict.items():
-            if clean_text(v).lower() == clean_incoming:
+            existing_norm = normalize_for_comparison(v)
+            if existing_norm == incoming_norm:
                 return k
-                
-        # 2. Substring/Variant match handling (e.g., catching duplicate entries with hardware specs like "on RX 6000 or newer")
-        for k, v in master_dict.items():
-            clean_existing = clean_text(v).lower()
-            if clean_incoming in clean_existing or clean_existing in clean_incoming:
-                # Keep the longer, more descriptive string or match directly
+            # Fallback intersection check for heavily overlapping sentences
+            if incoming_norm in existing_norm or existing_norm in incoming_norm:
                 return k
                 
         return None
