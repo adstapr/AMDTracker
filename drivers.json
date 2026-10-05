@@ -1,6 +1,28 @@
 {
     "drivers": [
         {
+            "version": "23.1.2",
+            "type": "WHQL",
+            "url": "https://web.archive.org/web/20230124192614/https://www.amd.com/en/support/kb/release-notes/rn-rad-win-23-1-2-kb",
+            "fixed_bug_ids": [
+                "BUG-043",
+                "BUG-044",
+                "BUG-045"
+            ],
+            "known_bug_ids": [
+                "BUG-046",
+                "BUG-047",
+                "BUG-035",
+                "BUG-048",
+                "BUG-049",
+                "BUG-050",
+                "BUG-051",
+                "BUG-052",
+                "BUG-053"
+            ],
+            "game_ids": []
+        },
+        {
             "version": "23.1.1",
             "type": "WHQL",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-1-1-RX7900.html",
@@ -177,7 +199,18 @@
         "BUG-039": "Some virtual reality games or apps may experience lower than expected performance.",
         "BUG-040": "Intermittent driver timeout may occur when applying Auto Overclock performance tuning.",
         "BUG-041": "While playing The Witcher® 3: Wild Hunt, an intermittent app crash or driver timeout may occur when Ray Tracing settings are enabled.",
-        "BUG-042": "Minor performance degradation may be observed after applying a factory reset of settings."
+        "BUG-042": "Minor performance degradation may be observed after applying a factory reset of settings.",
+        "BUG-043": "AMD Software: Adrenalin Edition may fail to launch with the error message “Delayed Write Failed” on Microsoft® Windows® 11 version 22H2.",
+        "BUG-044": "Poor performance and load time may be observed while playing SpaceEngine™.",
+        "BUG-045": "Missing or flickering textures may be observed while playing Emergency 4™.",
+        "BUG-046": "High idle power has situationally been observed when using select high-resolution and high refresh rate displays.",
+        "BUG-047": "Video stuttering or performance drop may be observed during gameplay plus video playback with some extended display configuration.",
+        "BUG-048": "Stuttering may be observed in Forspoken™ when dynamic resolution is set to enabled.",
+        "BUG-049": "Application crash may be observed while opening Premium Gold Packs in EA SPORTS™ FIFA 23.",
+        "BUG-050": "Stuttering may be observed while playing Sea of Thieves™.",
+        "BUG-051": "Corruption may be observed while playing Battlefield™ 4 with Post Process Quality settings set to high or ultra",
+        "BUG-052": "Some virtual reality games or apps may experience lower-than-expected performance.",
+        "BUG-053": "Maximum encode bitrate is limited to 100Mbps for certain applications."
     },
     "master_games": {}
 }
