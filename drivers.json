@@ -1,6 +1,23 @@
 {
     "drivers": [
         {
+            "version": "26.7.1",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-7-1.html",
+            "fixed_bug_ids": [
+                "BUG-304",
+                "BUG-305",
+                "BUG-306",
+                "BUG-307",
+                "BUG-308"
+            ],
+            "known_bug_ids": [
+                "BUG-309",
+                "BUG-310",
+                "BUG-311",
+                "BUG-312"
+            ]
+        },
+        {
             "version": "26.6.4",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-6-4.html",
             "fixed_bug_ids": [
@@ -267,23 +284,6 @@
                 "BUG-322",
                 "BUG-267",
                 "BUG-323"
-            ]
-        },
-        {
-            "version": "26.7.1",
-            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-7-1.html",
-            "fixed_bug_ids": [
-                "BUG-304",
-                "BUG-305",
-                "BUG-306",
-                "BUG-307",
-                "BUG-308"
-            ],
-            "known_bug_ids": [
-                "BUG-309",
-                "BUG-310",
-                "BUG-311",
-                "BUG-312"
             ]
         },
         {
