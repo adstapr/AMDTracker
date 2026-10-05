@@ -1,6 +1,21 @@
 {
     "drivers": [
         {
+            "version": "23.4.3",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-4-3.html",
+            "fixed_bug_ids": [
+                "BUG-087",
+                "BUG-088"
+            ],
+            "known_bug_ids": [
+                "BUG-045",
+                "BUG-085",
+                "BUG-086",
+                "BUG-012",
+                "BUG-089"
+            ]
+        },
+        {
             "version": "23.4.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-4-2.html",
             "fixed_bug_ids": [
@@ -354,6 +369,9 @@
         "BUG-083": "Application crashes may be intermittently observed after enabling the render preview window in Unreal Engine 5™.",
         "BUG-084": "A blank or black screen may occur after a driver upgrade using certain display configurations.",
         "BUG-085": "Video stuttering or performance drops may be observed during gameplay and video playback with some extended display configurations on Radeon™ RX 7000 series GPUs.",
-        "BUG-086": "Some virtual reality games or applications may experience lower-than-expected performance on Radeon™ RX 7000 series GPUs."
+        "BUG-086": "Some virtual reality games or applications may experience lower-than-expected performance on Radeon™ RX 7000 series GPUs.",
+        "BUG-087": "Red corruption may occur in World War Z™: Aftermath when using the Vulkan® API.",
+        "BUG-088": "Longer than expected shader compilation time when first launching THE LAST OF US™ Part I.",
+        "BUG-089": "Application crash may be intermittently observed while playing RuneScape™ on some AMD Graphics Products, such as the Radeon™ RX 5700 XT."
     }
 }
