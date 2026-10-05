@@ -35,6 +35,27 @@
             </div>
         </div>
 
+        <!-- SECTION: Timeline Slider Controller -->
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm space-y-4">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h2 class="text-sm font-semibold uppercase tracking-wider text-slate-300">Timeline & Architecture Filter</h2>
+                    <p id="timeline-status" class="text-xs text-indigo-400 mt-0.5">Showing all driver history</p>
+                </div>
+                <button id="reset-timeline" class="text-xs text-slate-400 hover:text-white bg-slate-950 px-3 py-1.5 rounded border border-slate-800 transition">Reset Filter</button>
+            </div>
+            
+            <div class="relative pt-2 pb-6">
+                <input type="range" id="timelineSlider" min="0" max="100" value="100" step="1" 
+                    class="w-full h-2 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-indigo-500 border border-slate-800">
+                
+                <!-- Magnet Datalist / Markers -->
+                <div id="timeline-markers" class="flex justify-between text-[10px] text-slate-500 font-mono mt-2 px-1">
+                    <!-- Populated dynamically via JS -->
+                </div>
+            </div>
+        </div>
+
         <!-- SECTION 3: Visual Bug Lifecycle Graph -->
         <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm space-y-4">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -67,94 +88,155 @@
                 return response.json();
             })
             .then(data => {
-                const driverContainer = document.getElementById('driver-tracker');
-                driverContainer.innerHTML = '';
-
-                // Calculate and populate stats boxes
-                const totalDrivers = data.drivers.length;
-                const totalIssues = data.master_bugs ? Object.keys(data.master_bugs).length : 0;
+                const chronologicalDrivers = [...data.drivers].reverse();
                 
-                const allFixedIds = new Set();
-                const allKnownIds = new Set();
-                data.drivers.forEach(d => {
-                    (d.fixed_bug_ids || []).forEach(id => allFixedIds.add(id));
-                    (d.known_bug_ids || []).forEach(id => allKnownIds.add(id));
+                // Define Architecture/Year Magnet Milestones (mapped loosely by date strings or version indexes)
+                const milestones = [
+                    { label: 'Start', index: 0, type: 'start' },
+                    { label: '2022', keyword: '22.', type: 'year' },
+                    { label: 'RDNA 3 Launch', keyword: '22.11.', type: 'launch' },
+                    { label: '2023', keyword: '23.', type: 'year' },
+                    { label: '2024', keyword: '24.', type: 'year' },
+                    { label: 'RDNA 4 Launch', keyword: '25.', type: 'launch' }, // or matching future architecture triggers
+                    { label: 'Latest', index: chronologicalDrivers.length - 1, type: 'end' }
+                ];
+
+                // Resolve milestone exact array indexes
+                milestones.forEach(m => {
+                    if (m.index !== undefined) return;
+                    let foundIdx = chronologicalDrivers.findIndex(d => d.version.includes(m.keyword) || (d.date && d.date.includes(m.keyword)));
+                    m.index = foundIdx !== -1 ? foundIdx : 0;
                 });
-                
-                const fixRate = totalIssues > 0 ? Math.round((allFixedIds.size / totalIssues) * 100) : 0;
 
-                let activeOpenCount = 0;
-                if (data.drivers.length > 0) {
-                    const activeKnown = new Set();
-                    [...data.drivers].reverse().forEach(d => {
-                        (d.fixed_bug_ids || []).forEach(id => activeKnown.delete(id));
-                        (d.known_bug_ids || []).forEach(id => activeKnown.add(id));
+                // Setup Slider Range attributes
+                const slider = document.getElementById('timelineSlider');
+                slider.min = 0;
+                slider.max = chronologicalDrivers.length - 1;
+                slider.value = chronologicalDrivers.length - 1;
+
+                // Render Timeline Ticks / Markers HTML
+                const markersContainer = document.getElementById('timeline-markers');
+                markersContainer.innerHTML = '';
+                milestones.forEach(m => {
+                    let span = document.createElement('span');
+                    span.className = 'cursor-pointer hover:text-indigo-400 transition';
+                    span.textContent = m.label;
+                    span.onclick = () => {
+                        slider.value = m.index;
+                        updateView();
+                    };
+                    markersContainer.appendChild(span);
+                });
+
+                let bugChart = null;
+
+                function updateView() {
+                    const maxIndex = parseInt(slider.value);
+                    const filteredDriversChronological = chronologicalDrivers.slice(0, maxIndex + 1);
+                    const filteredDriversDisplay = [...filteredDriversChronological].reverse(); // Most recent first for cards
+
+                    // Update Status text
+                    const currentDriver = chronologicalDrivers[maxIndex];
+                    document.getElementById('timeline-status').textContent = `Filtered up to version ${currentDriver.version} (${currentDriver.date || 'Unknown date'})`;
+
+                    // Recalculate Stats based on filtered view
+                    const totalDrivers = filteredDriversChronological.length;
+                    const totalIssues = data.master_bugs ? Object.keys(data.master_bugs).length : 0;
+                    
+                    const allFixedIds = new Set();
+                    const allKnownIds = new Set();
+                    filteredDriversChronological.forEach(d => {
+                        (d.fixed_bug_ids || []).forEach(id => allFixedIds.add(id));
+                        (d.known_bug_ids || []).forEach(id => allKnownIds.add(id));
                     });
-                    activeOpenCount = activeKnown.size;
+                    
+                    const fixRate = totalIssues > 0 ? Math.round((allFixedIds.size / totalIssues) * 100) : 0;
+
+                    let activeOpenCount = 0;
+                    if (filteredDriversChronological.length > 0) {
+                        const activeKnown = new Set();
+                        filteredDriversChronological.forEach(d => {
+                            (d.fixed_bug_ids || []).forEach(id => activeKnown.delete(id));
+                            (d.known_bug_ids || []).forEach(id => activeKnown.add(id));
+                        });
+                        activeOpenCount = activeKnown.size;
+                    }
+
+                    document.getElementById('stat-total-drivers').textContent = totalDrivers;
+                    document.getElementById('stat-total-issues').textContent = totalIssues;
+                    document.getElementById('stat-fix-rate').textContent = `${fixRate}%`;
+                    document.getElementById('stat-open-issues').textContent = activeOpenCount;
+
+                    // Render Driver Cards
+                    const driverContainer = document.getElementById('driver-tracker');
+                    driverContainer.innerHTML = '';
+                    filteredDriversDisplay.forEach((d) => {
+                        let card = document.createElement('div');
+                        card.className = 'bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm space-y-4';
+                        
+                        let fixedHtml = (d.fixed_bug_ids || []).filter(id => data.master_bugs[id]?.trim()).map(id => `
+                            <li class="text-emerald-400 text-xs mb-1 flex items-center gap-2">
+                                <span class="bg-emerald-950 px-1.5 py-0.5 rounded border border-emerald-800/50 font-mono text-[10px]">${id}</span>
+                                <span>${data.master_bugs[id]}</span>
+                            </li>
+                        `).join('');
+
+                        let knownHtml = (d.known_bug_ids || []).filter(id => data.master_bugs[id]?.trim()).map(id => `
+                            <li class="text-amber-400 text-xs mb-1 flex items-center gap-2">
+                                <span class="bg-amber-950 px-1.5 py-0.5 rounded border border-amber-800/50 font-mono text-[10px]">${id}</span>
+                                <span>${data.master_bugs[id]}</span>
+                            </li>
+                        `).join('');
+
+                        card.innerHTML = `
+                            <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                                <div>
+                                    <span class="text-xl font-bold text-white">${d.version}</span>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-slate-400 text-xs block">${d.date || ''}</span>
+                                    <a href="${d.url}" target="_blank" class="text-indigo-400 hover:underline text-xs">Release Notes</a>
+                                </div>
+                            </div>
+                            
+                            <div class="grid sm:grid-cols-2 gap-3">
+                                <div class="bg-slate-950/50 p-3 rounded border border-slate-800/50">
+                                    <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-500 block mb-2">Fixed in this version</span>
+                                    <ul class="list-none pl-0">${fixedHtml || '<span class="text-slate-600 text-xs">None</span>'}</ul>
+                                </div>
+                                <div class="bg-slate-950/50 p-3 rounded border border-slate-800/50">
+                                    <span class="text-[10px] font-bold uppercase tracking-wider text-amber-500 block mb-2">Known / Open Issues</span>
+                                    <ul class="list-none pl-0">${knownHtml || '<span class="text-slate-600 text-xs">None</span>'}</ul>
+                                </div>
+                            </div>
+                        `;
+                        driverContainer.appendChild(card);
+                    });
+
+                    // Update Chart Data
+                    const driverVersions = filteredDriversChronological.map(d => d.version);
+                    const fixedCounts = filteredDriversChronological.map(d => (d.fixed_bug_ids || []).length);
+                    const excludeDuplicates = document.getElementById('excludeDuplicatesToggle').checked;
+                    
+                    const knownCounts = getKnownCountsForSlice(filteredDriversChronological, excludeDuplicates);
+
+                    if (bugChart) {
+                        bugChart.data.labels = driverVersions;
+                        bugChart.data.datasets[0].data = fixedCounts;
+                        bugChart.data.datasets[1].data = knownCounts;
+                        bugChart.update();
+                    } else {
+                        renderChart(driverVersions, fixedCounts, knownCounts);
+                    }
                 }
 
-                document.getElementById('stat-total-drivers').textContent = totalDrivers;
-                document.getElementById('stat-total-issues').textContent = totalIssues;
-                document.getElementById('stat-fix-rate').textContent = `${fixRate}%`;
-                document.getElementById('stat-open-issues').textContent = activeOpenCount;
-
-                // Render Driver Cards
-                data.drivers.forEach((d) => {
-                    let card = document.createElement('div');
-                    card.className = 'bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm space-y-4';
-                    
-                    let fixedHtml = (d.fixed_bug_ids || []).filter(id => data.master_bugs[id]?.trim()).map(id => `
-                        <li class="text-emerald-400 text-xs mb-1 flex items-center gap-2">
-                            <span class="bg-emerald-950 px-1.5 py-0.5 rounded border border-emerald-800/50 font-mono text-[10px]">${id}</span>
-                            <span>${data.master_bugs[id]}</span>
-                        </li>
-                    `).join('');
-
-                    let knownHtml = (d.known_bug_ids || []).filter(id => data.master_bugs[id]?.trim()).map(id => `
-                        <li class="text-amber-400 text-xs mb-1 flex items-center gap-2">
-                            <span class="bg-amber-950 px-1.5 py-0.5 rounded border border-amber-800/50 font-mono text-[10px]">${id}</span>
-                            <span>${data.master_bugs[id]}</span>
-                        </li>
-                    `).join('');
-
-                    card.innerHTML = `
-                        <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-                            <div>
-                                <span class="text-xl font-bold text-white">${d.version}</span>
-                            </div>
-                            <div class="text-right">
-                                <span class="text-slate-400 text-xs block">${d.date || ''}</span>
-                                <a href="${d.url}" target="_blank" class="text-indigo-400 hover:underline text-xs">Release Notes</a>
-                            </div>
-                        </div>
-                        
-                        <div class="grid sm:grid-cols-2 gap-3">
-                            <div class="bg-slate-950/50 p-3 rounded border border-slate-800/50">
-                                <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-500 block mb-2">Fixed in this version</span>
-                                <ul class="list-none pl-0">${fixedHtml || '<span class="text-slate-600 text-xs">None</span>'}</ul>
-                            </div>
-                            <div class="bg-slate-950/50 p-3 rounded border border-slate-800/50">
-                                <span class="text-[10px] font-bold uppercase tracking-wider text-amber-500 block mb-2">Known / Open Issues</span>
-                                <ul class="list-none pl-0">${knownHtml || '<span class="text-slate-600 text-xs">None</span>'}</ul>
-                            </div>
-                        </div>
-                    `;
-                    driverContainer.appendChild(card);
-                });
-
-                // Chart Setup & Rendering Function
-                let bugChart = null;
-                const chronologicalDrivers = [...data.drivers].reverse();
-                const driverVersions = chronologicalDrivers.map(d => d.version);
-                const fixedCounts = chronologicalDrivers.map(d => (d.fixed_bug_ids || []).length);
-
-                function getKnownCounts(excludeDuplicates) {
+                function getKnownCountsForSlice(sliceDrivers, excludeDuplicates) {
                     if (!excludeDuplicates) {
-                        return chronologicalDrivers.map(d => -Math.abs((d.known_bug_ids || []).length));
+                        return sliceDrivers.map(d => -Math.abs((d.known_bug_ids || []).length));
                     }
 
                     let activeKnown = new Set();
-                    return chronologicalDrivers.map(d => {
+                    return sliceDrivers.map(d => {
                         (d.fixed_bug_ids || []).forEach(id => activeKnown.delete(id));
                         
                         let uniqueCount = 0;
@@ -168,16 +250,7 @@
                     });
                 }
 
-                function renderChart() {
-                    const excludeDuplicates = document.getElementById('excludeDuplicatesToggle').checked;
-                    const knownCounts = getKnownCounts(excludeDuplicates);
-
-                    if (bugChart) {
-                        bugChart.data.datasets[1].data = knownCounts;
-                        bugChart.update();
-                        return;
-                    }
-
+                function renderChart(driverVersions, fixedCounts, knownCounts) {
                     const ctx = document.getElementById('bugLifecycleChart').getContext('2d');
                     bugChart = new Chart(ctx, {
                         type: 'line',
@@ -213,7 +286,7 @@
                             maintainAspectRatio: false,
                             scales: {
                                 x: {
-                                    ticks: { display: false }, // Completely hides the cluttered bottom text labels while keeping hover tooltips active
+                                    ticks: { display: false },
                                     grid: { color: '#1e293b' }
                                 },
                                 y: {
@@ -262,11 +335,16 @@
                     });
                 }
 
-                // Initial render
-                renderChart();
+                // Event Listeners
+                slider.addEventListener('input', updateView);
+                document.getElementById('excludeDuplicatesToggle').addEventListener('change', updateView);
+                document.getElementById('reset-timeline').addEventListener('click', () => {
+                    slider.value = chronologicalDrivers.length - 1;
+                    updateView();
+                });
 
-                // Listen for toggle changes
-                document.getElementById('excludeDuplicatesToggle').addEventListener('change', renderChart);
+                // Initial Load
+                updateView();
             })
             .catch(error => console.error('Error loading driver tracker data:', error));
     </script>
