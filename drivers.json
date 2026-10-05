@@ -761,8 +761,8 @@
             ]
         },
         {
-            "version": "25.12.1",
-            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-12-1.html",
+            "version": "23.12.1",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-12-1.html",
             "fixed_bug_ids": [
                 "BUG-145",
                 "BUG-144",
