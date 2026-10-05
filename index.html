@@ -97,6 +97,20 @@
                 <canvas id="bugLifecycleChart"></canvas>
             </div>
         </div>
+
+        <!-- New Panel for Unfixed / Active Open Issues -->
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                <div>
+                    <h2 class="text-xl font-semibold text-slate-200">Active Unfixed Issues</h2>
+                    <p class="text-slate-400 text-sm">Currently unresolved issues remaining up to the latest selected driver version</p>
+                </div>
+                <span id="unfixed-count-badge" class="bg-amber-950 text-amber-400 border border-amber-800/50 text-xs font-mono px-2.5 py-1 rounded-full">0 issues</span>
+            </div>
+            <div id="unfixed-issues-list" class="space-y-2 max-h-[400px] overflow-y-auto pr-2">
+                <!-- Dynamically populated -->
+            </div>
+        </div>
             
         <div class="space-y-6">
             <h2 class="text-xl font-semibold text-slate-200 border-b border-slate-800 pb-2">Issues/Fixes by version (most recent first)</h2>
@@ -209,13 +223,17 @@
                     const fixRate = totalIssues > 0 ? Math.round((allFixedIds.size / totalIssues) * 100) : 0;
 
                     let activeOpenCount = 0;
+                    const activeKnownMap = new Map(); // bugId -> first spotted / latest details
                     if (filteredDriversChronological.length > 0) {
-                        const activeKnown = new Set();
                         filteredDriversChronological.forEach(d => {
-                            (d.fixed_bug_ids || []).forEach(id => activeKnown.delete(id));
-                            (d.known_bug_ids || []).forEach(id => activeKnown.add(id));
+                            (d.fixed_bug_ids || []).forEach(id => activeKnownMap.delete(id));
+                            (d.known_bug_ids || []).forEach(id => {
+                                if (!activeKnownMap.has(id)) {
+                                    activeKnownMap.set(id, d.version);
+                                }
+                            });
                         });
-                        activeOpenCount = activeKnown.size;
+                        activeOpenCount = activeKnownMap.size;
                     }
 
                     document.getElementById('stat-total-drivers').textContent = totalDrivers;
@@ -223,6 +241,31 @@
                     document.getElementById('stat-fix-rate').textContent = `${fixRate}%`;
                     document.getElementById('stat-open-issues').textContent = activeOpenCount;
 
+                    // Render Unfixed Issues Panel
+                    const unfixedListContainer = document.getElementById('unfixed-issues-list');
+                    document.getElementById('unfixed-count-badge').textContent = `${activeOpenCount} issue${activeOpenCount === 1 ? '' : 's'}`;
+                    unfixedListContainer.innerHTML = '';
+
+                    if (activeOpenCount === 0) {
+                        unfixedListContainer.innerHTML = `<p class="text-slate-500 text-xs py-2">No active unfixed issues in this range.</p>`;
+                    } else {
+                        let unfixedHtml = '';
+                        activeKnownMap.forEach((firstVersion, id) => {
+                            const description = data.master_bugs[id] || 'No description available';
+                            unfixedHtml += `
+                                <div class="bg-slate-950/60 p-3 rounded-lg border border-slate-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                                    <div class="flex items-start gap-2.5">
+                                        <span class="bg-amber-950 text-amber-400 border border-amber-800/50 font-mono text-[10px] px-1.5 py-0.5 rounded mt-0.5 shrink-0">${id}</span>
+                                        <span class="text-xs text-slate-200">${description}</span>
+                                    </div>
+                                    <span class="text-[10px] text-slate-400 shrink-0 font-mono">Reported in: ${firstVersion}</span>
+                                </div>
+                            `;
+                        });
+                        unfixedListContainer.innerHTML = unfixedHtml;
+                    }
+
+                    // Render Driver Cards
                     const driverContainer = document.getElementById('driver-tracker');
                     driverContainer.innerHTML = '';
                     filteredDriversDisplay.forEach((d) => {
