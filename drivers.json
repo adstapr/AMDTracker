@@ -1,6 +1,26 @@
 {
     "drivers": [
         {
+            "version": "23.11.1",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-11-1.html",
+            "fixed_bug_ids": [
+                "BUG-103",
+                "BUG-135",
+                "BUG-136",
+                "BUG-137",
+                "BUG-138",
+                "BUG-139",
+                "BUG-140",
+                "BUG-141"
+            ],
+            "known_bug_ids": [
+                "BUG-112",
+                "BUG-142",
+                "BUG-143",
+                "BUG-144"
+            ]
+        },
+        {
             "version": "23.10.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-10-2.html",
             "fixed_bug_ids": [
@@ -612,6 +632,16 @@
         "BUG-131": "The display may intermittently freeze after changing the encode format while streaming select games with AMD Link.",
         "BUG-132": "Corruption may be observed in Forza Motorsport when RT is enabled.",
         "BUG-133": "Intermittent flickering may be briefly observed in Total War: Pharaoh’s menus after changing graphics settings.",
-        "BUG-134": "Intermittent app crash in Call of Duty®: Modern Warfare® II when Radeon Anti-Lag is enabled. Users experiencing this are recommended to disable Anti-Lag as a temporary workaround."
+        "BUG-134": "Intermittent app crash in Call of Duty®: Modern Warfare® II when Radeon Anti-Lag is enabled. Users experiencing this are recommended to disable Anti-Lag as a temporary workaround.",
+        "BUG-135": "Lower than expected performance in Counter Stike 2 on some AMD Graphics Products, such as the Radeon™ RX 7600.",
+        "BUG-136": "Intermittent flickering may be observed in Total War: Pharaoh’s menus after changing graphics settings.",
+        "BUG-137": "Intermittent flicker may be observed on some textures while playing Alan Wake 2.",
+        "BUG-138": "Rebuilding shader cache may be incorrectly required when relaunching Baldur’s Gate 3 using Vulkan® API.",
+        "BUG-139": "Rebuilding shader cache may be incorrectly required when relaunching Forza Motorsport.",
+        "BUG-140": "Intermittent driver crash while viewing the credits screen after finishing a race in Forza Motorsport.",
+        "BUG-141": "Intermittent black screen or code 31 error in device manager after reboot on some AMD Graphics Products, such as the Radeon™ RX 6700 XT.",
+        "BUG-142": "Intermittent corruption may be observed on the racetrack while playing EA Sports WRC.",
+        "BUG-143": "Stars may intermittently fail to appear while playing Crysis Remastered.",
+        "BUG-144": "Intermittent micro-stuttering may be experienced when running Chromium-based browsers on systems that pair a Radeon™ RX 7000 series GPU with a secondary display connected to an AMD Ryzen™ 7000 series processor."
     }
 }
