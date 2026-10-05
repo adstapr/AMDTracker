@@ -1,6 +1,22 @@
 {
     "drivers": [
         {
+            "version": "26.2.1",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-2-1.html",
+            "fixed_bug_ids": [
+                "BUG-356",
+                "BUG-357"
+            ],
+            "known_bug_ids": [
+                "BUG-327",
+                "BUG-309",
+                "BUG-338",
+                "BUG-310",
+                "BUG-358",
+                "BUG-359"
+            ]
+        },
+        {
             "version": "26.1.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-1-1.html",
             "fixed_bug_ids": [
@@ -1462,6 +1478,10 @@
         "BUG-352": "Slow window resizing may be observed (related to vkAcquireNextImage extension) while developing games that use the Vulkan API on Radeon™ RX 7000 series and Radeon™ RX 9000 graphics products.",
         "BUG-353": "Intermittent audio dropouts during minimized video playback on certain Xiaomi and Hisense TV models on AMD Radeon™ RX 9000 series graphics products.",
         "BUG-354": "Player sprites may not render correctly while playing Cassette Beasts on Radeon™ RX 7000 series and Radeon™ RX 9000 series graphics products.",
-        "BUG-355": "Artifact may appear when playing Baldur’s Gate 3 with TAA enabled on Radeon™ RX 5000 series and Radeon™ RX 6000 series graphics products."
+        "BUG-355": "Artifact may appear when playing Baldur’s Gate 3 with TAA enabled on Radeon™ RX 5000 series and Radeon™ RX 6000 series graphics products.",
+        "BUG-356": "Corrupted clouds may be observed while playing Arc Raiders on Radeon™ RX 9000 series graphics products.",
+        "BUG-357": "Intermittent application crash may be observed when playing The Finals with ray tracing enabled on Radeon™ RX 7000 series products.",
+        "BUG-358": "AMD FSR Upscaling and AMD FSR Frame Generation may show as inactive in AMD Software: Adrenalin Edition when playing Yakuza Kiwami 3 & Dark Ties and Call of Duty®: Black Ops 7 when enabled on Radeon™ RX 9000 series graphics products.",
+        "BUG-359": "AMD Install Manager is unable to install Optional Drivers. Users are recommended to use the installation link available on this page."
     }
 }
