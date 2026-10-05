@@ -1,6 +1,23 @@
 {
     "drivers": [
         {
+            "version": "23.1.1",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-1-1-RX7900.html",
+            "fixed_bug_ids": [
+                "BUG-039",
+                "BUG-037",
+                "BUG-040",
+                "BUG-041"
+            ],
+            "known_bug_ids": [
+                "BUG-031",
+                "BUG-032",
+                "BUG-033",
+                "BUG-034",
+                "BUG-038"
+            ]
+        },
+        {
             "version": "22.12.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-22-12-2-RX7900.html",
             "fixed_bug_ids": [
@@ -142,6 +159,9 @@
         "BUG-035": "While loading Marvel’s Spider-Man: Miles Morales™ an app crash or driver timeout may occur after enabling ray tracing settings.",
         "BUG-036": "Improvements to power usage during hardware accelerated video playback. Further power efficiency improvements are planned for future releases.",
         "BUG-037": "While playing Valheim™ an app crash or driver timeout may occur using Vulkan® API. Any users who may be experiencing these issues should select DirectX® API as a temporary workaround.",
-        "BUG-038": "Some virtual reality games or apps may experience lower than expected performance."
+        "BUG-038": "Some virtual reality games or apps may experience lower than expected performance.",
+        "BUG-039": "Intermittent driver timeout may occur when applying Auto Overclock performance tuning.",
+        "BUG-040": "While playing The Witcher® 3: Wild Hunt, an intermittent app crash or driver timeout may occur when Ray Tracing settings are enabled.",
+        "BUG-041": "Minor performance degradation may be observed after applying a factory reset of settings."
     }
 }
