@@ -1,6 +1,31 @@
 {
     "drivers": [
         {
+            "version": "24.3.1",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-3-1.html",
+            "fixed_bug_ids": [
+                "BUG-185",
+                "BUG-166",
+                "BUG-114",
+                "BUG-186",
+                "BUG-177",
+                "BUG-187",
+                "BUG-188",
+                "BUG-189",
+                "BUG-180",
+                "BUG-181",
+                "BUG-190",
+                "BUG-183"
+            ],
+            "known_bug_ids": [
+                "BUG-191",
+                "BUG-192",
+                "BUG-193",
+                "BUG-182",
+                "BUG-184"
+            ]
+        },
+        {
             "version": "24.2.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-2-1.html",
             "fixed_bug_ids": [
@@ -760,6 +785,14 @@
         "BUG-182": "AMD SmartAccess Video may be incorrectly reported as “Available” on some systems with the Parsec Virtual Display Driver installed.",
         "BUG-183": "Performance drop may be observed while using some DirectML workloads in Topaz AI.",
         "BUG-184": "Audio and video may intermittently become out of sync while recording using the AV1 codec in AMD Software: Adrenalin Edition.",
-        "BUG-185": "Excessive micro stutter may be intermittently experienced after enabling AMD Fluid Motion Frames for select games."
+        "BUG-185": "Excessive micro stutter may be intermittently experienced after enabling AMD Fluid Motion Frames for select games.",
+        "BUG-186": "Improvements to reduce initial loading times while playing World of Warcraft with DirectX 12 API on some AMD Graphics Products, such as the Radeon™ RX 6800.",
+        "BUG-187": "Some characters may appear invisible or have missing textures while playing Cossacks 3.",
+        "BUG-188": "Flickering lights may be observed while playing Space Engineers in certain indoor environments.",
+        "BUG-189": "The maximum memory tuning limit may be incorrectly reported on AMD Radeon™ RX 7900 GRE graphics products.",
+        "BUG-190": "GPU Acceleration may be missing/greyed out in Adobe Premiere Pro on some hybrid graphics systems.",
+        "BUG-191": "Intermittent driver timeout or application crash may be experienced while playing HELLDIVERS™ 2 on dual monitor setups on some AMD Graphics Products, such as the Radeon™ RX 7900 XTX.",
+        "BUG-192": "Intermittent application crash may be observed while playing Lords of the Fallen and entering certain areas on Radeon™ RX 6000 series GPUs.",
+        "BUG-193": "Artifacts may appear in certain mud environments while playing SnowRunner on some AMD Graphics Products, such as the Radeon™ RX 6800."
     }
 }
