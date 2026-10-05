@@ -33,7 +33,6 @@
 <body class="bg-slate-950 text-slate-100 p-6 font-sans">
     <div class="max-w-6xl mx-auto space-y-8">
         
-        <!-- Header with Official Bug Report Button -->
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-800 pb-4">
             <div>
                 <h1 class="text-3xl font-bold tracking-tight">AMD Tracker</h1>
@@ -64,7 +63,6 @@
             </div>
         </div>
 
-        <!-- Bug Lifecycle / Time to Fix Analytics Card -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm flex items-center justify-between">
                 <div>
@@ -95,7 +93,7 @@
                 <button id="reset-timeline" class="text-xs text-slate-400 hover:text-white bg-slate-950 px-3 py-1.5 rounded border border-slate-800 transition">Reset Range</button>
             </div>
             
-            <div class="relative pt-2 pb-10">
+            <div class="relative py-8">
                 <div class="relative h-2 bg-slate-950 rounded-lg border border-slate-800 mx-3">
                     <div id="slider-range-fill" class="absolute h-full bg-indigo-600/30 rounded-lg pointer-events-none"></div>
                     
@@ -103,9 +101,8 @@
                         class="absolute -top-2 left-0 w-full h-6 appearance-none bg-transparent pointer-events-none z-20">
                     <input type="range" id="sliderMax" min="0" max="100" value="100" step="1" 
                         class="absolute -top-2 left-0 w-full h-6 appearance-none bg-transparent pointer-events-none z-20">
-                </div>
-                
-                <div id="timeline-markers" class="absolute left-3 right-3 h-6 mt-3">
+
+                    <div id="timeline-markers" class="absolute inset-0 pointer-events-none"></div>
                 </div>
             </div>
         </div>
@@ -127,7 +124,6 @@
             </div>
         </div>
 
-        <!-- Panel for Unfixed / Active Open Issues with Keyword Search Bar -->
         <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm space-y-4">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-800 pb-3">
                 <div>
@@ -147,7 +143,6 @@
             </div>
 
             <div id="unfixed-issues-list" class="space-y-2 max-h-[400px] overflow-y-auto pr-2">
-                <!-- Dynamically populated -->
             </div>
         </div>
             
@@ -168,13 +163,13 @@
                 const chronologicalDrivers = [...data.drivers].reverse();
                 const totalSteps = chronologicalDrivers.length - 1;
                 const milestones = [
-                    { label: '2022', match: (d) => d.version.startsWith('22.') && !d.version.includes('22.11.') },
-                    { label: 'RDNA 3', match: (d) => d.version.includes('22.12.') },
-                    { label: '2023', match: (d) => d.version.startsWith('23.') },
-                    { label: '2024', match: (d) => d.version.startsWith('24.') },
-                    { label: 'RDNA 4', match: (d) => d.version.includes('25.3.') || d.version.includes('25.4.') },
-                    { label: '2025', match: (d) => d.version.startsWith('25.') && !d.version.includes('25.3.') && !d.version.includes('25.4.') },
-                    { label: '2026', match: (d) => d.version.startsWith('26.') }
+                    { label: '2022', type: 'year', match: (d) => d.version.startsWith('22.') && !d.version.includes('22.11.') },
+                    { label: 'RDNA 3', type: 'arch', match: (d) => d.version.includes('22.12.') },
+                    { label: '2023', type: 'year', match: (d) => d.version.startsWith('23.') },
+                    { label: '2024', type: 'year', match: (d) => d.version.startsWith('24.') },
+                    { label: 'RDNA 4', type: 'arch', match: (d) => d.version.includes('25.3.') || d.version.includes('25.4.') },
+                    { label: '2025', type: 'year', match: (d) => d.version.startsWith('25.') && !d.version.includes('25.3.') && !d.version.includes('25.4.') },
+                    { label: '2026', type: 'year', match: (d) => d.version.startsWith('26.') }
                 ];
 
                 milestones.forEach(m => {
@@ -201,7 +196,13 @@
                 activeMilestones.forEach(m => {
                     let pct = totalSteps > 0 ? (m.index / totalSteps) * 100 : 0;
                     let span = document.createElement('span');
-                    span.className = 'absolute text-[10px] text-slate-400 font-mono cursor-pointer hover:text-indigo-400 transition -translate-x-1/2 whitespace-nowrap bg-slate-900 px-1 py-0.5 rounded border border-slate-800';
+                    
+                    if (m.type === 'arch') {
+                        span.className = 'absolute text-[10px] text-indigo-300 font-mono font-bold cursor-pointer hover:text-white transition -translate-x-1/2 whitespace-nowrap bg-indigo-950/80 border border-indigo-700/60 px-1.5 py-0.5 rounded shadow-sm top-[-26px] pointer-events-auto z-10';
+                    } else {
+                        span.className = 'absolute text-[10px] text-slate-400 font-mono cursor-pointer hover:text-white transition -translate-x-1/2 whitespace-nowrap bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded bottom-[-26px] pointer-events-auto z-10';
+                    }
+
                     span.style.left = `${pct}%`;
                     span.textContent = m.label;
                     span.onclick = () => {
@@ -328,23 +329,22 @@
 
                     renderUnfixedList(data);
 
-                    // Render Driver Cards
                     const driverContainer = document.getElementById('driver-tracker');
                     driverContainer.innerHTML = '';
                     filteredDriversDisplay.forEach((d) => {
                         let card = document.createElement('div');
-                        card.className = 'bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm space-y-4';
+                        card.className = 'bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm space-y-4 hover:border-slate-700/80 transition';
                         
                         let fixedHtml = (d.fixed_bug_ids || []).filter(id => data.master_bugs[id]?.trim()).map(id => `
                             <li class="text-emerald-400 text-xs mb-1 flex items-center gap-2">
-                                <span class="bg-emerald-950 px-1.5 py-0.5 rounded border border-emerald-800/50 font-mono text-[10px]">${id}</span>
+                                <span class="bg-emerald-950 px-1.5 py-0.5 rounded border border-emerald-800/50 font-mono text-[10px] shrink-0">${id}</span>
                                 <span>${data.master_bugs[id]}</span>
                             </li>
                         `).join('');
 
                         let knownHtml = (d.known_bug_ids || []).filter(id => data.master_bugs[id]?.trim()).map(id => `
                             <li class="text-amber-400 text-xs mb-1 flex items-center gap-2">
-                                <span class="bg-amber-950 px-1.5 py-0.5 rounded border border-amber-800/50 font-mono text-[10px]">${id}</span>
+                                <span class="bg-amber-950 px-1.5 py-0.5 rounded border border-amber-800/50 font-mono text-[10px] shrink-0">${id}</span>
                                 <span>${data.master_bugs[id]}</span>
                             </li>
                         `).join('');
@@ -411,7 +411,7 @@
                         filteredEntries.forEach(([id, firstVersion]) => {
                             const description = data.master_bugs[id] || 'No description available';
                             unfixedHtml += `
-                                <div class="bg-slate-950/60 p-3 rounded-lg border border-slate-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                                <div class="bg-slate-950/60 p-3 rounded-lg border border-slate-800/80 hover:border-slate-700/80 transition flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                                     <div class="flex items-start gap-2.5">
                                         <span class="bg-amber-950 text-amber-400 border border-amber-800/50 font-mono text-[10px] px-1.5 py-0.5 rounded mt-0.5 shrink-0">${id}</span>
                                         <span class="text-xs text-slate-200">${description}</span>
@@ -447,31 +447,25 @@
                 function renderChart(driverVersions, fixedCounts, knownCounts) {
                     const ctx = document.getElementById('bugLifecycleChart').getContext('2d');
                     bugChart = new Chart(ctx, {
-                        type: 'line',
+                        type: 'bar',
                         data: {
                             labels: driverVersions,
                             datasets: [
                                 {
                                     label: 'Fixed Issues',
                                     data: fixedCounts,
-                                    borderColor: '#10b981',
-                                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                                    borderWidth: 2,
-                                    pointBackgroundColor: '#10b981',
-                                    pointRadius: 4,
-                                    fill: true,
-                                    tension: 0.1
+                                    backgroundColor: '#10b981',
+                                    hoverBackgroundColor: '#34d399',
+                                    borderRadius: 3,
+                                    borderSkipped: false
                                 },
                                 {
                                     label: 'Open / Known Issues',
                                     data: knownCounts,
-                                    borderColor: '#f59e0b',
-                                    backgroundColor: 'rgba(245, 158, 11, 0.1)',
-                                    borderWidth: 2,
-                                    pointBackgroundColor: '#f59e0b',
-                                    pointRadius: 4,
-                                    fill: true,
-                                    tension: 0.1
+                                    backgroundColor: '#f59e0b',
+                                    hoverBackgroundColor: '#fbbf24',
+                                    borderRadius: 3,
+                                    borderSkipped: false
                                 }
                             ]
                         },
@@ -480,14 +474,16 @@
                             maintainAspectRatio: false,
                             scales: {
                                 x: {
+                                    stacked: true,
                                     ticks: { display: false },
                                     grid: { color: '#1e293b' }
                                 },
                                 y: {
+                                    stacked: true,
                                     beginAtZero: true,
                                     ticks: { 
                                         color: '#94a3b8', 
-                                        font: { family: 'monospace', size: 12 }, 
+                                        font: { family: 'monospace', size: 11 }, 
                                         precision: 0,
                                         callback: function(value) {
                                             return Math.abs(value);
@@ -495,10 +491,7 @@
                                     },
                                     grid: { 
                                         color: function(context) {
-                                            if (context.tick.value === 0) {
-                                                return '#475569';
-                                            }
-                                            return '#1e293b';
+                                            return context.tick.value === 0 ? '#475569' : '#1e293b';
                                         },
                                         lineWidth: function(context) {
                                             return context.tick.value === 0 ? 2 : 1;
