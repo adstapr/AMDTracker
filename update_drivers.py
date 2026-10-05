@@ -7,185 +7,174 @@ import requests
 
 JSON_FILE = "drivers.json"
 
-
 def clean_text(text):
-  """Cleans up smart quotes, trademark glitches, and weird spacing."""
-  if not text:
-    return ""
-  return (
-      text.replace("â„¢", "™")
-      .replace("â€“", "-")
-      .replace("Â®", "®")
-      .replace("\u200b", "")
-      .strip()
-  )
-
+    """Cleans up smart quotes, trademark glitches, and weird spacing."""
+    if not text:
+        return ""
+    return (
+        text.replace("â„¢", "™")
+            .replace("â€“", "-")
+            .replace("Â®", "®")
+            .replace("\u200b", "")
+            .strip()
+    )
 
 def get_next_id(master_dict, prefix):
-  """Finds the next sequential ID like FEAT-001 or GAME-001."""
-  if not master_dict:
-    return f"{prefix}-001"
-  existing_nums = []
-  for key in master_dict.keys():
-    match = re.search(r"(\d+)", key)
-    if match:
-      existing_nums.append(int(match.group(1)))
-  next_num = max(existing_nums) + 1 if existing_nums else 1
-  return f"{prefix}-{next_num:03d}"
-
+    """Finds the next sequential ID like BUG-001 or FEAT-001."""
+    if not master_dict:
+        return f"{prefix}-001"
+    existing_nums = []
+    for key in master_dict.keys():
+        match = re.search(r"(\d+)", key)
+        if match:
+            existing_nums.append(int(match.group(1)))
+    next_num = max(existing_nums) + 1 if existing_nums else 1
+    return f"{prefix}-{next_num:03d}"
 
 def parse_list_items(soup, header_keywords):
-  """Scrapes text items under headings containing specific keywords."""
-  items = []
-  for header in soup.find_all(["h2", "h3", "strong", "p", "div"]):
-    text_content = header.get_text()
-    if any(keyword.lower() in text_content.lower() for keyword in header_keywords):
-      sibling = header.find_next_sibling()
-      # Look through immediate siblings or container lists
-      while sibling and sibling.name not in ["h2", "h3"]:
-        if sibling.name == "ul":
-          for li in sibling.find_all("li"):
-            cleaned = clean_text(li.get_text())
-            if cleaned:
-              items.append(cleaned)
-        elif sibling.name == "p":
-          cleaned = clean_text(sibling.get_text())
-          if cleaned and len(cleaned) > 5:
-            items.append(cleaned)
-        sibling = sibling.find_next_sibling()
-      if items:
-        break
-  return items
-
+    """Robustly scrapes text items under headings containing specific keywords, handling nested wrappers."""
+    items = []
+    # Search all potential header or text elements
+    for element in soup.find_all(["h1", "h2", "h3", "h4", "strong", "b", "p", "div", "span"]):
+        text_content = element.get_text()
+        if any(keyword.lower() in text_content.lower() for keyword in header_keywords):
+            # Find the nearest container or sibling that holds the list or text items
+            container = element.find_parent(["section", "div", "article", "body"])
+            if not container:
+                container = element
+            
+            # Look for <li> elements within this section/container block
+            lists = container.find_all("ul")
+            for ul in lists:
+                for li in ul.find_all("li"):
+                    cleaned = clean_text(li.get_text())
+                    if cleaned and cleaned not in items:
+                        items.append(cleaned)
+            
+            # Fallback if no <ul> was found nearby
+            if not items:
+                sibling = element.find_next_sibling()
+                while sibling and sibling.name not in ["h1", "h2", "h3", "h4"]:
+                    if sibling.name == "ul":
+                        for li in sibling.find_all("li"):
+                            cleaned = clean_text(li.get_text())
+                            if cleaned and cleaned not in items:
+                                items.append(cleaned)
+                    elif sibling.name == "p":
+                        cleaned = clean_text(sibling.get_text())
+                        if cleaned and len(cleaned) > 5 and cleaned not in items:
+                            items.append(cleaned)
+                    sibling = sibling.find_next_sibling()
+            
+            if items:
+                break
+    return items
 
 def fetch_amd_release_notes(url):
-  print(f"Fetching release notes from: {url}")
-  headers = {
-      "User-Agent": (
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,"
-          " like Gecko) Chrome/122.0.0.0 Safari/537.36"
-      ),
-      "Accept-Language": "en-US,en;q=0.9",
-  }
-
-  fixed_texts = []
-  known_texts = []
-  feature_texts = []
-  game_texts = []
-  driver_type = "Optional"
-
-  try:
-    response = requests.get(url, headers=headers, timeout=10)
-    response.encoding = "utf-8"
-
-    if response.status_code == 200:
-      soup = BeautifulSoup(response.text, "html.parser")
-      fixed_texts = parse_list_items(soup, ["Fixed Issues"])
-      known_texts = parse_list_items(soup, ["Known Issues"])
-      feature_texts = parse_list_items(
-          soup, ["Highlights", "New Features", "What's New"]
-      )
-      game_texts = parse_list_items(
-          soup, ["Support for", "New Game Support", "Game Support"]
-      )
-
-      if "Recommended" in soup.get_text():
-        driver_type = "Recommended"
-  except Exception as e:
-    print(f"Notice: Could not scrape text due to network restrictions ({e}).")
-
-  # Extract version from filename
-  filename = url.split("/")[-1].replace(".html", "")
-  raw_version_part = filename.replace("RN-RAD-WIN-", "")
-  version_match = re.search(r"(\d+-\d+-\d+)", raw_version_part)
-  if version_match:
-    version = version_match.group(1).replace("-", ".")
-  else:
-    version = raw_version_part.replace("-", ".")
-
-  return {
-      "version": version,
-      "type": driver_type,
-      "url": url,
-      "fixed_texts": fixed_texts,
-      "known_texts": known_texts,
-      "feature_texts": feature_texts,
-      "game_texts": game_texts,
-  }
-
-
-def update_json(scraped_data):
-  if os.path.exists(JSON_FILE):
-    with open(JSON_FILE, "r", encoding="utf-8") as f:
-      data = json.load(f)
-  else:
-    data = {
-        "drivers": [],
-        "master_bugs": {},
-        "master_features": {},
-        "master_games": {},
+    print(f"Fetching release notes from: {url}")
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+        "Accept-Language": "en-US,en;q=0.9",
     }
 
-  # Ensure master keys exist if migrating an old file
-  master_bugs = data.setdefault("master_bugs", {})
-  master_features = data.setdefault("master_features", {})
-  master_games = data.setdefault("master_games", {})
+    fixed_texts = []
+    known_texts = []
+    feature_texts = []
+    game_texts = []
+    driver_type = "Optional"
 
-  def process_list(text_list, master_dict, prefix):
-    ids = []
-    for text in text_list:
-      existing_id = next(
-          (k for k, v in master_dict.items() if clean_text(v) == clean_text(text)),
-          None,
-      )
-      if existing_id:
-        ids.append(existing_id)
-      else:
-        new_id = get_next_id(master_dict, prefix)
-        master_dict[new_id] = text
-        ids.append(new_id)
-    return ids
+    try:
+        response = requests.get(url, headers=headers, timeout=10)
+        response.encoding = "utf-8"
 
-  fixed_bug_ids = process_list(scraped_data["fixed_texts"], master_bugs, "BUG")
-  known_bug_ids = process_list(scraped_data["known_texts"], master_bugs, "BUG")
-  feature_ids = process_list(
-      scraped_data["feature_texts"], master_features, "FEAT"
-  )
-  game_ids = process_list(scraped_data["game_texts"], master_games, "GAME")
+        if response.status_code == 200:
+            soup = BeautifulSoup(response.text, "html.parser")
+            fixed_texts = parse_list_items(soup, ["Fixed Issues"])
+            known_texts = parse_list_items(soup, ["Known Issues"])
+            feature_texts = parse_list_items(soup, ["Highlights", "New Features", "What's New"])
+            game_texts = parse_list_items(soup, ["Support for", "New Game Support", "Game Support"])
 
-  new_driver_entry = {
-      "version": scraped_data["version"],
-      "type": scraped_data["type"],
-      "url": scraped_data["url"],
-      "fixed_bug_ids": fixed_bug_ids,
-      "known_bug_ids": known_bug_ids,
-      "feature_ids": feature_ids,
-      "game_ids": game_ids,
-  }
+            if "Recommended" in soup.get_text():
+                driver_type = "Recommended"
+    except Exception as e:
+        print(f"Notice: Could not scrape text due to network restrictions ({e}).")
 
-  # Remove existing entry for this version/url to prevent duplicates
-  data["drivers"] = [
-      d
-      for d in data["drivers"]
-      if d["url"] != scraped_data["url"]
-      and d.get("version") != scraped_data["version"]
-  ]
-  data["drivers"].insert(0, new_driver_entry)
+    # Extract version from filename
+    filename = url.split("/")[-1].replace(".html", "")
+    raw_version_part = filename.replace("RN-RAD-WIN-", "")
+    version_match = re.search(r"(\d+-\d+-\d+)", raw_version_part)
+    if version_match:
+        version = version_match.group(1).replace("-", ".")
+    else:
+        version = raw_version_part.replace("-", ".")
 
-  with open(JSON_FILE, "w", encoding="utf-8") as f:
-    json.dump(data, f, indent=4, ensure_ascii=False)
+    return {
+        "version": version,
+        "type": driver_type,
+        "url": url,
+        "fixed_texts": fixed_texts,
+        "known_texts": known_texts,
+        "feature_texts": feature_texts,
+        "game_texts": game_texts,
+    }
 
-  print(
-      f"Successfully updated drivers.json with features/games for version"
-      f" {scraped_data['version']}"
-  )
+def update_json(scraped_data):
+    if os.path.exists(JSON_FILE):
+        with open(JSON_FILE, "r", encoding="utf-8") as f:
+            data = json.load(f)
+    else:
+        data = {
+            "drivers": [],
+            "master_bugs": {},
+            "master_features": {},
+            "master_games": {}
+        }
 
+    master_bugs = data.setdefault("master_bugs", {})
+    master_features = data.setdefault("master_features", {})
+    master_games = data.setdefault("master_games", {})
+
+    def process_list(text_list, master_dict, prefix):
+        ids = []
+        for text in text_list:
+            existing_id = next((k for k, v in master_dict.items() if clean_text(v) == clean_text(text)), None)
+            if existing_id:
+                ids.append(existing_id)
+            else:
+                new_id = get_next_id(master_dict, prefix)
+                master_dict[new_id] = text
+                ids.append(new_id)
+        return ids
+
+    fixed_bug_ids = process_list(scraped_data["fixed_texts"], master_bugs, "BUG")
+    known_bug_ids = process_list(scraped_data["known_texts"], master_bugs, "BUG")
+    feature_ids = process_list(scraped_data["feature_texts"], master_features, "FEAT")
+    game_ids = process_list(scraped_data["game_texts"], master_games, "GAME")
+
+    new_driver_entry = {
+        "version": scraped_data["version"],
+        "type": scraped_data["type"],
+        "url": scraped_data["url"],
+        "fixed_bug_ids": fixed_bug_ids,
+        "known_bug_ids": known_bug_ids,
+        "feature_ids": feature_ids,
+        "game_ids": game_ids
+    }
+
+    # Remove existing entry for this version/url to prevent duplicates
+    data["drivers"] = [d for d in data["drivers"] if d["url"] != scraped_data["url"] and d.get("version") != scraped_data["version"]]
+    data["drivers"].insert(0, new_driver_entry)
+
+    with open(JSON_FILE, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=4, ensure_ascii=False)
+
+    print(f"Successfully updated drivers.json with fixed bugs ({len(fixed_bug_ids)}) and known bugs ({len(known_bug_ids)}) for version {scraped_data['version']}")
 
 if __name__ == "__main__":
-  if len(sys.argv) < 2:
-    print("Usage: python update_drivers.py <amd_url>")
-    sys.exit(1)
+    if len(sys.argv) < 2:
+        print("Usage: python update_drivers.py <amd_url>")
+        sys.exit(1)
 
-  target_url = sys.argv[1]
-  driver_info = fetch_amd_release_notes(target_url)
-  update_json(driver_info)
+    target_url = sys.argv[1]
+    driver_info = fetch_amd_release_notes(target_url)
+    update_json(driver_info)
