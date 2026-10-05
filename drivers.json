@@ -1,6 +1,26 @@
 {
     "drivers": [
         {
+            "version": "24.5.1",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-5-1.html",
+            "fixed_bug_ids": [
+                "BUG-206",
+                "BUG-176",
+                "BUG-204",
+                "BUG-203",
+                "BUG-207"
+            ],
+            "known_bug_ids": [
+                "BUG-205",
+                "BUG-200",
+                "BUG-208",
+                "BUG-209",
+                "BUG-202",
+                "BUG-210",
+                "BUG-184"
+            ]
+        },
+        {
             "version": "24.4.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-4-1.html",
             "fixed_bug_ids": [
@@ -832,6 +852,10 @@
         "BUG-203": "Texture flicking may be observed while playing Hitman: Contracts.",
         "BUG-204": "Intermittent stutter immediately after alt-tab with Performance Metrics Overlay enabled.",
         "BUG-205": "Fallout 3 and Fallout: New Vegas may fail to launch.",
-        "BUG-206": "Intermittent application crash or driver timeout may be observed while playing World of Warcraft® or World of Warcraft® Classic on RDNA 3 series graphics products."
+        "BUG-206": "Intermittent application crash or driver timeout may be observed while playing World of Warcraft® or World of Warcraft® Classic on RDNA 3 series graphics products.",
+        "BUG-207": "Corruption around certain water elements may be observed while playing Alan Wake 2 with Radeon™ Boost enabled.",
+        "BUG-208": "Corruption may be observed while playing Dying Light 2 Stay Human: Reloaded Edition with Radeon™ Boost enabled. Users experiencing this issue are recommended to disable Radeon™ Boost as a temporary workaround.",
+        "BUG-209": "Intermittent in-game corruption may be observed while playing Ghost of Tsushima DIRECTOR'S CUT with AMD Software: Adrenalin Edition™ Record & Streaming and HDR enabled.",
+        "BUG-210": "AMD Software: Adrenalin Edition Performance Metrics may intermittently fail to update while playing HELLDIVERS™ 2."
     }
 }
