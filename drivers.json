@@ -1,6 +1,28 @@
 {
     "drivers": [
         {
+            "version": "25.8.1",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-8-1.html",
+            "fixed_bug_ids": [
+                "BUG-300",
+                "BUG-282",
+                "BUG-313",
+                "BUG-314",
+                "BUG-315",
+                "BUG-316",
+                "BUG-317"
+            ],
+            "known_bug_ids": [
+                "BUG-318",
+                "BUG-319",
+                "BUG-320",
+                "BUG-321",
+                "BUG-322",
+                "BUG-267",
+                "BUG-323"
+            ]
+        },
+        {
             "version": "26.7.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-7-1.html",
             "fixed_bug_ids": [
@@ -1276,6 +1298,17 @@
         "BUG-309": "Intermittent application crash or driver timeout may be observed while playing Battlefield™ 6 on AMD Ryzen AI 9 HX 370. AMD is actively working on a resolution with the developer to be released as soon as possible.",
         "BUG-310": "Texture flickering or corruption may appear while playing Battlefield™ 6 with AMD Record and Stream on some AMD graphics products.",
         "BUG-311": "Failure to install may be observed while installing AI Bundle components in some regions with limited access to HuggingFace and GitHub.",
-        "BUG-312": "AMD Smart Access Memory may become disabled after driver installation on Windows® 10 systems."
+        "BUG-312": "AMD Smart Access Memory may become disabled after driver installation on Windows® 10 systems.",
+        "BUG-313": "Intermittent application crash may be observed while playing Battlefield™ 2042.",
+        "BUG-314": "Intermittent application crash may be observed while playing Dragon Age: The Veilguard on Radeon™ RX 9000 series graphics products.",
+        "BUG-315": "Stutter improved while playing Call of Duty®: Warzone™ Season 03 ‘Verdansk’ map on some AMD Graphics Products",
+        "BUG-316": "Texture issues may be observed while using Oculus Rift S on RX 5000 and 6000 series graphics products.",
+        "BUG-317": "Increased number of parameters supported in Vulkan Llama.cpp on AMD Ryzen™ AI MAX+ products.",
+        "BUG-318": "Corruption may appear while playing Mafia: The Old Country on Radeon™ RX 6600 series graphics products.",
+        "BUG-319": "Intermittent application crash may be observed while playing The Last of Us Part II on Radeon™ RX 7900 series graphics products.",
+        "BUG-320": "Intermittent application crash may be observed while playing Call of Duty®: Black Ops 6 on Radeon™ RX 9000 series graphics products.",
+        "BUG-321": "Intermittent application crash or driver timeout may be observed while playing Wuchang: Fallen Feathers with FSR 4 enabled on Radeon™ RX 9000 series graphics products.",
+        "BUG-322": "Intermittent application crash may be observed while playing FBC: Firebreak on some AMD Ryzen™ processors such as the Ryzen™ AI 300 series and the Ryzen™ 7000 series.",
+        "BUG-323": "Intermittent application crash may be observed while playing NBA 2K25 in MyCareer mode on Radeon™ RX 9070 series graphics products."
     }
 }
