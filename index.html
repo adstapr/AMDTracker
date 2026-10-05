@@ -46,7 +46,7 @@
 
     <script>
         // Fetch external drivers.json cleanly
-        fetch('drivers.json')
+        fetch('./drivers.json')
             .then(response => {
                 if (!response.ok) throw new Error('Failed to load drivers.json');
                 return response.json();
@@ -125,73 +125,60 @@
                     bugContainer.appendChild(bugRow);
                 }
 
-                // 3. Render Visual Chart (Correctly mapped to master bug keys and driver versions)
-                const driverVersions = data.drivers.map(d => d.version);
-                const activeBugIds = Object.keys(data.master_bugs);
-
-                let chartData = [];
-                activeBugIds.forEach((bugId, yIndex) => {
-                    driverVersions.forEach((ver, xIndex) => {
-                        let driver = data.drivers[xIndex];
-                        let status = 0; 
-
-                        if (driver.fixed_bug_ids && driver.fixed_bug_ids.includes(bugId)) {
-                            status = 2; // Fixed (Green)
-                        } else if (driver.known_bug_ids && driver.known_bug_ids.includes(bugId)) {
-                            status = 1; // Open (Amber)
-                        }
-
-                        if (status > 0) {
-                            chartData.push({
-                                x: xIndex,
-                                y: yIndex,
-                                v: status,
-                                bug: bugId,
-                                version: ver
-                            });
-                        }
-                    });
-                });
+                // 3. Render Visual Chart (Chronological left-to-right, aggregated totals per driver)
+                // Reverse the drivers array so oldest is first (left) and newest is last (right)
+                const chronologicalDrivers = [...data.drivers].reverse();
+                
+                const driverVersions = chronologicalDrivers.map(d => d.version);
+                const fixedCounts = chronologicalDrivers.map(d => (d.fixed_bug_ids || []).length);
+                const knownCounts = chronologicalDrivers.map(d => (d.known_bug_ids || []).length);
 
                 const ctx = document.getElementById('bugLifecycleChart').getContext('2d');
                 new Chart(ctx, {
-                    type: 'scatter',
+                    type: 'bar',
                     data: {
-                        datasets: [{
-                            data: chartData.map(d => ({ x: d.x, y: d.y, v: d.v })),
-                            backgroundColor: (context) => {
-                                const val = context.raw?.v;
-                                return val === 2 ? '#10b981' : '#f59e0b'; // Green vs Amber
+                        labels: driverVersions,
+                        datasets: [
+                            {
+                                label: 'Fixed Issues',
+                                data: fixedCounts,
+                                backgroundColor: '#10b981', // Green
+                                borderRadius: 4
                             },
-                            pointRadius: 7,
-                            pointHoverRadius: 9
-                        }]
+                            {
+                                label: 'Open / Known Issues',
+                                data: knownCounts,
+                                backgroundColor: '#f59e0b', // Amber
+                                borderRadius: 4
+                            }
+                        ]
                     },
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
                         scales: {
                             x: {
-                                type: 'category',
-                                labels: driverVersions,
-                                ticks: { color: '#94a3b8', font: { family: 'monospace', size: 11 } },
+                                stacked: true,
+                                ticks: { color: '#94a3b8', font: { family: 'monospace', size: 12 } },
                                 grid: { color: '#1e293b' }
                             },
                             y: {
-                                type: 'category',
-                                labels: activeBugIds,
-                                ticks: { color: '#94a3b8', font: { family: 'monospace', size: 11 } },
+                                stacked: true,
+                                beginAtZero: true,
+                                ticks: { color: '#94a3b8', font: { family: 'monospace', size: 12 }, precision: 0 },
                                 grid: { color: '#1e293b' }
                             }
                         },
                         plugins: {
-                            legend: { display: false },
+                            legend: {
+                                display: true,
+                                position: 'top',
+                                labels: { color: '#94a3b8', font: { family: 'sans-serif', size: 12 } }
+                            },
                             tooltip: {
                                 callbacks: {
-                                    label: function(context) {
-                                        let item = chartData[context.dataIndex];
-                                        let state = item.v === 2 ? 'FIXED' : 'OPEN';
-                                        return `${item.bug} on ${item.version}: ${state}`;
+                                    title: function(context) {
+                                        return `Driver Version: ${context[0].label}`;
                                     }
                                 }
                             }
