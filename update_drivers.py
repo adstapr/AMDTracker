@@ -33,11 +33,16 @@ def get_next_id(master_dict, prefix):
     next_num = max(existing_nums) + 1 if existing_nums else 1
     return f"{prefix}-{next_num:03d}"
 
+def get_main_content(soup):
+    # Target main article or content body to avoid footers/navs
+    return soup.find(["article", "main"]) or soup.find("div", class_=re.compile(r"content|node|release-notes", re.I)) or soup
+
 def parse_amd_section(soup, keywords):
     items = []
+    main_container = get_main_content(soup)
     target_tag = None
     
-    for tag in soup.find_all(["h1", "h2", "h3", "h4", "h5", "h6", "strong", "b", "p", "span", "div"]):
+    for tag in main_container.find_all(["h1", "h2", "h3", "h4", "h5", "h6", "strong", "b", "p"]):
         text = tag.get_text(strip=True).rstrip(':').strip()
         if not text:
             continue
@@ -91,40 +96,46 @@ def parse_amd_section(soup, keywords):
 def parse_amd_games_section(soup):
     items = []
     keywords = ["support for", "new game support", "game support", "optimized for"]
+    main_container = get_main_content(soup)
     
-    for tag in soup.find_all(["h1", "h2", "h3", "h4", "h5", "h6", "strong", "b", "p", "div"]):
-        text = tag.get_text(strip=True)
-        if any(kw in text.lower() for kw in keywords):
-            curr = tag.find_next_sibling()
-            if not curr and tag.parent:
-                curr = tag.parent.find_next_sibling()
-                
-            while curr:
-                if curr.name in ["h1", "h2", "h3", "h4", "h5", "h6"]:
-                    break
-                if curr.name in ["ul", "ol"]:
-                    for li in curr.find_all("li", recursive=True):
+    target_tags = []
+    for tag in main_container.find_all(["h1", "h2", "h3", "h4", "h5", "h6", "strong", "b"]):
+        text = tag.get_text(strip=True).rstrip(':').strip()
+        if any(kw == text.lower() or text.lower().startswith(kw) for kw in keywords):
+            target_tags.append(tag)
+            
+    for target_tag in target_tags:
+        curr = target_tag.find_next_sibling()
+        if not curr and target_tag.parent:
+            curr = target_tag.parent.find_next_sibling()
+            
+        while curr:
+            if curr.name in ["h1", "h2", "h3", "h4", "h5", "h6"]:
+                break
+            if curr.name in ["ul", "ol"]:
+                for li in curr.find_all("li", recursive=True):
+                    li_copy = BeautifulSoup(str(li), "html.parser")
+                    for nested in li_copy.find_all(["ul", "ol"]):
+                        nested.decompose()
+                    cleaned = clean_text(li_copy.get_text())
+                    if cleaned and len(cleaned) > 1 and cleaned not in items:
+                        items.append(cleaned)
+            elif curr.name == "p":
+                cleaned = clean_text(curr.get_text())
+                if cleaned and cleaned.lower().rstrip(':') not in keywords:
+                    if cleaned and len(cleaned) > 1 and cleaned not in items:
+                        items.append(cleaned)
+            elif hasattr(curr, "find_all"):
+                for ul in curr.find_all(["ul", "ol"]):
+                    for li in ul.find_all("li", recursive=True):
                         li_copy = BeautifulSoup(str(li), "html.parser")
                         for nested in li_copy.find_all(["ul", "ol"]):
                             nested.decompose()
                         cleaned = clean_text(li_copy.get_text())
-                        if cleaned and len(cleaned) > 2 and cleaned not in items:
+                        if cleaned and len(cleaned) > 1 and cleaned not in items:
                             items.append(cleaned)
-                elif curr.name == "p":
-                    cleaned = clean_text(curr.get_text())
-                    if cleaned and cleaned.lower().rstrip(':') not in ["support for", "new game support", "game support", "optimized for"]:
-                        if cleaned and len(cleaned) > 2 and cleaned not in items:
-                            items.append(cleaned)
-                elif hasattr(curr, "find_all"):
-                    for ul in curr.find_all(["ul", "ol"]):
-                        for li in ul.find_all("li", recursive=True):
-                            li_copy = BeautifulSoup(str(li), "html.parser")
-                            for nested in li_copy.find_all(["ul", "ol"]):
-                                nested.decompose()
-                            cleaned = clean_text(li_copy.get_text())
-                            if cleaned and len(cleaned) > 2 and cleaned not in items:
-                                items.append(cleaned)
-                curr = curr.find_next_sibling()
+            curr = curr.find_next_sibling()
+            
     return items
 
 def fetch_amd_release_notes(url):
