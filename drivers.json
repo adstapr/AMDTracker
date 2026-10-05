@@ -1,6 +1,25 @@
 {
     "drivers": [
         {
+            "version": "23.10.1",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-10-1.html",
+            "fixed_bug_ids": [
+                "BUG-126",
+                "BUG-127",
+                "BUG-128",
+                "BUG-129",
+                "BUG-130",
+                "BUG-131"
+            ],
+            "known_bug_ids": [
+                "BUG-103",
+                "BUG-112",
+                "BUG-132",
+                "BUG-133",
+                "BUG-134"
+            ]
+        },
+        {
             "version": "23.9.3",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-9-3.html",
             "fixed_bug_ids": [],
@@ -565,6 +584,15 @@
         "BUG-122": "GPU Clock may be artificially limited to 2700 MHz when performing manual tuning on Radeon™ RX 7700 XT and RX 7800 XT graphics.",
         "BUG-123": "Intermittent application crash or driver timeout may be observed while playing F1® 23 on some AMD Graphics Products, such as the Radeon™ RX 7800 XT.",
         "BUG-124": "The display may intermittently freeze after changing the encoding format while streaming select games using AMD Link. Users experiencing this issue are suggested to select the desired encode format before streaming as a temporary workaround.",
-        "BUG-125": "Intermittent driver crashes while playing Counter Strike 2 on some AMD Graphics Products, such as the Radeon™ RX 7900 XTX. Users experiencing this can try disabling MSAA and FSR as a temporary workaround."
+        "BUG-125": "Intermittent driver crashes while playing Counter Strike 2 on some AMD Graphics Products, such as the Radeon™ RX 7900 XTX. Users experiencing this can try disabling MSAA and FSR as a temporary workaround.",
+        "BUG-126": "Intermittent app crash while playing Starfield on Radeon™ RX 7000 Series Graphics Products.",
+        "BUG-127": "Intermittent driver crash while playing Counter Strike 2 with MSAA or FSR enabled on some AMD Graphics Products, such as the Radeon™ RX 7900 XTX.",
+        "BUG-128": "Improvements to stutter experienced while playing Counter Strike 2.",
+        "BUG-129": "EA SPORTS FC™ 24 may fail to open on some AMD Graphics Products, such as the Radeon™ RX 7800 XT.",
+        "BUG-130": "System freeze or black screen when playing video files on Radeon™ RX 6000 Series Graphics Products.",
+        "BUG-131": "The display may intermittently freeze after changing the encode format while streaming select games with AMD Link.",
+        "BUG-132": "Corruption may be observed in Forza Motorsport when RT is enabled.",
+        "BUG-133": "Intermittent flickering may be briefly observed in Total War: Pharaoh’s menus after changing graphics settings.",
+        "BUG-134": "Intermittent app crash in Call of Duty®: Modern Warfare® II when Radeon Anti-Lag is enabled. Users experiencing this are recommended to disable Anti-Lag as a temporary workaround."
     }
 }
