@@ -1,6 +1,28 @@
 {
     "drivers": [
         {
+            "version": "26.1.1",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-1-1.html",
+            "fixed_bug_ids": [
+                "BUG-346",
+                "BUG-347",
+                "BUG-348",
+                "BUG-349",
+                "BUG-350",
+                "BUG-351",
+                "BUG-352",
+                "BUG-353",
+                "BUG-354",
+                "BUG-355"
+            ],
+            "known_bug_ids": [
+                "BUG-327",
+                "BUG-309",
+                "BUG-338",
+                "BUG-310"
+            ]
+        },
+        {
             "version": "25.12.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-12-1.html",
             "fixed_bug_ids": [
@@ -1430,6 +1452,16 @@
         "BUG-342": "Intermittent system crashes may be observed while using some high-bandwidth HDMI 2.1 displays during display standby. Users experiencing this issue are recommended to use a DisplayPort connection as a temporary workaround.",
         "BUG-343": "Intermittent application freeze when using the in-game Radeon™ Overlay.",
         "BUG-344": "Intermittent application crash when playing ARC Raiders on the Blue Gate map on Radeon™ RX 9000 series products.",
-        "BUG-345": "Some shadows may not render correctly while playing Call of Duty®: Black Ops 7 on some AMD Graphics Products. AMD is actively working on a resolution with the developer to be released as soon as possible."
+        "BUG-345": "Some shadows may not render correctly while playing Call of Duty®: Black Ops 7 on some AMD Graphics Products. AMD is actively working on a resolution with the developer to be released as soon as possible.",
+        "BUG-346": "Some shadows may not render correctly while playing Call of Duty®: Black Ops 7 on some AMD Graphics Products on Radeon™ RX 5000 series and Radeon™ RX 6000 series graphics products.",
+        "BUG-347": "Texture corruption may be observed when playing Enshrouded while at the first “Elixir Well” location on Radeon™ RX 7000 series and Radeon™ RX 9000 series graphics products.",
+        "BUG-348": "Application may fail to launch while playing Diablo 4 with usernames containing non-english characters on Radeon™ RX 7000 series and Radeon™ RX 9000 series graphics products.",
+        "BUG-349": "Some lights may not render correctly while playing Microsoft Flight Simulator 2024 during nighttime scenes on Radeon™ RX 9000 series graphics products.",
+        "BUG-350": "Application crashes when using Unreal Engine 5.6 Editor with Lumen HWRT enabled on Radeon™ RX 5000, Radeon™ RX 6000, Radeon™ RX 7000 and Radeon™ RX 9000 series products.",
+        "BUG-351": "Intermittent visual corruption may be observed while navigating Chromium and Electron apps on Radeon™ RX 5000 series and Radeon™ RX 6000 series graphics products.",
+        "BUG-352": "Slow window resizing may be observed (related to vkAcquireNextImage extension) while developing games that use the Vulkan API on Radeon™ RX 7000 series and Radeon™ RX 9000 graphics products.",
+        "BUG-353": "Intermittent audio dropouts during minimized video playback on certain Xiaomi and Hisense TV models on AMD Radeon™ RX 9000 series graphics products.",
+        "BUG-354": "Player sprites may not render correctly while playing Cassette Beasts on Radeon™ RX 7000 series and Radeon™ RX 9000 series graphics products.",
+        "BUG-355": "Artifact may appear when playing Baldur’s Gate 3 with TAA enabled on Radeon™ RX 5000 series and Radeon™ RX 6000 series graphics products."
     }
 }
