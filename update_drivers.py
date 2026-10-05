@@ -13,14 +13,15 @@ def clean_text(text):
         return ""
     return (
         text.replace("â„¢", "™")
-            .replace("â€“", "-")
-            .replace("Â®", "®")
-            .replace("\u200b", "")
-            .strip()
+        .replace("â€“", "-")
+        .replace("Â®", "®")
+        .replace("\u200b", "")
+        .replace("\xa0", " ")
+        .strip()
     )
 
 def get_next_id(master_dict, prefix):
-    """Finds the next sequential ID like BUG-001 or FEAT-001."""
+    """Finds the next sequential ID like FEAT-001 or GAME-001."""
     if not master_dict:
         return f"{prefix}-001"
     existing_nums = []
@@ -32,40 +33,26 @@ def get_next_id(master_dict, prefix):
     return f"{prefix}-{next_num:03d}"
 
 def parse_list_items(soup, header_keywords):
-    """Robustly scrapes text items under headings containing specific keywords, handling nested wrappers."""
+    """Scrapes text items under headings containing specific keywords safely."""
     items = []
-    # Search all potential header or text elements
-    for element in soup.find_all(["h1", "h2", "h3", "h4", "strong", "b", "p", "div", "span"]):
-        text_content = element.get_text()
+    for header in soup.find_all(["h2", "h3", "strong", "p", "div", "span"]):
+        text_content = header.get_text()
         if any(keyword.lower() in text_content.lower() for keyword in header_keywords):
-            # Find the nearest container or sibling that holds the list or text items
-            container = element.find_parent(["section", "div", "article", "body"])
-            if not container:
-                container = element
-            
-            # Look for <li> elements within this section/container block
-            lists = container.find_all("ul")
-            for ul in lists:
-                for li in ul.find_all("li"):
-                    cleaned = clean_text(li.get_text())
-                    if cleaned and cleaned not in items:
-                        items.append(cleaned)
-            
-            # Fallback if no <ul> was found nearby
-            if not items:
-                sibling = element.find_next_sibling()
-                while sibling and sibling.name not in ["h1", "h2", "h3", "h4"]:
-                    if sibling.name == "ul":
-                        for li in sibling.find_all("li"):
-                            cleaned = clean_text(li.get_text())
-                            if cleaned and cleaned not in items:
-                                items.append(cleaned)
-                    elif sibling.name == "p":
-                        cleaned = clean_text(sibling.get_text())
-                        if cleaned and len(cleaned) > 5 and cleaned not in items:
+            # Traverse siblings to find lists or paragraphs
+            sibling = header.find_next_sibling()
+            checked_count = 0
+            while sibling and checked_count < 5:
+                if sibling.name == "ul":
+                    for li in sibling.find_all("li"):
+                        cleaned = clean_text(li.get_text())
+                        if cleaned:
                             items.append(cleaned)
-                    sibling = sibling.find_next_sibling()
-            
+                elif sibling.name == "p":
+                    cleaned = clean_text(sibling.get_text())
+                    if cleaned and len(cleaned) > 5:
+                        items.append(cleaned)
+                sibling = sibling.find_next_sibling()
+                checked_count += 1
             if items:
                 break
     return items
@@ -74,7 +61,9 @@ def fetch_amd_release_notes(url):
     print(f"Fetching release notes from: {url}")
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-        "Accept-Language": "en-US,en;q=0.9",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.5",
+        "Referer": "https://www.amd.com/"
     }
 
     fixed_texts = []
@@ -84,7 +73,7 @@ def fetch_amd_release_notes(url):
     driver_type = "Optional"
 
     try:
-        response = requests.get(url, headers=headers, timeout=10)
+        response = requests.get(url, headers=headers, timeout=15)
         response.encoding = "utf-8"
 
         if response.status_code == 200:
@@ -96,17 +85,19 @@ def fetch_amd_release_notes(url):
 
             if "Recommended" in soup.get_text():
                 driver_type = "Recommended"
+        else:
+            print(f"Warning: Received HTTP status {response.status_code}. Proceeding with empty lists.")
     except Exception as e:
-        print(f"Notice: Could not scrape text due to network restrictions ({e}).")
+        print(f"Notice: Could not scrape text due to network restrictions or timeout ({e}).")
 
-    # Extract version from filename
+    # Extract version from filename/url safely
     filename = url.split("/")[-1].replace(".html", "")
     raw_version_part = filename.replace("RN-RAD-WIN-", "")
     version_match = re.search(r"(\d+-\d+-\d+)", raw_version_part)
     if version_match:
         version = version_match.group(1).replace("-", ".")
     else:
-        version = raw_version_part.replace("-", ".")
+        version = raw_version_part.replace("-", ".") if raw_version_part else "26.0.0"
 
     return {
         "version": version,
@@ -120,16 +111,16 @@ def fetch_amd_release_notes(url):
 
 def update_json(scraped_data):
     if os.path.exists(JSON_FILE):
-        with open(JSON_FILE, "r", encoding="utf-8") as f:
-            data = json.load(f)
+        try:
+            with open(JSON_FILE, "r", encoding="utf-8") as f:
+                data = json.load(f)
+        except json.JSONDecodeError:
+            data = {}
     else:
-        data = {
-            "drivers": [],
-            "master_bugs": {},
-            "master_features": {},
-            "master_games": {}
-        }
+        data = {}
 
+    # Ensure keys exist
+    data.setdefault("drivers", [])
     master_bugs = data.setdefault("master_bugs", {})
     master_features = data.setdefault("master_features", {})
     master_games = data.setdefault("master_games", {})
@@ -137,7 +128,10 @@ def update_json(scraped_data):
     def process_list(text_list, master_dict, prefix):
         ids = []
         for text in text_list:
-            existing_id = next((k for k, v in master_dict.items() if clean_text(v) == clean_text(text)), None)
+            existing_id = next(
+                (k for k, v in master_dict.items() if clean_text(v) == clean_text(text)),
+                None,
+            )
             if existing_id:
                 ids.append(existing_id)
             else:
@@ -158,17 +152,20 @@ def update_json(scraped_data):
         "fixed_bug_ids": fixed_bug_ids,
         "known_bug_ids": known_bug_ids,
         "feature_ids": feature_ids,
-        "game_ids": game_ids
+        "game_ids": game_ids,
     }
 
     # Remove existing entry for this version/url to prevent duplicates
-    data["drivers"] = [d for d in data["drivers"] if d["url"] != scraped_data["url"] and d.get("version") != scraped_data["version"]]
+    data["drivers"] = [
+        d for d in data["drivers"]
+        if d.get("url") != scraped_data["url"] and d.get("version") != scraped_data["version"]
+    ]
     data["drivers"].insert(0, new_driver_entry)
 
     with open(JSON_FILE, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=4, ensure_ascii=False)
 
-    print(f"Successfully updated drivers.json with fixed bugs ({len(fixed_bug_ids)}) and known bugs ({len(known_bug_ids)}) for version {scraped_data['version']}")
+    print(f"Successfully updated drivers.json for version {scraped_data['version']}")
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
