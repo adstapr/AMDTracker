@@ -116,7 +116,7 @@
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
                     <h2 class="text-xl font-semibold text-slate-200 mb-1">Bugs Per Driver</h2>
-                    <p class="text-slate-400 text-sm">(Positive = Fixed Issues, Negative = Open / Known Issues)</p>
+                    <p class="text-slate-400 text-sm">(Positive = Fixed Issues, Negative = Open / Known Issues — Click any driver column to view)</p>
                 </div>
                 <label class="flex items-center gap-2.5 text-xs text-slate-300 cursor-pointer select-none bg-slate-950 px-3 py-2 rounded-lg border border-slate-800">
                     <input type="checkbox" id="excludeDuplicatesToggle" checked class="rounded border-slate-700 bg-slate-900 text-indigo-600 focus:ring-indigo-500 w-4 h-4">
@@ -125,7 +125,7 @@
             </div>
             
             <div class="relative h-[450px] w-full">
-                <canvas id="bugLifecycleChart"></canvas>
+                <canvas id="bugLifecycleChart" class="cursor-pointer"></canvas>
             </div>
         </div>
 
@@ -158,6 +158,49 @@
             <div id="driver-tracker" class="space-y-4 max-h-[800px] overflow-y-auto pr-2"></div>
         </div>
 
+    </div>
+
+    <!-- Driver Detail View Modal Overlay -->
+    <div id="driver-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-3xl w-full max-h-[85vh] flex flex-col shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+            <!-- Driver Modal Header -->
+            <div class="p-5 border-b border-slate-800 flex items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-3">
+                        <h3 id="driver-modal-version" class="text-2xl font-bold text-white font-mono">26.X.X</h3>
+                        <a id="driver-modal-link" href="#" target="_blank" class="text-indigo-400 hover:underline text-xs flex items-center gap-1">
+                            <span>Release Notes</span>
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                        </a>
+                    </div>
+                    <p id="driver-modal-subtitle" class="text-slate-400 text-xs mt-1">Driver version release details</p>
+                </div>
+                <button id="close-driver-modal" class="text-slate-400 hover:text-white bg-slate-950 p-2 rounded-lg border border-slate-800 transition shrink-0">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+
+            <!-- Driver Modal Content Body -->
+            <div class="p-5 overflow-y-auto flex-1 space-y-4">
+                <div class="grid sm:grid-cols-2 gap-4">
+                    <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800/80">
+                        <div class="flex items-center justify-between mb-3 border-b border-slate-800/80 pb-2">
+                            <span class="text-xs font-bold uppercase tracking-wider text-emerald-400">Fixed in this version</span>
+                            <span id="driver-modal-fixed-count" class="bg-emerald-950 text-emerald-400 border border-emerald-800/50 text-[10px] font-mono px-2 py-0.5 rounded">0</span>
+                        </div>
+                        <ul id="driver-modal-fixed-list" class="space-y-2 max-h-[350px] overflow-y-auto pr-1"></ul>
+                    </div>
+
+                    <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800/80">
+                        <div class="flex items-center justify-between mb-3 border-b border-slate-800/80 pb-2">
+                            <span class="text-xs font-bold uppercase tracking-wider text-amber-400">Known / Open Issues</span>
+                            <span id="driver-modal-known-count" class="bg-amber-950 text-amber-400 border border-amber-800/50 text-[10px] font-mono px-2 py-0.5 rounded">0</span>
+                        </div>
+                        <ul id="driver-modal-known-list" class="space-y-2 max-h-[350px] overflow-y-auto pr-1"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Issue Detail View Modal Overlay -->
@@ -392,6 +435,7 @@
                     driverContainer.innerHTML = '';
                     filteredDriversDisplay.forEach((d) => {
                         let card = document.createElement('div');
+                        card.id = `driver-card-${d.version.replace(/\./g, '-')}`;
                         card.className = 'bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm space-y-4 hover:border-slate-700/80 transition';
                         
                         let fixedHtml = (d.fixed_bug_ids || []).filter(id => data.master_bugs[id]?.trim()).map(id => `
@@ -414,8 +458,8 @@
 
                         card.innerHTML = `
                             <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-                                <div>
-                                    <span class="text-xl font-bold text-white">${d.version}</span>
+                                <div class="flex items-center gap-3">
+                                    <button onclick="openDriverModal('${d.version}')" class="text-xl font-bold text-white hover:text-indigo-400 hover:underline transition font-mono">${d.version}</button>
                                 </div>
                                 <div class="text-right">
                                     <a href="${d.url}" target="_blank" class="text-indigo-400 hover:underline text-xs">Release Notes</a>
@@ -535,6 +579,25 @@
                         options: {
                             responsive: true,
                             maintainAspectRatio: false,
+                            onClick: (e, elements, chart) => {
+                                let targetIdx = null;
+
+                                // 1. Try clicking directly on an active bar element
+                                if (elements && elements.length > 0) {
+                                    targetIdx = elements[0].index;
+                                } else {
+                                    // 2. Fallback for clicking empty areas or 0-value bars on the middle axis
+                                    const valueX = chart.scales.x.getValueForPixel(e.x);
+                                    if (valueX !== undefined && valueX >= 0 && valueX < chart.data.labels.length) {
+                                        targetIdx = Math.round(valueX);
+                                    }
+                                }
+
+                                if (targetIdx !== null && chart.data.labels[targetIdx]) {
+                                    const selectedVersion = chart.data.labels[targetIdx];
+                                    openDriverModal(selectedVersion);
+                                }
+                            },
                             scales: {
                                 x: {
                                     stacked: true,
@@ -571,7 +634,7 @@
                                 tooltip: {
                                     callbacks: {
                                         title: function(context) {
-                                            return `Driver Version: ${context[0].label}`;
+                                            return `Driver Version: ${context[0].label} (Click to open)`;
                                         },
                                         label: function(context) {
                                             let label = context.dataset.label || '';
@@ -601,15 +664,81 @@
 
                 updateView();
 
-                // Check URL hash on initial load (e.g., #BUG-381)
+                // Check URL hash on initial load (e.g., #BUG-381 or #driver-26.9.2)
                 if (window.location.hash) {
-                    const hashId = window.location.hash.replace('#', '').toUpperCase();
-                    if (data.master_bugs && data.master_bugs[hashId]) {
-                        openIssueModal(hashId);
+                    const hashVal = window.location.hash.replace('#', '');
+                    if (hashVal.startsWith('driver-')) {
+                        const ver = hashVal.replace('driver-', '');
+                        openDriverModal(ver);
+                    } else if (data.master_bugs && data.master_bugs[hashVal.toUpperCase()]) {
+                        openIssueModal(hashVal.toUpperCase());
                     }
                 }
             })
             .catch(error => console.error('Error loading driver tracker data:', error));
+
+        // Function to open the dedicated Driver Detail View Modal
+        function openDriverModal(versionStr) {
+            const driverObj = globalChronologicalDrivers.find(d => d.version === versionStr);
+            if (!driverObj) return;
+
+            document.getElementById('driver-modal-version').textContent = driverObj.version;
+            document.getElementById('driver-modal-subtitle').textContent = `Full driver release details and issue breakdown`;
+            
+            const linkEl = document.getElementById('driver-modal-link');
+            if (driverObj.url) {
+                linkEl.href = driverObj.url;
+                linkEl.classList.remove('hidden');
+            } else {
+                linkEl.classList.add('hidden');
+            }
+
+            const fixedList = document.getElementById('driver-modal-fixed-list');
+            const knownList = document.getElementById('driver-modal-known-list');
+            fixedList.innerHTML = '';
+            knownList.innerHTML = '';
+
+            const validFixed = (driverObj.fixed_bug_ids || []).filter(id => globalMasterBugs[id]?.trim());
+            const validKnown = (driverObj.known_bug_ids || []).filter(id => globalMasterBugs[id]?.trim());
+
+            document.getElementById('driver-modal-fixed-count').textContent = validFixed.length;
+            document.getElementById('driver-modal-known-count').textContent = validKnown.length;
+
+            if (validFixed.length === 0) {
+                fixedList.innerHTML = `<li class="text-slate-500 text-xs py-2 italic">No fixed issues reported for this version.</li>`;
+            } else {
+                validFixed.forEach(id => {
+                    const desc = globalMasterBugs[id] || 'No description available';
+                    fixedList.innerHTML += `
+                        <li class="text-xs">
+                            <button onclick="openIssueModal('${id}')" class="text-left flex items-start gap-2 bg-emerald-950/20 hover:bg-emerald-950/50 border border-emerald-900/30 p-2 rounded transition w-full group">
+                                <span class="bg-emerald-950 text-emerald-400 group-hover:border-emerald-500 border border-emerald-800/50 font-mono text-[10px] px-1.5 py-0.5 rounded shrink-0">${id}</span>
+                                <span class="text-slate-200 group-hover:text-white transition">${desc}</span>
+                            </button>
+                        </li>
+                    `;
+                });
+            }
+
+            if (validKnown.length === 0) {
+                knownList.innerHTML = `<li class="text-slate-500 text-xs py-2 italic">No known issues listed for this version.</li>`;
+            } else {
+                validKnown.forEach(id => {
+                    const desc = globalMasterBugs[id] || 'No description available';
+                    knownList.innerHTML += `
+                        <li class="text-xs">
+                            <button onclick="openIssueModal('${id}')" class="text-left flex items-start gap-2 bg-amber-950/20 hover:bg-amber-950/50 border border-amber-900/30 p-2 rounded transition w-full group">
+                                <span class="bg-amber-950 text-amber-400 group-hover:border-amber-500 border border-amber-800/50 font-mono text-[10px] px-1.5 py-0.5 rounded shrink-0">${id}</span>
+                                <span class="text-slate-200 group-hover:text-white transition">${desc}</span>
+                            </button>
+                        </li>
+                    `;
+                });
+            }
+
+            window.history.replaceState(null, null, `#driver-${versionStr}`);
+            document.getElementById('driver-modal').classList.remove('hidden');
+        }
 
         // Function to open the dedicated Issue Detail View Modal
         function openIssueModal(bugId) {
@@ -621,7 +750,6 @@
             let fixedVersion = null;
             let appearsInVersions = [];
 
-            // Traverse chronological history to extract driver occurrences
             globalChronologicalDrivers.forEach(d => {
                 const isKnown = (d.known_bug_ids || []).includes(bugId);
                 const isFixed = (d.fixed_bug_ids || []).includes(bugId);
@@ -638,7 +766,6 @@
                 }
             });
 
-            // Populate Modal Fields
             document.getElementById('modal-bug-id').textContent = bugId;
             document.getElementById('modal-bug-title').textContent = description;
             document.getElementById('modal-first-version').textContent = firstSeenVersion || 'N/A';
@@ -653,7 +780,6 @@
                 statusBadge.className = 'text-xs px-2.5 py-0.5 rounded font-semibold bg-amber-950 text-amber-400 border border-amber-800/60';
             }
 
-            // Render Chronological Timeline Items in Modal
             appearsInVersions.reverse().forEach(item => {
                 const timelineRow = document.createElement('div');
                 timelineRow.className = 'relative flex items-center justify-between bg-slate-950/60 p-2.5 rounded-lg border border-slate-800/80';
@@ -666,7 +792,7 @@
                 timelineRow.innerHTML = `
                     <div class="flex items-center gap-2.5">
                         <span class="w-2 h-2 rounded-full ${dotColor} shrink-0 -ml-[21px]"></span>
-                        <span class="font-bold text-white font-mono text-sm">${item.version}</span>
+                        <button onclick="openDriverModal('${item.version}')" class="font-bold text-white font-mono text-sm hover:text-indigo-400 hover:underline transition">${item.version}</button>
                         <span class="${statusColor} font-medium text-[11px]">${statusLabel}</span>
                     </div>
                     <a href="${item.url}" target="_blank" class="text-indigo-400 hover:underline text-[11px] shrink-0">Release Notes</a>
@@ -674,24 +800,35 @@
                 historyList.appendChild(timelineRow);
             });
 
-            // Update URL hash for easy bookmarking/sharing
             window.history.replaceState(null, null, `#${bugId}`);
-
-            // Show Modal
             document.getElementById('issue-modal').classList.remove('hidden');
         }
 
-        // Close Modal Handler
+        // Close Modal Handlers
         document.getElementById('close-modal').addEventListener('click', closeModal);
         document.getElementById('issue-modal').addEventListener('click', (e) => {
             if (e.target.id === 'issue-modal') closeModal();
         });
+
+        document.getElementById('close-driver-modal').addEventListener('click', closeDriverModal);
+        document.getElementById('driver-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'driver-modal') closeDriverModal();
+        });
+
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeModal();
+            if (e.key === 'Escape') {
+                closeModal();
+                closeDriverModal();
+            }
         });
 
         function closeModal() {
             document.getElementById('issue-modal').classList.add('hidden');
+            window.history.replaceState(null, null, ' ');
+        }
+
+        function closeDriverModal() {
+            document.getElementById('driver-modal').classList.add('hidden');
             window.history.replaceState(null, null, ' ');
         }
     </script>
