@@ -51,7 +51,7 @@
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-7-1.html",
             "fixed_bug_ids": [
                 "BUG-304",
-                "BUG-305",
+                "BUG-369",
                 "BUG-306",
                 "BUG-307",
                 "BUG-308",
@@ -186,14 +186,14 @@
                 "BUG-309",
                 "BUG-338",
                 "BUG-310",
-                "BUG-358"
+                "BUG-361"
             ]
         },
         {
             "version": "26.1.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-1-1.html",
             "fixed_bug_ids": [
-                "BUG-346",
+                "BUG-345",
                 "BUG-347",
                 "BUG-348",
                 "BUG-349",
@@ -304,7 +304,7 @@
                 "BUG-319",
                 "BUG-320",
                 "BUG-323",
-                "BUG-322",
+                "BUG-331",
                 "BUG-267",
                 "BUG-326",
                 "BUG-327"
@@ -327,7 +327,7 @@
                 "BUG-319",
                 "BUG-320",
                 "BUG-321",
-                "BUG-322",
+                "BUG-331",
                 "BUG-267",
                 "BUG-323"
             ]
@@ -365,7 +365,7 @@
                 "BUG-282",
                 "BUG-288",
                 "BUG-295",
-                "BUG-301"
+                "BUG-331"
             ]
         },
         {
@@ -565,10 +565,10 @@
                 "BUG-209",
                 "BUG-234",
                 "BUG-230",
-                "BUG-184"
+                "BUG-112"
             ],
             "known_bug_ids": [
-                "BUG-232",
+                "BUG-236",
                 "BUG-235"
             ]
         },
@@ -586,10 +586,10 @@
             ],
             "known_bug_ids": [
                 "BUG-229",
-                "BUG-184",
+                "BUG-112",
                 "BUG-230",
                 "BUG-231",
-                "BUG-232"
+                "BUG-236"
             ]
         },
         {
@@ -607,7 +607,7 @@
                 "BUG-221"
             ],
             "known_bug_ids": [
-                "BUG-184",
+                "BUG-112",
                 "BUG-222",
                 "BUG-215"
             ]
@@ -626,7 +626,7 @@
                 "BUG-208",
                 "BUG-209",
                 "BUG-213",
-                "BUG-184",
+                "BUG-112",
                 "BUG-214",
                 "BUG-215"
             ]
@@ -648,7 +648,7 @@
                 "BUG-209",
                 "BUG-202",
                 "BUG-210",
-                "BUG-184"
+                "BUG-112"
             ]
         },
         {
@@ -671,7 +671,7 @@
                 "BUG-202",
                 "BUG-203",
                 "BUG-204",
-                "BUG-184",
+                "BUG-112",
                 "BUG-205",
                 "BUG-206",
                 "BUG-176"
@@ -684,8 +684,8 @@
                 "BUG-185",
                 "BUG-166",
                 "BUG-114",
-                "BUG-186",
-                "BUG-177",
+                "BUG-179",
+                "BUG-201",
                 "BUG-187",
                 "BUG-188",
                 "BUG-189",
@@ -699,7 +699,7 @@
                 "BUG-192",
                 "BUG-193",
                 "BUG-182",
-                "BUG-184"
+                "BUG-112"
             ]
         },
         {
@@ -713,26 +713,26 @@
                 "BUG-168",
                 "BUG-169",
                 "BUG-170",
-                "BUG-171",
+                "BUG-127",
                 "BUG-172",
                 "BUG-163",
                 "BUG-164",
                 "BUG-162",
-                "BUG-173",
+                "BUG-165",
                 "BUG-174"
             ],
             "known_bug_ids": [
                 "BUG-175",
                 "BUG-114",
                 "BUG-176",
-                "BUG-177",
-                "BUG-178",
+                "BUG-201",
+                "BUG-187",
                 "BUG-179",
                 "BUG-180",
                 "BUG-181",
                 "BUG-182",
                 "BUG-183",
-                "BUG-184",
+                "BUG-112",
                 "BUG-185"
             ]
         },
@@ -753,7 +753,7 @@
                 "BUG-158",
                 "BUG-159",
                 "BUG-160",
-                "BUG-161",
+                "BUG-112",
                 "BUG-162",
                 "BUG-163",
                 "BUG-164",
@@ -774,7 +774,7 @@
             "known_bug_ids": [
                 "BUG-112",
                 "BUG-148",
-                "BUG-149",
+                "BUG-152",
                 "BUG-150",
                 "BUG-151"
             ]
@@ -894,7 +894,7 @@
             "version": "23.8.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-8-1.html",
             "fixed_bug_ids": [
-                "BUG-113",
+                "BUG-145",
                 "BUG-106",
                 "BUG-111",
                 "BUG-114",
@@ -916,7 +916,7 @@
             ],
             "known_bug_ids": [
                 "BUG-103",
-                "BUG-108",
+                "BUG-031",
                 "BUG-109",
                 "BUG-110",
                 "BUG-112",
@@ -935,7 +935,7 @@
             ],
             "known_bug_ids": [
                 "BUG-103",
-                "BUG-108",
+                "BUG-031",
                 "BUG-109",
                 "BUG-110",
                 "BUG-111",
@@ -981,7 +981,7 @@
             "version": "23.5.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-5-1.html",
             "fixed_bug_ids": [
-                "BUG-090",
+                "BUG-095",
                 "BUG-012",
                 "BUG-091",
                 "BUG-092"
@@ -1118,7 +1118,7 @@
                 "BUG-053",
                 "BUG-054",
                 "BUG-044",
-                "BUG-055",
+                "BUG-120",
                 "BUG-048",
                 "BUG-049",
                 "BUG-056",
@@ -1235,8 +1235,8 @@
             ],
             "known_bug_ids": [
                 "BUG-021",
-                "BUG-008",
-                "BUG-011",
+                "BUG-023",
+                "BUG-022",
                 "BUG-012"
             ]
         },
@@ -1251,8 +1251,8 @@
             "known_bug_ids": [
                 "BUG-015",
                 "BUG-009",
-                "BUG-008",
-                "BUG-011",
+                "BUG-023",
+                "BUG-022",
                 "BUG-012"
             ]
         },
@@ -1269,10 +1269,10 @@
                 "BUG-007"
             ],
             "known_bug_ids": [
-                "BUG-008",
+                "BUG-023",
                 "BUG-009",
                 "BUG-010",
-                "BUG-011",
+                "BUG-022",
                 "BUG-012"
             ]
         }
@@ -1285,10 +1285,8 @@
         "BUG-005": "Chromium-based browsers may experience video stuttering on extended monitors with mixed refresh rates using Radeon™ RX 6000 series GPUs.",
         "BUG-006": "Oculus dashboard menu and rendered controllers may appear bouncing/wobbly on Oculus Quest 2 with some AMD Graphics Products such as the Radeon™ RX 6800 XT Graphics.",
         "BUG-007": "While previewing the timeline in VEGAS Pro™, some colors may appear inverted.",
-        "BUG-008": "GPU utilization may be stuck at 100% in Radeon performance metrics after closing games on some AMD Graphics Products such as Radeon™ 570.",
         "BUG-009": "When Radeon™ Anti-Lag is enabled, a beep can be heard when pressing shift + back key.",
         "BUG-010": "Elite Dangerous may crash upon launch on Radeon™ RX 6000 series GPUs.",
-        "BUG-011": "Stuttering may occur during video playback using hardware acceleration with Firefox on some AMD Graphics Products such as the Radeon™ RX 6900 XT Graphics.",
         "BUG-012": "Brief display corruption may occur when switching between video and game windows on some AMD Graphics Products such as the Radeon™ RX 6700 XT.",
         "BUG-013": "Black screen may occur during driver upgrade or settings reset using Microsoft® Windows® 11 version 22H2 on Radeon™ RX 6000 series GPUs.",
         "BUG-014": "Lower than expected performance on Gotham Knights™ using AMD Processors on some AMD Graphics Products such as Radeon™ RX 6950 XT.",
@@ -1329,7 +1327,6 @@
         "BUG-052": "Corruption may be observed while scrolling the points shop in STEAM™ on Radeon RX 6000 series GPUs.",
         "BUG-053": "Performance drop may be observed during Fortnite™ and YouTube playback with Enhanced Sync enabled on some AMD Graphics Products such as AMD Radeon™ RX 5700 XT.",
         "BUG-054": "Corruption or game crash may be observed while playing Door Kickers 2™.",
-        "BUG-055": "Application crash may be observed when launching Baldur's Gate 3™ using Vulkan® API on Radeon™ RX 7000 series GPUs.",
         "BUG-056": "White foliage may be observed while playing Hogwarts Legacy™ on Radeon™ RX 7000 series GPUs.",
         "BUG-057": "AMD Bug Report Tool pop-up or system hang may be observed after driver upgrade on some hybrid graphics notebooks. Users are recommended to use the factory reset install option as a workaround.",
         "BUG-058": "Corruption may be briefly observed when moving Netflix video between displays or minimize-to-fullscreen on some AMD Products such as AMD Ryzen™ 7 6800U.",
@@ -1344,7 +1341,7 @@
         "BUG-067": "Intermittent driver timeout, system freeze or BSOD may be observed using select displays on Radeon™ RX 7000 series GPUs.",
         "BUG-068": "Connection failure or black screen may be observed using Parsec client with AMD decoder setting.",
         "BUG-069": "Application crash may be observed while playing UNCHARTED™: Legacy of Thieves Collection on some AMD Graphics Products such as the Radeon™ RX 6700 XT.",
-        "BUG-070": "The Performance Metrics Overlay may intermittently resize across the display on some AMD Graphics Products such as the Radeon™ RX 6600M. As a temporary solution, users encountering this are recommended to disable the Performance Metrics Overlay.",
+        "BUG-070": "The Performance Metrics Overlay may intermittently resize across the display on some AMD Graphics Products such as the Radeon™ RX 6600M.",
         "BUG-071": "The Performance Metrics Overlay may have some missing units when enabled, or situationally become truncated after changing display scaling settings.",
         "BUG-072": "Application crash may be observed while playing Genshin Impact™ on some AMD Graphics Products, such as the Radeon™ RX 6750 XT.",
         "BUG-073": "Corruption may be observed while playing It Takes Two™ on Radeon™ RX 7000 series GPUs.",
@@ -1362,7 +1359,6 @@
         "BUG-087": "Red corruption may occur in World War Z™: Aftermath when using the Vulkan® API.",
         "BUG-088": "Longer than expected shader compilation time when first launching THE LAST OF US™ Part I.",
         "BUG-089": "Application crash may be intermittently observed while playing RuneScape™ on some AMD Graphics Products, such as the Radeon™ RX 5700 XT.",
-        "BUG-090": "Application crash or driver timeout may be observed during video playback using DaVinci Resolve™ Studio.",
         "BUG-091": "Higher than expected memory usage during shader compilation time when first launching THE LAST OF US™ Part I.",
         "BUG-092": "Intermittent system crash while playing Call of Duty®: Modern Warfare® II on some AMD Graphics Products, such as the Radeon™ RX 580.",
         "BUG-093": "System crashes or freezes may occur after installing the driver on certain laptops that use hybrid graphics with AMD products, such as the AMD Ryzen™ 9 7945HX. Users that may experience this issue are recommended to use AMD Software: Adrenalin Edition 23.4.3 or the latest available OEM driver.",
@@ -1379,12 +1375,10 @@
         "BUG-105": "Higher than expected GPU Memory Utilization when using certain Record and Stream settings such as Instant Replay.",
         "BUG-106": "Performance drop may be experienced for DirectX® 11 games on AMD Radeon™ RX 5600 XT when AMD SmartAccess Memory is Enabled. As a temporary workaround, users encountering this are recommended to disable SmartAccess Memory in the Performance Tuning Page.",
         "BUG-107": "Audio may intermittently become out of sync with video when recording from AMD Software: Adrenalin Edition with AVC and HEVC codecs.",
-        "BUG-108": "High idle power has situationally been observed when using select multi-display setups with mixed high-resolution and high refresh rate displays on Radeon™ RX 7000 series GPUs.",
         "BUG-109": "Intermittent corruption may be observed playing Rocket League™ with Bloom set to Off on some AMD Graphics Products, such as the Radeon™ RX 6900 XT.",
         "BUG-110": "Intermittent application hang for a few seconds may be observed while playing RuneScape™ on some AMD Graphics Products, such as the Radeon™ RX 5700 XT.",
         "BUG-111": "Application crash or driver timeout may be observed while playing Ratchet & Clank™: Rift Apart with Ray-Tracing and Dynamic Resolution Scaling enabled on some AMD Graphics Products, such as the Radeon™ RX 7900 XTX.",
         "BUG-112": "Audio may intermittently become out of sync with video when recording from AMD Software: Adrenalin Edition with AV1 codec.",
-        "BUG-113": "Improvements to high idle power when using select multi-display setups with mixed high-resolution and high refresh rate displays on Radeon™ RX 7000 series GPUs with variable refresh rate enabled. Further optimizations are being investigated to improve idle power on additional display configurations.",
         "BUG-114": "Application crash or driver timeout may be observed while playing Starcraft II™ on Radeon™ RX 7000 series GPUs.",
         "BUG-115": "Performance drop may be experienced for various games on AMD Ryzen™ processors with Radeon™ 700M series GPUS.",
         "BUG-116": "Display may not reach correct brightness with certain games on some SAMSUNG™ FreeSync Premium Pro displays and TVs when local dimming is enabled.",
@@ -1418,7 +1412,6 @@
         "BUG-146": "Certain textures may become invisible while playing Final Fantasy X HD Remaster on Radeon™ RX 7000 series GPUs.",
         "BUG-147": "Intermittent stutter while playing Overwatch 2 on some AMD Graphics Products, such as the Radeon™ RX 6900 XT.",
         "BUG-148": "Intermittent grey screen after driver upgrade with certain monitors (such as Nixeus NX-EDG274K) on Radeon™ RX 7000 series GPUs.",
-        "BUG-149": "Performance drop may be observed in some light DirectML workloads.",
         "BUG-150": "Graphics API metric may show as N/A in certain UWP applications.",
         "BUG-151": "Intermittent flickering of certain ground textures may be observed while playing War Thunder with 4x SAAA enabled on some AMD Graphics Products, such as the Radeon™ RX 7900 XTX.",
         "BUG-152": "Performance drop may be observed in some DirectML workloads.",
@@ -1430,7 +1423,6 @@
         "BUG-158": "Dead Space may experience an application crash after enabling RTAO on some AMD Graphics Products, such as the Radeon™ RX 6800.",
         "BUG-159": "Excessive stuttering may be experienced when first playing a match in Overwatch 2 and Battlefield™ 2042.",
         "BUG-160": "HDR setting may not take effect until resizing/moving the window while playing certain games such as Like A Dragon: Infinite Wealth.",
-        "BUG-161": "Audio may intermittently become out of sync with the video when recording from AMD Software: Adrenalin Edition using AV1 codec.",
         "BUG-162": "Oculus Rift S may display with a green tint on AMD Radeon™ RX 7000 series GPUs.",
         "BUG-163": "After a system reboot, Parsec host application may experience a crash on some AMD Graphics Products, such as the Radeon™ RX 7900 XTX.",
         "BUG-164": "During Microsoft Teams meetings, the camera may intermittently display looped footage on some AMD Products, such as the AMD Ryzen™ 7 7840U Processor.",
@@ -1440,22 +1432,16 @@
         "BUG-168": "Intermittent application crash when first launching Enshrouded or changing Anti-Aliasing settings on Radeon™ 7000 series graphics products.",
         "BUG-169": "Shadows may appear bright, or reflections may be missing while playing Enshrouded on Radeon™ 7000 series graphics products.",
         "BUG-170": "HDR settings may intermittently fail to take effect while playing certain games such as Like A Dragon: Infinite Wealth.",
-        "BUG-171": "Intermittent driver timeout or application crash may be considered while playing Counterstrike 2 with FSR enabled on some AMD Graphics Products, such as the Radeon™ RX 7900 XTX.",
         "BUG-172": "Graphics API metric may be incorrectly reported as DirectX® 12 for some Vulkan® games.",
-        "BUG-173": "AFMF may be inaccurately displayed on select hybrid graphics configurations, particularly in systems where one of the devices lacks support for AFMF. AFMF must be supported on the displaying GPU to be activated.",
         "BUG-174": "Mouse lag or stutter may be observed when selecting the discrete GPU as the primary display adapter on certain mobile systems, such as an AMD Ryzen™ 9 6900HS Mobile Processor paired with an AMD Radeon™ RX 6800S Mobile GPU.",
         "BUG-175": "Intermittent driver timeout or application crash may be experienced while playing HELLDIVERS™ 2 with 100% GPU utilization on some AMD Graphics Products, such as the Radeon™ RX 7900 XTX.",
         "BUG-176": "Intermittent application crash or driver timeout may be observed while playing Overwatch® 2 with Radeon™ Boost enabled on Radeon™ RX 6000 and above series GPUs.",
-        "BUG-177": "Purple corruption may be observed while playing Dying Light 2 Stay Human: Reloaded Edition with Radeon™ Boost and Raytracing enabled.",
-        "BUG-178": "Some textures for characters may appear invisible while playing Cossacks 3.",
         "BUG-179": "World of Warcraft may experience extended initial loading times with DirectX 12 API on some AMD Graphics Products, such as the Radeon™ RX 6800.",
         "BUG-180": "Shader caching may fail for Windows usernames containing accented characters.",
         "BUG-181": "FPS performance metric may incorrectly report values while a game is minimized.",
         "BUG-182": "AMD SmartAccess Video may be incorrectly reported as “Available” on some systems with the Parsec Virtual Display Driver installed.",
         "BUG-183": "Performance drop may be observed while using some DirectML workloads in Topaz AI.",
-        "BUG-184": "Audio and video may intermittently become out of sync while recording using the AV1 codec in AMD Software: Adrenalin Edition.",
         "BUG-185": "Excessive micro stutter may be intermittently experienced after enabling AMD Fluid Motion Frames for select games.",
-        "BUG-186": "Improvements to reduce initial loading times while playing World of Warcraft with DirectX 12 API on some AMD Graphics Products, such as the Radeon™ RX 6800.",
         "BUG-187": "Some characters may appear invisible or have missing textures while playing Cossacks 3.",
         "BUG-188": "Flickering lights may be observed while playing Space Engineers in certain indoor environments.",
         "BUG-189": "The maximum memory tuning limit may be incorrectly reported on AMD Radeon™ RX 7900 GRE graphics products.",
@@ -1500,7 +1486,6 @@
         "BUG-229": "Overly dark shadows or desaturated colors may be observed while playing Black Myth: Wukong when Global Illumination is to Medium or higher.",
         "BUG-230": "AMD Software: Adrenalin Edition may unexpectedly initiate upon system wake from sleep mode.",
         "BUG-231": "Intermittent driver timeout or application crash while playing Warhammer 40,000: Space Marine 2.",
-        "BUG-232": "Intermittent performance when entering certain areas while playing DayZ",
         "BUG-233": "Intermittent driver timeout or application crash during certain cutscenes while playing FINAL FANTASY XVI on some AMD Graphics Products, such as the Radeon™ RX 6600 XT.",
         "BUG-234": "AFMF may become inactive after enabling certain on-screen overlays.",
         "BUG-235": "Intermittent driver timeout or crash may be observed while playing Warhammer 40,000: Space Marine 2 on some AMD Graphics Products, such as the AMD Ryzen™ AI 9 HX 370.",
@@ -1565,11 +1550,9 @@
         "BUG-295": "Stutter and lower than expected performance may be observed while playing 4K resolution YouTube videos in Chromium.",
         "BUG-296": "Texture flickering or corruption may appear while playing The Elder Scrolls IV: Oblivion Remastered with AMD FidelityFX™ Super Resolution enabled on Radeon™ RX 9070 XT.",
         "BUG-299": "Lower than expected performance may be observed while playing Warhammer 40,000: Darktide on Radeon™ RX 9070 series graphics products.",
-        "BUG-301": "Intermittent application crash may be observed while playing FBC: Firebreak on some AMD Ryzen AI 300 series and some AMD Ryzen 7000 series APU products.",
         "BUG-302": "AMD FidelityFX™ Super Resolution 4 (FSR 4) is not enabled while playing DragonKin: The Banished, Blades of Fire, RoadCraft, The Alters, Star Wars Outlaws and S.T.A.L.K.E.R. 2: Heart of Chornobyl on Radeon™ RX 9000 series graphics products.",
         "BUG-303": "Intermittent system or application crash maybe observed while playing Black Myth: WuKong on Radeon™ RX 7650 GRE graphics products.",
         "BUG-304": "Model flickering or rendering failure may be observed in Maxon Cinema 4D and Blender on Radeon™ RX 7000 series and above graphics products.",
-        "BUG-305": "Intermittent application crash may be observed on some models while running Blender on Radeon™ RX 7000 series and above graphics products.",
         "BUG-306": "Directional indicator icon may fail to render while playing Fortnite on Radeon™ RX 7000 series and above graphics products.",
         "BUG-307": "Intermittent application crash may be observed in some games with AMD FSR Upscaling 4.1 enabled on Windows® 10 systems for Radeon™ RX 7000 series graphics products.",
         "BUG-308": "AMD FSR Upscaling and AMD FSR Frame Generation may show as inactive in AMD Software: Adrenalin Edition while playing Battlefield™ 6 when enabled on Radeon™ RX 9000 series graphics products.",
@@ -1585,7 +1568,6 @@
         "BUG-319": "Intermittent application crash may be observed while playing The Last of Us Part II on Radeon™ RX 7900 series graphics products.",
         "BUG-320": "Intermittent application crash may be observed while playing Call of Duty®: Black Ops 6 on Radeon™ RX 9000 series graphics products.",
         "BUG-321": "Intermittent application crash or driver timeout may be observed while playing Wuchang: Fallen Feathers with FSR 4 enabled on Radeon™ RX 9000 series graphics products.",
-        "BUG-322": "Intermittent application crash may be observed while playing FBC: Firebreak on some AMD Ryzen™ processors such as the Ryzen™ AI 300 series and the Ryzen™ 7000 series.",
         "BUG-323": "Intermittent application crash may be observed while playing NBA 2K25 in MyCareer mode on Radeon™ RX 9070 series graphics products.",
         "BUG-324": "Playstation® VR controllers are not detected while playing SteamVR™.",
         "BUG-325": "Intermittent application crash or driver timeout may be observed while playing Monster Hunter Wilds with Ray Tracing enabled and recording with AMD Software on Radeon™ RX 7600, 7700, and 7800 series graphics products.",
@@ -1609,7 +1591,6 @@
         "BUG-343": "Intermittent application freeze when using the in-game Radeon™ Overlay.",
         "BUG-344": "Intermittent application crash when playing ARC Raiders on the Blue Gate map on Radeon™ RX 9000 series products.",
         "BUG-345": "Some shadows may not render correctly while playing Call of Duty®: Black Ops 7 on some AMD Graphics Products. AMD is actively working on a resolution with the developer to be released as soon as possible.",
-        "BUG-346": "Some shadows may not render correctly while playing Call of Duty®: Black Ops 7 on some AMD Graphics Products on Radeon™ RX 5000 series and Radeon™ RX 6000 series graphics products.",
         "BUG-347": "Texture corruption may be observed when playing Enshrouded while at the first “Elixir Well” location on Radeon™ RX 7000 series and Radeon™ RX 9000 series graphics products.",
         "BUG-348": "Application may fail to launch while playing Diablo 4 with usernames containing non-english characters on Radeon™ RX 7000 series and Radeon™ RX 9000 series graphics products.",
         "BUG-349": "Some lights may not render correctly while playing Microsoft Flight Simulator 2024 during nighttime scenes on Radeon™ RX 9000 series graphics products.",
@@ -1621,7 +1602,6 @@
         "BUG-355": "Artifact may appear when playing Baldur’s Gate 3 with TAA enabled on Radeon™ RX 5000 series and Radeon™ RX 6000 series graphics products.",
         "BUG-356": "Corrupted clouds may be observed while playing Arc Raiders on Radeon™ RX 9000 series graphics products.",
         "BUG-357": "Intermittent application crash may be observed when playing The Finals with ray tracing enabled on Radeon™ RX 7000 series products.",
-        "BUG-358": "AMD FSR Upscaling and AMD FSR Frame Generation may show as inactive in AMD Software: Adrenalin Edition when playing Yakuza Kiwami 3 & Dark Ties and Call of Duty®: Black Ops 7 when enabled on Radeon™ RX 9000 series graphics products.",
         "BUG-360": "Texture flickering or corruption may appear while using Windows desktop applications with Instant Replay and Record Desktop enabled on Radeon™ RX 7000 series products.",
         "BUG-361": "AMD FSR Upscaling and AMD FSR Frame Generation may show as inactive in AMD Software: Adrenalin Edition when playing Yakuza Kiwami 3 & Dark Ties, Call of Duty®: Black Ops 7, and Resident Evil Requiem when enabled on Radeon™ RX 9000 series graphics products.",
         "BUG-362": "Users may experience intermittent loss of mouse and keyboard functionality both in-game and on the desktop when interacting with AMD Software: Adrenalin Edition.",
