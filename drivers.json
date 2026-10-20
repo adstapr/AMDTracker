@@ -1644,15 +1644,15 @@
         "BUG-385": "Intermittent driver timeout may be observed while playing War Thunder in DirectX 12 mode with Instant Replay and Borderless Region Capture enabled on Radeon™ RX 6000 series graphics products.",
         "BUG-386": "Intermittent driver timeout or system freeze may be observed while playing HITMAN™ World of Assassination on Radeon™ RX 9000 series graphics products.",
         "BUG-387": "Intermittent application crash or driver timeout may be observed while playing Assassin's Creed Black Flag Resynced on Radeon™ RX 7000 series graphics products.",
-        "BUG-388": "Intermittent driver timeout may be observed while playing War Thunder on Radeon™ RX 5000 series graphics products."
-        "BUG-389": "Stuttering may be observed while playing the Call of Duty®: Modern Warfare® 4 on Radeon™ RX 6000 series graphics products and above."
-        "BUG-390": "Intermittent system shutdown may be observed while playing Valor Mortis on Radeon™ RX 7600 series graphics products."
-        "BUG-391": "Intermittent driver timeout may be observed while playing Valor Mortis on Radeon™ RX 7000 series graphics products."
-        "BUG-392": "Intermittent system shutdown may be observed while playing FINAL FANTASY RESONANCE on Ryzen™ AI MAX PRO 400 Series processors."
-        "BUG-393": "Intermittent application hang may be observed while playing Death Stranding 2: On the Beach with AMD FSR enabled on Radeon™ RX 9000 series graphics products."
-        "BUG-394": "Intermittent application crash or driver timeout may be observed while playing Cyberpunk 2077 with AMD FSR Upscaling, AMD Radeon™ Anti-Lag and in-game frame generation enabled during video playback on a secondary display on some Radeon™ RX 9000 series graphics products."
-        "BUG-395": "Black screen may be observed when launching Fallout 76 on Ryzen™ AI Max PRO 400 Series processors."
-        "BUG-396": "Intermittent application crash or driver timeout may be observed in some games when opening or closing other overlays, such as Xbox Game Bar, while the AMD Software: Adrenalin Edition Performance Metrics Overlay is enabled on Radeon™ graphics products."
+        "BUG-388": "Intermittent driver timeout may be observed while playing War Thunder on Radeon™ RX 5000 series graphics products.",
+        "BUG-389": "Stuttering may be observed while playing the Call of Duty®: Modern Warfare® 4 on Radeon™ RX 6000 series graphics products and above.",
+        "BUG-390": "Intermittent system shutdown may be observed while playing Valor Mortis on Radeon™ RX 7600 series graphics products.",
+        "BUG-391": "Intermittent driver timeout may be observed while playing Valor Mortis on Radeon™ RX 7000 series graphics products.",
+        "BUG-392": "Intermittent system shutdown may be observed while playing FINAL FANTASY RESONANCE on Ryzen™ AI MAX PRO 400 Series processors.",
+        "BUG-393": "Intermittent application hang may be observed while playing Death Stranding 2: On the Beach with AMD FSR enabled on Radeon™ RX 9000 series graphics products.",
+        "BUG-394": "Intermittent application crash or driver timeout may be observed while playing Cyberpunk 2077 with AMD FSR Upscaling, AMD Radeon™ Anti-Lag and in-game frame generation enabled during video playback on a secondary display on some Radeon™ RX 9000 series graphics products.",
+        "BUG-395": "Black screen may be observed when launching Fallout 76 on Ryzen™ AI Max PRO 400 Series processors.",
+        "BUG-396": "Intermittent application crash or driver timeout may be observed in some games when opening or closing other overlays, such as Xbox Game Bar, while the AMD Software: Adrenalin Edition Performance Metrics Overlay is enabled on Radeon™ graphics products.",
         "BUG-397": "Intermittent system crash or hang may be observed when switching between applications or toggling overlays while playing games with in-game AMD FSR Frame Generation enabled on Radeon™ RX 9000 series graphics products."
     }
 }
