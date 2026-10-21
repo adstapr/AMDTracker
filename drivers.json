@@ -983,6 +983,20 @@
         {
             "version": "24.8.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-8-1.html",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [
+                "Hyper-Tune is now supported in: Call of Duty®: Modern Warfare® III, Marvel's Spider-Man Remastered, & Marvel's Spider-Man: Miles Morales",
+                "Support and optimizations for the latest 2.1 version of Amuse application with FLUX.1 model support.",
+                "Expanded Vulkan Extensions Support: VK_KHR_video_decode_av1"
+            ],
+            "New Game Support": [
+                "Call of Duty®: Black Ops 6 Open Beta",
+                "Concord™",
+                "FINAL FANTASY XVI",
+                "Star Wars Outlaws™"
+            ],
             "fixed_bug_ids": [
                 "BUG-215",
                 "BUG-222",
@@ -1003,6 +1017,16 @@
         {
             "version": "24.7.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-7-1.html",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [
+                "Hyper-Tune is now supported in: Gray Zone Warfare, Lords of the Fallen, RoboCop: Rogue City, & Like a Dragon Gaiden: The Man Who Erased His Name."
+            ],
+            "New Game Support": [
+                "Zenless Zone Zero",
+                "Kunitsu-Gami: Path of the Goddess"
+            ],
             "fixed_bug_ids": [
                 "BUG-214",
                 "BUG-217",
@@ -1023,6 +1047,22 @@
         {
             "version": "24.6.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-6-1.html",
+            "Type": 3,
+            "New Features": [
+                "AMD Radeon™ Anti-Lag 2"
+            ],
+            "New Product support": [],
+            "Other Improvements": [
+                "Hyper-Tune is now supported in: Like a Dragon: Infinite Wealth, Overwatch® 2, The First Descendant, F1® 24, & Outpost: Infinity Siege",
+                "Performance improvements and memory footprint reduction for Large Language Models (LLMs) thanks to 4-bit quantization acceleration support for all RDNA™ series discrete graphics products and RDNA™ 3 series integrated graphics products running ONNXRuntime with DirectML.",
+                "Official support for Windows Subsystem for Linux (WSL 2) enabling PyTorch users with supported hardware to develop with AMD ROCm™ software on a Windows system, eliminating the need for dual boot set ups.",
+                "Expanded Agility SDK Support: Microsoft DirectX 12 Work Graphs 1.0 API, GPU Upload Heaps, Shader Model 6.8, & R9B9G9E5 Support for Render Targets and UAV.",
+                "vLLM support for Llama2 & Llama3"
+            ],
+            "New Game Support": [
+                "The First Descendant",
+                "Once Human"
+            ],
             "fixed_bug_ids": [
                 "BUG-205",
                 "BUG-175",
@@ -1042,6 +1082,17 @@
         {
             "version": "24.5.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-5-1.html",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [
+                "Hyper-Tune is now supported in: Ghost of Tsushima DIRECTOR'S CUT, Horizon Forbidden West™ Complete Edition, Starfield, & The Last of Us™ Part I"
+            ],
+            "New Game Support": [
+                "Ghost of Tsushima DIRECTOR'S CUT",
+                "Senua’s Saga: Hellblade II",
+                "F1® 24"
+            ],
             "fixed_bug_ids": [
                 "BUG-206",
                 "BUG-176",
@@ -1062,6 +1113,19 @@
         {
             "version": "24.4.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-4-1.html",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [
+                "Performance improvements for HELLDIVERS™ 2",
+                "Hyper-Tune is now supported in: Nightingale, & SKULL AND BONES™",
+                "Expanded Vulkan Extensions Support: VK_KHR_shader_maximal_reconvergence & VK_KHR_dynamic_rendering_local_read",
+                "Support and optimizations for 7.1.0 & 7.1.1 versions of Topaz Gigapixel AI application with new “Recovery” and “Low Resolution” AI upscaling features."
+            ],
+            "New Game Support": [
+                "Manor Lords",
+                "Gray Zone Warfare Early Access"
+            ],
             "fixed_bug_ids": [
                 "BUG-194",
                 "BUG-192",
@@ -1088,6 +1152,17 @@
         {
             "version": "24.3.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-3-1.html",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [
+                "Hyper-Tune is now supported in: Dragon's Dogma 2, Diablo® IV, Ghostrunner 2, & Suicide Squad: Kill the Justice League"
+            ],
+            "New Game Support": [
+                "Dragon's Dogma 2",
+                "Horizon Forbidden West™ Complete Edition",
+                "Outpost: Infinity Siege"
+            ],
             "fixed_bug_ids": [
                 "BUG-185",
                 "BUG-175",
@@ -1113,6 +1188,18 @@
         {
             "version": "24.2.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-2-1.html",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [
+                "Hyper-Tune is now supported in: THE FINALS, Like A Dragon: Infinite Wealth, Forza Motorsport, & Ratchet & Clank™: Rift Apart",
+                "Expanded Vulkan Extensions Support (see release notes for extention names)"
+            ],
+            "New Game Support": [
+                "SKULL AND BONES™",
+                "Nightingale",
+                "The Thaumaturge"
+            ],
             "fixed_bug_ids": [
                 "BUG-175",
                 "BUG-159",
@@ -1147,6 +1234,20 @@
         {
             "version": "24.1.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-1-1.html",
+            "Type": 3,
+            "New Features": [
+                "AMD Fluid Motion Frames (AFMF)",
+                "AMD Video Upscaling",
+                "AMD Smart Technology Tab + AMD Assistant",
+            ],
+            "New Product support": [
+                "AMD Radeon™ RX 7600 XT",
+                "AMD Ryzen™ 8000G Series Desktop Processors"
+            ],
+            "Other Improvements": [
+                "Support for Hardware Accelerated GPU Scheduling has been expanded to Radeon™ RX 7600 series GPUs on Windows 11 version 22H2 and newer."
+            ],
+            "New Game Support": [],
             "fixed_bug_ids": [
                 "BUG-152",
                 "BUG-148",
@@ -1171,6 +1272,22 @@
         {
             "version": "23.12.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-12-1.html",
+            "Type": 3,
+            "New Features": [
+                "Introducing: AMD HYPR-RX Eco",
+                "Expanded OpenGL Interop Support: expanding support for FRTC, Radeon™ Super Resolution, Overlay, Record and Stream features to OpenGL games."
+            ],
+            "New Product support": [],
+            "Other Improvements": [
+                "NEW AMD Software UI Redesign",
+                "Support for Hardware Accelerated GPU Scheduling for Radeon RX 7900/7800/7700 series GPUs on Windows 11 version 22H2 and newer.",
+                "Expanded Vulkan Extenstion Support",
+                "DirectML improvements and optimizations for Topaz AI, DaVinci Resolve and Adobe Lightroom on AMD Radeon RX 600M, 700M, 6000, and 7000 series graphics."
+            ],
+            "New Game Support": [
+                "Avatar: Frontiers of Pandora",
+                "THE FINALS"
+            ],
             "fixed_bug_ids": [
                 "BUG-145",
                 "BUG-144",
@@ -1190,6 +1307,19 @@
         {
             "version": "23.11.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-11-1.html",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [
+                "Radeon Boost is now supported in: Alan Wake 2",
+                "DirectML improvements and optimizations for Stable Diffusion, Adobe Lightroom, DaVinci Resolve, UL Procyon AI workloads on AMD Radeon RX 600M, 700M, 6000, and 7000 series graphics.  "
+            ],
+            "New Game Support": [
+                "Call of Duty®: Modern Warfare® III",
+                "Like a Dragon Gaiden: The Man Who Erased His Name",
+                "The Invincible",
+                "JX3 Ultimate"
+            ],
             "fixed_bug_ids": [
                 "BUG-103",
                 "BUG-135",
@@ -1210,6 +1340,15 @@
         {
             "version": "23.10.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-10-2.html",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [],
+            "New Game Support": [
+                "Assassin's Creed Mirage",
+                "The Lords of the Fallen",
+                "Forza Motorsport"
+            ],
             "fixed_bug_ids": [
                 "BUG-126",
                 "BUG-127",
@@ -1229,6 +1368,17 @@
         {
             "version": "23.10.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-10-1.html",
+            "Type": 3,
+            "New Features": [
+                "Anti-Lag+ Support - removed in 23.10.2 due to anti cheat issues, replaced by Anti Lag 2."
+            ],
+            "New Product support": [],
+            "Other Improvements": [],
+            "New Game Support": [
+                "Assassin's Creed Mirage",
+                "The Lords of the Fallen",
+                "Forza Motorsport"
+            ],
             "fixed_bug_ids": [
                 "BUG-126",
                 "BUG-127",
