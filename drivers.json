@@ -1,8 +1,24 @@
 {
+    "type_mapping": {
+        "1": "optional (non WHQL or not specified)",
+        "2": "optional (WHQL)",
+        "3": "WHQL Recommended"
+    },
     "drivers": [
         {
             "version": "26.10.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/rn-rad-win-26-10-1.html",
+            "Type": 3,
+            "New Features": [
+                "FSR 4.1 upscaling support for: Radeon™ RX 6000, Ryzen™ AI Max 300, Ryzen™ AI Max 400, Ryzen™ AI 9 300, Ryzen™ AI 9 400."
+            ],
+            "New Product support": [],
+            "Other Improvements": [],
+            "New Game Support": [
+                "Call of Duty®: Modern Warfare® 4",
+                "STAR WARS: Galactic Racer™",
+                "FINAL FANTASY RESONANCE"
+            ],
             "fixed_bug_ids": [
                 "BUG-389"
             ],
@@ -24,6 +40,18 @@
         {
             "version": "26.9.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-9-2.html",
+            "Type": 2,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [],
+            "New Game Support": [
+                "Minecraft Dungeons II",
+                "Call of Duty®: Modern Warfare® 4 campaign early access",
+                "The Witcher 3: Wild Hunt — Remastered",
+                "Gears of War: E-Day",
+                "CONTROL Resonant",
+                "Valor Mortis"
+            ],
             "fixed_bug_ids": [
                 "BUG-384",
                 "BUG-385",
@@ -40,6 +68,14 @@
         {
             "version": "26.9.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-9-1.html",
+            "Type": 2,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [],
+            "New Game Support": [
+                "Onimusha: Way of the Sword",
+                "The Blood of Dawnwalker"
+            ],
             "fixed_bug_ids": [
                 "BUG-382"
             ],
@@ -53,6 +89,17 @@
         {
             "version": "26.8.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-8-1.html",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [
+                "AMD Radeon™ RX 9050 4GB"
+            ],
+            "Other Improvements": [],
+            "New Game Support": [
+                "Resonance: A Plague Tale Legacy",
+                "STAR WARS Zero Company™",
+                "Call of Duty®: Modern Warfare® 4 Open Beta Early Access"
+            ],
             "fixed_bug_ids": [
                 "BUG-376",
                 "BUG-377",
@@ -70,6 +117,18 @@
         {
             "version": "26.7.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-7-1.html",
+            "Type": 3,
+            "New Features": [
+                "FSR 4.1 upscaling support for: Radeon™ RX 6000, Ryzen™ AI Max 300, Ryzen™ AI Max 400, Ryzen™ AI 9 300, Ryzen™ AI 9 400."
+            ],
+            "New Product support": [
+                "AMD Radeon™ RX 9050"
+            ],
+            "Other Improvements": [],
+            "New Game Support": [
+                "Gears of War: E-Day Open Beta Early Access ",
+                "Out of Control Evolution"
+            ],
             "fixed_bug_ids": [
                 "BUG-304",
                 "BUG-369",
@@ -88,6 +147,11 @@
         {
             "version": "26.6.4",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-6-4.html",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [],
+            "New Game Support": [],
             "fixed_bug_ids": [
                 "BUG-375",
                 "BUG-307"
@@ -97,6 +161,11 @@
         {
             "version": "26.6.3",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-6-3-HOTFIX.html",
+            "Type": 1,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [],
+            "New Game Support": [],
             "fixed_bug_ids": [
                 "BUG-375"
             ],
@@ -105,6 +174,16 @@
         {
             "version": "26.6.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-6-2.html",
+            "Type": 3,
+            "New Features": [
+                "AMD FSR Upscaling 4.1 support for AMD Radeon™ RX 7000 Series Graphics cards."
+            ],
+            "New Product support": [],
+            "Other Improvements": [],
+            "New Game Support": [
+                "Assassin's Creed Black Flag Resynced",
+                "DOOM: The Dark Ages | Revelations"
+            ],
             "fixed_bug_ids": [
                 "BUG-365",
                 "BUG-373"
@@ -121,6 +200,14 @@
         {
             "version": "26.6.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-6-1.html",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [],
+            "New Game Support": [
+                "F1® 25: 2026 Season Pack",
+                "World of Tanks: HEAT"
+            ],
             "fixed_bug_ids": [
                 "BUG-370",
                 "BUG-371",
@@ -138,6 +225,14 @@
         {
             "version": "26.5.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-5-2.html",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [],
+            "New Game Support": [
+                "Forza Horizon 6",
+                "007 First Light"
+            ],
             "fixed_bug_ids": [
                 "BUG-365",
                 "BUG-368"
@@ -153,6 +248,17 @@
         {
             "version": "26.5.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-5-1.html",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [],
+            "New Game Support": [
+                "PRAGMATA",
+                "Honor of Kings: World",
+                "INDUSTRIA 2T",
+                "Tides of Tomorrow",
+                "MONGIL: STAR DIVE"
+            ],
             "fixed_bug_ids": [
                 "BUG-366",
                 "BUG-367"
@@ -168,6 +274,16 @@
         {
             "version": "26.3.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-3-1.html",
+            "Type": 3,
+            "New Features": [
+                "FSR Upscaling 4.1 for Radeon RX 9000 series graphics cards."
+            ],
+            "New Product support": [],
+            "Other Improvements": [],
+            "New Game Support": [
+                "Crimson Desert",
+                "DEATH STRANDING 2: ON THE BEACH"
+            ],
             "fixed_bug_ids": [
                 "BUG-327",
                 "BUG-362",
@@ -184,6 +300,16 @@
         {
             "version": "26.2.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-2-2.html",
+            "Type": 3,
+            "New Features": [
+                "Support for WSL with ROCm 7.2.1 now uses the open‑source ROCDGXG library, with added support for select AMD Ryzen™ processors."
+            ],
+            "New Product support": [],
+            "Other Improvements": [],
+            "New Game Support": [
+                "Resident Evil Requiem",
+                "Marathon"
+            ],
             "fixed_bug_ids": [
                 "BUG-338",
                 "BUG-360"
@@ -198,6 +324,14 @@
         {
             "version": "26.2.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-2-1.html",
+            "Type": 1,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [],
+            "New Game Support": [
+                "Yakuza Kiwami 3 & Dark Ties",
+                "Nioh 3"
+            ],
             "fixed_bug_ids": [
                 "BUG-356",
                 "BUG-357"
@@ -213,6 +347,25 @@
         {
             "version": "26.1.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-1-1.html",
+            "Type": 3,
+            "New Features": [
+                "Optional install of  AI Bundle"
+            ],
+            "New Product support": [
+                "AMD Ryzen™ AI 9 HX 475",
+                "AMD Ryzen™ AI 9 HX 470",
+                "AMD Ryzen™ AI 9 465",
+                "AMD Ryzen™ AI 7 450",
+                "AMD Ryzen™ AI 7 445",
+                "AMD Ryzen™ AI 5 435",
+                "AMD Ryzen™ AI 5 430"
+            ],
+            "Other Improvements": [],
+            "New Game Support": [
+                "Starsand Island",
+                "Avatar: Frontiers of Pandora™ - From the Ashes Edition"
+            ],
+            
             "fixed_bug_ids": [
                 "BUG-345",
                 "BUG-347",
@@ -235,6 +388,16 @@
         {
             "version": "25.12.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-12-1.html",
+            "Type": 3,
+            "New Features": [
+                "Support for AMD FSR™ “Redstone”"
+            ],
+            "New Product support": [
+                "AMD Radeon™ AI PRO R9600D",
+                "AMD Radeon™ AI PRO R9700S"
+            ],
+            "Other Improvements": [],
+            "New Game Support": [],
             "fixed_bug_ids": [
                 "BUG-339",
                 "BUG-342",
@@ -252,6 +415,17 @@
         {
             "version": "25.11.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-11-1.html",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [
+                "AMD Ryzen™ 5 7500X3D"
+            ],
+            "Other Improvements": [],
+            "New Game Support": [
+                "Call of Duty®: Black Ops 7",
+                "Anno 117: Pax Romana",
+                "ARC Raiders"
+            ],
             "fixed_bug_ids": [
                 "BUG-340",
                 "BUG-341"
@@ -268,6 +442,19 @@
         {
             "version": "25.10.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-10-2.html",
+            "Type": 3,
+            "New Features": [
+                "Expanded Vulkan Support (Radeon™ RX 7000 and 9000 series graphics products) (see notes for extention names)",
+                "Initial introduction of Work Graphs support on Radeon™ RX 9000 series graphics products."
+            ],
+            "New Product support": [
+                "AMD Ryzen™ AI 5 330"
+            ],
+            "Other Improvements": [],
+            "New Game Support": [
+                "Battlefield™ 6 (DX12)",
+                "Vampire: The Masquerade - Bloodlines 2 (DX12)"
+            ],
             "fixed_bug_ids": [
                 "BUG-319",
                 "BUG-331",
@@ -290,12 +477,29 @@
         {
             "version": "25.10.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-10-1-BATTLEFIELD-6-PREVIEW.html",
+            "Type": 1,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [],
+            "New Game Support": [
+                "Battlefield™ 6 (DX12)"
+            ],
             "fixed_bug_ids": [],
             "known_bug_ids": []
         },
         {
             "version": "25.9.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-9-2.html",
+            "Type": 1,
+            "New Features": [],
+            "New Product support": [
+                "AMD Radeon™ RX 7700"
+            ],
+            "Other Improvements": [],
+            "New Game Support": [
+                "Dying Light: The Beast",
+                "Call of Duty®: Black Ops 7 Beta"
+            ],
             "fixed_bug_ids": [
                 "BUG-328",
                 "BUG-329",
@@ -315,6 +519,16 @@
         {
             "version": "25.9.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-9-1.html",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [
+                "FSR 4 can be enabled for most games that support FSR 3.1 with DirectX® 12."
+            ],
+            "New Game Support": [
+                "Borderlands® 4",
+                "Hell Is Us"
+            ],
             "fixed_bug_ids": [
                 "BUG-318",
                 "BUG-321",
@@ -334,6 +548,24 @@
         {
             "version": "25.8.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-8-1.html",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [
+                "AMD Radeon™ RX 9060"
+            ],
+            "Other Improvements": [
+                "Expanded Vulkan Extension Support (see release notes for extention names)",
+                "HYPR-Tune is now supported in: The Alters & F1® 25",
+                "FSR 4 is now supported in: Cyberpunk 2077, WUCHANG: Fallen Feathers, Mafia: The Old Country, Arena Breakout: Infinite, Game of Thrones: Kingsroad, Wreckfest 2, & Lies of P",
+                "AMD ROCm™ on WSL for AMD Radeon™ RX 7700 XT: Forward Attention 2 (FA2) decode kernel enablement added. New models: Deepseek R1 Distilled (7B, 32B, 70B) & Qwen 2.5 7B."
+            ],
+            "New Game Support": [
+                "Mafia: The Old Country",
+                "Mecha BREAK",
+                "WUCHANG: Fallen Feathers",
+                "Valorant (Unreal Engine 5 release) ",
+                "Battlefield™ 6 Open Beta"
+            ],
             "fixed_bug_ids": [
                 "BUG-295",
                 "BUG-282",
@@ -356,6 +588,13 @@
         {
             "version": "25.6.3",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-6-3.html",
+            "Type": 1,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [
+                "FSR 4 is now supported in: Monster Hunter Wilds & Grand Theft Auto V Enhanced"
+            ],
+            "New Game Support": [],
             "fixed_bug_ids": [
                 "BUG-302",
                 "BUG-303",
@@ -372,6 +611,16 @@
         {
             "version": "25.6.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-6-2.html",
+            "Type": 1,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [
+                "FSR 4 is now supported in: The Alters, Delta Force, Dragonkin: The Banished, & RoadCraft"
+            ],
+            "New Game Support": [
+                "The Alters",
+                "FBC: Firebreak"
+            ],
             "fixed_bug_ids": [
                 "BUG-162",
                 "BUG-290",
@@ -392,6 +641,20 @@
         {
             "version": "25.6.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-6-1.html",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [
+                "AMD Radeon™ RX 9060 XT",
+                "AMD Radeon™ AI PRO R9700"
+            ],
+            "Other Improvements": [
+                "FSR 4 is now supported in: Deadzone: Rogue, F1® 25, Frostpunk 2, Legacy: Steel & Sorcery, Lords of the Fallen, Planetaries, QANGA, Rem Survival, Runescape: Dragonwilds, Star Wars Outlaws, Steel Seed, Stellar Blade™, Virtua Fighter 5 R.E.V.O, & Wild Assault.",
+                "Expanded Vulkan Extension Support (see release notes for extention names)",
+                "AMD ROCm™ on WSL for AMD Radeon™ RX 9000 Series and AMD Radeon™ AI PRO R9700: Support for Llama.cpp, Forward Attention 2 (FA2) backward pass enablement, Support for JAX (inference), New models: Llama 3.1, Qwen 1.5, ChatGLM 2/4."
+            ],
+            "New Game Support": [
+                "Onimusha™ 2: Samurai's Destiny Remaster"
+            ],
             "fixed_bug_ids": [
                 "BUG-287",
                 "BUG-292"
@@ -411,6 +674,13 @@
         {
             "version": "25.5.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-5-2-F1-25.html",
+            "Type": 1,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [],
+            "New Game Support": [
+                "F1® 25"
+            ],
             "fixed_bug_ids": [
                 "BUG-289"
             ],
@@ -422,6 +692,20 @@
         {
             "version": "25.5.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-5-1.html",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [
+                "AMD Radeon™ RX 9070 GRE"
+            ],
+            "Other Improvements": [
+                "FSR 4 is now supported in: Ghost of Tsushima DIRECTOR'S CUT, EVERSPACE™ 2, Fort Solis, Warhammer 40,000: Darktide, THE FINALS, & InFlux Redux",
+                "HYPR-Tune is now supported in: Marvel's Spider-Man 2, Marvel Rivals, Grand Theft Auto V Enhanced, Kingdom Come: Deliverance II, & Path of Exile 2",
+                "Vulkan 1.4 support, and expanded Vulkan extention support (see release notes for extention names)"
+            ],
+            "New Game Support": [
+                "DOOM: The Dark Ages",
+                "F1® 25"
+            ],
             "fixed_bug_ids": [
                 "BUG-275",
                 "BUG-269",
@@ -443,6 +727,16 @@
         {
             "version": "25.4.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-4-1.html",
+            "Type": 1,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [
+                "FSR 4 is now supported in: The Elder Scrolls IV: Oblivion® Remastered, Assassin's Creed Shadows, Kingdom Come: Deliverance II, DYNASTY WARRIORS: ORIGINS, Sid Meier's Civilization® VII, & NARAKA: BLADEPOINT.",
+                "Added support for Amuse 3 and AMD-optimized models."
+            ],
+            "New Game Support": [
+                "The Elder Scrolls IV: Oblivion® Remastered"
+            ],
             "fixed_bug_ids": [
                 "BUG-270",
                 "BUG-271",
@@ -469,6 +763,14 @@
         {
             "version": "25.3.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-3-2.html",
+            "Type": 1,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [],
+            "New Game Support": [
+                "Assassin's Creed Shadows",
+                "The Last of Us™ Part II Remastered"
+            ],
             "fixed_bug_ids": [
                 "BUG-257",
                 "BUG-260",
@@ -493,6 +795,37 @@
         {
             "version": "25.3.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-3-1.html",
+            "Type": 3,
+            "New Features": [
+                "AMD Fidelity™ FX Super Resolution 4 (AMD FSR 4)",
+                "AMD Fluid Motion Frames 2.1",
+                "AI Enhanced Features in AMD Software: Adrenalin Edition™: AMD Chat & AMD Image Inspector",
+                "AMD Install Manager",
+                "AMD Radeon™ Image Sharpening 2"
+            ],
+            "New Product support": [
+                "AMD Radeon™ RX 9070 XT",
+                "AMD Radeon™ RX 9070",
+                "AMD Radeon™ RX 7650 GRE",
+                "AMD Ryzen™ Al Max+ 395",
+                "AMD Ryzen™ AI 5 PRO 340 (AMD Radeon™ 840M)",
+                "AMD Ryzen™ AI 7 PRO 350 (AMD Radeon™ 860M)",
+                "AMD Ryzen™ AI 5 340 (AMD Radeon™ 840M)",
+                "AMD Ryzen™ Al 7 350 (AMD Radeon™ 860M)",
+                "AMD Ryzen 9 9955HX with AMD Radeon™ Graphics",
+                "AMD Ryzen 9 9850HX with AMD Radeon™ Graphics",
+                "AMD Ryzen 9 9955HX3D with AMD Radeon™ Graphics"
+            ],
+            "Other Improvements": [
+                "AMD ROCm™ on WSL for AMD Radeon™ RX 7000 Series: Official support for Llama3 8B (via vLLM) and Stable Diffusion 3 models. Support for Hugging Face transformers. Support for Ubuntu 24.04.",
+                "AI Performance Improvements on AMD Radeon™ RX 7000 Series",
+                "HYPR-Tune is now supported in: Farming Simulator 25, S.T.A.L.K.E.R. 2: Heart of Chornobyl, & Silent Hill 2",
+                "Expanded Vulkan Extension Support: VK_EXT_depth_clamp_control"
+            ],
+            "New Game Support": [
+                "FragPunk",
+                "Split Fiction"
+            ],
             "fixed_bug_ids": [
                 "BUG-246",
                 "BUG-235",
@@ -514,6 +847,16 @@
         {
             "version": "25.2.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-2-1.html",
+            "Type": 1,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [],
+            "New Game Support": [
+                "Sid Meier's Civilization VII",
+                "Avowed",
+                "Monster Hunter Wilds",
+                "Like a Dragon: Pirate Yakuza in Hawaii"
+            ],
             "fixed_bug_ids": [
                 "BUG-250",
                 "BUG-252"
@@ -529,6 +872,14 @@
         {
             "version": "25.1.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-1-1.html",
+            "Type": 1,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [],
+            "New Game Support": [
+                "Marvel's Spider-Man 2",
+                "FINAL FANTASY VII REBIRTH"
+            ],
             "fixed_bug_ids": [
                 "BUG-249",
                 "BUG-248"
@@ -545,6 +896,11 @@
         {
             "version": "24.12.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-12-1.html",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [],
+            "New Game Support": [],
             "fixed_bug_ids": [
                 "BUG-241",
                 "BUG-242",
@@ -564,6 +920,16 @@
         {
             "version": "24.10.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-10-1.html",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [
+                "HYPR-Tune is now supported in: Call of Duty®: Black Ops, 7 Days to Die, & Once Human."
+            ],
+            "New Game Support": [
+                "Unknown 9: Awakening",
+                "Call of Duty®: Black Ops 6"
+            ],
             "fixed_bug_ids": [
                 "BUG-236",
                 "BUG-237"
@@ -579,6 +945,27 @@
         {
             "version": "24.9.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-9-1.html",
+            "Type": 3,
+            "New Features": [
+                "AMD Fluid Motion Frames (AFMF) 2",
+                "AMD Radeon™ Anti-Lag 2 Vulkan® Support",
+                "Geometric Downscaling for Video",
+                "Preview of AMD FreeSync™ Color Accuracy"
+            ],
+            "New Product support": [],
+            "Other Improvements": [
+                "Radeon™ Boost is now supported in: FINAL FANTASY XVI",
+                "HYPR-Tune is now supported in: Black Myth: Wukong, Creatures of Ava, Frostpunk 2, God of War Ragnarök, & Ghost of Tsushima DIRECTOR'S CUT",
+                "Expanded Vulkan Extensions Support (check release notes for extention names)",
+                "Mesh Nodes in Work Graphs via Microsoft Agility SDK 1.715.0 Preview"
+            ],
+            "New Game Support": [
+                "Frostpunk 2",
+                "God of War Ragnarök",
+                "Warhammer 40,000: Space Marine 2",
+                "The Sims™ 4 DirectX® 11 Update",
+                "SILENT HILL 2"
+            ],
             "fixed_bug_ids": [
                 "BUG-231",
                 "BUG-233",
@@ -1544,7 +1931,6 @@
         "BUG-273": "Image corruption may be observed while running certain diffuser models in Amuse 3.0 with Radeon™ RX 9000 series graphics products.",
         "BUG-274": "Lower than expected performance may be observed while playing World of Warcraft (western plaguelands) with Radeon™ RX 9000 series graphics products.",
         "BUG-275": "Failure to detect integrated camera may be observed after driver installation using factory reset option on some Ryzen™ AI Max and Max+ series products.",
-        "BUG-276": "Added support for Amuse 3 and AMD-optimized models.",
         "BUG-277": "Intermittent application crash or driver timeout may be observed while playing The Last of Us Part 2.",
         "BUG-278": "Intermittent system or application crash may be observed while playing Cyberpunk 2077",
         "BUG-279": "Intermittent system or application crash may be observed during shader compilation while playing Fantasy VII Rebirth during shader compilation.",
