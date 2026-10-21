@@ -8,6 +8,7 @@
         {
             "version": "26.10.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/rn-rad-win-26-10-1.html",
+            "Date": "20-10-2026",
             "Type": 3,
             "New Features": [
                 "FSR 4.1 upscaling support for: Radeon™ RX 6000, Ryzen™ AI Max 300, Ryzen™ AI Max 400, Ryzen™ AI 9 300, Ryzen™ AI 9 400."
@@ -40,6 +41,7 @@
         {
             "version": "26.9.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-9-2.html",
+            "Date": "29-09-2026",
             "Type": 2,
             "New Features": [],
             "New Product support": [],
@@ -68,6 +70,7 @@
         {
             "version": "26.9.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-9-1.html",
+            "Date": "03-09-2026",
             "Type": 2,
             "New Features": [],
             "New Product support": [],
@@ -89,6 +92,7 @@
         {
             "version": "26.8.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-8-1.html",
+            "Date": "20-08-2026",
             "Type": 3,
             "New Features": [],
             "New Product support": [
@@ -117,6 +121,7 @@
         {
             "version": "26.7.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-7-1.html",
+            "Date": "28-07-2026",
             "Type": 3,
             "New Features": [
                 "FSR 4.1 upscaling support for: Radeon™ RX 6000, Ryzen™ AI Max 300, Ryzen™ AI Max 400, Ryzen™ AI 9 300, Ryzen™ AI 9 400."
@@ -147,6 +152,7 @@
         {
             "version": "26.6.4",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-6-4.html",
+            "Date": "29-06-2026",
             "Type": 3,
             "New Features": [],
             "New Product support": [],
@@ -161,6 +167,7 @@
         {
             "version": "26.6.3",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-6-3-HOTFIX.html",
+            "Date": "24-06-2026",
             "Type": 1,
             "New Features": [],
             "New Product support": [],
@@ -174,6 +181,7 @@
         {
             "version": "26.6.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-6-2.html",
+            "Date": "22-06-2026",
             "Type": 3,
             "New Features": [
                 "AMD FSR Upscaling 4.1 support for AMD Radeon™ RX 7000 Series Graphics cards."
@@ -200,6 +208,7 @@
         {
             "version": "26.6.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-6-1.html",
+            "Date": "02-06-2026",
             "Type": 3,
             "New Features": [],
             "New Product support": [],
@@ -225,6 +234,7 @@
         {
             "version": "26.5.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-5-2.html",
+            "Date": "14-05-2026",
             "Type": 3,
             "New Features": [],
             "New Product support": [],
@@ -248,6 +258,7 @@
         {
             "version": "26.5.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-5-1.html",
+            "Date": "06-05-2026",
             "Type": 3,
             "New Features": [],
             "New Product support": [],
@@ -274,6 +285,7 @@
         {
             "version": "26.3.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-3-1.html",
+            "Date": "19-03-2026",
             "Type": 3,
             "New Features": [
                 "FSR Upscaling 4.1 for Radeon RX 9000 series graphics cards."
@@ -300,6 +312,7 @@
         {
             "version": "26.2.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-2-2.html",
+            "Date": "26-02-2026",
             "Type": 3,
             "New Features": [
                 "Support for WSL with ROCm 7.2.1 now uses the open‑source ROCDGXG library, with added support for select AMD Ryzen™ processors."
@@ -324,6 +337,7 @@
         {
             "version": "26.2.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-2-1.html",
+            "Date": "11-02-2026",
             "Type": 1,
             "New Features": [],
             "New Product support": [],
@@ -347,6 +361,7 @@
         {
             "version": "26.1.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-1-1.html",
+            "Date": "21-01-2026",
             "Type": 3,
             "New Features": [
                 "Optional install of  AI Bundle"
@@ -388,6 +403,7 @@
         {
             "version": "25.12.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-12-1.html",
+            "Date": "10-12-2025",
             "Type": 3,
             "New Features": [
                 "Support for AMD FSR™ “Redstone”"
@@ -415,6 +431,7 @@
         {
             "version": "25.11.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-11-1.html",
+            "Date": "13-11-2025",
             "Type": 3,
             "New Features": [],
             "New Product support": [
@@ -442,6 +459,7 @@
         {
             "version": "25.10.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-10-2.html",
+            "Date": "29-10-2025",
             "Type": 3,
             "New Features": [
                 "Expanded Vulkan Support (Radeon™ RX 7000 and 9000 series graphics products) (see notes for extention names)",
@@ -477,6 +495,7 @@
         {
             "version": "25.10.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-10-1-BATTLEFIELD-6-PREVIEW.html",
+            "Date": "10-10-2025",
             "Type": 1,
             "New Features": [],
             "New Product support": [],
@@ -490,6 +509,7 @@
         {
             "version": "25.9.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-9-2.html",
+            "Date": "18-09-2025",
             "Type": 1,
             "New Features": [],
             "New Product support": [
@@ -519,6 +539,7 @@
         {
             "version": "25.9.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-9-1.html",
+            "Date": "08-09-2025",
             "Type": 3,
             "New Features": [],
             "New Product support": [],
@@ -548,6 +569,7 @@
         {
             "version": "25.8.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-8-1.html",
+            "Date": "04-08-2025",
             "Type": 3,
             "New Features": [],
             "New Product support": [
@@ -588,6 +610,7 @@
         {
             "version": "25.6.3",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-6-3.html",
+            "Date": "30-06-2025",
             "Type": 1,
             "New Features": [],
             "New Product support": [],
@@ -611,6 +634,7 @@
         {
             "version": "25.6.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-6-2.html",
+            "Date": "12-06-2025",
             "Type": 1,
             "New Features": [],
             "New Product support": [],
@@ -641,6 +665,7 @@
         {
             "version": "25.6.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-6-1.html",
+            "Date": "05-06-2025",
             "Type": 3,
             "New Features": [],
             "New Product support": [
@@ -674,6 +699,7 @@
         {
             "version": "25.5.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-5-2-F1-25.html",
+            "Date": "30-05-2025",
             "Type": 1,
             "New Features": [],
             "New Product support": [],
@@ -692,6 +718,7 @@
         {
             "version": "25.5.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-5-1.html",
+            "Date": "08-05-2025",
             "Type": 3,
             "New Features": [],
             "New Product support": [
@@ -727,6 +754,7 @@
         {
             "version": "25.4.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-4-1.html",
+            "Date": "22-04-2025",
             "Type": 1,
             "New Features": [],
             "New Product support": [],
@@ -763,6 +791,7 @@
         {
             "version": "25.3.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-3-2.html",
+            "Date": "20-03-2025",
             "Type": 1,
             "New Features": [],
             "New Product support": [],
@@ -795,6 +824,7 @@
         {
             "version": "25.3.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-3-1.html",
+            "Date": "06-03-2025",
             "Type": 3,
             "New Features": [
                 "AMD Fidelity™ FX Super Resolution 4 (AMD FSR 4)",
@@ -847,6 +877,7 @@
         {
             "version": "25.2.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-2-1.html",
+            "Date": "11-02-2025",
             "Type": 1,
             "New Features": [],
             "New Product support": [],
@@ -872,6 +903,7 @@
         {
             "version": "25.1.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-25-1-1.html",
+            "Date": "23-01-2025",
             "Type": 1,
             "New Features": [],
             "New Product support": [],
@@ -896,6 +928,7 @@
         {
             "version": "24.12.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-12-1.html",
+            "Date": "05-12-2024",
             "Type": 3,
             "New Features": [],
             "New Product support": [],
@@ -920,6 +953,7 @@
         {
             "version": "24.10.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-10-1.html",
+            "Date": "18-10-2024",
             "Type": 3,
             "New Features": [],
             "New Product support": [],
@@ -945,6 +979,7 @@
         {
             "version": "24.9.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-9-1.html",
+            "Date": "10-09-2024",
             "Type": 3,
             "New Features": [
                 "AMD Fluid Motion Frames (AFMF) 2",
@@ -983,6 +1018,7 @@
         {
             "version": "24.8.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-8-1.html",
+            "Date": "29-08-2024",
             "Type": 3,
             "New Features": [],
             "New Product support": [],
@@ -1017,6 +1053,7 @@
         {
             "version": "24.7.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-7-1.html",
+            "Date": "19-07-2024",
             "Type": 3,
             "New Features": [],
             "New Product support": [],
@@ -1047,6 +1084,7 @@
         {
             "version": "24.6.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-6-1.html",
+            "Date": "27-06-2024",
             "Type": 3,
             "New Features": [
                 "AMD Radeon™ Anti-Lag 2"
@@ -1082,6 +1120,7 @@
         {
             "version": "24.5.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-5-1.html",
+            "Date": "15-05-2024",
             "Type": 3,
             "New Features": [],
             "New Product support": [],
@@ -1113,6 +1152,7 @@
         {
             "version": "24.4.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-4-1.html",
+            "Date": "25-04-2024",
             "Type": 3,
             "New Features": [],
             "New Product support": [],
@@ -1152,6 +1192,7 @@
         {
             "version": "24.3.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-3-1.html",
+            "Date": "20-03-2024",
             "Type": 3,
             "New Features": [],
             "New Product support": [],
@@ -1188,6 +1229,7 @@
         {
             "version": "24.2.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-2-1.html",
+            "Date": "26-02-2024",
             "Type": 3,
             "New Features": [],
             "New Product support": [],
@@ -1234,6 +1276,7 @@
         {
             "version": "24.1.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-1-1.html",
+            "Date": "23-01-2024",
             "Type": 3,
             "New Features": [
                 "AMD Fluid Motion Frames (AFMF)",
@@ -1272,6 +1315,7 @@
         {
             "version": "23.12.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-12-1.html",
+            "Date": "05-12-2023",
             "Type": 3,
             "New Features": [
                 "Introducing: AMD HYPR-RX Eco",
@@ -1307,6 +1351,7 @@
         {
             "version": "23.11.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-11-1.html",
+            "Date": "02-11-2023",
             "Type": 3,
             "New Features": [],
             "New Product support": [],
@@ -1340,6 +1385,7 @@
         {
             "version": "23.10.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-10-2.html",
+            "Date": "19-10-2023",
             "Type": 3,
             "New Features": [],
             "New Product support": [],
@@ -1368,9 +1414,10 @@
         {
             "version": "23.10.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-10-1.html",
+            "Date": "11-10-2023",
             "Type": 3,
             "New Features": [
-                "Anti-Lag+ Support - removed in 23.10.2 due to anti cheat issues, replaced by Anti Lag 2."
+                "Anti-Lag+ Support - removed in 23.10.2 due to anti cheat issues, replaced by Anti Lag 2 later."
             ],
             "New Product support": [],
             "Other Improvements": [],
@@ -1398,6 +1445,18 @@
         {
             "version": "23.9.3",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-9-3.html",
+            "Date": "27-09-2023",
+            "Type": 2,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [
+                "MeanVarianceNormalization (MVN) and Stable Diffusion variants optimizations"
+            ],
+            "New Game Support": [
+                "Counter Strike 2",
+                "Cyberpunk 2077: Phantom Liberty",
+                "PAYDAY 3"
+            ],
             "fixed_bug_ids": [],
             "known_bug_ids": [
                 "BUG-103",
