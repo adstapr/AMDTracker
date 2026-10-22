@@ -7,22 +7,28 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
             pointer-events: auto;
             width: 16px;
             height: 16px;
             border-radius: 9999px;
-            background: #6366f1;
+            background: #dc2626;
+            background-color: #dc2626;
             cursor: pointer;
             border: 2px solid #020617;
             position: relative;
             z-index: 30;
         }
         input[type="range"]::-moz-range-thumb {
+            -webkit-appearance: none;
+            appearance: none;
             pointer-events: auto;
             width: 16px;
             height: 16px;
             border-radius: 9999px;
-            background: #6366f1;
+            background: #dc2626;
+            background-color: #dc2626;
             cursor: pointer;
             border: 2px solid #020617;
             position: relative;
@@ -30,96 +36,94 @@
         }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 p-6 font-sans">
+<body class="bg-zinc-950 text-zinc-100 p-6 font-sans">
     <div class="max-w-6xl mx-auto space-y-8">
+
         
-        <!-- Header with Official Bug Report Button -->
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-800 pb-4">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-zinc-800 pb-4">
             <div>
-                <h1 class="text-3xl font-bold tracking-tight">AMD Tracker</h1>
-                <p class="text-slate-400 text-sm mt-1">A bug tracker using AMD's driver notes.</p>
+                <h1 class="text-3xl font-bold tracking-tight text-red-600">AMD Tracker</h1>
+                <p class="text-red-600 text-sm mt-1">A bug tracker using AMD's driver notes.</p>
             </div>
-            <a href="https://www.amd.com/en/resources/support-articles/faqs/AMDBRT.html" target="_blank" class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold px-4 py-2.5 rounded-lg transition shadow-sm self-start sm:self-auto">
+            <a href="https://www.amd.com/en/resources/support-articles/faqs/AMDBRT.html" target="_blank" class="inline-flex items-center gap-2 bg-red-700 hover:bg-red-500 text-white text-xs font-semibold px-4 py-2.5 rounded-lg transition shadow-sm self-start sm:self-auto">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
                 <span>How to report an AMD driver issue</span>
             </a>
         </div>
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm">
-                <span class="text-slate-400 text-xs font-medium uppercase tracking-wider block mb-1">Total Drivers</span>
-                <span id="stat-total-drivers" class="text-2xl font-bold text-white">0</span>
+            <div class="bg-zinc-900/80 border border-zinc-800 rounded-xl p-5 shadow-sm">
+                <span class="text-red-700 text-xs font-medium uppercase tracking-wider block mb-1">Total Drivers</span>
+                <span id="stat-total-drivers" class="text-2xl font-bold text-red-400">0</span>
             </div>
-            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm">
-                <span class="text-slate-400 text-xs font-medium uppercase tracking-wider block mb-1">Total Unique Issues</span>
+            <div class="bg-zinc-900/80 border border-zinc-800 rounded-xl p-5 shadow-sm">
+                <span class="text-red-700 text-xs font-medium uppercase tracking-wider block mb-1">Total Unique Issues</span>
                 <span id="stat-total-issues" class="text-2xl font-bold text-indigo-400">0</span>
             </div>
-            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm">
-                <span class="text-slate-400 text-xs font-medium uppercase tracking-wider block mb-1">Overall Fix Rate</span>
+            <div class="bg-zinc-900/80 border border-zinc-800 rounded-xl p-5 shadow-sm">
+                <span class="text-red-700 text-xs font-medium uppercase tracking-wider block mb-1">Overall Fix Rate</span>
                 <span id="stat-fix-rate" class="text-2xl font-bold text-emerald-400">0%</span>
             </div>
-            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm">
-                <span class="text-slate-400 text-xs font-medium uppercase tracking-wider block mb-1">Active Open Issues</span>
+            <div class="bg-zinc-900/80 border border-zinc-800 rounded-xl p-5 shadow-sm">
+                <span class="text-red-700 text-xs font-medium uppercase tracking-wider block mb-1">Active Open Issues</span>
                 <span id="stat-open-issues" class="text-2xl font-bold text-amber-400">0</span>
             </div>
         </div>
 
-        <!-- Bug Lifecycle / Time to Fix Analytics Card -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm flex items-center justify-between">
+            <div class="bg-zinc-900/80 border border-zinc-800 rounded-xl p-5 shadow-sm flex items-center justify-between">
                 <div>
-                    <span class="text-slate-400 text-xs font-medium uppercase tracking-wider block mb-1">Avg. Time to Fix</span>
+                    <span class="text-red-700 text-xs font-medium uppercase tracking-wider block mb-1">Avg. Time to Fix</span>
                     <span id="stat-avg-time-to-fix" class="text-base font-bold text-cyan-400">0 releases</span>
                 </div>
-                <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800 text-cyan-400 shrink-0">
+                <div class="bg-zinc-900/80 p-2.5 rounded-lg border border-zinc-800 text-cyan-400 shrink-0">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                 </div>
             </div>
-            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm flex items-center justify-between gap-4">
+            <div class="bg-zinc-900/80 border border-zinc-800 rounded-xl p-5 shadow-sm flex items-center justify-between gap-4">
                 <div class="min-w-0 flex-1">
-                    <span class="text-slate-400 text-xs font-medium uppercase tracking-wider block mb-1">Longest Unresolved Standing Issue</span>
+                    <span class="text-red-700 text-xs font-medium uppercase tracking-wider block mb-1">Longest Unresolved Standing Issue</span>
                     <button id="btn-oldest-open-bug" class="text-left w-full group">
                         <span id="stat-oldest-open-bug" class="text-xs font-mono text-amber-300 group-hover:text-amber-200 group-hover:underline block line-clamp-2 mt-1 leading-relaxed">None</span>
                     </button>
                 </div>
-                <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800 text-amber-400 shrink-0">
+                <div class="bg-zinc-900/80 p-2.5 rounded-lg border border-zinc-800 text-amber-400 shrink-0">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
                 </div>
             </div>
         </div>
 
-        <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm space-y-4">
+        <div class="bg-zinc-900/80 border border-zinc-800 rounded-xl p-6 shadow-sm space-y-4">
             <div class="flex justify-between items-center">
                 <div>
-                    <h2 class="text-sm font-semibold uppercase tracking-wider text-slate-300">Timeline & Architecture Range Filter</h2>
-                    <p id="timeline-status" class="text-xs text-indigo-400 mt-0.5">Showing all driver history</p>
+                    <h2 class="text-sm font-semibold uppercase tracking-wider text-red-700">Timeline & Architecture Range Filter</h2>
+                    <p id="timeline-status" class="text-xs text-red-600 mt-0.5">Showing all driver history</p>
                 </div>
-                <button id="reset-timeline" class="text-xs text-slate-400 hover:text-white bg-slate-950 px-3 py-1.5 rounded border border-slate-800 transition">Reset Range</button>
+                <button id="reset-timeline" class="text-xs text-red-600 hover:text-white bg-zinc-900/80 px-3 py-1.5 rounded border border-zinc-800 transition">Reset Range</button>
             </div>
             
             <div class="relative py-8">
-                <div class="relative h-2 bg-slate-950 rounded-lg border border-slate-800 mx-3">
-                    <div id="slider-range-fill" class="absolute h-full bg-indigo-600/30 rounded-lg pointer-events-none"></div>
+                <div class="relative h-2 bg-zinc-900/80 rounded-lg border border-zinc-800 mx-3">
+                    <div id="slider-range-fill" class="absolute h-full bg-red-600/30 rounded-lg pointer-events-none"></div>
                     
                     <input type="range" id="sliderMin" min="0" max="100" value="0" step="1" 
-                        class="absolute -top-2 left-0 w-full h-6 appearance-none bg-transparent pointer-events-none z-20">
+                        class="absolute -top-2 left-0 w-full h-6 appearance-none bg-transparent accent-red-600 pointer-events-none z-20">
                     <input type="range" id="sliderMax" min="0" max="100" value="100" step="1" 
-                        class="absolute -top-2 left-0 w-full h-6 appearance-none bg-transparent pointer-events-none z-20">
+                        class="absolute -top-2 left-0 w-full h-6 appearance-none bg-transparent accent-red-600 pointer-events-none z-20">
 
-                    <!-- Architecture / Year Marker Overlay Container -->
                     <div id="timeline-markers" class="absolute inset-0 pointer-events-none"></div>
                 </div>
             </div>
         </div>
 
-        <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm space-y-4">
+        <div class="bg-zinc-900/80 border border-zinc-800 rounded-xl p-6 shadow-sm space-y-4">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
-                    <h2 class="text-xl font-semibold text-slate-200 mb-1">Bugs Per Driver</h2>
-                    <p class="text-slate-400 text-sm">(Positive = Fixed Issues, Negative = Open / Known Issues — Click any driver column to view)</p>
+                    <h2 class="text-xl font-semibold text-red-700 mb-1">Bugs Per Driver</h2>
+                    <p class="text-red-600 text-sm">(Positive = Fixed Issues, Negative = Open / Known Issues — Click any driver column to view)</p>
                 </div>
-                <label class="flex items-center gap-2.5 text-xs text-slate-300 cursor-pointer select-none bg-slate-950 px-3 py-2 rounded-lg border border-slate-800">
-                    <input type="checkbox" id="excludeDuplicatesToggle" checked class="rounded border-slate-700 bg-slate-900 text-indigo-600 focus:ring-indigo-500 w-4 h-4">
+                <label class="flex items-center gap-2.5 text-xs text-red-600 cursor-pointer select-none bg-zinc-900/80 px-3 py-2 rounded-lg border border-zinc-800">
+                    <input type="checkbox" id="excludeDuplicatesToggle" checked class="rounded border-slate-700 bg-zinc-900/80 text-red-600 focus:ring-red-500 w-4 h-4">
                     <span>Exclude duplicate known issues</span>
                 </label>
             </div>
@@ -129,12 +133,11 @@
             </div>
         </div>
 
-        <!-- Panel for Unfixed / Active Open Issues with Keyword Search Bar -->
-        <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm space-y-4">
-            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-800 pb-3">
+        <div class="bg-zinc-900/80 border border-zinc-800 rounded-xl p-6 shadow-sm space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-zinc-800 pb-3">
                 <div>
-                    <h2 class="text-xl font-semibold text-slate-200">Active Unfixed Issues</h2>
-                    <p class="text-slate-400 text-sm">Currently unresolved issues remaining up to the latest selected driver version</p>
+                    <h2 class="text-xl font-semibold text-red-700">Active Unfixed Issues</h2>
+                    <p class="text-red-600 text-sm">Currently unresolved issues remaining up to the latest selected driver version</p>
                 </div>
                 <div class="flex items-center gap-3">
                     <span id="unfixed-count-badge" class="bg-amber-950 text-amber-400 border border-amber-800/50 text-xs font-mono px-2.5 py-1 rounded-full">0 issues</span>
@@ -142,61 +145,57 @@
             </div>
 
             <div class="relative">
-                <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
+                <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-red-700">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 </span>
-                <input type="text" id="issueSearchInput" placeholder="Filter active bugs by keyword (e.g., stutter, crash, overlay)..." class="w-full bg-slate-950 border border-slate-800 rounded-lg pl-9 pr-4 py-2 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition">
+                <input type="text" id="issueSearchInput" placeholder="Filter active bugs by keyword (e.g., stutter, crash, overlay)..." class="w-full bg-zinc-900/80 border border-zinc-800 rounded-lg pl-9 pr-4 py-2 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-slate-500 transition">
             </div>
 
             <div id="unfixed-issues-list" class="space-y-2 max-h-[400px] overflow-y-auto pr-2">
-                <!-- Dynamically populated -->
             </div>
         </div>
             
         <div class="space-y-6">
-            <h2 class="text-xl font-semibold text-slate-200 border-b border-slate-800 pb-2">Issues/Fixes by version (most recent first)</h2>
+            <h2 class="text-xl font-semibold text-red-700 border-b border-zinc-800 pb-2">Issues/Fixes by version (most recent first)</h2>
             <div id="driver-tracker" class="space-y-4 max-h-[800px] overflow-y-auto pr-2"></div>
         </div>
 
     </div>
 
-    <!-- Driver Detail View Modal Overlay -->
-    <div id="driver-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-3xl w-full max-h-[85vh] flex flex-col shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150">
-            <!-- Driver Modal Header -->
-            <div class="p-5 border-b border-slate-800 flex items-center justify-between gap-4">
+    <div id="driver-modal" class="fixed inset-0 bg-zinc-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-zinc-900 border border-zinc-800 rounded-2xl max-w-4xl w-full max-h-[100vh] flex flex-col shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+            <div class="p-5 border-b border-zinc-800 flex items-center justify-between gap-4">
                 <div>
                     <div class="flex items-center gap-3">
                         <h3 id="driver-modal-version" class="text-2xl font-bold text-white font-mono">26.X.X</h3>
-                        <a id="driver-modal-link" href="#" target="_blank" class="text-indigo-400 hover:underline text-xs flex items-center gap-1">
+                        <a id="driver-modal-link" href="#" target="_blank" class="text-red-600 hover:underline text-xs flex items-center gap-1">
                             <span>Release Notes</span>
                             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                         </a>
                     </div>
-                    <p id="driver-modal-subtitle" class="text-slate-400 text-xs mt-1">Driver version release details</p>
+                    <p id="driver-modal-subtitle" class="text-red-700 text-xs mt-1">Driver version release details</p>
                 </div>
-                <button id="close-driver-modal" class="text-slate-400 hover:text-white bg-slate-950 p-2 rounded-lg border border-slate-800 transition shrink-0">
+                <button id="close-driver-modal" class="text-red-700 hover:text-white bg-zinc-900 p-2 rounded-lg border border-zinc-800 transition shrink-0">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
                 </button>
             </div>
 
-            <!-- Driver Modal Content Body -->
             <div class="p-5 overflow-y-auto flex-1 space-y-4">
                 <div class="grid sm:grid-cols-2 gap-4">
-                    <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800/80">
-                        <div class="flex items-center justify-between mb-3 border-b border-slate-800/80 pb-2">
+                    <div class="bg-zinc-900/80/60 p-4 rounded-xl border border-zinc-800/80">
+                        <div class="flex items-center justify-between mb-3 border-b border-zinc-800/80 pb-2">
                             <span class="text-xs font-bold uppercase tracking-wider text-emerald-400">Fixed in this version</span>
                             <span id="driver-modal-fixed-count" class="bg-emerald-950 text-emerald-400 border border-emerald-800/50 text-[10px] font-mono px-2 py-0.5 rounded">0</span>
                         </div>
-                        <ul id="driver-modal-fixed-list" class="space-y-2 max-h-[350px] overflow-y-auto pr-1"></ul>
+                        <ul id="driver-modal-fixed-list" class="space-y-2 max-h-[100vh] overflow-y-auto pr-1"></ul>
                     </div>
 
-                    <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800/80">
-                        <div class="flex items-center justify-between mb-3 border-b border-slate-800/80 pb-2">
+                    <div class="bg-zinc-900/80/60 p-4 rounded-xl border border-zinc-800/80">
+                        <div class="flex items-center justify-between mb-3 border-b border-zinc-800/80 pb-2">
                             <span class="text-xs font-bold uppercase tracking-wider text-amber-400">Known / Open Issues</span>
                             <span id="driver-modal-known-count" class="bg-amber-950 text-amber-400 border border-amber-800/50 text-[10px] font-mono px-2 py-0.5 rounded">0</span>
                         </div>
-                        <ul id="driver-modal-known-list" class="space-y-2 max-h-[350px] overflow-y-auto pr-1"></ul>
+                        <ul id="driver-modal-known-list" class="space-y-2 max-h-[100vh] overflow-y-auto pr-1"></ul>
                     </div>
                 </div>
             </div>
@@ -204,18 +203,18 @@
     </div>
 
     <!-- Issue Detail View Modal Overlay -->
-    <div id="issue-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-2xl w-full max-h-[85vh] flex flex-col shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+    <div id="issue-modal" class="fixed inset-0 bg-zinc-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-zinc-900 border border-zinc-800 rounded-2xl max-w-3xl w-full max-h-[85vh] flex flex-col shadow-3xl overflow-hidden animate-in fade-in zoom-in-95 duration-150">
             <!-- Modal Header -->
-            <div class="p-5 border-b border-slate-800 flex items-start justify-between gap-4">
+            <div class="p-5 border-b border-zinc-800 flex items-start justify-between gap-4">
                 <div>
                     <div class="flex items-center gap-2 mb-1.5">
                         <span id="modal-bug-id" class="bg-amber-950 text-amber-400 border border-amber-800/50 font-mono text-xs px-2 py-0.5 rounded font-semibold">BUG-000</span>
                         <span id="modal-bug-status" class="text-xs px-2 py-0.5 rounded font-medium">Status</span>
                     </div>
-                    <h3 id="modal-bug-title" class="text-base font-semibold text-slate-100 leading-snug">Issue description</h3>
+                    <h3 id="modal-bug-title" class="text-base font-semibold text-red-100 leading-snug">Issue description</h3>
                 </div>
-                <button id="close-modal" class="text-slate-400 hover:text-white bg-slate-950 p-2 rounded-lg border border-slate-800 transition shrink-0">
+                <button id="close-modal" class="text-red-700 hover:text-white bg-zinc-900 p-2 rounded-lg border border-zinc-800 transition shrink-0">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
                 </button>
             </div>
@@ -223,25 +222,41 @@
             <!-- Modal Content Body -->
             <div class="p-5 overflow-y-auto space-y-5 flex-1 text-xs">
                 <!-- Summary Stats Row -->
-                <div class="grid grid-cols-2 gap-3 bg-slate-950/50 p-3.5 rounded-xl border border-slate-800/60">
+                <div class="grid grid-cols-2 gap-3 bg-zinc-900 p-3.5 rounded-xl border border-zinc-800">
                     <div>
-                        <span class="text-slate-400 block mb-0.5 font-medium">First Reported In</span>
-                        <span id="modal-first-version" class="text-slate-200 font-mono text-sm font-semibold">-</span>
+                        <span class="text-red-500 block mb-0.5 font-medium">First Reported In</span>
+                        <span id="modal-first-version" class="text-white font-mono text-sm font-semibold">-</span>
                     </div>
                     <div>
-                        <span class="text-slate-400 block mb-0.5 font-medium font-sans">Resolved In</span>
-                        <span id="modal-resolved-version" class="text-slate-200 font-mono text-sm font-semibold">-</span>
+                        <span class="text-red-500 block mb-0.5 font-medium font-sans">Resolved In</span>
+                        <span id="modal-resolved-version" class="text-white font-mono text-sm font-semibold">-</span>
                     </div>
                 </div>
 
                 <!-- Driver Version History Timeline -->
                 <div>
-                    <h4 class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">Driver Version History</h4>
-                    <div id="modal-history-list" class="space-y-2 border-l-2 border-slate-800 ml-2 pl-4">
+                    <h4 class="text-xs font-semibold uppercase tracking-wider text-red-500 mb-3">Driver Version History</h4>
+                    <div id="modal-history-list" class="space-y-2 border-l-2 border-zinc-800 ml-2 pl-4">
                         <!-- Populated dynamically -->
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <aside class="hidden xl:flex flex-col fixed right-6 top-6 w-64 h-[calc(100vh-3rem)] bg-zinc-900/20 border border-zinc-800/30 rounded-xl p-4 shadow-2xl z-50 pointer-events-auto">
+        <h2 class="text-xs font-bold uppercase tracking-wider text-red-600 border-b border-zinc-800 pb-2 mb-3">Site Changelog</h2>
+        <div id="sidebar-changelog-list" class="space-y-1 overflow-y-auto pr-1 flex-1"></div>
+    </aside>
+    
+    <div id="site-changelog-modal" class="fixed inset-0 bg-zinc-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-zinc-900 border border-zinc-800 rounded-2xl max-w-lg w-full flex flex-col shadow-2xl overflow-hidden p-6 space-y-4">
+            <div class="flex items-center justify-between border-b border-zinc-800 pb-3">
+                <h3 id="site-modal-version" class="text-xl font-bold text-white font-mono">v1.00</h3>
+                <button id="close-site-modal" class="text-red-700 hover:text-white bg-zinc-900 p-2 rounded-lg border border-zinc-800 transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div id="site-modal-content" class="text-xs text-zinc-300 space-y-2 leading-relaxed"></div>
         </div>
     </div>
 
@@ -249,6 +264,54 @@
         let globalMasterBugs = {};
         let globalChronologicalDrivers = [];
         let currentOldestBugId = null;
+
+	const siteChangelog = [
+            {
+                version: "v1.1",
+                date: "22nd October 2026",
+                notes: "Changed colors to be more in line with AMD, added site changelog sidebar, other visual improvements."
+            },
+            {
+                version: "v1.01",
+                date: "20nd October 2026",
+                notes: "Driver 26.10.1 added"
+            },
+            {
+                version: "v1.00",
+                date: "6th October 2026",
+                notes: "Initial release with drivers back to 22.10.2 for issues known/fixed."
+            }
+        ];
+
+        const sidebarList = document.getElementById('sidebar-changelog-list');
+        if (sidebarList) {
+            sidebarList.innerHTML = '';
+            siteChangelog.forEach(changelog => {
+                let btn = document.createElement('button');
+                btn.className = 'w-full text-left px-2.5 py-1.5 rounded text-xs font-mono text-zinc-300 hover:bg-zinc-800 hover:text-white transition flex items-center justify-between group';
+                btn.innerHTML = `<span>${changelog.version}</span> <span class="text-[10px] text-red-600 opacity-0 group-hover:opacity-100 transition">View</span>`;
+                
+                btn.onclick = () => {
+                    document.getElementById('site-modal-version').textContent = `${changelog.version} (${changelog.date})`;
+                    document.getElementById('site-modal-content').textContent = changelog.notes;
+                    document.getElementById('site-changelog-modal').classList.remove('hidden');
+                };
+                
+                sidebarList.appendChild(btn);
+            });
+        }
+
+    const modal = document.getElementById('site-changelog-modal');
+
+    modal.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            modal.classList.add('hidden');
+        }
+    });
+
+        document.getElementById('close-site-modal').addEventListener('click', () => {
+            document.getElementById('site-changelog-modal').classList.add('hidden');
+        });
 
         fetch('./drivers.json')
             .then(response => {
@@ -259,6 +322,7 @@
                 globalMasterBugs = data.master_bugs || {};
                 const chronologicalDrivers = [...data.drivers].reverse();
                 globalChronologicalDrivers = chronologicalDrivers;
+
 
                 const totalSteps = chronologicalDrivers.length - 1;
                 const milestones = [
@@ -297,9 +361,9 @@
                     let span = document.createElement('span');
                     
                     if (m.type === 'arch') {
-                        span.className = 'absolute text-[10px] text-indigo-300 font-mono font-bold cursor-pointer hover:text-white transition -translate-x-1/2 whitespace-nowrap bg-indigo-950/80 border border-indigo-700/60 px-1.5 py-0.5 rounded shadow-sm top-[-26px] pointer-events-auto z-10';
+                        span.className = 'absolute text-[10px] text-red-600 font-mono font-bold cursor-pointer hover:text-red-500 transition -translate-x-1/2 whitespace-nowrap bg-zinc-900/80 border border-red-800 px-1.5 py-0.5 rounded shadow-sm top-[-26px] pointer-events-auto z-10';
                     } else {
-                        span.className = 'absolute text-[10px] text-slate-400 font-mono cursor-pointer hover:text-white transition -translate-x-1/2 whitespace-nowrap bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded bottom-[-26px] pointer-events-auto z-10';
+                        span.className = 'absolute text-[10px] text-red-600 font-mono cursor-pointer hover:text-red-500 transition -translate-x-1/2 whitespace-nowrap bg-zinc-900/80 border border-red-800 px-1.5 py-0.5 rounded bottom-[-26px] pointer-events-auto z-10';
                     }
 
                     span.style.left = `${pct}%`;
@@ -436,7 +500,7 @@
                     filteredDriversDisplay.forEach((d) => {
                         let card = document.createElement('div');
                         card.id = `driver-card-${d.version.replace(/\./g, '-')}`;
-                        card.className = 'bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm space-y-4 hover:border-slate-700/80 transition';
+                        card.className = 'bg-zinc-900 border border-zinc-800 rounded-xl p-5 shadow-sm space-y-4 hover:border-red-600/60 transition';
                         
                         let fixedHtml = (d.fixed_bug_ids || []).filter(id => data.master_bugs[id]?.trim()).map(id => `
                             <li class="text-emerald-400 text-xs mb-1">
@@ -457,23 +521,23 @@
                         `).join('');
 
                         card.innerHTML = `
-                            <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                            <div class="flex justify-between items-center border-b border-zinc-800 pb-3">
                                 <div class="flex items-center gap-3">
-                                    <button onclick="openDriverModal('${d.version}')" class="text-xl font-bold text-white hover:text-indigo-400 hover:underline transition font-mono">${d.version}</button>
+                                    <button onclick="openDriverModal('${d.version}')" class="text-xl font-bold text-white hover:text-red-400 hover:underline transition font-mono">${d.version}</button>
                                 </div>
                                 <div class="text-right">
-                                    <a href="${d.url}" target="_blank" class="text-indigo-400 hover:underline text-xs">Release Notes</a>
+                                    <a href="${d.url}" target="_blank" class="text-red-400 hover:underline text-xs">Release Notes</a>
                                 </div>
                             </div>
                             
                             <div class="grid sm:grid-cols-2 gap-3">
-                                <div class="bg-slate-950/50 p-3 rounded border border-slate-800/50">
+                                <div class="bg-zinc-900/80/50 p-3 rounded border border-zinc-800/50">
                                     <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-500 block mb-2">Fixed in this version</span>
-                                    <ul class="list-none pl-0">${fixedHtml || '<span class="text-slate-600 text-xs">None</span>'}</ul>
+                                    <ul class="list-none pl-0">${fixedHtml || '<span class="text-red-700 text-xs">None</span>'}</ul>
                                 </div>
-                                <div class="bg-slate-950/50 p-3 rounded border border-slate-800/50">
+                                <div class="bg-zinc-900/80/50 p-3 rounded border border-zinc-800/50">
                                     <span class="text-[10px] font-bold uppercase tracking-wider text-amber-500 block mb-2">Known / Open Issues</span>
-                                    <ul class="list-none pl-0">${knownHtml || '<span class="text-slate-600 text-xs">None</span>'}</ul>
+                                    <ul class="list-none pl-0">${knownHtml || '<span class="text-red-700 text-xs">None</span>'}</ul>
                                 </div>
                             </div>
                         `;
@@ -512,18 +576,18 @@
                     unfixedListContainer.innerHTML = '';
 
                     if (filteredEntries.length === 0) {
-                        unfixedListContainer.innerHTML = `<p class="text-slate-500 text-xs py-2">No matching active unfixed issues found.</p>`;
+                        unfixedListContainer.innerHTML = `<p class="text-red-700 text-xs py-2">No matching active unfixed issues found.</p>`;
                     } else {
                         let unfixedHtml = '';
                         filteredEntries.forEach(([id, firstVersion]) => {
                             const description = data.master_bugs[id] || 'No description available';
                             unfixedHtml += `
-                                <button onclick="openIssueModal('${id}')" class="w-full text-left bg-slate-950/60 hover:bg-slate-800/60 p-3 rounded-lg border border-slate-800/80 hover:border-indigo-500/50 transition flex flex-col sm:flex-row sm:items-center justify-between gap-2 group">
+                                <button onclick="openIssueModal('${id}')" class="w-full text-left bg-zinc-900 hover:bg-slate-800 p-3 rounded-lg border border-zinc-800/80 hover:border-red-500/50 transition flex flex-col sm:flex-row sm:items-center justify-between gap-2 group">
                                     <div class="flex items-start gap-2.5 min-w-0">
                                         <span class="bg-amber-950 text-amber-400 border border-amber-800/50 font-mono text-[10px] px-1.5 py-0.5 rounded mt-0.5 shrink-0 group-hover:border-amber-400">${id}</span>
-                                        <span class="text-xs text-slate-200 group-hover:text-indigo-200 transition line-clamp-2">${description}</span>
+                                        <span class="text-xs text-white group-hover:text-white transition line-clamp-2">${description}</span>
                                     </div>
-                                    <span class="text-[10px] text-slate-400 shrink-0 font-mono">Reported in: ${firstVersion}</span>
+                                    <span class="text-[10px] text-red-500 shrink-0 font-mono">Reported in: ${firstVersion}</span>
                                 </button>
                             `;
                         });
@@ -705,7 +769,7 @@
             document.getElementById('driver-modal-known-count').textContent = validKnown.length;
 
             if (validFixed.length === 0) {
-                fixedList.innerHTML = `<li class="text-slate-500 text-xs py-2 italic">No fixed issues reported for this version.</li>`;
+                fixedList.innerHTML = `<li class="text-red-700 text-xs py-2 italic">No fixed issues reported for this version.</li>`;
             } else {
                 validFixed.forEach(id => {
                     const desc = globalMasterBugs[id] || 'No description available';
@@ -713,7 +777,7 @@
                         <li class="text-xs">
                             <button onclick="openIssueModal('${id}')" class="text-left flex items-start gap-2 bg-emerald-950/20 hover:bg-emerald-950/50 border border-emerald-900/30 p-2 rounded transition w-full group">
                                 <span class="bg-emerald-950 text-emerald-400 group-hover:border-emerald-500 border border-emerald-800/50 font-mono text-[10px] px-1.5 py-0.5 rounded shrink-0">${id}</span>
-                                <span class="text-slate-200 group-hover:text-white transition">${desc}</span>
+                                <span class="text-white group-hover:text-white transition">${desc}</span>
                             </button>
                         </li>
                     `;
@@ -721,7 +785,7 @@
             }
 
             if (validKnown.length === 0) {
-                knownList.innerHTML = `<li class="text-slate-500 text-xs py-2 italic">No known issues listed for this version.</li>`;
+                knownList.innerHTML = `<li class="text-red-700 text-xs py-2 italic">No known issues listed for this version.</li>`;
             } else {
                 validKnown.forEach(id => {
                     const desc = globalMasterBugs[id] || 'No description available';
@@ -729,7 +793,7 @@
                         <li class="text-xs">
                             <button onclick="openIssueModal('${id}')" class="text-left flex items-start gap-2 bg-amber-950/20 hover:bg-amber-950/50 border border-amber-900/30 p-2 rounded transition w-full group">
                                 <span class="bg-amber-950 text-amber-400 group-hover:border-amber-500 border border-amber-800/50 font-mono text-[10px] px-1.5 py-0.5 rounded shrink-0">${id}</span>
-                                <span class="text-slate-200 group-hover:text-white transition">${desc}</span>
+                                <span class="text-red-200 group-hover:text-white transition">${desc}</span>
                             </button>
                         </li>
                     `;
@@ -782,7 +846,7 @@
 
             appearsInVersions.reverse().forEach(item => {
                 const timelineRow = document.createElement('div');
-                timelineRow.className = 'relative flex items-center justify-between bg-slate-950/60 p-2.5 rounded-lg border border-slate-800/80';
+                timelineRow.className = 'relative flex items-center justify-between bg-zinc-900/80/60 p-2.5 rounded-lg border border-zinc-800/80';
 
                 const isFixed = item.type === 'fixed';
                 const dotColor = isFixed ? 'bg-emerald-500' : 'bg-amber-500';
@@ -792,10 +856,10 @@
                 timelineRow.innerHTML = `
                     <div class="flex items-center gap-2.5">
                         <span class="w-2 h-2 rounded-full ${dotColor} shrink-0 -ml-[21px]"></span>
-                        <button onclick="openDriverModal('${item.version}')" class="font-bold text-white font-mono text-sm hover:text-indigo-400 hover:underline transition">${item.version}</button>
+                        <button onclick="openDriverModal('${item.version}')" class="font-bold text-white font-mono text-sm hover:text-red-400 hover:underline transition">${item.version}</button>
                         <span class="${statusColor} font-medium text-[11px]">${statusLabel}</span>
                     </div>
-                    <a href="${item.url}" target="_blank" class="text-indigo-400 hover:underline text-[11px] shrink-0">Release Notes</a>
+                    <a href="${item.url}" target="_blank" class="text-red-500 hover:underline text-[11px] shrink-0">Release Notes</a>
                 `;
                 historyList.appendChild(timelineRow);
             });
