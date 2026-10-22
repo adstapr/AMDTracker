@@ -267,6 +267,11 @@
 
 	const siteChangelog = [
             {
+                version: "v1.1.1",
+                date: "23rd October 2026",
+                notes: "Avg time to fix now shows both days and driver releases. Avg time to fix is calculated by the first report of the issue even if the slider has not selected the first driver it appeared in."
+            },
+			{
                 version: "v1.1",
                 date: "22nd October 2026",
                 notes: "Changed colors to be more in line with AMD, added site changelog sidebar, other visual improvements."
@@ -430,26 +435,48 @@
                     currentActiveKnownMap = new Map(); 
                     
                     let sliceFixReleases = [];
-                    
-                    filteredDriversChronological.forEach((d, sIdx) => {
-                        const globalIdx = minIdx + sIdx;
-                        (d.fixed_bug_ids || []).forEach(id => {
-                            for (let i = 0; i <= globalIdx; i++) {
-                                const pastDriver = chronologicalDrivers[i];
-                                if ((pastDriver.known_bug_ids || []).includes(id)) {
-                                    sliceFixReleases.push(globalIdx - i);
-                                    break;
-                                }
-                            }
-                        });
-                    });
+		    let fixDurationsInDays = [];
 
-                    let avgReleases = 0;
-                    if (sliceFixReleases.length > 0) {
-                        avgReleases = (sliceFixReleases.reduce((a, b) => a + b, 0) / sliceFixReleases.length).toFixed(1);
-                    }
+		    function parseDriverDate(dateStr) {
+    		    if (!dateStr) return null;
+    		    const parts = dateStr.split('-');
+    		    if (parts.length !== 3) return null;
+    		    return new Date(`${parts[2]}-${parts[1]}-${parts[0]}`);
+		    }
 
-                    document.getElementById('stat-avg-time-to-fix').textContent = `${avgReleases} releases`;
+		    filteredDriversChronological.forEach((d, sIdx) => {
+    		    const globalIdx = minIdx + sIdx;
+    		    const fixDate = parseDriverDate(d.Date);
+
+    		    (d.fixed_bug_ids || []).forEach(id => {
+        	    	for (let i = 0; i <= globalIdx; i++) {
+            		    const pastDriver = chronologicalDrivers[i];
+            		    if ((pastDriver.known_bug_ids || []).includes(id)) {
+                		    sliceFixReleases.push(globalIdx - i);
+
+                		    const reportDate = parseDriverDate(pastDriver.Date);
+                		    if (fixDate && reportDate) {
+                    		    const diffTime = fixDate - reportDate;
+                    		    const diffDays = Math.max(0, Math.ceil(diffTime / (1000 * 60 * 60 * 24)));
+                    		    fixDurationsInDays.push(diffDays);
+                		    }
+                		    break;
+            		    }
+        		    }
+    		    });
+		    });
+
+let avgReleases = 0;
+if (sliceFixReleases.length > 0) {
+    avgReleases = (sliceFixReleases.reduce((a, b) => a + b, 0) / sliceFixReleases.length).toFixed(1);
+}
+
+let avgDays = 0;
+if (fixDurationsInDays.length > 0) {
+    avgDays = Math.round(fixDurationsInDays.reduce((a, b) => a + b, 0) / fixDurationsInDays.length);
+}
+
+document.getElementById('stat-avg-time-to-fix').textContent = `${avgDays} days (${avgReleases} releases)`;
 
                     if (filteredDriversChronological.length > 0) {
                         filteredDriversChronological.forEach(d => {
@@ -494,7 +521,6 @@
 
                     renderUnfixedList(data);
 
-                    // Render Driver Cards
                     const driverContainer = document.getElementById('driver-tracker');
                     driverContainer.innerHTML = '';
                     filteredDriversDisplay.forEach((d) => {
@@ -646,11 +672,10 @@
                             onClick: (e, elements, chart) => {
                                 let targetIdx = null;
 
-                                // 1. Try clicking directly on an active bar element
                                 if (elements && elements.length > 0) {
                                     targetIdx = elements[0].index;
                                 } else {
-                                    // 2. Fallback for clicking empty areas or 0-value bars on the middle axis
+
                                     const valueX = chart.scales.x.getValueForPixel(e.x);
                                     if (valueX !== undefined && valueX >= 0 && valueX < chart.data.labels.length) {
                                         targetIdx = Math.round(valueX);
@@ -728,7 +753,6 @@
 
                 updateView();
 
-                // Check URL hash on initial load (e.g., #BUG-381 or #driver-26.9.2)
                 if (window.location.hash) {
                     const hashVal = window.location.hash.replace('#', '');
                     if (hashVal.startsWith('driver-')) {
@@ -741,7 +765,6 @@
             })
             .catch(error => console.error('Error loading driver tracker data:', error));
 
-        // Function to open the dedicated Driver Detail View Modal
         function openDriverModal(versionStr) {
             const driverObj = globalChronologicalDrivers.find(d => d.version === versionStr);
             if (!driverObj) return;
@@ -804,7 +827,6 @@
             document.getElementById('driver-modal').classList.remove('hidden');
         }
 
-        // Function to open the dedicated Issue Detail View Modal
         function openIssueModal(bugId) {
             const description = globalMasterBugs[bugId] || 'No description available';
             const historyList = document.getElementById('modal-history-list');
@@ -868,7 +890,6 @@
             document.getElementById('issue-modal').classList.remove('hidden');
         }
 
-        // Close Modal Handlers
         document.getElementById('close-modal').addEventListener('click', closeModal);
         document.getElementById('issue-modal').addEventListener('click', (e) => {
             if (e.target.id === 'issue-modal') closeModal();
