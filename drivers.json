@@ -1416,9 +1416,7 @@
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-10-1.html",
             "Date": "11-10-2023",
             "Type": 3,
-            "New Features": [
-                "Anti-Lag+ Support - removed in 23.10.2 due to anti cheat issues, replaced by Anti Lag 2 later."
-            ],
+            "New Features": [],
             "New Product support": [],
             "Other Improvements": [],
             "New Game Support": [
@@ -1468,6 +1466,18 @@
         {
             "version": "23.9.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-9-2.html",
+            "Date": "20-09-2023",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [
+                "Microsoft® Agility SDK Retail Release 1.610.5 including Enhanced Barriers and Vulkan on DX12 compatibility features."
+            ],
+            "New Game Support": [
+                "Lies of P",
+                "Party Animals",
+                "The Crew™ Motorfest"
+            ],
             "fixed_bug_ids": [
                 "BUG-120",
                 "BUG-122",
@@ -1484,6 +1494,17 @@
         {
             "version": "23.9.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-9-1.html",
+            "Date": "06-09-2023",
+            "Type": 3,
+            "New Features": [
+                "AMD Radeon™ Anti-Lag+ (later removed due to anti cheat issues, replaced by Anti Lag 2)",
+                "AMD HYPR-RX"
+            ],
+            "New Product support": [],
+            "Other Improvements": [
+                "Radeon™ Boost is now supported in: Resident Evil™ 4 Remake and Ghostwire™: Tokyo"
+            ],
+            "New Game Support": [],
             "fixed_bug_ids": [
                 "BUG-119"
             ],
@@ -1496,8 +1517,30 @@
             ]
         },
         {
+            "version": "23.9.1.SI.7800XT.7700XT",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-9-1-SI-RX7800XT-RX7700-XT.html",
+            "Date": "06-09-2023",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [
+                "AMD Radeon™ RX 7800 XT / RX 7700 XT"
+            ],
+            "Other Improvements": [],
+            "New Game Support": [],
+            "fixed_bug_ids": [],
+            "known_bug_ids": []
+        },
+        {
             "version": "23.8.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-8-2.html",
+            "Date": "31-08-2023",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [],
+            "New Game Support": [
+                "Starfield™"
+            ],
             "fixed_bug_ids": [
                 "BUG-117"
             ],
@@ -1510,6 +1553,14 @@
         {
             "version": "23.8.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-8-1.html",
+            "Date": "21-08-2023",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [],
+            "New Game Support": [
+                "Immortals of Aveum™"
+            ],
             "fixed_bug_ids": [
                 "BUG-145",
                 "BUG-106",
@@ -1528,6 +1579,14 @@
         {
             "version": "23.10.23",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-10-23-03-RCRA.html",
+            "Date": "31-07-2023",
+            "Type": 2,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [],
+            "New Game Support": [
+                "Support for Ratchet & Clank™: Rift Apart"
+            ],
             "fixed_bug_ids": [
                 "BUG-111"
             ],
@@ -1543,6 +1602,12 @@
         {
             "version": "23.7.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-7-2.html",
+            "Date": "25-07-2023",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [],
+            "New Game Support": [],
             "fixed_bug_ids": [
                 "BUG-102",
                 "BUG-101",
@@ -1563,6 +1628,16 @@
         {
             "version": "23.7.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-7-1.html",
+            "Date": "06-07-2023",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [
+                "Additional Vulkan® extensions."
+            ],
+            "New Game Support": [
+                "Exoprimal™"
+            ],
             "fixed_bug_ids": [
                 "BUG-094",
                 "BUG-095",
@@ -1584,6 +1659,16 @@
         {
             "version": "23.5.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-5-2.html",
+            "Date": "01-06-2023",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [
+                "Performance optimizations for Microsoft Olive DirectML pipeline for Stable Diffusion 1.5 on AMD Radeon RX 7900 series graphics"
+            ],
+            "New Game Support": [
+                "Diablo® IV"
+            ],
             "fixed_bug_ids": [],
             "known_bug_ids": [
                 "BUG-031",
@@ -1597,6 +1682,14 @@
         {
             "version": "23.5.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-5-1.html",
+            "Date": "24-05-2023",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [],
+            "New Game Support": [
+                "The Lord of the Rings: Gollum™"
+            ],
             "fixed_bug_ids": [
                 "BUG-095",
                 "BUG-012",
@@ -1614,6 +1707,14 @@
         {
             "version": "23.4.3",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-4-3.html",
+            "Date": "27-04-2023",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [],
+            "New Game Support": [
+                "STAR WARS Jedi: Survivor™"
+            ],
             "fixed_bug_ids": [
                 "BUG-087",
                 "BUG-088"
@@ -1629,6 +1730,17 @@
         {
             "version": "23.4.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-4-2.html",
+            "Date": "20-04-2023",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [
+                "Additional Vulkan® extensions."
+            ],
+            "New Game Support": [
+                "Dead Island 2™",
+                "Boundary™"
+            ],
             "fixed_bug_ids": [
                 "BUG-080",
                 "BUG-082",
@@ -1646,6 +1758,16 @@
         {
             "version": "23.4.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-4-1.html",
+            "Date": "03-04-2023",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [
+                "Game optimizations for The Last of Us™ Part 1"
+            ],
+            "New Game Support": [
+                "Meet Your Maker™"
+            ],
             "fixed_bug_ids": [
                 "BUG-077",
                 "BUG-076",
@@ -1663,6 +1785,17 @@
         {
             "version": "23.3.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-3-2.html",
+            "Date": "22-03-2023",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [
+                "Additional Vulkan® extensions."
+            ],
+            "New Game Support": [
+                "Resident Evil™ 4 Remake",
+                "The Last of Us™ Part 1"
+            ],
             "fixed_bug_ids": [
                 "BUG-069",
                 "BUG-072",
@@ -1684,6 +1817,15 @@
         {
             "version": "23.3.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-3-1.html",
+            "Date": "07-03-2023",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [],
+            "New Game Support": [
+                "Halo Infinite™ Ray Tracing Update",
+                "Wo Long™: Fallen Dynasty"
+            ],
             "fixed_bug_ids": [
                 "BUG-063",
                 "BUG-047",
@@ -1706,6 +1848,15 @@
         {
             "version": "23.2.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-2-2.html",
+            "Date": "22-02-2023",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [],
+            "New Game Support": [
+                "Atomic Heart™",
+                "Company of Heroes™ 3"
+            ],
             "fixed_bug_ids": [
                 "BUG-058",
                 "BUG-051",
@@ -1728,6 +1879,21 @@
         {
             "version": "23.2.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-2-1.html",
+            "Date": "14-02-2023",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [
+                "Support for IREE compiler using MLIR interface on Vulkan.",
+                "Additional Vulkan® extensions. Click here for more information.",
+                "Radeon RX 6000 Series GPUs now have support for newly introduced streaming capabilities including pre-filter toggle, pre-analysis feature and CAML technology.",
+                "A new version of AMD Link improves overall connectivity across all supported Radeon products, RX 400 series and newer. (AMD Link was later deprecated)",
+                "Performance increases of up to: 4% in Marvel’s Spider-Man Remastered, 3% in Sniper Elite 5, 6% in Shadow of the Tomb Raider, 7% in Quake II RTX, 4% in Hitman 3, 6% in Marvel's Guardians of the Galaxy, 19% in F1 2022, 9% in DOOM Eternal, 4% in Borderlands 3, & 4% in Hogwarts Legacy."
+            ],
+            "New Game Support": [
+                "Forspoken™",
+                "Dead Space™"
+            ],
             "fixed_bug_ids": [
                 "BUG-042",
                 "BUG-043",
@@ -1756,6 +1922,17 @@
         {
             "version": "23.1.2",
             "url": "https://web.archive.org/web/20230124192614/https://www.amd.com/en/support/kb/release-notes/rn-rad-win-23-1-2-kb",
+            "Date": "24-01-2023",
+            "Type": 2,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [
+                "Support for IREE compiler using MLIR interface on Vulkan.",
+                "Additional Vulkan® extensions."
+            ],
+            "New Game Support": [
+                "Forspoken™"
+            ],
             "fixed_bug_ids": [
                 "BUG-042",
                 "BUG-043",
@@ -1776,6 +1953,12 @@
         {
             "version": "23.1.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-23-1-1-RX7900.html",
+            "Date": "11-01-2023",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [],
+            "New Game Support": [],
             "fixed_bug_ids": [
                 "BUG-039",
                 "BUG-037",
@@ -1793,6 +1976,12 @@
         {
             "version": "22.12.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-22-12-2-RX7900.html",
+            "Date": "20-12-2022",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [],
+            "New Game Support": [],
             "fixed_bug_ids": [
                 "BUG-029",
                 "BUG-030",
@@ -1811,6 +2000,14 @@
         {
             "version": "22.12.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-22-12-1-RX7900.html",
+            "Date": "13-12-2022",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [
+                "Support for Radeon™ RX 7900 Series Graphics."
+            ],
+            "Other Improvements": [],
+            "New Game Support": [],
             "fixed_bug_ids": [],
             "known_bug_ids": [
                 "BUG-029",
@@ -1825,6 +2022,16 @@
         {
             "version": "22.11.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-22-11-2.html",
+            "Date": "01-12-2022",
+            "Type": 3,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [],
+            "New Game Support": [
+                "The Callisto Protocol™",
+                "Need for Speed™ Unbound",
+                "The Witcher® 3: Wild Hunt Next-Gen Update"
+            ],
             "fixed_bug_ids": [
                 "BUG-021",
                 "BUG-022",
@@ -1842,6 +2049,15 @@
         {
             "version": "22.11.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-22-11-1.html",
+            "Date": "15-11-2022",
+            "Type": 2,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [],
+            "New Game Support": [
+                "Call of Duty®: Warzone 2.0",
+                "Marvel’s Spider-Man: Miles Morales™"
+            ],
             "fixed_bug_ids": [
                 "BUG-015",
                 "BUG-009",
@@ -1860,6 +2076,16 @@
         {
             "version": "22.10.3",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-22-10-3.html",
+            "Date": "28-10-2022",
+            "Type": 2,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [
+                "Radeon™ Boost is now supported while using Variable Rate Shading in Dying Light 2™"
+            ],
+            "New Game Support": [
+                "Call of Duty®: Modern Warfare® II"
+            ],
             "fixed_bug_ids": [
                 "BUG-010",
                 "BUG-013",
@@ -1876,6 +2102,15 @@
         {
             "version": "22.10.2",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-22-10-2.html",
+            "Date": "21-10-2022",
+            "Type": 2,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [],
+            "New Game Support": [
+                "UNCHARTED™: Legacy of Thieves Collection",
+                "Call of Duty®: Modern Warfare® II Campaign"
+            ],
             "fixed_bug_ids": [
                 "BUG-001",
                 "BUG-002",
