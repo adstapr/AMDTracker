@@ -82,7 +82,14 @@
             </div>
             <div class="bg-zinc-900/80 border border-zinc-800 rounded-xl p-5 shadow-sm flex items-center justify-between gap-4">
                 <div class="min-w-0 flex-1">
-                    <span class="text-red-700 text-xs font-medium uppercase tracking-wider block mb-1">Longest Unresolved Standing Issue</span>
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-red-600 text-xs font-medium uppercase tracking-wider block">Longest Standing issue</span>
+                        <div class="flex items-center gap-1.5 text-xs text-zinc-400">
+                            <label for="staleThreshold" class="text-[12px] text-red-500">Max Versions Since Last Mention:</label>
+                            <input type="number" id="staleThreshold" min="1" max="100" value="10" 
+                                class="w-14 bg-zinc-950 border border-zinc-800 rounded px-1.5 py-0.5 text-xs text-red-500 font-mono focus:outline-none focus:border-red-600">
+                        </div>
+                    </div>
                     <button id="btn-oldest-open-bug" class="text-left w-full group">
                         <span id="stat-oldest-open-bug" class="text-xs font-mono text-amber-300 group-hover:text-amber-200 group-hover:underline block line-clamp-2 mt-1 leading-relaxed">None</span>
                     </button>
@@ -212,7 +219,7 @@
                         <span id="modal-bug-id" class="bg-amber-950 text-amber-400 border border-amber-800/50 font-mono text-xs px-2 py-0.5 rounded font-semibold">BUG-000</span>
                         <span id="modal-bug-status" class="text-xs px-2 py-0.5 rounded font-medium">Status</span>
                     </div>
-                    <h3 id="modal-bug-title" class="text-base font-semibold text-red-100 leading-snug">Issue description</h3>
+                    <h3 id="modal-bug-title" class="text-base font-semibold text-red-500 leading-snug">Issue description</h3>
                 </div>
                 <button id="close-modal" class="text-red-700 hover:text-white bg-zinc-900 p-2 rounded-lg border border-zinc-800 transition shrink-0">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
@@ -266,12 +273,18 @@
         let currentOldestBugId = null;
 
 	const siteChangelog = [
-            {
+	                
+	    {
+                version: "v1.1.2",
+                date: "23rd October 2026",
+                notes: "User controllable 'Max Versions Since Last Mention' input. This is so the longest issue isn't always populated by the issue from 22.10.2 that was never mentioned again by AMD. Small visual improvements on text as well."
+            },
+	    {
                 version: "v1.1.1",
                 date: "23rd October 2026",
                 notes: "Avg time to fix now shows both days and driver releases. Avg time to fix is calculated by the first report of the issue even if the slider has not selected the first driver it appeared in."
             },
-			{
+	    {
                 version: "v1.1",
                 date: "22nd October 2026",
                 notes: "Changed colors to be more in line with AMD, added site changelog sidebar, other visual improvements."
@@ -490,27 +503,40 @@ document.getElementById('stat-avg-time-to-fix').textContent = `${avgDays} days (
                         activeOpenCount = currentActiveKnownMap.size;
                     }
 
+                    const maxStaleThreshold = parseInt(document.getElementById('staleThreshold').value) || 10;
+                    const lastDriverIdxInSlice = maxIdx;
+
                     let oldestBugText = 'None';
                     currentOldestBugId = null;
+
                     if (currentActiveKnownMap.size > 0) {
                         let oldestIdx = Infinity;
                         let oldestIdStr = '';
+
                         currentActiveKnownMap.forEach((ver, id) => {
-                            let firstIdx = 0;
-                            for (let i = 0; i < chronologicalDrivers.length; i++) {
+                            let firstIdx = -1;
+                            let lastSeenIdx = -1;
+
+                            for (let i = 0; i <= lastDriverIdxInSlice; i++) {
                                 if ((chronologicalDrivers[i].known_bug_ids || []).includes(id)) {
-                                    firstIdx = i;
-                                    break;
+                                    if (firstIdx === -1) firstIdx = i;
+                                    lastSeenIdx = i;
                                 }
                             }
-                            if (firstIdx < oldestIdx) {
-                                oldestIdx = firstIdx;
-                                currentOldestBugId = id;
-                                oldestIdStr = `${id}: ${data.master_bugs[id] || ''}`;
+
+                            const versionsSinceLastSeen = lastDriverIdxInSlice - lastSeenIdx;
+                            if (versionsSinceLastSeen <= maxStaleThreshold) {
+                                if (firstIdx !== -1 && firstIdx < oldestIdx) {
+                                    oldestIdx = firstIdx;
+                                    currentOldestBugId = id;
+                                    oldestIdStr = `${id}: ${data.master_bugs[id] || ''}`;
+                                }
                             }
                         });
+
                         oldestBugText = oldestIdStr || 'None';
                     }
+
                     document.getElementById('stat-oldest-open-bug').textContent = oldestBugText;
                     document.getElementById('stat-oldest-open-bug').title = oldestBugText;
 
@@ -740,6 +766,7 @@ document.getElementById('stat-avg-time-to-fix').textContent = `${avgDays} days (
                 sliderMin.addEventListener('input', updateView);
                 sliderMax.addEventListener('input', updateView);
                 document.getElementById('excludeDuplicatesToggle').addEventListener('change', updateView);
+                document.getElementById('staleThreshold').addEventListener('input', updateView);
                 document.getElementById('issueSearchInput').addEventListener('input', () => renderUnfixedList(data));
                 document.getElementById('reset-timeline').addEventListener('click', () => {
                     sliderMin.value = 0;
@@ -816,7 +843,7 @@ document.getElementById('stat-avg-time-to-fix').textContent = `${avgDays} days (
                         <li class="text-xs">
                             <button onclick="openIssueModal('${id}')" class="text-left flex items-start gap-2 bg-amber-950/20 hover:bg-amber-950/50 border border-amber-900/30 p-2 rounded transition w-full group">
                                 <span class="bg-amber-950 text-amber-400 group-hover:border-amber-500 border border-amber-800/50 font-mono text-[10px] px-1.5 py-0.5 rounded shrink-0">${id}</span>
-                                <span class="text-red-200 group-hover:text-white transition">${desc}</span>
+                                <span class="text-white group-hover:text-red-200 transition">${desc}</span>
                             </button>
                         </li>
                     `;
