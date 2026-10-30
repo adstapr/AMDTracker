@@ -6,6 +6,39 @@
     },
     "drivers": [
         {
+            "version": "26.10.2",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-10-2.html",
+            "Date": "30-10-2026",
+            "Type": 2,
+            "New Features": [],
+            "New Product support": [],
+            "Other Improvements": [],
+            "New Game Support": [],
+            "fixed_bug_ids": [
+                "BUG-390",
+                "BUG-391",
+                "BUG-396",
+                "BUG-392",
+                "BUG-393",
+                "BUG-397",
+                "BUG-398",
+                "BUG-399",
+                "BUG-400",
+                "BUG-401"
+            ],
+            "known_bug_ids": [
+                "BUG-387",
+                "BUG-388",
+                "BUG-394",
+                "BUG-402",
+                "BUG-403",
+                "BUG-311",
+                "BUG-312",
+                "BUG-404",
+                "BUG-405"
+            ]
+        },
+        {
             "version": "26.10.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/rn-rad-win-26-10-1.html",
             "Date": "20-10-2026",
@@ -2483,6 +2516,14 @@
         "BUG-394": "Intermittent application crash or driver timeout may be observed while playing Cyberpunk 2077 with AMD FSR Upscaling, AMD Radeon™ Anti-Lag and in-game frame generation enabled during video playback on a secondary display on some Radeon™ RX 9000 series graphics products.",
         "BUG-395": "Black screen may be observed when launching Fallout 76 on Ryzen™ AI Max PRO 400 Series processors.",
         "BUG-396": "Intermittent application crash or driver timeout may be observed in some games when opening or closing other overlays, such as Xbox Game Bar, while the AMD Software: Adrenalin Edition Performance Metrics Overlay is enabled on Radeon™ graphics products.",
-        "BUG-397": "Intermittent system crash or hang may be observed when switching between applications or toggling overlays while playing games with in-game AMD FSR Frame Generation enabled on Radeon™ RX 9000 series graphics products."
+        "BUG-397": "Intermittent system crash or hang may be observed when switching between applications or toggling overlays while playing games with in-game AMD FSR Frame Generation enabled on Radeon™ RX 9000 series graphics products.",
+        "BUG-398": "Intermittent application crash may be observed while launching the Steam™ launcher on AMD Radeon™ graphics products.",
+        "BUG-399": "Intermittent driver timeout may be observed while playing video on Windows® 11 with Hardware-Accelerated GPU Scheduling (HAGS) enabled on Radeon™ RX 7000 series graphics products.",
+        "BUG-400": "Application crash may be observed while playing games on Windows® 10 systems with Radeon™ RX 9000 series graphics products after uninstalling AMD Software: Adrenalin Edition with the AMD Cleanup Utility.",
+        "BUG-401": "AMD Install Manager fails to locate optional drivers for AMD Software: Adrenalin Edition when Recommended + Optional is selected."
+        "BUG-402": "Call of Duty®: Modern Warfare® Remastered may become unresponsive while using Alt+Tab during gameplay on Ryzen™ AI Max PRO 400 Series processors."
+        "BUG-403": "Black screen may be observed when launching Gears of War: Reloaded on AMD Ryzen™ AI 9 400 Series processors. Users experiencing this issue are recommended to switch the in-game display mode to Windowed and then back to Fullscreen."
+        "BUG-404": "Visual corruption may appear in the sky and on character hair while playing Phantom Blade Zero on Radeon™ RX 9000 series graphics products. Users experiencing character hair corruption are recommended to disable the High-Quality Hair setting in the game."
+        "BUG-405": "Black corruption may be observed while playing Call of Duty®: Modern Warfare® Remastered on Radeon™ RX 9000 series graphics products." 
     }
 }
