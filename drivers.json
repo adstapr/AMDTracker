@@ -2520,10 +2520,10 @@
         "BUG-398": "Intermittent application crash may be observed while launching the Steam™ launcher on AMD Radeon™ graphics products.",
         "BUG-399": "Intermittent driver timeout may be observed while playing video on Windows® 11 with Hardware-Accelerated GPU Scheduling (HAGS) enabled on Radeon™ RX 7000 series graphics products.",
         "BUG-400": "Application crash may be observed while playing games on Windows® 10 systems with Radeon™ RX 9000 series graphics products after uninstalling AMD Software: Adrenalin Edition with the AMD Cleanup Utility.",
-        "BUG-401": "AMD Install Manager fails to locate optional drivers for AMD Software: Adrenalin Edition when Recommended + Optional is selected."
-        "BUG-402": "Call of Duty®: Modern Warfare® Remastered may become unresponsive while using Alt+Tab during gameplay on Ryzen™ AI Max PRO 400 Series processors."
-        "BUG-403": "Black screen may be observed when launching Gears of War: Reloaded on AMD Ryzen™ AI 9 400 Series processors. Users experiencing this issue are recommended to switch the in-game display mode to Windowed and then back to Fullscreen."
-        "BUG-404": "Visual corruption may appear in the sky and on character hair while playing Phantom Blade Zero on Radeon™ RX 9000 series graphics products. Users experiencing character hair corruption are recommended to disable the High-Quality Hair setting in the game."
+        "BUG-401": "AMD Install Manager fails to locate optional drivers for AMD Software: Adrenalin Edition when Recommended + Optional is selected.",
+        "BUG-402": "Call of Duty®: Modern Warfare® Remastered may become unresponsive while using Alt+Tab during gameplay on Ryzen™ AI Max PRO 400 Series processors.",
+        "BUG-403": "Black screen may be observed when launching Gears of War: Reloaded on AMD Ryzen™ AI 9 400 Series processors. Users experiencing this issue are recommended to switch the in-game display mode to Windowed and then back to Fullscreen.",
+        "BUG-404": "Visual corruption may appear in the sky and on character hair while playing Phantom Blade Zero on Radeon™ RX 9000 series graphics products. Users experiencing character hair corruption are recommended to disable the High-Quality Hair setting in the game.",
         "BUG-405": "Black corruption may be observed while playing Call of Duty®: Modern Warfare® Remastered on Radeon™ RX 9000 series graphics products." 
     }
 }
