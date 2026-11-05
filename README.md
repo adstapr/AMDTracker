@@ -1,2 +1,2 @@
 # AMDTracker
-Logging and tracking AMD driver issues/fixes
+Tracking AMD technology support & driver issues/fixes/features.
