@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- link rel="icon" type="image/x-icon" href="icon.ico" -->
     <meta charset="UTF-8">
     <title>AMD Tracker</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none;
@@ -14,7 +14,6 @@
             height: 16px;
             border-radius: 9999px;
             background: #dc2626;
-            background-color: #dc2626;
             cursor: pointer;
             border: 2px solid #020617;
             position: relative;
@@ -28,926 +27,633 @@
             height: 16px;
             border-radius: 9999px;
             background: #dc2626;
-            background-color: #dc2626;
             cursor: pointer;
             border: 2px solid #020617;
             position: relative;
             z-index: 30;
         }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: var(--color-zinc-950, #09090b); }
+        ::-webkit-scrollbar-thumb { background: var(--color-zinc-800, #27272a); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--color-zinc-300, #3f3f46); }
+        * { scrollbar-width: thin; scrollbar-color: var(--color-zinc-800, #27272a) var(--color-zinc-950, #09090b); }
+
+        :root, body.theme-amd {
+            --color-zinc-950: #060607;
+            --color-zinc-900: #17171a;
+            --color-zinc-800: #27272a;
+            --color-zinc-100: #f4f4f5;
+            --color-zinc-300: #d4d4d8;
+            --color-zinc-400: #a1a1aa;
+        }
+
+        body.theme-light {
+            --color-zinc-950: #ffffff;
+            --color-zinc-900: #f8fafc;
+            --color-zinc-800: #94a3b8;
+            --color-zinc-100: #020617;
+            --color-zinc-300: #1e293b;
+            --color-zinc-400: #475569;
+            --color-white: #020617;
+        }
+        body.theme-light input[type="text"],
+        body.theme-light input[type="number"],
+        body.theme-light select,
+        body.theme-light #themeSelector {
+            background-color: #ffffff !important;
+            color: #0f172a !important;
+            border-color: #cbd5e1 !important;
+        }
+        body.theme-light #themeSelector option {
+            background-color: #ffffff !important;
+            color: #0f172a !important;
+        }
+
+        body.theme-midnight {
+            --color-zinc-950: #060b1a;
+            --color-zinc-900: #0f1933;
+            --color-zinc-800: #182446;
+            --color-zinc-100: #dadcdf;
+            --color-zinc-300: #d5dae0;
+            --color-zinc-400: #1b2f4d;
+        }
+
+        body.theme-matrix {
+            --color-zinc-950: #050a07;
+            --color-zinc-900: #151614;
+            --color-zinc-800: #09130d;
+            --color-zinc-100: #e6f7ed;
+            --color-zinc-300: #a3e6be;
+            --color-zinc-400: #6ee7b7;
+        }
+
+        body {
+            background-color: var(--color-zinc-950) !important;
+            color: var(--color-zinc-100) !important;
+            overflow-x: hidden;
+        }
     </style>
 </head>
 <body class="bg-zinc-950 text-zinc-100 p-6 font-sans">
-    <div class="max-w-6xl mx-auto space-y-8">
+<script>
+    window.addEventListener('message', (event) => {
+        if (!event.data) return;
 
-        
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-zinc-800 pb-4">
-            <div>
-                <h1 class="text-3xl font-bold tracking-tight text-red-600">AMD Tracker</h1>
-                <p class="text-red-600 text-sm mt-1">A bug tracker using AMD's driver notes.</p>
-            </div>
-            <a href="https://www.amd.com/en/resources/support-articles/faqs/AMDBRT.html" target="_blank" class="inline-flex items-center gap-2 bg-red-700 hover:bg-red-500 text-white text-xs font-semibold px-4 py-2.5 rounded-lg transition shadow-sm self-start sm:self-auto">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
-                <span>How to report an AMD driver issue</span>
-            </a>
-        </div>
-
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div class="bg-zinc-900/80 border border-zinc-800 rounded-xl p-5 shadow-sm">
-                <span class="text-red-700 text-xs font-medium uppercase tracking-wider block mb-1">Total Drivers</span>
-                <span id="stat-total-drivers" class="text-2xl font-bold text-red-400">0</span>
-            </div>
-            <div class="bg-zinc-900/80 border border-zinc-800 rounded-xl p-5 shadow-sm">
-                <span class="text-red-700 text-xs font-medium uppercase tracking-wider block mb-1">Total Unique Issues</span>
-                <span id="stat-total-issues" class="text-2xl font-bold text-indigo-400">0</span>
-            </div>
-            <div class="bg-zinc-900/80 border border-zinc-800 rounded-xl p-5 shadow-sm">
-                <span class="text-red-700 text-xs font-medium uppercase tracking-wider block mb-1">Overall Fix Rate</span>
-                <span id="stat-fix-rate" class="text-2xl font-bold text-emerald-400">0%</span>
-            </div>
-            <div class="bg-zinc-900/80 border border-zinc-800 rounded-xl p-5 shadow-sm">
-                <span class="text-red-700 text-xs font-medium uppercase tracking-wider block mb-1">Active Open Issues</span>
-                <span id="stat-open-issues" class="text-2xl font-bold text-amber-400">0</span>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="bg-zinc-900/80 border border-zinc-800 rounded-xl p-5 shadow-sm flex items-center justify-between">
-                <div>
-                    <span class="text-red-700 text-xs font-medium uppercase tracking-wider block mb-1">Avg. Time to Fix</span>
-                    <span id="stat-avg-time-to-fix" class="text-base font-bold text-cyan-400">0 releases</span>
-                </div>
-                <div class="bg-zinc-900/80 p-2.5 rounded-lg border border-zinc-800 text-cyan-400 shrink-0">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                </div>
-            </div>
-            <div class="bg-zinc-900/80 border border-zinc-800 rounded-xl p-5 shadow-sm flex items-center justify-between gap-4">
-                <div class="min-w-0 flex-1">
-                    <div class="flex items-center justify-between mb-1">
-                        <span class="text-red-600 text-xs font-medium uppercase tracking-wider block">Longest Standing issue</span>
-                        <div class="flex items-center gap-1.5 text-xs text-zinc-400">
-                            <label for="staleThreshold" class="text-[12px] text-red-500">Max Versions Since Last Mention:</label>
-                            <input type="number" id="staleThreshold" min="1" max="100" value="10" 
-                                class="w-14 bg-zinc-950 border border-zinc-800 rounded px-1.5 py-0.5 text-xs text-red-500 font-mono focus:outline-none focus:border-red-600">
-                        </div>
-                    </div>
-                    <button id="btn-oldest-open-bug" class="text-left w-full group">
-                        <span id="stat-oldest-open-bug" class="text-xs font-mono text-amber-300 group-hover:text-amber-200 group-hover:underline block line-clamp-2 mt-1 leading-relaxed">None</span>
-                    </button>
-                </div>
-                <div class="bg-zinc-900/80 p-2.5 rounded-lg border border-zinc-800 text-amber-400 shrink-0">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
-                </div>
-            </div>
-        </div>
-
-        <div class="bg-zinc-900/80 border border-zinc-800 rounded-xl p-6 shadow-sm space-y-4">
-            <div class="flex justify-between items-center">
-                <div>
-                    <h2 class="text-sm font-semibold uppercase tracking-wider text-red-700">Timeline & Architecture Range Filter</h2>
-                    <p id="timeline-status" class="text-xs text-red-600 mt-0.5">Showing all driver history</p>
-                </div>
-                <button id="reset-timeline" class="text-xs text-red-600 hover:text-white bg-zinc-900/80 px-3 py-1.5 rounded border border-zinc-800 transition">Reset Range</button>
-            </div>
-            
-            <div class="relative py-8">
-                <div class="relative h-2 bg-zinc-900/80 rounded-lg border border-zinc-800 mx-3">
-                    <div id="slider-range-fill" class="absolute h-full bg-red-600/30 rounded-lg pointer-events-none"></div>
-                    
-                    <input type="range" id="sliderMin" min="0" max="100" value="0" step="1" 
-                        class="absolute -top-2 left-0 w-full h-6 appearance-none bg-transparent accent-red-600 pointer-events-none z-20">
-                    <input type="range" id="sliderMax" min="0" max="100" value="100" step="1" 
-                        class="absolute -top-2 left-0 w-full h-6 appearance-none bg-transparent accent-red-600 pointer-events-none z-20">
-
-                    <div id="timeline-markers" class="absolute inset-0 pointer-events-none"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="bg-zinc-900/80 border border-zinc-800 rounded-xl p-6 shadow-sm space-y-4">
-            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <div>
-                    <h2 class="text-xl font-semibold text-red-700 mb-1">Bugs Per Driver</h2>
-                    <p class="text-red-600 text-sm">(Positive = Fixed Issues, Negative = Open / Known Issues — Click any driver column to view)</p>
-                </div>
-                <label class="flex items-center gap-2.5 text-xs text-red-600 cursor-pointer select-none bg-zinc-900/80 px-3 py-2 rounded-lg border border-zinc-800">
-                    <input type="checkbox" id="excludeDuplicatesToggle" checked class="rounded border-slate-700 bg-zinc-900/80 text-red-600 focus:ring-red-500 w-4 h-4">
-                    <span>Exclude duplicate known issues</span>
-                </label>
-            </div>
-            
-            <div class="relative h-[450px] w-full">
-                <canvas id="bugLifecycleChart" class="cursor-pointer"></canvas>
-            </div>
-        </div>
-
-        <div class="bg-zinc-900/80 border border-zinc-800 rounded-xl p-6 shadow-sm space-y-4">
-            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-zinc-800 pb-3">
-                <div>
-                    <h2 class="text-xl font-semibold text-red-700">Active Unfixed Issues</h2>
-                    <p class="text-red-600 text-sm">Currently unresolved issues remaining up to the latest selected driver version</p>
-                </div>
-                <div class="flex items-center gap-3">
-                    <span id="unfixed-count-badge" class="bg-amber-950 text-amber-400 border border-amber-800/50 text-xs font-mono px-2.5 py-1 rounded-full">0 issues</span>
-                </div>
-            </div>
-
-            <div class="relative">
-                <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-red-700">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                </span>
-                <input type="text" id="issueSearchInput" placeholder="Filter active bugs by keyword (e.g., stutter, crash, overlay)..." class="w-full bg-zinc-900/80 border border-zinc-800 rounded-lg pl-9 pr-4 py-2 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-slate-500 transition">
-            </div>
-
-            <div id="unfixed-issues-list" class="space-y-2 max-h-[400px] overflow-y-auto pr-2">
-            </div>
-        </div>
-            
-        <div class="space-y-6">
-            <h2 class="text-xl font-semibold text-red-700 border-b border-zinc-800 pb-2">Issues/Fixes by version (most recent first)</h2>
-            <div id="driver-tracker" class="space-y-4 max-h-[800px] overflow-y-auto pr-2"></div>
-        </div>
-
-    </div>
-
-    <div id="driver-modal" class="fixed inset-0 bg-zinc-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-zinc-900 border border-zinc-800 rounded-2xl max-w-4xl w-full max-h-[100vh] flex flex-col shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150">
-            <div class="p-5 border-b border-zinc-800 flex items-center justify-between gap-4">
-                <div>
-                    <div class="flex items-center gap-3">
-                        <h3 id="driver-modal-version" class="text-2xl font-bold text-white font-mono">26.X.X</h3>
-                        <a id="driver-modal-link" href="#" target="_blank" class="text-red-600 hover:underline text-xs flex items-center gap-1">
-                            <span>Release Notes</span>
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-                        </a>
-                    </div>
-                    <p id="driver-modal-subtitle" class="text-red-700 text-xs mt-1">Driver version release details</p>
-                </div>
-                <button id="close-driver-modal" class="text-red-700 hover:text-white bg-zinc-900 p-2 rounded-lg border border-zinc-800 transition shrink-0">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-                </button>
-            </div>
-
-            <div class="p-5 overflow-y-auto flex-1 space-y-4">
-                <div class="grid sm:grid-cols-2 gap-4">
-                    <div class="bg-zinc-900/80/60 p-4 rounded-xl border border-zinc-800/80">
-                        <div class="flex items-center justify-between mb-3 border-b border-zinc-800/80 pb-2">
-                            <span class="text-xs font-bold uppercase tracking-wider text-emerald-400">Fixed in this version</span>
-                            <span id="driver-modal-fixed-count" class="bg-emerald-950 text-emerald-400 border border-emerald-800/50 text-[10px] font-mono px-2 py-0.5 rounded">0</span>
-                        </div>
-                        <ul id="driver-modal-fixed-list" class="space-y-2 max-h-[100vh] overflow-y-auto pr-1"></ul>
-                    </div>
-
-                    <div class="bg-zinc-900/80/60 p-4 rounded-xl border border-zinc-800/80">
-                        <div class="flex items-center justify-between mb-3 border-b border-zinc-800/80 pb-2">
-                            <span class="text-xs font-bold uppercase tracking-wider text-amber-400">Known / Open Issues</span>
-                            <span id="driver-modal-known-count" class="bg-amber-950 text-amber-400 border border-amber-800/50 text-[10px] font-mono px-2 py-0.5 rounded">0</span>
-                        </div>
-                        <ul id="driver-modal-known-list" class="space-y-2 max-h-[100vh] overflow-y-auto pr-1"></ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Issue Detail View Modal Overlay -->
-    <div id="issue-modal" class="fixed inset-0 bg-zinc-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-zinc-900 border border-zinc-800 rounded-2xl max-w-3xl w-full max-h-[85vh] flex flex-col shadow-3xl overflow-hidden animate-in fade-in zoom-in-95 duration-150">
-            <!-- Modal Header -->
-            <div class="p-5 border-b border-zinc-800 flex items-start justify-between gap-4">
-                <div>
-                    <div class="flex items-center gap-2 mb-1.5">
-                        <span id="modal-bug-id" class="bg-amber-950 text-amber-400 border border-amber-800/50 font-mono text-xs px-2 py-0.5 rounded font-semibold">BUG-000</span>
-                        <span id="modal-bug-status" class="text-xs px-2 py-0.5 rounded font-medium">Status</span>
-                    </div>
-                    <h3 id="modal-bug-title" class="text-base font-semibold text-red-500 leading-snug">Issue description</h3>
-                </div>
-                <button id="close-modal" class="text-red-700 hover:text-white bg-zinc-900 p-2 rounded-lg border border-zinc-800 transition shrink-0">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-                </button>
-            </div>
-
-            <!-- Modal Content Body -->
-            <div class="p-5 overflow-y-auto space-y-5 flex-1 text-xs">
-                <!-- Summary Stats Row -->
-                <div class="grid grid-cols-2 gap-3 bg-zinc-900 p-3.5 rounded-xl border border-zinc-800">
-                    <div>
-                        <span class="text-red-500 block mb-0.5 font-medium">First Reported In</span>
-                        <span id="modal-first-version" class="text-white font-mono text-sm font-semibold">-</span>
-                    </div>
-                    <div>
-                        <span class="text-red-500 block mb-0.5 font-medium font-sans">Resolved In</span>
-                        <span id="modal-resolved-version" class="text-white font-mono text-sm font-semibold">-</span>
-                    </div>
-                </div>
-
-                <!-- Driver Version History Timeline -->
-                <div>
-                    <h4 class="text-xs font-semibold uppercase tracking-wider text-red-500 mb-3">Driver Version History</h4>
-                    <div id="modal-history-list" class="space-y-2 border-l-2 border-zinc-800 ml-2 pl-4">
-                        <!-- Populated dynamically -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <aside class="hidden xl:flex flex-col fixed right-6 top-6 w-64 h-[calc(100vh-3rem)] bg-zinc-900/20 border border-zinc-800/30 rounded-xl p-4 shadow-2xl z-50 pointer-events-auto">
-        <h2 class="text-xs font-bold uppercase tracking-wider text-red-600 border-b border-zinc-800 pb-2 mb-3">Site Changelog</h2>
-        <div id="sidebar-changelog-list" class="space-y-1 overflow-y-auto pr-1 flex-1"></div>
-    </aside>
-    
-    <div id="site-changelog-modal" class="fixed inset-0 bg-zinc-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-zinc-900 border border-zinc-800 rounded-2xl max-w-lg w-full flex flex-col shadow-2xl overflow-hidden p-6 space-y-4">
-            <div class="flex items-center justify-between border-b border-zinc-800 pb-3">
-                <h3 id="site-modal-version" class="text-xl font-bold text-white font-mono">v1.00</h3>
-                <button id="close-site-modal" class="text-red-700 hover:text-white bg-zinc-900 p-2 rounded-lg border border-zinc-800 transition">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-                </button>
-            </div>
-            <div id="site-modal-content" class="text-xs text-zinc-300 space-y-2 leading-relaxed"></div>
-        </div>
-    </div>
-
-    <script>
-        let globalMasterBugs = {};
-        let globalChronologicalDrivers = [];
-        let currentOldestBugId = null;
-
-	const siteChangelog = [
-	                
-	    {
-                version: "v1.1.3",
-                date: "31st October 2026",
-                notes: "26.10.2 driver added."
-            },
-			{
-                version: "v1.1.2",
-                date: "23rd October 2026",
-                notes: "User controllable 'Max Versions Since Last Mention' input. This is so the longest issue isn't always populated by the issue from 22.10.2 that was never mentioned again by AMD. Small visual improvements on text as well."
-            },
-	    	{
-                version: "v1.1.1",
-                date: "23rd October 2026",
-                notes: "Avg time to fix now shows both days and driver releases. Avg time to fix is calculated by the first report of the issue even if the slider has not selected the first driver it appeared in."
-            },
-	    	{
-                version: "v1.1",
-                date: "22nd October 2026",
-                notes: "Changed colors to be more in line with AMD, added site changelog sidebar, other visual improvements."
-            },
-            {
-                version: "v1.01",
-                date: "20nd October 2026",
-                notes: "Driver 26.10.1 added"
-            },
-            {
-                version: "v1.00",
-                date: "6th October 2026",
-                notes: "Initial release with drivers back to 22.10.2 for issues known/fixed."
+        if (typeof event.data.frameHeight === 'number') {
+            const frame = document.getElementById('content-frame');
+            if (frame) {
+                frame.style.height = `${event.data.frameHeight}px`;
             }
-        ];
-
-        const sidebarList = document.getElementById('sidebar-changelog-list');
-        if (sidebarList) {
-            sidebarList.innerHTML = '';
-            siteChangelog.forEach(changelog => {
-                let btn = document.createElement('button');
-                btn.className = 'w-full text-left px-2.5 py-1.5 rounded text-xs font-mono text-zinc-300 hover:bg-zinc-800 hover:text-white transition flex items-center justify-between group';
-                btn.innerHTML = `<span>${changelog.version}</span> <span class="text-[10px] text-red-600 opacity-0 group-hover:opacity-100 transition">View</span>`;
-                
-                btn.onclick = () => {
-                    document.getElementById('site-modal-version').textContent = `${changelog.version} (${changelog.date})`;
-                    document.getElementById('site-modal-content').textContent = changelog.notes;
-                    document.getElementById('site-changelog-modal').classList.remove('hidden');
-                };
-                
-                sidebarList.appendChild(btn);
-            });
         }
 
-    const modal = document.getElementById('site-changelog-modal');
-
-    modal.addEventListener('click', (event) => {
-        if (event.target === modal) {
-            modal.classList.add('hidden');
+        if (event.data.action === 'openDriverModal') {
+            openRootDriverModal(event.data.version, event.data.driverObj, event.data.masterBugs);
+        } else if (event.data.action === 'openIssueModal') {
+            openRootIssueModal(event.data.bugId, event.data.description, event.data.historyItems);
+        } else if (event.data.action === 'openGameModal') {
+            openRootGameModal(event.data.gameName, event.data.gameNumber, event.data.gameObj);
         }
     });
 
-        document.getElementById('close-site-modal').addEventListener('click', () => {
-            document.getElementById('site-changelog-modal').classList.add('hidden');
-        });
+    (function() {
+        const savedTheme = localStorage.getItem('amd_tracker_theme') || 'theme-amd';
+        document.body.className = document.body.className + ' ' + savedTheme;
+    })();
+</script>
+    <div class="max-w-7xl mx-auto space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-zinc-800 pb-4">
+            <div>
+                <h1 class="text-3xl font-bold tracking-tight text-red-600">AMD Tracker</h1>
+                <p class="text-red-600 text-sm mt-1">Tracking all things AMD</p>
+            </div>
+            <select id="themeSelector" onchange="setTheme(this.value)" class="bg-zinc-900 border border-zinc-800 text-xs text-zinc-100 rounded-lg px-3 py-2.5 font-medium focus:outline-none focus:border-red-600 cursor-pointer shadow-sm">
+                <option value="theme-amd">AMD Crimson (Dark)</option>
+                <option value="theme-light">Clean Slate (Light)</option>
+                <option value="theme-midnight">Navy (Dark)</option>
+                <option value="theme-matrix">Matrix (Dark)</option>
+            </select>
+            <a id="header-action-btn" href="https://www.amd.com/en/resources/support-articles/faqs/AMDBRT.html" target="_blank" class="inline-flex items-center gap-2 bg-red-700 hover:bg-red-500 text-white text-base font-semibold px-4 py-2.5 rounded-lg transition shadow-sm self-start sm:self-auto">
+                <span id="header-action-text">How to report an AMD driver issue</span>
+            </a>
+        </div>
 
-        fetch('./drivers.json')
-            .then(response => {
-                if (!response.ok) throw new Error('Failed to load drivers.json');
-                return response.json();
-            })
-            .then(data => {
-                globalMasterBugs = data.master_bugs || {};
-                const chronologicalDrivers = [...data.drivers].reverse();
-                globalChronologicalDrivers = chronologicalDrivers;
+        <div class="flex items-center gap-2 border-b border-zinc-800 pb-3">
+            <button onclick="navigateTo('/drivers')" id="tab-drivers" class="sub-tab inline-flex items-center gap-2 bg-red-600/10 text-red-500 border border-red-600/30 text-xs font-semibold px-3.5 py-2 rounded-lg transition cursor-pointer">
+                <span>Drivers & Bugs</span>
+            </button>
+            <button onclick="navigateTo('/tech')" id="tab-tech" class="sub-tab inline-flex items-center gap-2 bg-zinc-900 hover:bg-zinc-800 text-zinc-300 border border-zinc-800 text-xs font-semibold px-3.5 py-2 rounded-lg transition cursor-pointer">
+                <span>AMD Tech</span>
+            </button>
+        </div>
+    </div>
 
+    <div id="frame-container" class="w-full mt-6">
+        <iframe name="content-frame" id="content-frame" src="drivers.html" class="w-full border-none block" style="height: 1000px; overflow: hidden;"></iframe>
+    </div>
 
-                const totalSteps = chronologicalDrivers.length - 1;
-                const milestones = [
-                    { label: '2022', type: 'year', match: (d) => d.version.startsWith('22.') && !d.version.includes('22.11.') },
-                    { label: 'RDNA 3', type: 'arch', match: (d) => d.version.includes('22.12.') },
-                    { label: '2023', type: 'year', match: (d) => d.version.startsWith('23.') },
-                    { label: '2024', type: 'year', match: (d) => d.version.startsWith('24.') },
-                    { label: 'RDNA 4', type: 'arch', match: (d) => d.version.includes('25.3.') || d.version.includes('25.4.') },
-                    { label: '2025', type: 'year', match: (d) => d.version.startsWith('25.') && !d.version.includes('25.3.') && !d.version.includes('25.4.') },
-                    { label: '2026', type: 'year', match: (d) => d.version.startsWith('26.') }
-                ];
+    <aside class="hidden xl:flex flex-col fixed right-6 top-6 w-64 h-[calc(100vh-3rem)] bg-zinc-900/20 border border-zinc-800/30 rounded-xl p-4 shadow-2xl z-50">
+        <h2 class="text-xs font-bold uppercase tracking-wider text-red-600 border-b border-zinc-800 pb-2 mb-3">Site Changelog</h2>
+        <div id="sidebar-changelog-list" class="space-y-1 overflow-y-auto pr-1 flex-1"></div>
+    </aside>
 
-                milestones.forEach(m => {
-                    let foundIdx = chronologicalDrivers.findIndex(m.match);
-                    if (foundIdx === -1) {
-                        foundIdx = chronologicalDrivers.findIndex(d => d.version.includes(m.label.toLowerCase()));
-                    }
-                    m.index = foundIdx !== -1 ? foundIdx : null;
-                });
-
-                const activeMilestones = milestones.filter(m => m.index !== null);
-                const sliderMin = document.getElementById('sliderMin');
-                const sliderMax = document.getElementById('sliderMax');
-                sliderMin.min = 0;
-                sliderMin.max = totalSteps;
-                sliderMin.value = 0;
-
-                sliderMax.min = 0;
-                sliderMax.max = totalSteps;
-                sliderMax.value = totalSteps;
-
-                const markersContainer = document.getElementById('timeline-markers');
-                markersContainer.innerHTML = '';
-                activeMilestones.forEach(m => {
-                    let pct = totalSteps > 0 ? (m.index / totalSteps) * 100 : 0;
-                    let span = document.createElement('span');
-                    
-                    if (m.type === 'arch') {
-                        span.className = 'absolute text-[10px] text-red-600 font-mono font-bold cursor-pointer hover:text-red-500 transition -translate-x-1/2 whitespace-nowrap bg-zinc-900/80 border border-red-800 px-1.5 py-0.5 rounded shadow-sm top-[-26px] pointer-events-auto z-10';
-                    } else {
-                        span.className = 'absolute text-[10px] text-red-600 font-mono cursor-pointer hover:text-red-500 transition -translate-x-1/2 whitespace-nowrap bg-zinc-900/80 border border-red-800 px-1.5 py-0.5 rounded bottom-[-26px] pointer-events-auto z-10';
-                    }
-
-                    span.style.left = `${pct}%`;
-                    span.textContent = m.label;
-                    span.onclick = () => {
-                        let midVal = (parseInt(sliderMin.value) + parseInt(sliderMax.value)) / 2;
-                        if (m.index <= midVal) {
-                            sliderMin.value = m.index;
-                        } else {
-                            sliderMax.value = m.index;
-                        }
-                        updateView();
-                    };
-                    markersContainer.appendChild(span);
-                });
-
-                let bugChart = null;
-                let currentActiveKnownMap = new Map(); 
-
-                function updateView() {
-                    let minIdx = parseInt(sliderMin.value);
-                    let maxIdx = parseInt(sliderMax.value);
-
-                    if (minIdx > maxIdx) {
-                        let temp = minIdx;
-                        minIdx = maxIdx;
-                        maxIdx = temp;
-                        sliderMin.value = minIdx;
-                        sliderMax.value = maxIdx;
-                    }
-
-                    const fill = document.getElementById('slider-range-fill');
-                    const leftPct = totalSteps > 0 ? (minIdx / totalSteps) * 100 : 0;
-                    const rightPct = totalSteps > 0 ? (1 - (maxIdx / totalSteps)) * 100 : 0;
-                    fill.style.left = `${leftPct}%`;
-                    fill.style.right = `${rightPct}%`;
-
-                    const filteredDriversChronological = chronologicalDrivers.slice(minIdx, maxIdx + 1);
-                    const filteredDriversDisplay = [...filteredDriversChronological].reverse();
-
-                    const startVer = chronologicalDrivers[minIdx].version;
-                    const endVer = chronologicalDrivers[maxIdx].version;
-                    document.getElementById('timeline-status').textContent = minIdx === 0 && maxIdx === totalSteps ? 
-                        'Showing all driver history' : `Showing range: ${startVer} to ${endVer}`;
-
-                    const totalDrivers = filteredDriversChronological.length;
-                    const sliceUniqueIssues = new Set();
-                    const allFixedIds = new Set();
-                    
-                    filteredDriversChronological.forEach(d => {
-                        (d.fixed_bug_ids || []).forEach(id => {
-                            sliceUniqueIssues.add(id);
-                            allFixedIds.add(id);
-                        });
-                        (d.known_bug_ids || []).forEach(id => {
-                            sliceUniqueIssues.add(id);
-                        });
-                    });
-
-                    const totalIssues = sliceUniqueIssues.size;
-                    const fixRate = totalIssues > 0 ? Math.round((allFixedIds.size / totalIssues) * 100) : 0;
-
-                    let activeOpenCount = 0;
-                    currentActiveKnownMap = new Map(); 
-                    
-                    let sliceFixReleases = [];
-		    let fixDurationsInDays = [];
-
-		    function parseDriverDate(dateStr) {
-    		    if (!dateStr) return null;
-    		    const parts = dateStr.split('-');
-    		    if (parts.length !== 3) return null;
-    		    return new Date(`${parts[2]}-${parts[1]}-${parts[0]}`);
-		    }
-
-		    filteredDriversChronological.forEach((d, sIdx) => {
-    		    const globalIdx = minIdx + sIdx;
-    		    const fixDate = parseDriverDate(d.Date);
-
-    		    (d.fixed_bug_ids || []).forEach(id => {
-        	    	for (let i = 0; i <= globalIdx; i++) {
-            		    const pastDriver = chronologicalDrivers[i];
-            		    if ((pastDriver.known_bug_ids || []).includes(id)) {
-                		    sliceFixReleases.push(globalIdx - i);
-
-                		    const reportDate = parseDriverDate(pastDriver.Date);
-                		    if (fixDate && reportDate) {
-                    		    const diffTime = fixDate - reportDate;
-                    		    const diffDays = Math.max(0, Math.ceil(diffTime / (1000 * 60 * 60 * 24)));
-                    		    fixDurationsInDays.push(diffDays);
-                		    }
-                		    break;
-            		    }
-        		    }
-    		    });
-		    });
-
-let avgReleases = 0;
-if (sliceFixReleases.length > 0) {
-    avgReleases = (sliceFixReleases.reduce((a, b) => a + b, 0) / sliceFixReleases.length).toFixed(1);
-}
-
-let avgDays = 0;
-if (fixDurationsInDays.length > 0) {
-    avgDays = Math.round(fixDurationsInDays.reduce((a, b) => a + b, 0) / fixDurationsInDays.length);
-}
-
-document.getElementById('stat-avg-time-to-fix').textContent = `${avgDays} days (${avgReleases} releases)`;
-
-                    if (filteredDriversChronological.length > 0) {
-                        filteredDriversChronological.forEach(d => {
-                            (d.fixed_bug_ids || []).forEach(id => currentActiveKnownMap.delete(id));
-                            (d.known_bug_ids || []).forEach(id => {
-                                if (!currentActiveKnownMap.has(id)) {
-                                    currentActiveKnownMap.set(id, d.version);
-                                }
-                            });
-                        });
-                        activeOpenCount = currentActiveKnownMap.size;
-                    }
-
-                    const maxStaleThreshold = parseInt(document.getElementById('staleThreshold').value) || 10;
-                    const lastDriverIdxInSlice = maxIdx;
-
-                    let oldestBugText = 'None';
-                    currentOldestBugId = null;
-
-                    if (currentActiveKnownMap.size > 0) {
-                        let oldestIdx = Infinity;
-                        let oldestIdStr = '';
-
-                        currentActiveKnownMap.forEach((ver, id) => {
-                            let firstIdx = -1;
-                            let lastSeenIdx = -1;
-
-                            for (let i = 0; i <= lastDriverIdxInSlice; i++) {
-                                if ((chronologicalDrivers[i].known_bug_ids || []).includes(id)) {
-                                    if (firstIdx === -1) firstIdx = i;
-                                    lastSeenIdx = i;
-                                }
-                            }
-
-                            const versionsSinceLastSeen = lastDriverIdxInSlice - lastSeenIdx;
-                            if (versionsSinceLastSeen <= maxStaleThreshold) {
-                                if (firstIdx !== -1 && firstIdx < oldestIdx) {
-                                    oldestIdx = firstIdx;
-                                    currentOldestBugId = id;
-                                    oldestIdStr = `${id}: ${data.master_bugs[id] || ''}`;
-                                }
-                            }
-                        });
-
-                        oldestBugText = oldestIdStr || 'None';
-                    }
-
-                    document.getElementById('stat-oldest-open-bug').textContent = oldestBugText;
-                    document.getElementById('stat-oldest-open-bug').title = oldestBugText;
-
-                    document.getElementById('stat-total-drivers').textContent = totalDrivers;
-                    document.getElementById('stat-total-issues').textContent = totalIssues;
-                    document.getElementById('stat-fix-rate').textContent = `${fixRate}%`;
-                    document.getElementById('stat-open-issues').textContent = activeOpenCount;
-
-                    renderUnfixedList(data);
-
-                    const driverContainer = document.getElementById('driver-tracker');
-                    driverContainer.innerHTML = '';
-                    filteredDriversDisplay.forEach((d) => {
-                        let card = document.createElement('div');
-                        card.id = `driver-card-${d.version.replace(/\./g, '-')}`;
-                        card.className = 'bg-zinc-900 border border-zinc-800 rounded-xl p-5 shadow-sm space-y-4 hover:border-red-600/60 transition';
-                        
-                        let fixedHtml = (d.fixed_bug_ids || []).filter(id => data.master_bugs[id]?.trim()).map(id => `
-                            <li class="text-emerald-400 text-xs mb-1">
-                                <button onclick="openIssueModal('${id}')" class="text-left flex items-start gap-2 hover:bg-emerald-950/40 p-1 rounded transition w-full group">
-                                    <span class="bg-emerald-950 text-emerald-400 group-hover:border-emerald-500 border border-emerald-800/50 font-mono text-[10px] px-1.5 py-0.5 rounded shrink-0">${id}</span>
-                                    <span class="group-hover:underline">${data.master_bugs[id]}</span>
-                                </button>
-                            </li>
-                        `).join('');
-
-                        let knownHtml = (d.known_bug_ids || []).filter(id => data.master_bugs[id]?.trim()).map(id => `
-                            <li class="text-amber-400 text-xs mb-1">
-                                <button onclick="openIssueModal('${id}')" class="text-left flex items-start gap-2 hover:bg-amber-950/40 p-1 rounded transition w-full group">
-                                    <span class="bg-amber-950 text-amber-400 group-hover:border-amber-500 border border-amber-800/50 font-mono text-[10px] px-1.5 py-0.5 rounded shrink-0">${id}</span>
-                                    <span class="group-hover:underline">${data.master_bugs[id]}</span>
-                                </button>
-                            </li>
-                        `).join('');
-
-                        card.innerHTML = `
-                            <div class="flex justify-between items-center border-b border-zinc-800 pb-3">
-                                <div class="flex items-center gap-3">
-                                    <button onclick="openDriverModal('${d.version}')" class="text-xl font-bold text-white hover:text-red-400 hover:underline transition font-mono">${d.version}</button>
-                                </div>
-                                <div class="text-right">
-                                    <a href="${d.url}" target="_blank" class="text-red-400 hover:underline text-xs">Release Notes</a>
-                                </div>
-                            </div>
-                            
-                            <div class="grid sm:grid-cols-2 gap-3">
-                                <div class="bg-zinc-900/80/50 p-3 rounded border border-zinc-800/50">
-                                    <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-500 block mb-2">Fixed in this version</span>
-                                    <ul class="list-none pl-0">${fixedHtml || '<span class="text-red-700 text-xs">None</span>'}</ul>
-                                </div>
-                                <div class="bg-zinc-900/80/50 p-3 rounded border border-zinc-800/50">
-                                    <span class="text-[10px] font-bold uppercase tracking-wider text-amber-500 block mb-2">Known / Open Issues</span>
-                                    <ul class="list-none pl-0">${knownHtml || '<span class="text-red-700 text-xs">None</span>'}</ul>
-                                </div>
-                            </div>
-                        `;
-                        driverContainer.appendChild(card);
-                    });
-
-                    const driverVersions = filteredDriversChronological.map(d => d.version);
-                    const fixedCounts = filteredDriversChronological.map(d => (d.fixed_bug_ids || []).length);
-                    const excludeDuplicates = document.getElementById('excludeDuplicatesToggle').checked;
-                    
-                    const knownCounts = getKnownCountsForSlice(filteredDriversChronological, excludeDuplicates);
-
-                    if (bugChart) {
-                        bugChart.data.labels = driverVersions;
-                        bugChart.data.datasets[0].data = fixedCounts;
-                        bugChart.data.datasets[1].data = knownCounts;
-                        bugChart.update();
-                    } else {
-                        renderChart(driverVersions, fixedCounts, knownCounts);
-                    }
-                }
-
-                function renderUnfixedList(data) {
-                    const unfixedListContainer = document.getElementById('unfixed-issues-list');
-                    const searchQuery = document.getElementById('issueSearchInput').value.toLowerCase().trim();
-                    
-                    const entriesArray = Array.from(currentActiveKnownMap.entries()).reverse();
-
-                    let filteredEntries = entriesArray.filter(([id, firstVersion]) => {
-                        if (!searchQuery) return true;
-                        const desc = (data.master_bugs[id] || '').toLowerCase();
-                        return id.toLowerCase().includes(searchQuery) || desc.includes(searchQuery) || firstVersion.toLowerCase().includes(searchQuery);
-                    });
-
-                    document.getElementById('unfixed-count-badge').textContent = `${filteredEntries.length} issue${filteredEntries.length === 1 ? '' : 's'}`;
-                    unfixedListContainer.innerHTML = '';
-
-                    if (filteredEntries.length === 0) {
-                        unfixedListContainer.innerHTML = `<p class="text-red-700 text-xs py-2">No matching active unfixed issues found.</p>`;
-                    } else {
-                        let unfixedHtml = '';
-                        filteredEntries.forEach(([id, firstVersion]) => {
-                            const description = data.master_bugs[id] || 'No description available';
-                            unfixedHtml += `
-                                <button onclick="openIssueModal('${id}')" class="w-full text-left bg-zinc-900 hover:bg-slate-800 p-3 rounded-lg border border-zinc-800/80 hover:border-red-500/50 transition flex flex-col sm:flex-row sm:items-center justify-between gap-2 group">
-                                    <div class="flex items-start gap-2.5 min-w-0">
-                                        <span class="bg-amber-950 text-amber-400 border border-amber-800/50 font-mono text-[10px] px-1.5 py-0.5 rounded mt-0.5 shrink-0 group-hover:border-amber-400">${id}</span>
-                                        <span class="text-xs text-white group-hover:text-white transition line-clamp-2">${description}</span>
-                                    </div>
-                                    <span class="text-[10px] text-red-500 shrink-0 font-mono">Reported in: ${firstVersion}</span>
-                                </button>
-                            `;
-                        });
-                        unfixedListContainer.innerHTML = unfixedHtml;
-                    }
-                }
-
-                function getKnownCountsForSlice(sliceDrivers, excludeDuplicates) {
-                    if (!excludeDuplicates) {
-                        return sliceDrivers.map(d => -Math.abs((d.known_bug_ids || []).length));
-                    }
-
-                    let activeKnown = new Set();
-                    return sliceDrivers.map(d => {
-                        (d.fixed_bug_ids || []).forEach(id => activeKnown.delete(id));
-                        
-                        let uniqueCount = 0;
-                        (d.known_bug_ids || []).forEach(id => {
-                            if (!activeKnown.has(id)) {
-                                activeKnown.add(id);
-                                uniqueCount++;
-                            }
-                        });
-                        return -Math.abs(uniqueCount);
-                    });
-                }
-
-                function renderChart(driverVersions, fixedCounts, knownCounts) {
-                    const ctx = document.getElementById('bugLifecycleChart').getContext('2d');
-                    bugChart = new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels: driverVersions,
-                            datasets: [
-                                {
-                                    label: 'Fixed Issues',
-                                    data: fixedCounts,
-                                    backgroundColor: '#10b981',
-                                    hoverBackgroundColor: '#34d399',
-                                    borderRadius: 3,
-                                    borderSkipped: false
-                                },
-                                {
-                                    label: 'Open / Known Issues',
-                                    data: knownCounts,
-                                    backgroundColor: '#f59e0b',
-                                    hoverBackgroundColor: '#fbbf24',
-                                    borderRadius: 3,
-                                    borderSkipped: false
-                                }
-                            ]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            onClick: (e, elements, chart) => {
-                                let targetIdx = null;
-
-                                if (elements && elements.length > 0) {
-                                    targetIdx = elements[0].index;
-                                } else {
-
-                                    const valueX = chart.scales.x.getValueForPixel(e.x);
-                                    if (valueX !== undefined && valueX >= 0 && valueX < chart.data.labels.length) {
-                                        targetIdx = Math.round(valueX);
-                                    }
-                                }
-
-                                if (targetIdx !== null && chart.data.labels[targetIdx]) {
-                                    const selectedVersion = chart.data.labels[targetIdx];
-                                    openDriverModal(selectedVersion);
-                                }
-                            },
-                            scales: {
-                                x: {
-                                    stacked: true,
-                                    ticks: { display: false },
-                                    grid: { color: '#1e293b' }
-                                },
-                                y: {
-                                    stacked: true,
-                                    beginAtZero: true,
-                                    ticks: { 
-                                        color: '#94a3b8', 
-                                        font: { family: 'monospace', size: 11 }, 
-                                        precision: 0,
-                                        callback: function(value) {
-                                            return Math.abs(value);
-                                        }
-                                    },
-                                    grid: { 
-                                        color: function(context) {
-                                            return context.tick.value === 0 ? '#475569' : '#1e293b';
-                                        },
-                                        lineWidth: function(context) {
-                                            return context.tick.value === 0 ? 2 : 1;
-                                        }
-                                    }
-                                }
-                            },
-                            plugins: {
-                                legend: {
-                                    display: true,
-                                    position: 'top',
-                                    labels: { color: '#94a3b8', font: { family: 'sans-serif', size: 12 } }
-                                },
-                                tooltip: {
-                                    callbacks: {
-                                        title: function(context) {
-                                            return `Driver Version: ${context[0].label} (Click to open)`;
-                                        },
-                                        label: function(context) {
-                                            let label = context.dataset.label || '';
-                                            let value = Math.abs(context.parsed.y);
-                                            return ` ${label}: ${value}`;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    });
-                }
-
-                sliderMin.addEventListener('input', updateView);
-                sliderMax.addEventListener('input', updateView);
-                document.getElementById('excludeDuplicatesToggle').addEventListener('change', updateView);
-                document.getElementById('staleThreshold').addEventListener('input', updateView);
-                document.getElementById('issueSearchInput').addEventListener('input', () => renderUnfixedList(data));
-                document.getElementById('reset-timeline').addEventListener('click', () => {
-                    sliderMin.value = 0;
-                    sliderMax.value = totalSteps;
-                    updateView();
-                });
-
-                document.getElementById('btn-oldest-open-bug').addEventListener('click', () => {
-                    if (currentOldestBugId) openIssueModal(currentOldestBugId);
-                });
-
-                updateView();
-
-                if (window.location.hash) {
-                    const hashVal = window.location.hash.replace('#', '');
-                    if (hashVal.startsWith('driver-')) {
-                        const ver = hashVal.replace('driver-', '');
-                        openDriverModal(ver);
-                    } else if (data.master_bugs && data.master_bugs[hashVal.toUpperCase()]) {
-                        openIssueModal(hashVal.toUpperCase());
-                    }
-                }
-            })
-            .catch(error => console.error('Error loading driver tracker data:', error));
-
-        function openDriverModal(versionStr) {
-            const driverObj = globalChronologicalDrivers.find(d => d.version === versionStr);
-            if (!driverObj) return;
-
-            document.getElementById('driver-modal-version').textContent = driverObj.version;
-            document.getElementById('driver-modal-subtitle').textContent = `Full driver release details and issue breakdown`;
+    <script>
+        function setTheme(themeName) {
+            document.body.className = `p-6 font-sans ${themeName}`;
+            localStorage.setItem('amd_tracker_theme', themeName);
             
-            const linkEl = document.getElementById('driver-modal-link');
-            if (driverObj.url) {
-                linkEl.href = driverObj.url;
-                linkEl.classList.remove('hidden');
-            } else {
-                linkEl.classList.add('hidden');
-            }
-
-            const fixedList = document.getElementById('driver-modal-fixed-list');
-            const knownList = document.getElementById('driver-modal-known-list');
-            fixedList.innerHTML = '';
-            knownList.innerHTML = '';
-
-            const validFixed = (driverObj.fixed_bug_ids || []).filter(id => globalMasterBugs[id]?.trim());
-            const validKnown = (driverObj.known_bug_ids || []).filter(id => globalMasterBugs[id]?.trim());
-
-            document.getElementById('driver-modal-fixed-count').textContent = validFixed.length;
-            document.getElementById('driver-modal-known-count').textContent = validKnown.length;
-
-            if (validFixed.length === 0) {
-                fixedList.innerHTML = `<li class="text-red-700 text-xs py-2 italic">No fixed issues reported for this version.</li>`;
-            } else {
-                validFixed.forEach(id => {
-                    const desc = globalMasterBugs[id] || 'No description available';
-                    fixedList.innerHTML += `
-                        <li class="text-xs">
-                            <button onclick="openIssueModal('${id}')" class="text-left flex items-start gap-2 bg-emerald-950/20 hover:bg-emerald-950/50 border border-emerald-900/30 p-2 rounded transition w-full group">
-                                <span class="bg-emerald-950 text-emerald-400 group-hover:border-emerald-500 border border-emerald-800/50 font-mono text-[10px] px-1.5 py-0.5 rounded shrink-0">${id}</span>
-                                <span class="text-white group-hover:text-white transition">${desc}</span>
-                            </button>
-                        </li>
-                    `;
-                });
-            }
-
-            if (validKnown.length === 0) {
-                knownList.innerHTML = `<li class="text-red-700 text-xs py-2 italic">No known issues listed for this version.</li>`;
-            } else {
-                validKnown.forEach(id => {
-                    const desc = globalMasterBugs[id] || 'No description available';
-                    knownList.innerHTML += `
-                        <li class="text-xs">
-                            <button onclick="openIssueModal('${id}')" class="text-left flex items-start gap-2 bg-amber-950/20 hover:bg-amber-950/50 border border-amber-900/30 p-2 rounded transition w-full group">
-                                <span class="bg-amber-950 text-amber-400 group-hover:border-amber-500 border border-amber-800/50 font-mono text-[10px] px-1.5 py-0.5 rounded shrink-0">${id}</span>
-                                <span class="text-white group-hover:text-red-200 transition">${desc}</span>
-                            </button>
-                        </li>
-                    `;
-                });
-            }
-
-            window.history.replaceState(null, null, `#driver-${versionStr}`);
-            document.getElementById('driver-modal').classList.remove('hidden');
-        }
-
-        function openIssueModal(bugId) {
-            const description = globalMasterBugs[bugId] || 'No description available';
-            const historyList = document.getElementById('modal-history-list');
-            historyList.innerHTML = '';
-
-            let firstSeenVersion = null;
-            let fixedVersion = null;
-            let appearsInVersions = [];
-
-            globalChronologicalDrivers.forEach(d => {
-                const isKnown = (d.known_bug_ids || []).includes(bugId);
-                const isFixed = (d.fixed_bug_ids || []).includes(bugId);
-
-                if (isKnown || isFixed) {
-                    if (!firstSeenVersion && isKnown) firstSeenVersion = d.version;
-                    if (isFixed) fixedVersion = d.version;
-
-                    appearsInVersions.push({
-                        version: d.version,
-                        url: d.url,
-                        type: isFixed ? 'fixed' : 'known'
-                    });
+            const frame = document.getElementById('content-frame');
+            if (frame && frame.contentWindow) {
+                try {
+                    const iframeBody = frame.contentWindow.document.body;
+                    if (iframeBody) {
+                        iframeBody.className = iframeBody.className.replace(/theme-\w+/g, '').trim() + ' ' + themeName;
+                        const win = frame.contentWindow;
+                        if (win.bugChart) {
+                            const isLight = themeName === 'theme-light';
+                            win.bugChart.options.scales.x.grid.color = isLight ? '#e2e8f0' : '#1e293b';
+                            win.bugChart.options.scales.y.grid.color = (ctx) => (ctx.tick.value === 0 ? (isLight ? '#94a3b8' : '#475569') : (isLight ? '#e2e8f0' : '#1e293b'));
+                            win.bugChart.options.scales.y.ticks.color = isLight ? '#475569' : '#94a3b8';
+                            win.bugChart.update('none');
+                        }
+                    }
+                } catch (err) {
+                    frame.contentWindow.postMessage({ theme: themeName }, '*');
                 }
-            });
-
-            document.getElementById('modal-bug-id').textContent = bugId;
-            document.getElementById('modal-bug-title').textContent = description;
-            document.getElementById('modal-first-version').textContent = firstSeenVersion || 'N/A';
-            document.getElementById('modal-resolved-version').textContent = fixedVersion || 'Unresolved (Active Issue)';
-
-            const statusBadge = document.getElementById('modal-bug-status');
-            if (fixedVersion) {
-                statusBadge.textContent = 'Resolved';
-                statusBadge.className = 'text-xs px-2.5 py-0.5 rounded font-semibold bg-emerald-950 text-emerald-400 border border-emerald-800/60';
-            } else {
-                statusBadge.textContent = 'Active / Unresolved';
-                statusBadge.className = 'text-xs px-2.5 py-0.5 rounded font-semibold bg-amber-950 text-amber-400 border border-amber-800/60';
             }
-
-            appearsInVersions.reverse().forEach(item => {
-                const timelineRow = document.createElement('div');
-                timelineRow.className = 'relative flex items-center justify-between bg-zinc-900/80/60 p-2.5 rounded-lg border border-zinc-800/80';
-
-                const isFixed = item.type === 'fixed';
-                const dotColor = isFixed ? 'bg-emerald-500' : 'bg-amber-500';
-                const statusLabel = isFixed ? 'Marked as Fixed' : 'Reported as Known Issue';
-                const statusColor = isFixed ? 'text-emerald-400' : 'text-amber-400';
-
-                timelineRow.innerHTML = `
-                    <div class="flex items-center gap-2.5">
-                        <span class="w-2 h-2 rounded-full ${dotColor} shrink-0 -ml-[21px]"></span>
-                        <button onclick="openDriverModal('${item.version}')" class="font-bold text-white font-mono text-sm hover:text-red-400 hover:underline transition">${item.version}</button>
-                        <span class="${statusColor} font-medium text-[11px]">${statusLabel}</span>
-                    </div>
-                    <a href="${item.url}" target="_blank" class="text-red-500 hover:underline text-[11px] shrink-0">Release Notes</a>
-                `;
-                historyList.appendChild(timelineRow);
-            });
-
-            window.history.replaceState(null, null, `#${bugId}`);
-            document.getElementById('issue-modal').classList.remove('hidden');
-        }
-
-        document.getElementById('close-modal').addEventListener('click', closeModal);
-        document.getElementById('issue-modal').addEventListener('click', (e) => {
-            if (e.target.id === 'issue-modal') closeModal();
-        });
-
-        document.getElementById('close-driver-modal').addEventListener('click', closeDriverModal);
-        document.getElementById('driver-modal').addEventListener('click', (e) => {
-            if (e.target.id === 'driver-modal') closeDriverModal();
-        });
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closeModal();
-                closeDriverModal();
-            }
-        });
-
-        function closeModal() {
-            document.getElementById('issue-modal').classList.add('hidden');
-            window.history.replaceState(null, null, ' ');
-        }
-
-        function closeDriverModal() {
-            document.getElementById('driver-modal').classList.add('hidden');
-            window.history.replaceState(null, null, ' ');
         }
     </script>
+    <script>
+    const siteChangelog = [
+        { version: "v2.0", date: "5th November 2026", notes: "<ul><li>- Tech page for an easy to access list of games with AMD technologies support.</li><li>- More information for the drivers page including features added, avg days between releases, games supported.</li><li>- Multiple visual improvements including theme support, and hover mouse icons.</li><li>- Other misc improvements." },
+        { version: "v1.1.3", date: "31st October 2026", notes: "26.10.2 driver added" },
+        { version: "v1.1.2", date: "23rd October 2026", notes: "User controllable 'Max Versions Since Last Mention' input." },
+        { version: "v1.1", date: "22nd October 2026", notes: "AMD color update, added changelog sidebar." },
+        { version: "v1.01", date: "20nd October 2026", notes: "Driver 26.10.1 added" },
+        { version: "v1.00", date: "6th October 2026", notes: "Initial release." }
+    ];
+
+    const sidebarList = document.getElementById('sidebar-changelog-list');
+    if (sidebarList) {
+        sidebarList.innerHTML = '';
+        siteChangelog.forEach(changelog => {
+            let btn = document.createElement('button');
+            btn.className = 'w-full text-left px-2.5 py-1.5 rounded text-xs font-mono text-zinc-300 hover:bg-zinc-800 hover:text-white transition flex items-center justify-between group cursor-pointer';
+            btn.innerHTML = `<span>${changelog.version}</span> <span class="text-[10px] text-red-600 opacity-0 group-hover:opacity-100 transition">View</span>`;
+            
+            btn.onclick = () => {
+                const modalVer = document.getElementById('site-modal-version');
+                const modalContent = document.getElementById('site-modal-content');
+                const siteModal = document.getElementById('site-changelog-modal');
+                if (modalVer && modalContent && siteModal) {
+                    modalVer.textContent = `${changelog.version} (${changelog.date})`;
+                    modalContent.innerHTML = changelog.notes; // Changed from textContent to innerHTML
+                    siteModal.classList.remove('hidden');
+                }
+            };
+            sidebarList.appendChild(btn);
+        });
+    }
+</script>
+
+<div id="site-changelog-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-zinc-900 border border-zinc-800 rounded-2xl max-w-lg w-full flex flex-col shadow-2xl overflow-hidden p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-3">
+            <h3 id="site-modal-version" class="text-2xl font-bold text-white font-mono">v1.00</h3>
+            <button onclick="document.getElementById('site-changelog-modal').classList.add('hidden')" class="text-red-700 hover:text-red-400 p-2 rounded-lg transition cursor-pointer">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+        </div>
+        <div id="site-modal-content" class="text-base text-zinc-100 space-y-2 leading-relaxed"></div>
+    </div>
+</div>
+
+<div id="feedback-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-zinc-900 border border-zinc-800 rounded-2xl max-w-md w-full flex flex-col shadow-2xl overflow-hidden p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-3">
+            <h3 class="text-lg font-bold text-white">Report Error or Suggest Game</h3>
+            <button onclick="document.getElementById('feedback-modal').classList.add('hidden')" class="text-red-700 hover:text-red-400 p-2 rounded-lg transition cursor-pointer">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+        </div>
+        
+        <form id="feedback-form" action="https://silentforms.com/api/submit" method="POST" class="space-y-4">
+            <input type="hidden" name="accessKey" value="221f9b4361e82c38cbed4c378171834117c767aba4ff8cdcb9471f9e2fc3100f">
+            <input type="checkbox" name="botcheck" class="hidden" style="display:none;">
+            <input type="hidden" name="_subject" id="dynamic-subject">
+            <div>
+                <label class="block text-xs font-medium text-zinc-300 mb-1">Game Title(s):</label>
+                <textarea name="game titles" required rows="4" placeholder="What game is missing or incorrect?" class="w-full bg-zinc-950 border border-zinc-800 rounded p-2.5 text-xs text-white focus:outline-none focus:border-red-600"></textarea>
+            </div>
+            <div>
+                <label class="block text-xs font-medium text-zinc-300 mb-1">Source(s) If Applicable:</label>
+                <textarea name="sources" required rows="4" placeholder="Please include sources." class="w-full bg-zinc-950 border border-zinc-800 rounded p-2.5 text-xs text-white focus:outline-none focus:border-red-600"></textarea>
+            </div>
+            <div>
+                <label class="block text-xs font-medium text-zinc-300 mb-1">Any Other Details:</label>
+                <textarea name="details" required rows="4" placeholder="Any other details." class="w-full bg-zinc-950 border border-zinc-800 rounded p-2.5 text-xs text-white focus:outline-none focus:border-red-600"></textarea>
+            </div>
+            <div id="form-status" class="hidden text-xs font-semibold text-center p-3 rounded-lg border"></div>
+
+            <button type="submit" class="w-full bg-red-600 hover:bg-red-500 text-white font-semibold text-xs py-2.5 rounded transition cursor-pointer">
+                Submit
+            </button>
+        </form>
+    </div>
+</div>
+
+<div id="driver-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-zinc-900 border border-zinc-800 rounded-2xl max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+        <div class="p-5 border-b border-zinc-800 flex items-center justify-between gap-4">
+            <div>
+                <div class="flex items-center gap-3">
+                    <h3 id="driver-modal-version" class="text-2xl font-bold text-white font-mono">26.X.X</h3>
+                    <a id="driver-modal-link" href="#" target="_blank" class="text-red-500 hover:underline hover:text-red-400 text-xs flex items-center gap-1">
+                        <span>Release Notes</span>
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                    </a>
+                </div>
+                <p id="driver-modal-subtitle" class="text-red-500 text-xs mt-1">Driver version release details</p>
+            </div>
+            <button onclick="closeRootDriverModal()" class="text-red-700 hover:text-red-400 p-2 rounded-lg transition shrink-0 cursor-pointer">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+        </div>
+
+        <div class="p-5 overflow-y-auto flex-1 space-y-4">
+            <div id="driver-modal-extras" class="space-y-3"></div>
+            <div class="grid sm:grid-cols-2 gap-4">
+                <div class="p-4 rounded-xl">
+                    <div class="flex items-center justify-between mb-3 border-b border-zinc-800/80 pb-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400">Fixed in this version</span>
+                        <span id="driver-modal-fixed-count" class="bg-emerald-950 text-emerald-400 border border-emerald-800/50 text-[10px] font-mono px-2 py-0.5 rounded">0</span>
+                    </div>
+                    <ul id="driver-modal-fixed-list" class="space-y-2 max-h-[60vh] overflow-y-auto pr-1"></ul>
+                </div>
+
+                <div class="p-4 rounded-xl">
+                    <div class="flex items-center justify-between mb-3 border-b border-zinc-800/80 pb-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-amber-400">Known / Open Issues</span>
+                        <span id="driver-modal-known-count" class="bg-amber-950 text-amber-400 border border-amber-800/50 text-[10px] font-mono px-2 py-0.5 rounded">0</span>
+                    </div>
+                    <ul id="driver-modal-known-list" class="space-y-2 max-h-[60vh] overflow-y-auto pr-1"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="issue-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-zinc-900 border border-zinc-800 rounded-2xl max-w-3xl w-full max-h-[85vh] flex flex-col shadow-3xl overflow-hidden">
+        <div class="px-5 pt-5 pb-2 flex items-start justify-between gap-4">
+            <div>
+                <div class="flex items-center gap-2 mb-1.5">
+                    <span id="modal-bug-id" class="bg-amber-950 text-amber-400 border border-amber-800/50 font-mono text-xs px-2 py-0.5 rounded font-semibold">BUG-000</span>
+                    <span id="modal-bug-status" class="text-xs px-2 py-0.5 rounded font-medium">Status</span>
+                </div>
+                <h3 id="modal-bug-title" class="text-base font-semibold text-red-500 leading-snug">Issue description</h3>
+            </div>
+            <button onclick="closeRootIssueModal()" class="text-red-700 hover:text-red-400 p-2 rounded-lg transition shrink-0 cursor-pointer">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+        </div>
+
+        <div class="px-5 pb-5 pt-0 overflow-y-auto space-y-0 flex-1 text-xs">
+            <div class="grid grid-cols-2 gap-3 p-3.5 rounded-xl">
+                <div>
+                    <span class="text-red-500 block mb-0.5 font-medium">First Reported In</span>
+                    <span id="modal-first-version" class="text-white font-mono text-sm font-semibold">-</span>
+                </div>
+                <div>
+                    <span class="text-red-500 block mb-0.5 font-medium font-sans">Resolved In</span>
+                    <span id="modal-resolved-version" class="text-white font-mono text-sm font-semibold">-</span>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="text-xs font-semibold uppercase tracking-wider text-red-500 mb-3">Driver Version History</h4>
+                <div id="modal-history-list" class="space-y-2 border-l-2 border-zinc-800 ml-2 pl-4"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="game-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4" role="dialog" aria-modal="true">
+    <div class="bg-zinc-900 border border-zinc-800 rounded-xl w-full max-w-2xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+        <div class="p-5 border-b border-zinc-800 flex items-start justify-between bg-zinc-900/80">
+            <div>
+                <span id="modal-game-id" class="text-xs font-mono font-bold text-red-500 uppercase tracking-wider"></span>
+                <h2 id="modal-game-title" class="text-2xl font-extrabold text-white leading-tight mt-1"></h2>
+            </div>
+            <button onclick="closeRootGameModal()" class="text-zinc-400 hover:text-white text-2xl font-bold p-1 leading-none rounded hover:bg-zinc-800 transition cursor-pointer">&times;</button>
+        </div>
+
+        <div class="p-6 overflow-y-auto space-y-6">
+            <div>
+                <h3 class="text-sm font-mono text-zinc-300 uppercase font-semibold tracking-wider mb-3">Supported Technologies</h3>
+                <div id="modal-tech-list" class="grid grid-cols-1 sm:grid-cols-2 gap-2"></div>
+            </div>
+
+            <div id="modal-notes-container" class="hidden">
+                <h3 class="text-sm font-mono text-zinc-300 uppercase tracking-wider mb-2">Notes</h3>
+                <p id="modal-notes" class="text-sm text-zinc-300 bg-zinc-950/60 p-3 rounded-lg border border-zinc-800/80 leading-relaxed"></p>
+            </div>
+
+            <div>
+                <h3 class="text-sm font-mono text-zinc-300 uppercase tracking-wider mb-3">Sources & References</h3>
+                <div id="modal-sources-list" class="space-y-4"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    ['driver-modal', 'issue-modal', 'game-modal', 'site-changelog-modal', 'feedback-modal'].forEach(modalId => {
+        const modalEl = document.getElementById(modalId);
+        if (modalEl) {
+            modalEl.addEventListener('click', (e) => {
+                if (e.target === modalEl) {
+                    modalEl.classList.add('hidden');
+                    window.history.replaceState(null, null, ' ');
+                }
+            });
+        }
+    });
+
+    function openRootDriverModal(versionStr, driverObj, globalMasterBugs) {
+        const typeMapping = { 1: "Optional", 2: "WHQL Optional", 3: "WHQL Recommended" };
+        const typeColors = { 1: "bg-zinc-800 text-zinc-300 border-zinc-700", 2: "bg-blue-950 text-blue-400 border-blue-800/50", 3: "bg-emerald-950 text-emerald-400 border-emerald-800/50" };
+        const modalBadgeHtml = `<span class="text-[10px] font-mono px-2 py-0.5 rounded border ${typeColors[driverObj.Type] || 'bg-zinc-800 text-zinc-300'}">${typeMapping[driverObj.Type] || 'Driver'}</span>`;
+
+        document.getElementById('driver-modal-version').innerHTML = `<div class="flex items-center gap-3 flex-wrap"><span class="text-xl text-red-600 font-mono">${driverObj.version}</span> ${modalBadgeHtml} <span class="text-base text-zinc-300 font-mono">${driverObj.Date}</span></div>`;
+        document.getElementById('driver-modal-subtitle').innerHTML = `<span class="text-red-500">Full driver release details</span>`;
+        
+        const linkEl = document.getElementById('driver-modal-link');
+        if (driverObj.url) {
+            linkEl.href = driverObj.url;
+            linkEl.classList.remove('hidden');
+        } else {
+            linkEl.classList.add('hidden');
+        }
+
+        const extrasContainer = document.getElementById('driver-modal-extras');
+        extrasContainer.innerHTML = '';
+
+        const featuresList = driverObj["New Features"] || [];
+        const productsList = driverObj["New Product support"] || [];
+        const gamesList = driverObj["New Game Support"] || [];
+        const improvementsList = driverObj["Other Improvements"] || [];
+
+        let extrasHtml = '';
+        if (featuresList.length > 0) extrasHtml += `<div class="bg-indigo-950/20 border border-indigo-900/30 p-3 rounded-xl"><span class="text-[10px] font-bold uppercase tracking-wider text-indigo-400 block mb-1">New Features</span><ul class="space-y-1">${featuresList.map(f => `<li class="text-xs text-indigo-200">• ${f}</li>`).join('')}</ul></div>`;
+        if (gamesList.length > 0) extrasHtml += `<div class="bg-purple-950/20 border border-purple-900/30 p-3 rounded-xl"><span class="text-[10px] font-bold uppercase tracking-wider text-purple-400 block mb-1">New Game Support</span><ul class="space-y-1">${gamesList.map(g => `<li class="text-xs text-purple-200">• ${g}</li>`).join('')}</ul></div>`;
+        if (productsList.length > 0) extrasHtml += `<div class="bg-cyan-950/20 border border-cyan-900/30 p-3 rounded-xl"><span class="text-[10px] font-bold uppercase tracking-wider text-cyan-400 block mb-1">New Product Support</span><ul class="space-y-1">${productsList.map(p => `<li class="text-xs text-cyan-200">• ${p}</li>`).join('')}</ul></div>`;
+        if (improvementsList.length > 0) extrasHtml += `<div class="bg-zinc-900 border border-zinc-800 p-3 rounded-xl"><span class="text-[10px] font-bold uppercase tracking-wider text-zinc-300 block mb-1">Other Improvements</span><ul class="space-y-1">${improvementsList.map(i => `<li class="text-xs text-zinc-300">• ${i}</li>`).join('')}</ul></div>`;
+        extrasContainer.innerHTML = extrasHtml;
+
+        const fixedList = document.getElementById('driver-modal-fixed-list');
+        const knownList = document.getElementById('driver-modal-known-list');
+        fixedList.innerHTML = '';
+        knownList.innerHTML = '';
+
+        const validFixed = (driverObj.fixed_bug_ids || []).filter(id => globalMasterBugs[id]?.trim());
+        const validKnown = (driverObj.known_bug_ids || []).filter(id => globalMasterBugs[id]?.trim());
+
+        document.getElementById('driver-modal-fixed-count').textContent = validFixed.length;
+        document.getElementById('driver-modal-known-count').textContent = validKnown.length;
+
+        if (validFixed.length === 0) {
+            fixedList.innerHTML = `<li class="text-red-700 text-xs py-2 italic">No fixed issues reported for this version.</li>`;
+        } else {
+            validFixed.forEach(id => {
+                const desc = globalMasterBugs[id] || 'No description available';
+                fixedList.innerHTML += `<li class="text-xs"><div class="text-left flex items-start gap-2 bg-emerald-950/20 border border-emerald-900/30 p-2 rounded w-full"><span class="bg-emerald-950 text-emerald-400 border border-emerald-800/50 font-mono text-[10px] px-1.5 py-0.5 rounded shrink-0">${id}</span><span class="text-white">${desc}</span></div></li>`;
+            });
+        }
+
+        if (validKnown.length === 0) {
+            knownList.innerHTML = `<li class="text-red-700 text-xs py-2 italic">No known issues listed for this version.</li>`;
+        } else {
+            validKnown.forEach(id => {
+                const desc = globalMasterBugs[id] || 'No description available';
+                knownList.innerHTML += `<li class="text-xs"><div class="text-left flex items-start gap-2 bg-amber-950/20 border border-amber-900/30 p-2 rounded w-full"><span class="bg-amber-950 text-amber-400 border border-amber-800/50 font-mono text-[10px] px-1.5 py-0.5 rounded shrink-0">${id}</span><span class="text-white">${desc}</span></div></li>`;
+            });
+        }
+
+        window.history.replaceState(null, null, `#driver-${versionStr}`);
+        document.getElementById('driver-modal').classList.remove('hidden');
+    }
+
+    function closeRootDriverModal() {
+        document.getElementById('driver-modal').classList.add('hidden');
+        window.history.replaceState(null, null, ' ');
+    }
+
+    function openRootIssueModal(bugId, description, appearsInVersions) {
+        document.getElementById('modal-bug-id').textContent = bugId;
+        document.getElementById('modal-bug-title').textContent = description;
+        
+        let firstSeenVersion = appearsInVersions.find(i => i.type === 'known')?.version || 'N/A';
+        let fixedVersion = appearsInVersions.find(i => i.type === 'fixed')?.version || null;
+
+        document.getElementById('modal-first-version').textContent = firstSeenVersion;
+        document.getElementById('modal-resolved-version').textContent = fixedVersion || 'Unresolved (Active Issue)';
+
+        const statusBadge = document.getElementById('modal-bug-status');
+        if (fixedVersion) {
+            statusBadge.textContent = 'Resolved';
+            statusBadge.className = 'text-xs px-2.5 py-0.5 rounded font-semibold bg-emerald-950 text-emerald-400 border border-emerald-800/60';
+        } else {
+            statusBadge.textContent = 'Active / Unresolved';
+            statusBadge.className = 'text-xs px-2.5 py-0.5 rounded font-semibold bg-amber-950 text-amber-400 border border-amber-800/60';
+        }
+
+        const historyList = document.getElementById('modal-history-list');
+        historyList.innerHTML = '';
+        appearsInVersions.forEach(item => {
+            const timelineRow = document.createElement('div');
+            timelineRow.className = 'relative flex items-center justify-between p-2.5 rounded-lg';
+            const isFixed = item.type === 'fixed';
+            const dotColor = isFixed ? 'bg-emerald-500' : 'bg-amber-500';
+            const statusLabel = isFixed ? 'Marked as Fixed' : 'Reported as Known Issue';
+            const statusColor = isFixed ? 'text-emerald-400' : 'text-amber-400';
+
+            timelineRow.innerHTML = `
+                <div class="flex items-center gap-2.5">
+                    <span class="w-2 h-2 rounded-full ${dotColor} shrink-0 -ml-[21px]"></span>
+                    <span class="font-bold text-white font-mono text-sm">${item.version}</span>
+                    <span class="${statusColor} font-medium text-[11px]">${statusLabel}</span>
+                </div>
+                <a href="${item.url}" target="_blank" class="text-red-500 hover:underline hover:text-red-400 text-[13px] shrink-0">Release Notes</a>
+            `;
+            historyList.appendChild(timelineRow);
+        });
+
+        window.history.replaceState(null, null, `#${bugId}`);
+        document.getElementById('issue-modal').classList.remove('hidden');
+    }
+
+    function closeRootIssueModal() {
+        document.getElementById('issue-modal').classList.add('hidden');
+        window.history.replaceState(null, null, ' ');
+    }
+
+    function openRootGameModal(gameName, gameNumber, gameObj) {
+        document.getElementById('modal-game-id').textContent = `#${gameNumber}`;
+        document.getElementById('modal-game-title').textContent = gameName;
+
+        const techList = document.getElementById('modal-tech-list');
+        techList.innerHTML = '';
+        
+        const techDisplayNames = {
+            "fsr_upscaling": "FSR 4 Upscaling",
+            "frame_gen": "FSR 4 Frame Generation",
+            "anti_lag_2": "Anti Lag 2",
+            "ray_regeneration": "FSR Ray Regeneration",
+            "radiance_caching": "FSR Radiance Caching"
+        };
+
+        Object.keys(gameObj).forEach(key => {
+            if (key !== 'game_name' && key !== 'source(s)' && key !== 'sources' && key !== 'notes') {
+                const val = gameObj[key];
+                const isSupported = Array.isArray(val) ? val.includes(1) : val === 1;
+                if (isSupported) {
+                    techList.innerHTML += `<div class="bg-zinc-950/60 p-2.5 rounded border border-zinc-800/80 text-xs font-semibold text-emerald-400">✓ ${techDisplayNames[key] || key}</div>`;
+                }
+            }
+        });
+
+        const notesContainer = document.getElementById('modal-notes-container');
+        if (gameObj.notes) {
+            document.getElementById('modal-notes').textContent = gameObj.notes;
+            notesContainer.classList.remove('hidden');
+        } else {
+            notesContainer.classList.add('hidden');
+        }
+
+        const sourcesList = document.getElementById('modal-sources-list');
+        sourcesList.innerHTML = '';
+        const sourcesObj = gameObj.sources || gameObj['source(s)'];
+        if (sourcesObj) {
+            Object.keys(sourcesObj).forEach(tk => {
+                const urls = Array.isArray(sourcesObj[tk]) ? sourcesObj[tk] : [sourcesObj[tk]];
+                sourcesList.innerHTML += `<div class="text-xs"><strong class="text-zinc-300 block mb-1">${techDisplayNames[tk] || tk}:</strong>` + 
+                    urls.map(u => `<a href="${u}" target="_blank" class="text-red-400 hover:underline block truncate">${u}</a>`).join('') + `</div>`;
+            });
+        }
+
+        document.getElementById('game-modal').classList.remove('hidden');
+    }
+
+    function closeRootGameModal() {
+        document.getElementById('game-modal').classList.add('hidden');
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeRootDriverModal();
+            closeRootIssueModal();
+            closeRootGameModal();
+            document.getElementById('site-changelog-modal').classList.add('hidden');
+            document.getElementById('feedback-modal').classList.add('hidden');
+        }
+    });
+</script>
+
+<script>
+    const routes = {
+        '/drivers': 'drivers.html',
+        '/tech': 'tech.html'
+    };
+
+    function navigateTo(path, pushHistory = true) {
+        const targetPage = routes[path] || 'drivers.html';
+        const frame = document.getElementById('content-frame');
+        if (frame.getAttribute('src') !== targetPage) {
+            frame.src = targetPage;
+        }
+
+        if (pushHistory) {
+            history.pushState({ path: path }, '', path);
+        }
+
+        document.querySelectorAll('.sub-tab').forEach(t => {
+            t.className = "sub-tab inline-flex items-center gap-2 bg-zinc-900 hover:bg-zinc-800 text-zinc-300 border border-zinc-800 text-xs font-semibold px-3.5 py-2 rounded-lg transition cursor-pointer";
+        });
+
+        const btn = document.getElementById('header-action-btn');
+        const btnText = document.getElementById('header-action-text');
+
+        if (path === '/tech') {
+            document.getElementById('tab-tech').className = "sub-tab inline-flex items-center gap-2 bg-red-600/10 text-red-500 border border-red-600/30 text-xs font-semibold px-3.5 py-2 rounded-lg transition cursor-pointer";
+            btn.removeAttribute('href');
+            btn.onclick = (e) => {
+                e.preventDefault();
+                document.getElementById('feedback-modal').classList.remove('hidden');
+            };
+            btn.classList.add('cursor-pointer');
+            btnText.textContent = "Report an error or give us a game to add";
+        } else {
+            document.getElementById('tab-drivers').className = "sub-tab inline-flex items-center gap-2 bg-red-600/10 text-red-500 border border-red-600/30 text-xs font-semibold px-3.5 py-2 rounded-lg transition cursor-pointer";
+            btn.href = "https://www.amd.com/en/resources/support-articles/faqs/AMDBRT.html";
+            btnText.textContent = "How to report an AMD driver issue";
+        }
+    }
+
+    window.addEventListener('popstate', (e) => {
+        navigateTo(window.location.pathname, false);
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const currentPath = window.location.pathname.includes('tech') ? '/tech' : '/drivers';
+        navigateTo(currentPath, false);
+    });
+
+    document.getElementById('feedback-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const now = new Date().toLocaleString();
+        document.getElementById('dynamic-subject').value = `New Feedback / Bug Report - ${now}`;
+
+        const formData = new FormData(this);
+        const statusDiv = document.getElementById('form-status');
+        const submitBtn = this.querySelector('button[type="submit"]');
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+
+        try {
+            const response = await fetch('https://silentforms.com/api/submit', {
+                method: 'POST',
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            });
+            
+            if (response.ok) {
+                this.reset();
+                statusDiv.className = "text-xs font-semibold text-center p-3 rounded-lg border border-emerald-500/30 bg-emerald-500/10 text-emerald-400";
+                statusDiv.textContent = "Feedback submitted successfully!";
+                statusDiv.classList.remove('hidden');
+
+                setTimeout(() => {
+                    document.getElementById('feedback-modal').classList.add('hidden');
+                    statusDiv.classList.add('hidden');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Submit';
+                }, 2000);
+            } else {
+                statusDiv.className = "text-xs font-semibold text-center p-3 rounded-lg border border-red-500/30 bg-red-500/10 text-red-400";
+                statusDiv.textContent = "Submission failed.";
+                statusDiv.classList.remove('hidden');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit';
+            }
+        } catch (err) {
+            statusDiv.className = "text-xs font-semibold text-center p-3 rounded-lg border border-red-500/30 bg-red-500/10 text-red-400";
+            statusDiv.textContent = "Network error.";
+            statusDiv.classList.add('hidden');
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Submit';
+        }
+    });
+</script>
 </body>
 </html>
