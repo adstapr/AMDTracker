@@ -123,14 +123,7 @@
     })();
 </script>
 
-<div class="max-w-7xl mx-auto px-4 py-6 relative">
-
-    <aside class="fixed top-60 left-1/2 -translate-x-[60rem] w-80 border border-zinc-800/80 bg-zinc-900/40 rounded-lg p-3 max-h-[calc(100vh-3rem)] overflow-y-auto hidden xl:block z-20">
-        <div class="text-xl font-bold text-zinc-300 uppercase tracking-wider mb-3 px-2">Technologies</div>
-        <nav id="sidebar-nav" class="space-y-1">
-        </nav>
-    </aside>
-
+<div class="w-full">
     <main class="w-full">
         <header class="mb-6 flex items-center justify-between border-b border-zinc-800 pb-4">
             <h2 id="tech-title" class="text-xl font-bold text-white uppercase">Select Technology</h2>
@@ -172,7 +165,14 @@
     });
 
     window.addEventListener('message', (event) => {
-        if (event.data && event.data.theme) {
+        if (!event.data) return;
+
+        if (event.data.action === 'selectTech' && event.data.techKey) {
+            const techKeys = extractTechKeys(gamesData);
+            selectTechnology(event.data.techKey, techKeys);
+        }
+
+        if (event.data.theme) {
             const theme = event.data.theme;
             document.body.style.opacity = '0';
             document.body.classList.remove('theme-amd', 'theme-light', 'theme-midnight', 'theme-matrix');
@@ -194,10 +194,6 @@
 
     let gamesData = [];
 
-    function setTheme(themeName) {
-        document.body.className = `font-sans antialiased p-0 m-0 ${themeName}`;
-    }
-
     function extractTechKeys(data) {
         const keys = new Set();
         data.forEach(game => {
@@ -216,7 +212,6 @@
             gamesData = await response.json();
             
             const techKeys = extractTechKeys(gamesData);
-            renderSidebar(techKeys);
             
             if (techKeys.length > 0) {
                 selectTechnology(techKeys[0], techKeys);
@@ -226,37 +221,29 @@
         }
     }
 
-    function renderSidebar(techKeys) {
-        const nav = document.getElementById('sidebar-nav');
-        nav.innerHTML = '';
-
-        techKeys.forEach((techKey) => {
-            const supportedCount = gamesData.filter(game => {
-                const val = game[techKey];
-                return Array.isArray(val) ? val.includes(1) : val === 1;
-            }).length;
-
-            const btn = document.createElement('button');
-            btn.dataset.tech = techKey;
-            btn.className = "w-full text-left px-3 py-2.5 rounded-lg text-base font-semibold capitalize transition cursor-pointer flex items-center justify-between text-zinc-300 hover:text-white hover:bg-zinc-800/60";
-            
-            const formattedName = getTechDisplayName(techKey);
-
-            btn.innerHTML = `
-                <span class="truncate">${formattedName}</span>
-                <span class="text-[14px] font-mono bg-zinc-800 text-zinc-300 px-1.5 py-0.5 rounded">${supportedCount}</span>
-            `;
-            
-            btn.onclick = () => selectTechnology(techKey, techKeys);
-            nav.appendChild(btn);
-        });
-    }
-
     function selectTechnology(techKey, techKeys) {
         const grid = document.getElementById('games-grid');
         const titleEl = document.getElementById('tech-title');
         const countEl = document.getElementById('game-count');
         const explanationContainer = document.getElementById('tech-explanation-container');
+
+        const techItems = techKeys.map(k => {
+            const count = gamesData.filter(game => {
+                const val = game[k];
+                return Array.isArray(val) ? val.includes(1) : val === 1;
+            }).length;
+            return {
+                key: k,
+                name: getTechDisplayName(k),
+                count: count
+            };
+        });
+
+        window.parent.postMessage({
+            action: 'renderTechSidebar',
+            techItems: techItems,
+            activeTech: techKey
+        }, '*');
 
         const supportedGames = gamesData.filter(game => {
             const val = game[techKey];
@@ -283,49 +270,39 @@
             </div>
         `;
 
-        document.querySelectorAll('#sidebar-nav button').forEach(btn => {
-            if (btn.dataset.tech === techKey) {
-                btn.className = "w-full text-left px-3 py-2.5 text-base font-semibold capitalize transition cursor-pointer flex items-center justify-between bg-red-600/10 text-red-500 border border-red-600/30";
-            } else {
-                btn.className = "w-full text-left px-3 py-2.5 text-base font-semibold capitalize transition cursor-pointer flex items-center justify-between text-zinc-300 hover:text-white hover:bg-zinc-800/60";
-            }
-        });
-
         if (supportedGames.length === 0) {
             grid.innerHTML = `<p class="text-base text-zinc-300 col-span-full">No games found supporting this technology.</p>`;
-            sendHeightToParent();
-            return;
-        }
+        } else {
+            grid.innerHTML = supportedGames.map((game, index) => {
+                const gameNumber = String(index + 1).padStart(2, '0');
+                let sources = getGameSourcesForTech(game, techKey);
 
-        grid.innerHTML = supportedGames.map((game, index) => {
-            const gameNumber = String(index + 1).padStart(2, '0');
-            let sources = getGameSourcesForTech(game, techKey);
-
-            return `
-                <div onclick="openGameModal('${game.game_name?.replace(/'/g, "\\'")}', '${gameNumber}')" class="bg-zinc-900/60 border border-zinc-800 rounded-lg p-3 flex flex-col justify-between hover:border-red-500/50 hover:bg-zinc-900 transition cursor-pointer group">
-                    <div>
-                        <div class="flex items-center gap-2 mb-2">
-                            <span class="text-[12px] font-mono font-bold text-red-500 px-1.5 py-0.5 rounded shrink-0">
-                                #${gameNumber}
-                            </span>
-                            <h3 class="text-base font-bold text-white leading-snug group-hover:text-red-400 transition-colors">${game.game_name || 'Unnamed Game'}</h3>
+                return `
+                    <div onclick="openGameModal('${game.game_name?.replace(/'/g, "\\'")}', '${gameNumber}')" class="bg-zinc-900/60 border border-zinc-800 rounded-lg p-3 flex flex-col justify-between hover:border-red-500/50 hover:bg-zinc-900 transition cursor-pointer group">
+                        <div>
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="text-[12px] font-mono font-bold text-red-500 px-1.5 py-0.5 rounded shrink-0">
+                                    #${gameNumber}
+                                </span>
+                                <h3 class="text-base font-bold text-white leading-snug group-hover:text-red-400 transition-colors">${game.game_name || 'Unnamed Game'}</h3>
+                            </div>
                         </div>
+
+                        ${sources.length > 0 ? `
+                            <div class="pt-2 border-t border-zinc-800/80 mt-1 space-y-0.5">
+                                <span class="text-[9px] text-zinc-500 uppercase font-mono block">Sources</span>
+                                ${sources.slice(0, 3).map(src => `
+                                    <a href="${src}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[11px] text-red-400 hover:text-red-300 underline block truncate">
+                                        ${src}
+                                    </a>
+                                `).join('')}
+                                ${sources.length > 3 ? `<span class="text-[10px] text-zinc-500 italic">+${sources.length - 3} more</span>` : ''}
+                            </div>
+                        ` : ''}
                     </div>
-
-                    ${sources.length > 0 ? `
-                        <div class="pt-2 border-t border-zinc-800/80 mt-1 space-y-0.5">
-                            <span class="text-[9px] text-zinc-500 uppercase font-mono block">Sources</span>
-                            ${sources.slice(0, 3).map(src => `
-                                <a href="${src}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[11px] text-red-400 hover:text-red-300 underline block truncate">
-                                    ${src}
-                                </a>
-                            `).join('')}
-                            ${sources.length > 3 ? `<span class="text-[10px] text-zinc-500 italic">+${sources.length - 3} more</span>` : ''}
-                        </div>
-                    ` : ''}
-                </div>
-            `;
-        }).join('');
+                `;
+            }).join('');
+        }
 
         sendHeightToParent();
     }
