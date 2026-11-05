@@ -138,13 +138,12 @@
         </div>
 
         <div class="flex items-center gap-2 border-b border-zinc-800 pb-3">
-            <button onclick="navigateTo('/drivers')" id="tab-drivers" class="sub-tab inline-flex items-center gap-2 bg-red-600/10 text-red-500 border border-red-600/30 text-xs font-semibold px-3.5 py-2 rounded-lg transition cursor-pointer">
-                <span>Drivers & Bugs</span>
-            </button>
-            <button onclick="navigateTo('/tech')" id="tab-tech" class="sub-tab inline-flex items-center gap-2 bg-zinc-900 hover:bg-zinc-800 text-zinc-300 border border-zinc-800 text-xs font-semibold px-3.5 py-2 rounded-lg transition cursor-pointer">
-                <span>AMD Tech</span>
-            </button>
-        </div>
+        <button onclick="navigateTo('drivers')" id="tab-drivers" class="sub-tab inline-flex items-center gap-2 bg-red-600/10 text-red-500 border border-red-600/30 text-xs font-semibold px-3.5 py-2 rounded-lg transition cursor-pointer">
+            <span>Drivers & Bugs</span>
+        </button>
+        <button onclick="navigateTo('tech')" id="tab-tech" class="sub-tab inline-flex items-center gap-2 bg-zinc-900 hover:bg-zinc-800 text-zinc-300 border border-zinc-800 text-xs font-semibold px-3.5 py-2 rounded-lg transition cursor-pointer">
+            <span>AMD Tech</span>
+        </button>
     </div>
 
     <div id="frame-container" class="w-full mt-6">
@@ -561,19 +560,21 @@
 
 <script>
     const routes = {
-        '/drivers': 'drivers.html',
-        '/tech': 'tech.html'
+        'drivers': 'drivers.html',
+        'tech': 'tech.html',
+        '': 'drivers.html'
     };
 
-    function navigateTo(path, pushHistory = true) {
-        const targetPage = routes[path] || 'drivers.html';
+    function navigateTo(route, pushHistory = true) {
+        const cleanRoute = route.replace(/^[#\/]/, '') || 'drivers';
+        const targetPage = routes[cleanRoute] || 'drivers.html';
         const frame = document.getElementById('content-frame');
-        if (frame.getAttribute('src') !== targetPage) {
+        if (frame && frame.getAttribute('src') !== targetPage) {
             frame.src = targetPage;
         }
 
         if (pushHistory) {
-            history.pushState({ path: path }, '', path);
+            window.location.hash = cleanRoute;
         }
 
         document.querySelectorAll('.sub-tab').forEach(t => {
@@ -583,29 +584,36 @@
         const btn = document.getElementById('header-action-btn');
         const btnText = document.getElementById('header-action-text');
 
-        if (path === '/tech') {
-            document.getElementById('tab-tech').className = "sub-tab inline-flex items-center gap-2 bg-red-600/10 text-red-500 border border-red-600/30 text-xs font-semibold px-3.5 py-2 rounded-lg transition cursor-pointer";
-            btn.removeAttribute('href');
-            btn.onclick = (e) => {
-                e.preventDefault();
-                document.getElementById('feedback-modal').classList.remove('hidden');
-            };
-            btn.classList.add('cursor-pointer');
-            btnText.textContent = "Report an error or give us a game to add";
+        if (cleanRoute === 'tech') {
+            const techTab = document.getElementById('tab-tech');
+            if (techTab) techTab.className = "sub-tab inline-flex items-center gap-2 bg-red-600/10 text-red-500 border border-red-600/30 text-xs font-semibold px-3.5 py-2 rounded-lg transition cursor-pointer";
+            if (btn) {
+                btn.removeAttribute('href');
+                btn.onclick = (e) => {
+                    e.preventDefault();
+                    document.getElementById('feedback-modal').classList.remove('hidden');
+                };
+                btn.classList.add('cursor-pointer');
+            }
+            if (btnText) btnText.textContent = "Report an error or give us a game to add";
         } else {
-            document.getElementById('tab-drivers').className = "sub-tab inline-flex items-center gap-2 bg-red-600/10 text-red-500 border border-red-600/30 text-xs font-semibold px-3.5 py-2 rounded-lg transition cursor-pointer";
-            btn.href = "https://www.amd.com/en/resources/support-articles/faqs/AMDBRT.html";
-            btnText.textContent = "How to report an AMD driver issue";
+            const driversTab = document.getElementById('tab-drivers');
+            if (driversTab) driversTab.className = "sub-tab inline-flex items-center gap-2 bg-red-600/10 text-red-500 border border-red-600/30 text-xs font-semibold px-3.5 py-2 rounded-lg transition cursor-pointer";
+            if (btn) {
+                btn.href = "https://www.amd.com/en/resources/support-articles/faqs/AMDBRT.html";
+                btn.onclick = null;
+            }
+            if (btnText) btnText.textContent = "How to report an AMD driver issue";
         }
     }
 
-    window.addEventListener('popstate', (e) => {
-        navigateTo(window.location.pathname, false);
+    window.addEventListener('hashchange', () => {
+        navigateTo(window.location.hash, false);
     });
 
     window.addEventListener('DOMContentLoaded', () => {
-        const currentPath = window.location.pathname.includes('tech') ? '/tech' : '/drivers';
-        navigateTo(currentPath, false);
+        const initialRoute = window.location.hash || '#drivers';
+        navigateTo(initialRoute, false);
     });
 
     document.getElementById('feedback-form').addEventListener('submit', async function(e) {
