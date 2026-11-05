@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMD Tech</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        :root {
+            --color-zinc-950: #060607;
+            --color-zinc-900: #17171a;
+            --color-zinc-800: #27272a;
+            --color-zinc-100: #f4f4f5;
+            --color-zinc-300: #d4d4d8;
+            --color-zinc-400: #a1a1aa;
+        }
+        body {
+            background-color: var(--color-zinc-950) !important;
+            color: var(--color-zinc-100) !important;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            pointer-events: auto;
+            width: 16px;
+            height: 16px;
+            border-radius: 9999px;
+            background: #dc2626;
+            background-color: #dc2626;
+            cursor: pointer;
+            border: 2px solid #020617;
+            position: relative;
+            z-index: 30;
+        }
+        input[type="range"]::-moz-range-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            pointer-events: auto;
+            width: 16px;
+            height: 16px;
+            border-radius: 9999px;
+            background: #dc2626;
+            background-color: #dc2626;
+            cursor: pointer;
+            border: 2px solid #020617;
+            position: relative;
+            z-index: 30;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--color-zinc-950, #09090b);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-zinc-800, #27272a);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-zinc-300, #3f3f46);
+        }
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: var(--color-zinc-800, #27272a) var(--color-zinc-950, #09090b);
+        }
+
+        :root, body.theme-amd {
+            --color-zinc-950: #060607;
+            --color-zinc-900: #17171a;
+            --color-zinc-800: #27272a;
+            --color-zinc-100: #f4f4f5;
+            --color-zinc-300: #d4d4d8;
+            --color-zinc-400: #a1a1aa;
+        }
+
+        body.theme-light {
+            --color-zinc-950: #ffffff;
+            --color-zinc-900: #f8fafc;
+            --color-zinc-800: #94a3b8;
+            --color-zinc-100: #020617;
+            --color-zinc-300: #1e293b;
+            --color-zinc-400: #475569;
+            --color-white: #020617;
+        }
+        body.theme-light input[type="text"],
+        body.theme-light input[type="number"],
+        body.theme-light select,
+        body.theme-light #themeSelector {
+            background-color: #ffffff !important;
+            color: #0f172a !important;
+            border-color: #cbd5e1 !important;
+        }
+        body.theme-light #themeSelector option {
+            background-color: #ffffff !important;
+            color: #0f172a !important;
+        }
+
+        body.theme-midnight {
+            --color-zinc-950: #060b1a;
+            --color-zinc-900: #0f1933;
+            --color-zinc-800: #182446;
+            --color-zinc-100: #dadcdf;
+            --color-zinc-300: #d5dae0;
+            --color-zinc-400: #1b2f4d;
+        }
+
+        body.theme-matrix {
+            --color-zinc-950: #050a07;
+            --color-zinc-900: #151614;
+            --color-zinc-800: #09130d;
+            --color-zinc-100: #e6f7ed;
+            --color-zinc-300: #a3e6be;
+            --color-zinc-400: #6ee7b7;
+        }
+    </style>
+</head>
+<body class="bg-zinc-950 text-zinc-100 font-sans antialiased p-0 m-0">
+<script>
+    (function() {
+        const savedTheme = localStorage.getItem('amd_tracker_theme') || 'theme-amd';
+        document.body.className = document.body.className + ' ' + savedTheme;
+    })();
+</script>
+
+<div class="max-w-7xl mx-auto px-4 py-6 relative">
+
+    <aside class="fixed top-60 left-1/2 -translate-x-[60rem] w-80 border border-zinc-800/80 bg-zinc-900/40 rounded-lg p-3 max-h-[calc(100vh-3rem)] overflow-y-auto hidden xl:block z-20">
+        <div class="text-xl font-bold text-zinc-300 uppercase tracking-wider mb-3 px-2">Technologies</div>
+        <nav id="sidebar-nav" class="space-y-1">
+        </nav>
+    </aside>
+
+    <main class="w-full">
+        <header class="mb-6 flex items-center justify-between border-b border-zinc-800 pb-4">
+            <h2 id="tech-title" class="text-xl font-bold text-white uppercase">Select Technology</h2>
+            <span id="game-count" class="text-base font-bold text-red-500 font-mono">0 Games</span>
+        </header>
+
+        <!-- Dynamic Explanation Textbox Container -->
+        <div id="tech-explanation-container" class="mb-6"></div>
+
+        <div id="games-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
+        </div>
+    </main>
+</div>
+
+<script>
+    const techDisplayNames = {
+        "fsr_upscaling": "FSR 4 Upscaling",
+        "frame_gen": "FSR 4 Frame Generation",
+        "anti_lag_2": "Anti Lag 2",
+        "ray_regeneration": "FSR Ray Regeneration",
+        "radiance_caching": "FSR Radiance Caching"
+    };
+
+    function getTechDisplayName(techKey) {
+        return techDisplayNames[techKey] || techKey.replace(/_/g, ' ');
+    }
+
+    const techDescriptions = {
+        "fsr_upscaling": "FSR 4 upscaling (also known as FSR Redstone upscaling, or FSR Upscaling) renders the game at a lower internal resolution, then upscales the image to be as close to a native higher resolution image as possible while gaining performance. Similar to Nvidia's DLSS upscaling and Intel's XeSS upscaling. \n\n Games in this list have FSR 3.1 or above, as with AMD's driver override most games using FSR 3.1 or above can be overridden unless they use a custom implementation and/or Vulkan games which need an update to provide the needed Vulkan extensions. \n\n FSR Upscaling is currently supported on RX 6000, 7000 & 9000 series desktop graphics cards as well as Ryzen AI 300/400, & Z2 series APUs with the Xbox series S/X also supported.",
+        "frame_gen": "FSR 4 frame generation (also known as FSR Redstone frame generation or FSR frame generation) takes two frames generated by the game engine and interpolates a frame between them. This increases motion fluidity/smoothness, but with the drawback of increasing latency and potentially decreasing image quality. Similar to Nvidia's DLSS frame generation and Intel's XeSS frame generation. \n\n Games in this list have FSR 3.1.4 or above, as with AMD's driver override most games using FSR 3.1.4 or above can be overridden unless they use a custom implementation and/or Vulkan games which need an update to provide the needed Vulkan extensions. FSR 3.1.6 or above implementations do have frame pacing improvements which improve the technology substantially. \n\n FSR frame generation is currently supported on RX 9000 series only.",
+        "anti_lag_2": "Radeon Anti Lag 2 (renamed to FSR Latency Reduction) is a latency reduction technology aimed to reduce input latency by syncing the CPU/GPU as much as possible. Similar to Nvidia's Reflex and Intel's XeLL. \n\n Anti Lag 2 is integrated into the game, rather than the driver based Anti Lag which aims to do the same thing, but to a lesser extent. \n\n Anti Lag 2 is supported on RX 5000 series or above with integrated graphics also supported",
+        "ray_regeneration": "Ray Regeneration is a denoiser aimed to improve image quality in ray traced or path traced situations. It's not aimed to improve performance, although depending on the other denoising solutions the game offers it could. \n\n Ray Regeneration is only supported on RX 9000 series.",
+        "radiance_caching": "Radiance caching is designed to improve path tracing performance. \n\n Radiance caching is only supported on RX 9000 series."
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('amd_tracker_theme') || 'theme-amd';
+        document.body.className = document.body.className.replace(/theme-\w+/g, '').trim() + ' ' + savedTheme;
+        loadGames();
+    });
+
+    window.addEventListener('message', (event) => {
+        if (event.data && event.data.theme) {
+            const theme = event.data.theme;
+            document.body.style.opacity = '0';
+            document.body.classList.remove('theme-amd', 'theme-light', 'theme-midnight', 'theme-matrix');
+            document.body.classList.add(theme);
+
+            if (typeof bugChart !== 'undefined' && bugChart) {
+                const isLight = theme === 'theme-light';
+                bugChart.options.scales.x.grid.color = isLight ? '#e2e8f0' : '#1e293b';
+                bugChart.options.scales.y.grid.color = (ctx) => (ctx.tick.value === 0 ? (isLight ? '#94a3b8' : '#475569') : (isLight ? '#e2e8f0' : '#1e293b'));
+                bugChart.options.scales.y.ticks.color = isLight ? '#475569' : '#94a3b8';
+                bugChart.update('none');
+            }
+
+            requestAnimationFrame(() => {
+                document.body.style.opacity = '1';
+            });
+        }
+    });
+
+    let gamesData = [];
+
+    function setTheme(themeName) {
+        document.body.className = `font-sans antialiased p-0 m-0 ${themeName}`;
+    }
+
+    function extractTechKeys(data) {
+        const keys = new Set();
+        data.forEach(game => {
+            Object.keys(game).forEach(key => {
+                if (key !== 'game_name' && key !== 'source(s)' && key !== 'sources' && key !== 'notes') {
+                    keys.add(key);
+                }
+            });
+        });
+        return Array.from(keys);
+    }
+
+    async function loadGames() {
+        try {
+            const response = await fetch('games.json');
+            gamesData = await response.json();
+            
+            const techKeys = extractTechKeys(gamesData);
+            renderSidebar(techKeys);
+            
+            if (techKeys.length > 0) {
+                selectTechnology(techKeys[0], techKeys);
+            }
+        } catch (error) {
+            console.error('Error fetching games.json:', error);
+        }
+    }
+
+    function renderSidebar(techKeys) {
+        const nav = document.getElementById('sidebar-nav');
+        nav.innerHTML = '';
+
+        techKeys.forEach((techKey) => {
+            const supportedCount = gamesData.filter(game => {
+                const val = game[techKey];
+                return Array.isArray(val) ? val.includes(1) : val === 1;
+            }).length;
+
+            const btn = document.createElement('button');
+            btn.dataset.tech = techKey;
+            btn.className = "w-full text-left px-3 py-2.5 rounded-lg text-base font-semibold capitalize transition cursor-pointer flex items-center justify-between text-zinc-300 hover:text-white hover:bg-zinc-800/60";
+            
+            const formattedName = getTechDisplayName(techKey);
+
+            btn.innerHTML = `
+                <span class="truncate">${formattedName}</span>
+                <span class="text-[14px] font-mono bg-zinc-800 text-zinc-300 px-1.5 py-0.5 rounded">${supportedCount}</span>
+            `;
+            
+            btn.onclick = () => selectTechnology(techKey, techKeys);
+            nav.appendChild(btn);
+        });
+    }
+
+    function selectTechnology(techKey, techKeys) {
+        const grid = document.getElementById('games-grid');
+        const titleEl = document.getElementById('tech-title');
+        const countEl = document.getElementById('game-count');
+        const explanationContainer = document.getElementById('tech-explanation-container');
+
+        const supportedGames = gamesData.filter(game => {
+            const val = game[techKey];
+            return Array.isArray(val) ? val.includes(1) : val === 1;
+        });
+
+        supportedGames.sort((a, b) => {
+            const nameA = (a.game_name || '').toLowerCase();
+            const nameB = (b.game_name || '').toLowerCase();
+            return nameA.localeCompare(nameB);
+        });
+
+        const formattedTechName = getTechDisplayName(techKey);
+        titleEl.textContent = formattedTechName;
+        countEl.textContent = `${supportedGames.length} ${supportedGames.length === 1 ? 'Game' : 'Games'}`;
+
+        const description = techDescriptions[techKey] || `Explanation for ${formattedTechName} goes here.`;
+        explanationContainer.innerHTML = `
+            <div class="p-4 rounded-lg text-sm text-zinc-300 leading-relaxed">
+                <div class="flex items-center gap-2 mb-1">
+                    <span class="font-bold text-white uppercase tracking-wide text-base">About ${formattedTechName}</span>
+                </div>
+                <p class="mt-1 text-zinc-300 whitespace-pre-line">${description}</p>
+            </div>
+        `;
+
+        document.querySelectorAll('#sidebar-nav button').forEach(btn => {
+            if (btn.dataset.tech === techKey) {
+                btn.className = "w-full text-left px-3 py-2.5 text-base font-semibold capitalize transition cursor-pointer flex items-center justify-between bg-red-600/10 text-red-500 border border-red-600/30";
+            } else {
+                btn.className = "w-full text-left px-3 py-2.5 text-base font-semibold capitalize transition cursor-pointer flex items-center justify-between text-zinc-300 hover:text-white hover:bg-zinc-800/60";
+            }
+        });
+
+        if (supportedGames.length === 0) {
+            grid.innerHTML = `<p class="text-base text-zinc-300 col-span-full">No games found supporting this technology.</p>`;
+            sendHeightToParent();
+            return;
+        }
+
+        grid.innerHTML = supportedGames.map((game, index) => {
+            const gameNumber = String(index + 1).padStart(2, '0');
+            let sources = getGameSourcesForTech(game, techKey);
+
+            return `
+                <div onclick="openGameModal('${game.game_name?.replace(/'/g, "\\'")}', '${gameNumber}')" class="bg-zinc-900/60 border border-zinc-800 rounded-lg p-3 flex flex-col justify-between hover:border-red-500/50 hover:bg-zinc-900 transition cursor-pointer group">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-[12px] font-mono font-bold text-red-500 px-1.5 py-0.5 rounded shrink-0">
+                                #${gameNumber}
+                            </span>
+                            <h3 class="text-base font-bold text-white leading-snug group-hover:text-red-400 transition-colors">${game.game_name || 'Unnamed Game'}</h3>
+                        </div>
+                    </div>
+
+                    ${sources.length > 0 ? `
+                        <div class="pt-2 border-t border-zinc-800/80 mt-1 space-y-0.5">
+                            <span class="text-[9px] text-zinc-500 uppercase font-mono block">Sources</span>
+                            ${sources.slice(0, 3).map(src => `
+                                <a href="${src}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[11px] text-red-400 hover:text-red-300 underline block truncate">
+                                    ${src}
+                                </a>
+                            `).join('')}
+                            ${sources.length > 3 ? `<span class="text-[10px] text-zinc-500 italic">+${sources.length - 3} more</span>` : ''}
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        }).join('');
+
+        sendHeightToParent();
+    }
+
+    function getGameSourcesForTech(game, techKey) {
+        const sourcesObj = game.sources || game['source(s)'];
+        if (!sourcesObj) return [];
+
+        if (Array.isArray(sourcesObj[techKey])) return sourcesObj[techKey];
+        if (typeof sourcesObj[techKey] === 'string') return [sourcesObj[techKey]];
+        if (Array.isArray(sourcesObj)) return sourcesObj;
+
+        return [];
+    }
+
+    function openGameModal(gameName, gameNumber) {
+        const game = gamesData.find(g => g.game_name === gameName);
+        if (!game) return;
+
+        window.parent.postMessage({
+            action: 'openGameModal',
+            gameName: game.game_name,
+            gameNumber: gameNumber,
+            gameObj: game
+        }, '*');
+    }
+
+    function sendHeightToParent() {
+        setTimeout(() => {
+            const height = document.documentElement.scrollHeight;
+            window.parent.postMessage({ frameHeight: height }, '*');
+        }, 50);
+    }
+
+    window.addEventListener('resize', sendHeightToParent);
+</script>
+
+</body>
+</html>
