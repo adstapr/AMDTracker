@@ -288,7 +288,7 @@
         "notes": ""
     },
     {
-        "game_name": "Apex Legends",
+        "game_name": "Aphelion",
         "fsr_upscaling": [1],
         "frame_gen": [2],
         "anti_lag_2": [2],
@@ -5082,20 +5082,6 @@
         "notes": ""
     },
     {
-        "game_name": "New World",
-        "fsr_upscaling": [1],
-        "frame_gen": [2],
-        "anti_lag_2": [2],
-        "ray_regeneration": [2],
-        "radiance_caching": [2],
-        "sources": {
-            "fsr_upscaling": [
-                "https://www.pcgamingwiki.com/wiki/New_World"
-            ]
-        },
-        "notes": ""
-    },
-    {
         "game_name": "New World: Aeternum",
         "fsr_upscaling": [1],
         "frame_gen": [2],
@@ -5104,7 +5090,8 @@
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
-                "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+                "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab",
+                "https://www.pcgamingwiki.com/wiki/New_World"
             ]
         },
         "notes": ""
