@@ -2,13 +2,18 @@
     {
         "game_name": "'83",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
-                "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+                "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab",
+                "https://steamdb.info/depot/1059222/"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/",
+                "https://steamdb.info/depot/1059222/"
             ]
         },
         "notes": ""
@@ -16,7 +21,7 @@
     {
         "game_name": "007 First Light",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
@@ -24,6 +29,10 @@
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab",
                 "https://www.pcgamingwiki.com/wiki/007_First_Light"
+            ],
+            "frame_gen":[
+                "https://steamdb.info/depot/3768761/",
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -31,13 +40,16 @@
     {
         "game_name": "1666: Amsterdam",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -88,6 +100,20 @@
         "notes": ""
     },
     {
+        "game_name": "A.I.L.A",
+        "fsr_upscaling": [1],
+        "frame_gen": [2],
+        "anti_lag_2": [2],
+        "ray_regeneration": [2],
+        "radiance_caching": [2],
+        "sources": {
+            "fsr_upscaling": [
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
+            ]
+        },
+        "notes": ""
+    },
+    {
         "game_name": "Above the Snow",
         "fsr_upscaling": [1],
         "frame_gen": [2],
@@ -105,7 +131,7 @@
     {
         "game_name": "ACE COMBAT 8: WINGS OF THEVE",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
@@ -113,6 +139,9 @@
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab",
                 "https://www.pcgamingwiki.com/wiki/Ace_Combat_8:_Wings_of_Theve"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -199,6 +228,34 @@
         "notes": ""
     },
     {
+        "game_name": "Aliens: Fireteam Elite 2",
+        "fsr_upscaling": [1],
+        "frame_gen": [2],
+        "anti_lag_2": [2],
+        "ray_regeneration": [2],
+        "radiance_caching": [2],
+        "sources": {
+            "fsr_upscaling": [
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
+            ]
+        },
+        "notes": ""
+    },
+    {
+        "game_name": "Among The Trolls",
+        "fsr_upscaling": [1],
+        "frame_gen": [2],
+        "anti_lag_2": [2],
+        "ray_regeneration": [2],
+        "radiance_caching": [2],
+        "sources": {
+            "fsr_upscaling": [
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
+            ]
+        },
+        "notes": ""
+    },
+    {
         "game_name": "Anno 117: Pax Romana",
         "fsr_upscaling": [1],
         "frame_gen": [2],
@@ -226,6 +283,20 @@
         "sources": {
             "anti_lag_2": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-2f4d78e11f-tab"
+            ]
+        },
+        "notes": ""
+    },
+    {
+        "game_name": "Apex Legends",
+        "fsr_upscaling": [1],
+        "frame_gen": [2],
+        "anti_lag_2": [2],
+        "ray_regeneration": [2],
+        "radiance_caching": [2],
+        "sources": {
+            "fsr_upscaling":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -297,15 +368,37 @@
         "notes": ""
     },
     {
+        "game_name": "Ascend to ZERO",
+        "fsr_upscaling": [1],
+        "frame_gen": [1],
+        "anti_lag_2": [2],
+        "ray_regeneration": [2],
+        "radiance_caching": [2],
+        "sources": {
+            "fsr_upscaling": [
+                "https://steamdb.info/depot/2697941/",
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
+            ],
+            "frame_gen":[
+                "https://steamdb.info/depot/2697941/",
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
+            ]
+        },
+        "notes": ""
+    },
+    {
         "game_name": "ASHGARD: Infinity Mask",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -389,7 +482,7 @@
     {
         "game_name": "Assetto Corsa Rally",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
@@ -397,6 +490,9 @@
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab",
                 "https://www.pcgamingwiki.com/wiki/Assetto_Corsa_Rally"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -404,13 +500,16 @@
     {
         "game_name": "Atre: Dominance Wars",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -418,13 +517,16 @@
     {
         "game_name": "Automate It: Factory Puzzle",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -594,13 +696,16 @@
     {
         "game_name": "Beerserker: The Stolen Brew",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -693,7 +798,7 @@
     {
         "game_name": "Black One Blood Brothers",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
@@ -701,6 +806,9 @@
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab",
                 "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1829528821315859"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -827,13 +935,16 @@
     {
         "game_name": "Bus Bound",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -892,7 +1003,7 @@
         "fsr_upscaling": [1],
         "frame_gen": [1],
         "anti_lag_2": [1],
-        "ray_regeneration": [2],
+        "ray_regeneration": [1],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
@@ -903,16 +1014,19 @@
             ],
             "anti_lag_2": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-2f4d78e11f-tab"
+            ],
+            "ray_regeneration":[
+                "https://www.amd.com/en/gaming/featured-games/call-of-duty-black-ops-7.html"
             ]
         },
-        "notes": ""
+        "notes": "Ray Regeneration is only available in Multiplayer/Zombies, not campaign. There has been reports of ray tracing in general being disabled in later updates."
     },
     {
         "game_name": "Call of Duty: Modern Warfare 4",
         "fsr_upscaling": [1],
         "frame_gen": [1],
         "anti_lag_2": [1],
-        "ray_regeneration": [2],
+        "ray_regeneration": [1],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
@@ -923,6 +1037,10 @@
             ],
             "anti_lag_2": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-2f4d78e11f-tab"
+            ],
+            "ray_regeneration":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/",
+                "https://www.computerbase.de/artikel/gaming/call-of-duty-modern-warfare-4-benchmark-test.99862/seite-4"
             ]
         },
         "notes": ""
@@ -954,6 +1072,25 @@
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ]
+        },
+        "notes": ""
+    },
+    {
+        "game_name": "Carmageddon: Rogue Shift",
+        "fsr_upscaling": [1],
+        "frame_gen": [1],
+        "anti_lag_2": [2],
+        "ray_regeneration": [2],
+        "radiance_caching": [2],
+        "sources": {
+            "fsr_upscaling": [
+                "https://steamdb.info/depot/1712101/",
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
+            ],
+            "frame_gen":[
+                "https://steamdb.info/depot/1712101/",
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -1057,7 +1194,7 @@
     {
         "game_name": "Chernobylite 2: Exclusion Zone",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
@@ -1065,6 +1202,9 @@
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab",
                 "https://www.pcgamingwiki.com/wiki/Chernobylite_2:_Exclusion_Zone"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -1072,13 +1212,16 @@
     {
         "game_name": "Chip 'n Clawz vs. The Brainioids",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -1137,7 +1280,8 @@
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
-                "https://www.pcgamingwiki.com/wiki/Civilization_VII"
+                "https://www.pcgamingwiki.com/wiki/Civilization_VII",
+                "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
             ]
         },
         "notes": ""
@@ -1368,7 +1512,7 @@
         "fsr_upscaling": [1],
         "frame_gen": [1],
         "anti_lag_2": [1],
-        "ray_regeneration": [2],
+        "ray_regeneration": [1],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
@@ -1532,14 +1676,19 @@
     {
         "game_name": "DAVY x JONES",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab",
-                "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1816849002024108"
+                "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1816849002024108",
+                "https://steamdb.info/depot/2611171/"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/",
+                "https://steamdb.info/depot/2611171/"
             ]
         },
         "notes": ""
@@ -1547,13 +1696,16 @@
     {
         "game_name": "Dawn of Defiance",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -1561,13 +1713,16 @@
     {
         "game_name": "Day at the Office - Prologue",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -1607,15 +1762,32 @@
         "notes": ""
     },
     {
-        "game_name": "Deadzone: Rogue",
+        "game_name": "Dead Take",
         "fsr_upscaling": [1],
         "frame_gen": [2],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
+            "fsr_upscaling":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
+            ]
+        },
+        "notes": ""
+    },
+    {
+        "game_name": "Deadzone: Rogue",
+        "fsr_upscaling": [1],
+        "frame_gen": [1],
+        "anti_lag_2": [2],
+        "ray_regeneration": [2],
+        "radiance_caching": [2],
+        "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -1721,13 +1893,16 @@
     {
         "game_name": "Deep Space Corridor",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -1759,6 +1934,21 @@
             ],
             "frame_gen": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-8ec251a16e-tab"
+            ]
+        },
+        "notes": ""
+    },
+    {
+        "game_name": "Diablo 4",
+        "fsr_upscaling": [1],
+        "frame_gen": [2],
+        "anti_lag_2": [2],
+        "ray_regeneration": [2],
+        "radiance_caching": [2],
+        "sources": {
+            "fsr_upscaling": [
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/",
+                "https://steamdb.info/depot/2344522/"
             ]
         },
         "notes": ""
@@ -1815,13 +2005,16 @@
     {
         "game_name": "Distressed",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -1841,15 +2034,37 @@
         "notes": ""
     },
     {
+        "game_name": "DON'T PEEK",
+        "fsr_upscaling": [1],
+        "frame_gen": [1],
+        "anti_lag_2": [2],
+        "ray_regeneration": [2],
+        "radiance_caching": [2],
+        "sources": {
+            "fsr_upscaling": [
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/",
+                "https://steamdb.info/depot/3634221/"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/",
+                "https://steamdb.info/depot/3634221/"
+            ]
+        },
+        "notes": ""
+    },
+    {
         "game_name": "DON'T SCREAM",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -1857,13 +2072,16 @@
     {
         "game_name": "DON'T SCREAM TOGETHER",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -1951,14 +2169,17 @@
     {
         "game_name": "Dreadful River",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
-            ] 
+            ] ,
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
+            ]
         },
         "notes": ""
     },
@@ -1982,13 +2203,16 @@
     {
         "game_name": "Driving Life",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -2157,13 +2381,16 @@
     {
         "game_name": "Electronic Market Simulator",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -2671,13 +2898,18 @@
     {
         "game_name": "First Dwarf",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
-                "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+                "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab",
+                "https://steamdb.info/depot/1714901/"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/",
+                "https://steamdb.info/depot/1714901/"
             ]
         },
         "notes": ""
@@ -2704,13 +2936,16 @@
     {
         "game_name": "Folklore Hunter",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -2728,6 +2963,20 @@
             ],
             "frame_gen": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-8ec251a16e-tab"
+            ]
+        },
+        "notes": ""
+    },
+    {
+        "game_name": "Forever Winter",
+        "fsr_upscaling": [1],
+        "frame_gen": [2],
+        "anti_lag_2": [2],
+        "ray_regeneration": [2],
+        "radiance_caching": [2],
+        "sources": {
+            "fsr_upscaling": [
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -2779,13 +3028,16 @@
     {
         "game_name": "FPSCore",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -2918,6 +3170,20 @@
         "notes": ""
     },
     {
+        "game_name": "Gear.Club Unlimited 3",
+        "fsr_upscaling": [1],
+        "frame_gen": [2],
+        "anti_lag_2": [2],
+        "ray_regeneration": [2],
+        "radiance_caching": [2],
+        "sources": {
+            "fsr_upscaling": [
+                "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1846018067929738"
+            ]
+        },
+        "notes": ""
+    },
+    {
         "game_name": "Gears of War: E-Day",
         "fsr_upscaling": [1],
         "frame_gen": [1],
@@ -2979,13 +3245,18 @@
     {
         "game_name": "Go Ahead",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
-                "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+                "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab",
+                "https://steamdb.info/depot/3874301/"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/",
+                "https://steamdb.info/depot/3874301/"
             ]
         },
         "notes": ""
@@ -3034,13 +3305,16 @@
     {
         "game_name": "Golfing in Aether",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -3283,6 +3557,20 @@
         "notes": ""
     },
     {
+        "game_name": "Highguard",
+        "fsr_upscaling": [1],
+        "frame_gen": [2],
+        "anti_lag_2": [2],
+        "ray_regeneration": [2],
+        "radiance_caching": [2],
+        "sources": {
+            "fsr_upscaling": [
+                "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1824459501607814"
+            ]
+        },
+        "notes": "Highguard is no longer available to purchase/play."
+    },
+    {
         "game_name": "High On Life 2",
         "fsr_upscaling": [1],
         "frame_gen": [1],
@@ -3406,13 +3694,16 @@
     {
         "game_name": "House Flipper Remastered Collection",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -3499,13 +3790,16 @@
     {
         "game_name": "Infect Cam",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -3575,13 +3869,16 @@
     {
         "game_name": "It Reaches",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -3701,14 +3998,19 @@
     {
         "game_name": "Kopi",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab",
-                "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1818752592128232"
+                "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1818752592128232",
+                "https://steamdb.info/depot/2909961/"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/",
+                "https://steamdb.info/depot/2909961/"
             ]
         },
         "notes": ""
@@ -3730,13 +4032,16 @@
     {
         "game_name": "LANESPLIT",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -3846,13 +4151,16 @@
     {
         "game_name": "Lifecycles of the Traveler Spider",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -3941,13 +4249,16 @@
     {
         "game_name": "Longvinter",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -3955,13 +4266,16 @@
     {
         "game_name": "Lords and Legions",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -4069,13 +4383,16 @@
     {
         "game_name": "Lumina Veil",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -4185,14 +4502,19 @@
     {
         "game_name": "Manor Lords",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab",
-                "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1819386365095372"
+                "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1819386365095372",
+                "https://steamdb.info/depot/1363081/"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/",
+                "https://steamdb.info/depot/1363081/"
             ]
         },
         "notes": ""
@@ -4243,13 +4565,16 @@
     {
         "game_name": "MARVEL Tōkon: Fighting Souls",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -4440,13 +4765,16 @@
     {
         "game_name": "Microsoft Flight Simulator (2024)",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.pcgamingwiki.com/wiki/Microsoft_Flight_Simulator_2024"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -4454,13 +4782,16 @@
     {
         "game_name": "Millennium Dream",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -4468,13 +4799,16 @@
     {
         "game_name": "Mimetic - Prop hunt hide and seek",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -4518,7 +4852,7 @@
     },
     {
         "game_name": "Mongil: Star Dive",
-        "fsr_upscaling": [2],
+        "fsr_upscaling": [1],
         "frame_gen": [2],
         "anti_lag_2": [1],
         "ray_regeneration": [2],
@@ -4526,6 +4860,9 @@
         "sources": {
             "anti_lag_2": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-2f4d78e11f-tab"
+            ],
+            "fsr_upscaling":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -4639,15 +4976,20 @@
         "notes": ""
     },
     {
-        "game_name": "MotoGP26",
+        "game_name": "MotoGP 26",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
-                "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+                "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab",
+                "https://steamdb.info/depot/3875051/"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/",
+                "https://steamdb.info/depot/3875051/"
             ]
         },
         "notes": ""
@@ -4723,7 +5065,7 @@
                 "https://www.pcgamingwiki.com/wiki/NBA_2K27"
             ]
         },
-        "notes": ""
+        "notes": "NBA 2K27 includes the DLL files for Ray Regeneration and Radiance Caching, however they are not available in game."
     },
     {
         "game_name": "New Home: Medieval Village",
@@ -4800,6 +5142,20 @@
         "notes": ""
     },
     {
+        "game_name": "Nightmare Frontier",
+        "fsr_upscaling": [1],
+        "frame_gen": [2],
+        "anti_lag_2": [2],
+        "ray_regeneration": [2],
+        "radiance_caching": [2],
+        "sources": {
+            "fsr_upscaling": [
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
+            ]
+        },
+        "notes": ""
+    },
+    {
         "game_name": "Nimillion - The last expedition",
         "fsr_upscaling": [1],
         "frame_gen": [1],
@@ -4848,13 +5204,16 @@
     {
         "game_name": "NO BACKUP",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -4901,13 +5260,18 @@
     {
         "game_name": "NORSE: Oath of Blood",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
-                "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+                "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab",
+                "https://steamdb.info/depot/3054692/"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/",
+                "https://steamdb.info/depot/3054692/"
             ]
         },
         "notes": ""
@@ -4979,7 +5343,7 @@
     {
         "game_name": "Operation Athena",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
@@ -4987,6 +5351,9 @@
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab",
                 "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1815034432856792"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -5239,13 +5606,33 @@
     {
         "game_name": "Peko Downhill Hurl",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
+            ]
+        },
+        "notes": ""
+    },
+    {
+        "game_name": "Permafrost",
+        "fsr_upscaling": [1],
+        "frame_gen": [1],
+        "anti_lag_2": [2],
+        "ray_regeneration": [2],
+        "radiance_caching": [2],
+        "sources": {
+            "fsr_upscaling": [
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -5253,13 +5640,16 @@
     {
         "game_name": "PHANTOM",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -5298,13 +5688,16 @@
     {
         "game_name": "PirateGate",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -5326,7 +5719,7 @@
     {
         "game_name": "Pizza Bandit",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
@@ -5334,6 +5727,9 @@
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab",
                 "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1818752592134979"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -5348,6 +5744,20 @@
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ]
+        },
+        "notes": ""
+    },
+    {
+        "game_name": "Planet Zoo 2",
+        "fsr_upscaling": [1],
+        "frame_gen": [2],
+        "anti_lag_2": [2],
+        "ray_regeneration": [2],
+        "radiance_caching": [2],
+        "sources": {
+            "fsr_upscaling": [
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -5381,6 +5791,23 @@
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ]
+        },
+        "notes": ""
+    },
+    {
+        "game_name": "Predecessor",
+        "fsr_upscaling": [1],
+        "frame_gen": [1],
+        "anti_lag_2": [2],
+        "ray_regeneration": [2],
+        "radiance_caching": [2],
+        "sources": {
+            "fsr_upscaling": [
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -5470,13 +5897,16 @@
     {
         "game_name": "Prologue: Go Wayback!",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -5497,6 +5927,23 @@
             ],
             "anti_lag_2":[
                 "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1844115010489194"
+            ]
+        },
+        "notes": ""
+    },
+    {
+        "game_name": "Providence",
+        "fsr_upscaling": [1],
+        "frame_gen": [1],
+        "anti_lag_2": [2],
+        "ray_regeneration": [2],
+        "radiance_caching": [2],
+        "sources": {
+            "fsr_upscaling": [
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -5540,13 +5987,16 @@
     {
         "game_name": "Quantum Beast",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -5582,13 +6032,16 @@
     {
         "game_name": "Quarantine Zone: The Last Check",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -5627,13 +6080,16 @@
     {
         "game_name": "Ranger's Path: National Park Simulator",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -5660,13 +6116,18 @@
     {
         "game_name": "Re.poly",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
-                "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+                "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab",
+                "https://steamdb.info/depot/292001/"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/",
+                "https://steamdb.info/depot/292001/"
             ]
         },
         "notes": ""
@@ -5713,6 +6174,20 @@
         "sources": {
             "fsr_upscaling":[
                 "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1814309641478240"
+            ]
+        },
+        "notes": ""
+    },
+    {
+        "game_name": "Rematch",
+        "fsr_upscaling": [1],
+        "frame_gen": [2],
+        "anti_lag_2": [2],
+        "ray_regeneration": [2],
+        "radiance_caching": [2],
+        "sources": {
+            "fsr_upscaling": [
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -5897,13 +6372,16 @@
     {
         "game_name": "ROUTINE",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -6045,13 +6523,16 @@
     {
         "game_name": "Scientific project: Optic",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -6112,7 +6593,7 @@
     {
         "game_name": "Service Please",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
@@ -6120,6 +6601,9 @@
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab",
                 "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1827626365753554"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -6127,13 +6611,16 @@
     {
         "game_name": "Shifting To The Backrooms",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -6187,20 +6674,6 @@
         "notes": ""
     },
     {
-        "game_name": "Sid Meier's Civilization VII",
-        "fsr_upscaling": [1],
-        "frame_gen": [2],
-        "anti_lag_2": [2],
-        "ray_regeneration": [2],
-        "radiance_caching": [2],
-        "sources": {
-            "fsr_upscaling": [
-                "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
-            ]
-        },
-        "notes": ""
-    },
-    {
         "game_name": "SILENT BREATH",
         "fsr_upscaling": [1],
         "frame_gen": [2],
@@ -6248,7 +6721,7 @@
     {
         "game_name": "SILENT HILL: Townfall",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
@@ -6256,6 +6729,23 @@
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab",
                 "https://www.pcgamingwiki.com/wiki/Silent_Hill:_Townfall"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
+            ]
+        },
+        "notes": ""
+    },
+    {
+        "game_name": "Skull and Bones",
+        "fsr_upscaling": [1],
+        "frame_gen": [2],
+        "anti_lag_2": [2],
+        "ray_regeneration": [2],
+        "radiance_caching": [2],
+        "sources": {
+            "fsr_upscaling": [
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -6339,13 +6829,16 @@
     {
         "game_name": "Spirit of the North 2",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -6353,13 +6846,16 @@
     {
         "game_name": "Spirit Realm",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -6463,13 +6959,16 @@
     {
         "game_name": "Star Trek: Voyager - Across the Unknown",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -6526,13 +7025,16 @@
     {
         "game_name": "Starforged Legacy",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -6550,6 +7052,21 @@
             ],
             "frame_gen": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-8ec251a16e-tab"
+            ]
+        },
+        "notes": ""
+    },
+    {
+        "game_name": "Starsand Island",
+        "fsr_upscaling": [1],
+        "frame_gen": [2],
+        "anti_lag_2": [2],
+        "ray_regeneration": [2],
+        "radiance_caching": [2],
+        "sources": {
+            "fsr_upscaling": [
+                "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab",
+                "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1802893906863336"
             ]
         },
         "notes": ""
@@ -6708,6 +7225,23 @@
         "notes": ""
     },
     {
+        "game_name": "Succubus Nightmare",
+        "fsr_upscaling": [1],
+        "frame_gen": [1],
+        "anti_lag_2": [2],
+        "ray_regeneration": [2],
+        "radiance_caching": [2],
+        "sources": {
+            "fsr_upscaling": [
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
+            ],
+            "frame_gen": [
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
+            ]
+        },
+        "notes": ""
+    },
+    {
         "game_name": "Sudden Strike 5",
         "fsr_upscaling": [1],
         "frame_gen": [2],
@@ -6782,6 +7316,20 @@
         "notes": ""
     },
     {
+        "game_name": "Tainted Grail: The Fall of Avalon",
+        "fsr_upscaling": [1],
+        "frame_gen": [2],
+        "anti_lag_2": [2],
+        "ray_regeneration": [2],
+        "radiance_caching": [2],
+        "sources": {
+            "fsr_upscaling": [
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
+            ]
+        },
+        "notes": ""
+    },
+    {
         "game_name": "Tales of Wind Online",
         "fsr_upscaling": [1],
         "frame_gen": [2],
@@ -6827,13 +7375,16 @@
     {
         "game_name": "Test Drive Unlimited Solar Crown",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -7085,13 +7636,16 @@
     {
         "game_name": "The House of Hikmah",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -7135,7 +7689,7 @@
     {
         "game_name": "The Last of Us Part II Remastered",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [1],
         "ray_regeneration": [2],
         "radiance_caching": [2],
@@ -7207,13 +7761,16 @@
     {
         "game_name": "The Occultist",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -7286,13 +7843,16 @@
     {
         "game_name": "The Shadow of the Warring States Period",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -7422,13 +7982,18 @@
     {
         "game_name": "They Came From Venus",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
-                "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+                "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab",
+                "https://steamdb.info/depot/2718571/"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/",
+                "https://steamdb.info/depot/2718571/"
             ]
         },
         "notes": ""
@@ -7436,7 +8001,7 @@
     {
         "game_name": "Tides of Tomorrow",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
@@ -7444,6 +8009,9 @@
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab",
                 "https://www.pcgamingwiki.com/wiki/Tides_of_Tomorrow"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -7489,13 +8057,16 @@
     {
         "game_name": "Together: Moon Escape",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -7527,6 +8098,20 @@
             ]
         },
         "notes": ""
+    },
+    {
+        "game_name": "Total War: SHOGUN 2 - Complete Edition",
+        "fsr_upscaling": [1],
+        "frame_gen": [2],
+        "anti_lag_2": [2],
+        "ray_regeneration": [2],
+        "radiance_caching": [2],
+        "sources": {
+            "fsr_upscaling": [
+                "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ]
+        },
+        "notes": "Total War: SHOGUN 2 - Complete Edition is no longer available on steam due to backlash over AI generated assets/images. The developers have said they are working to fix the issues and the game will be back on sale at that time."
     },
     {
         "game_name": "Traffic Rivals: 1v1 Duels",
@@ -7562,13 +8147,16 @@
     {
         "game_name": "TRAUMA Broken Paradise",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -7712,13 +8300,16 @@
     {
         "game_name": "Vampires: Bloodlord Rising",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -7726,13 +8317,18 @@
     {
         "game_name": "VEIN",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
-                "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+                "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab",
+                "https://steamdb.info/depot/1857952/"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/",
+                "https://steamdb.info/depot/1857952/"
             ]
         },
         "notes": ""
@@ -7754,13 +8350,16 @@
     {
         "game_name": "VOID/BREAKER",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -7834,13 +8433,16 @@
     {
         "game_name": "WARDOGS",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -7903,13 +8505,16 @@
     {
         "game_name": "WASTED Bloodline",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -7982,13 +8587,16 @@
     {
         "game_name": "Whiskerwood",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -8062,13 +8670,16 @@
     {
         "game_name": "Witchspire",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
                 "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+            ],
+            "frame_gen":[
+                "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/"
             ]
         },
         "notes": ""
@@ -8133,26 +8744,11 @@
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
-                "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
-            ],
-            "frame_gen": [
-                "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-8ec251a16e-tab"
-            ]
-        },
-        "notes": ""
-    },
-    {
-        "game_name": "Yakuza Kiwami 2 (2025)",
-        "fsr_upscaling": [1],
-        "frame_gen": [1],
-        "anti_lag_2": [2],
-        "ray_regeneration": [2],
-        "radiance_caching": [2],
-        "sources": {
-            "fsr_upscaling": [
+                "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab",
                 "https://www.pcgamingwiki.com/wiki/Yakuza_Kiwami_2_(2025)"
             ],
             "frame_gen": [
+                "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-8ec251a16e-tab",
                 "https://www.pcgamingwiki.com/wiki/Yakuza_Kiwami_2_(2025)"
             ]
         },
