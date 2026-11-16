@@ -2043,7 +2043,8 @@
         "sources": {
             "fsr_upscaling": [
                 "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/",
-                "https://steamdb.info/depot/3634221/"
+                "https://steamdb.info/depot/3634221/",
+                "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
             ],
             "frame_gen":[
                 "https://www.reddit.com/r/radeon/comments/1xbrshh/oct2026_list_of_games_that_support_fsr_redstone/",
@@ -2087,15 +2088,18 @@
         "notes": ""
     },
     {
-        "game_name": "DON`T PEEK",
+        "game_name": "DOOM: The Dark Ages",
         "fsr_upscaling": [1],
-        "frame_gen": [2],
+        "frame_gen": [1],
         "anti_lag_2": [2],
         "ray_regeneration": [2],
         "radiance_caching": [2],
         "sources": {
             "fsr_upscaling": [
-                "https://www.amd.com/en/products/graphics/technologies/fidelityfx/supported-games.html#fsr4-item-6514045aac-tab"
+                "slayersclub.bethesda.net/en-US/news/doom-the-dark-ages-revelations-slaughter-mode-update-5-release-notes"
+            ],
+            "frame_gen": [
+                "slayersclub.bethesda.net/en-US/news/doom-the-dark-ages-revelations-slaughter-mode-update-5-release-notes"
             ]
         },
         "notes": ""
