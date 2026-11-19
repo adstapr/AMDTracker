@@ -6,6 +6,43 @@
     },
     "drivers": [
         {
+            "version": "26.11.2",
+            "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-11-2.html",
+            "Date": "19-11-2026",
+            "Type": 3,
+            "New Features": [
+                "Adds support for ROCm 10.2"
+            ],
+            "New Product support": [],
+            "Other Improvements": [],
+            "New Game Support": [
+                "Crimson Desert Enhanced: Charting the Unknown DLC",
+                "Phantom Blade Zero"
+            ],
+            "fixed_bug_ids": [
+                "BUG-312",
+                "BUG-408",
+                "BUG-409",
+                "BUG-410",
+                "BUG-388",
+                "BUG-411",
+                "BUG-412",
+                "BUG-413",
+                "BUG-414",
+                "BUG-415",
+            ],
+            "known_bug_ids": [
+                "BUG-387",
+                "BUG-394",
+                "BUG-402",
+                "BUG-403",
+                "BUG-311",
+                "BUG-405",
+                "BUG-416",
+                "BUG-417",
+            ]
+        },
+        {
             "version": "26.11.1",
             "url": "https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-26-11-1.html",
             "Date": "13-11-2026",
@@ -2551,6 +2588,16 @@
         "BUG-404": "Visual corruption may appear in the sky and on character hair while playing Phantom Blade Zero on Radeon™ RX 9000 series graphics products. Users experiencing character hair corruption are recommended to disable the High-Quality Hair setting in the game.",
         "BUG-405": "Black corruption may be observed while playing Call of Duty®: Modern Warfare® Remastered on Radeon™ RX 9000 series graphics products.",
         "BUG-406": "Excessive writes to the system drive may be observed while the system is idle on Radeon™ RX 7000 series graphics products and above.",
-        "BUG-407": "Excessive writes to the system drive may be observed while moving or resizing application windows."
+        "BUG-407": "Excessive writes to the system drive may be observed while moving or resizing application windows.",
+        "BUG-408": "Application crash may be observed on first launch of Resident Evil Requiem after resetting the shader cache on Radeon™ RX 7000 series graphics products and above.",
+        "BUG-409": "Visual corruption may appear on character hair while playing Phantom Blade Zero on Radeon™ RX 9000 series graphics products.",
+        "BUG-410": "Excessive writes to the system drive may be observed while the system is idle on Radeon™ RX 5000 and RX 6000 series graphics products when using Windows® 10.",
+        "BUG-411": "Application crash may be observed in some games after using the AMD Cleanup Utility on Windows® 10 systems with Radeon™ RX 9000 series graphics products.",
+        "BUG-412": "System crash may be observed when launching an application from a long file path on Radeon™ RX 7000 series graphics products.",
+        "BUG-413": "Intermittent application crash or driver timeout may be observed while streaming with OBS Studio on Radeon™ RX 9000 series graphics products.",
+        "BUG-414": "A memory leak may be observed over time, with applications taking progressively longer to launch, on Radeon™ RX 5000 series graphics products and above.",
+        "BUG-415": "Failure to launch PETAFAB: Bot Invasion may be observed on Radeon™ RX 6000 series graphics products.",
+        "BUG-416": "Intermittent blank or empty content may be observed in the tabs of AMD Software: Adrenalin Edition.",
+        "BUG-417": "Failure to launch Crimson Desert may be observed on Radeon™ RX 6000 series graphics products."
     }
 }
